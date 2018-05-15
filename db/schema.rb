@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_15_101732) do
+ActiveRecord::Schema.define(version: 2018_05_15_114353) do
+
+  create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "brand"
@@ -26,6 +33,15 @@ ActiveRecord::Schema.define(version: 2018_05_15_101732) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "artist_id"
+    t.string "name"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "providder"
     t.string "uid"
@@ -35,4 +51,5 @@ ActiveRecord::Schema.define(version: 2018_05_15_101732) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "songs", "artists"
 end
