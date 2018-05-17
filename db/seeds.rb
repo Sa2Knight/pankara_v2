@@ -14,4 +14,5 @@ ScoreType.create([
   { brand: 'DAM', name: 'ランキングバトル' },
   { brand: 'DAM', name: '精密採点' },
   { brand: 'DAM', name: 'その他' },
+  { brand: 'その他', name: 'その他' }
 ])
