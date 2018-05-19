@@ -13,6 +13,7 @@ class Api::EventsController < Api::BaseController
     #
     def events
       Event
+        .by_member(params[:members])
         .page(params[:page])
         .per(params[:per])
         .includes(%i[product store user_events users])

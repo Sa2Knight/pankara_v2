@@ -5,6 +5,16 @@ class Event < ApplicationRecord
   belongs_to :product, optional: true
 
   #
+  # 参加しているユーザで絞り込み
+  #
+  def self.by_member(*members)
+    return self.all if members&.compact.blank?
+
+    self.joins(:user_events)
+        .where(user_events: { user_id: members })
+  end
+
+  #
   # 総歌唱履歴数を取得する
   # TODO: キャッシュしたい
   #
