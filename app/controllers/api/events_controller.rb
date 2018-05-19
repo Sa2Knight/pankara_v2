@@ -12,11 +12,11 @@ class Api::EventsController < Api::BaseController
     # 一覧取得対象のイベント一覧
     #
     def events
-      Event
-        .by_member(params[:members])
-        .order(params[:sort_key] => params[:sort_order])
-        .page(params[:page])
-        .per(params[:per])
-        .includes(%i[product store user_events users])
+      @index = Event
+               .by_member(params[:members])
+               .order(params[:sort_key] => params[:sort_order])
+               .page(params[:page])
+               .per(params[:per])
+               .includes(%i[product store user_events users])
     end
 end

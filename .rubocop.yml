@@ -46,7 +46,15 @@ Style/IndentationConsistency:
 Style/GuardClause:
   Enabled: false
 
+# ABCSize制限を緩和
+Metrics/AbcSize:
+  Max: 20
+
 # テストコードではブロック長超過を許容
 Metrics/BlockLength:
   Exclude:
       - 'spec/**/*.rb'
+
+# 子クラスでの実装に期待したメソッド呼び出しを許可
+Rails/LexicallyScopedActionFilter:
+  Enabled: false

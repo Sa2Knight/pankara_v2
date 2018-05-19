@@ -17,12 +17,12 @@ class Api::SongsController < Api::BaseController
     # FIXME: Metrics/AbcSize
     #
     def songs
-      Song
-        .artist_by(params[:artist_id])
-        .name_by(params[:name])
-        .order(params[:sort_key] => params[:sort_order])
-        .page(params[:page])
-        .per(params[:per])
-        .includes(:artist)
+      @index = Song
+               .artist_by(params[:artist_id])
+               .name_by(params[:name])
+               .order(params[:sort_key] => params[:sort_order])
+               .page(params[:page])
+               .per(params[:per])
+               .includes(:artist)
     end
 end

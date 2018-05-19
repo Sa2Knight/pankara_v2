@@ -13,9 +13,10 @@ RSpec.describe 'events#index', type: :request do
       per:         per
     }
   end
-  let(:body)   { JSON.parse(response.body) }
-  let(:first)  { body.first }
-  let(:size)   { body.size }
+  let(:headers) { response.headers }
+  let(:body)    { JSON.parse(response.body) }
+  let(:first)   { body.first }
+  let(:size)    { body.size }
 
   before do
     before_request if defined? before_request
@@ -122,6 +123,10 @@ RSpec.describe 'events#index', type: :request do
         expect(size).to eq 2
         expect(body.first['id']).to eq Event.first.id
         expect(body.second['id']).to eq Event.second.id
+      end
+      it 'レスポンスヘッダにページング情報が含まれている' do
+        expect(headers['total-count']).to eq 5
+        expect(headers['total-pages']).to eq 3
       end
     end
     context '2件ずつ2ページ目を指定した場合' do
