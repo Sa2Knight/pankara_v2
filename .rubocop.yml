@@ -45,3 +45,8 @@ Style/IndentationConsistency:
 # 一行のみのif式を許可
 Style/GuardClause:
   Enabled: false
+
+# テストコードではブロック長超過を許容
+Metrics/BlockLength:
+  Exclude:
+      - 'spec/**/*.rb'
