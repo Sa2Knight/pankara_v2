@@ -14,6 +14,7 @@ class Api::EventsController < Api::BaseController
     def events
       Event
         .by_member(params[:members])
+        .order(params[:sort_key] => params[:sort_order])
         .page(params[:page])
         .per(params[:per])
         .includes(%i[product store user_events users])
