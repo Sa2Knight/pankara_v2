@@ -1,4 +1,4 @@
-class Api::EventsController < ApplicationController
+class Api::EventsController < Api::BaseController
   #
   # イベントの一覧を取得
   #
@@ -12,6 +12,9 @@ class Api::EventsController < ApplicationController
     # 一覧取得対象のイベント一覧
     #
     def events
-      Event.all.includes(%i[product store user_events users])
+      Event
+        .page(params[:page])
+        .per(params[:per])
+        .includes(%i[product store user_events users])
     end
 end

@@ -41,3 +41,7 @@ Style/NumericLiterals:
 # private/protectedメソッドのインデントを許可
 Style/IndentationConsistency:
   Enabled: false
+
+# 一行のみのif式を許可
+Style/GuardClause:
+  Enabled: false
