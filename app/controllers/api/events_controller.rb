@@ -12,6 +12,6 @@ class Api::EventsController < ApplicationController
     # 一覧取得対象のイベント一覧
     #
     def events
-      Event.all.includes(%i[product store users])
+      Event.all.includes(%i[product store user_events users])
     end
 end

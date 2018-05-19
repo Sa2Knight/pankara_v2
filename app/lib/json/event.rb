@@ -8,7 +8,7 @@ module JSON
         plan: event.plan,
         store: JSON::Store.generate(event.store),
         product: JSON::Product.generate(event.product),
-        history_size: 0, # TODO: カウンターキャッシュ?
+        history_size: event.history_count,
         members: event.users.map do |user|
           JSON::User.generate(user)
         end
