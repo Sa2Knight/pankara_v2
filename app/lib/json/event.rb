@@ -3,6 +3,7 @@ module JSON
     def self.generate(event)
       return nil if event.blank?
       {
+        id: event.id,
         datetime: event.datetime.strftime(CONSTANT::FORMAT::DATE_TIME),
         title: event.title,
         plan: event.plan,
