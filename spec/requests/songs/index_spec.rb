@@ -159,16 +159,18 @@ RSpec.describe 'songs#index', type: :request do
         expect(body.third['id']).to  eq Song.second.id
       end
     end
-    xcontext '不正なソートキーを指定した場合' do
+    context '不正なソートキーを指定した場合' do
       let(:sort_key) { 'hoge' }
 
       it '400' do
+        expect(response.status).to eq 400
       end
     end
-    xcontext '不正なソートオーダーを指定した場合' do
+    context '不正なソートオーダーを指定した場合' do
       let(:sort_order) { 'hoge' }
 
       it '400' do
+        expect(response.status).to eq 400
       end
     end
   end

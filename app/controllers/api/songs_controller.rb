@@ -25,4 +25,8 @@ class Api::SongsController < Api::BaseController
                .per(params[:per])
                .includes(:artist)
     end
+
+    def sortable_keys
+      %w[id artist_id name url]
+    end
 end

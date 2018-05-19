@@ -1,5 +1,7 @@
 class Api::BaseController < ApplicationController
   before_action :params_reset
+
+  before_action :sort_params_valid?, only: :index
   after_action :set_respons_header, only: :index
 
   #
@@ -22,5 +24,25 @@ class Api::BaseController < ApplicationController
     raise StandardError unless @index
     response.headers['total-count'] = @index.total_count
     response.headers['total-pages'] = @index.total_pages
+  end
+
+  #
+  # 一覧取得APIにおける、ソートパラメータの有効性を検証する
+  #
+  def sort_params_valid?
+    return raise400 unless params[:sort_key].in? sortable_keys
+    raise400 unless params[:sort_order].in? %w[asc desc]
+  end
+
+  # TODO: エラーレスポンスを汎用化させる
+  def raise400
+    render json: { message: 'params_invalid' }, status: :bad_request
+  end
+
+  #
+  # 各子クラスが対象とするモデルを定義する
+  #
+  def model
+    raise NotImplementedError
   end
 end

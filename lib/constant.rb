@@ -6,8 +6,8 @@ module CONSTANT
   module DEFAULT
     PAGE = 1
     PER_PAGE = 20
-    SORT_KEY = :id
-    SORT_ORDER = :asc
+    SORT_KEY = 'id'.freeze
+    SORT_ORDER = 'asc'.freeze
   end
   module CAP
     PER_PAGE = 50
