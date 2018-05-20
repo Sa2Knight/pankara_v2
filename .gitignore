@@ -10,3 +10,4 @@
 .byebug_history
 /config/master.key
 *.swp
+spec/examples.txt
