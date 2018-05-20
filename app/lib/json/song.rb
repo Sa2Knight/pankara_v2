@@ -31,8 +31,8 @@ module JSON
       return nil if song.blank?
 
       self.index_with_artist(song).merge(
-        my_history_count: song.history_count_by(user: user),
-        history_count: song.history_count
+        my_histories_count: song.histories_count_by(user: user),
+        histories_count: song.histories_count
       )
     end
   end

@@ -18,21 +18,34 @@ class Song < ApplicationRecord
   end
 
   #
-  # 歌唱回数を取得する
-  # NOTE: これもカウンターキャッシュあっても良いかも？
+  # 歌唱履歴一覧
   #
-  def history_count
-    History.where(song: self).size
+  def histories
+    History.where(song: self)
   end
 
   #
-  # 特定ユーザの歌唱回数を取得する
-  # NOTE: これもどうにかキャッシュしたい
+  # 特定ユーザの歌唱履歴一覧
   #
-  def history_count_by(user: nil)
-    return nil if user.blank?
+  def histories_by(user: nil)
+    return [] if user.blank?
     History.joins(:user_event)
            .where(song: self, user_events: { user: user })
-           .size
+  end
+
+  #
+  # 歌唱回数
+  # NOTE: これもカウンターキャッシュあっても良いかも？
+  #
+  def histories_count
+    self.histories.size
+  end
+
+  #
+  # 特定ユーザの歌唱回数
+  # NOTE: これもどうにかキャッシュしたい
+  #
+  def histories_count_by(user: nil)
+    self.histories_by(user: user).size
   end
 end

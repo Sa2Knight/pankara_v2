@@ -45,23 +45,23 @@ RSpec.describe 'songs#show', type: :request do
         end
 
         it '自身と全体の歌唱回数がレスポンスに含まれている' do
-          expect(body['my_history_count']).to eq 2
-          expect(body['history_count']).to eq 2 + 3
+          expect(body['my_histories_count']).to eq 2
+          expect(body['histories_count']).to eq 2 + 3
         end
       end
 
       context '歌唱履歴が存在しない場合' do
         let(:before_request) { FactoryBot.create(:user) }
         it '歌唱履歴数が0になる' do
-          expect(body['my_history_count']).to eq 0
-          expect(body['history_count']).to eq 0
+          expect(body['my_histories_count']).to eq 0
+          expect(body['histories_count']).to eq 0
         end
       end
     end
     xcontext 'ログインしていない場合' do
       # TODO: ログイン系実装後に追加
-      it 'my_history_countがnilになる' do
-        expect(body['my_history_count'].nil?).to be true
+      it 'my_histories_countが0になる' do
+        expect(body['my_histories_count']).to eq 0
       end
     end
   end

@@ -35,17 +35,17 @@ class Api::SongsController < Api::BaseController
     end
 
     #
-    # 一覧取得時に並び替え可能なキー
-    #
-    def sortable_keys
-      %w[id artist_id name url]
-    end
-
-    #
     # 詳細取得対象の楽曲
     #
     def song
       @song ||= Song.find_by(id: params[:id])
+    end
+
+    #
+    # 一覧取得時に並び替え可能なキー
+    #
+    def sortable_keys
+      %w[id artist_id name url]
     end
 
     #
