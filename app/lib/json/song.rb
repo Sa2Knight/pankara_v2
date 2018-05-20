@@ -1,6 +1,9 @@
 module JSON
   module Song
-    def self.generate(song)
+    #
+    # 一覧取得用
+    #
+    def self.index(song)
       return nil if song.blank?
       {
         id: song.id,
@@ -10,9 +13,25 @@ module JSON
       }
     end
 
-    def self.generate_with_artist(song)
+    #
+    # 一覧取得用(歌手情報付き)
+    #
+    def self.index_with_artist(song)
       return nil if song.blank?
-      self.generate(song).merge(artist: JSON::Artist.generate(song.artist))
+
+      self.index(song).merge(artist: JSON::Artist.generate(song.artist))
+    end
+
+    #
+    # 詳細取得用
+    #
+    def self.show(song, user = nil)
+      return nil if song.blank?
+
+      self.index_with_artist(song).merge(
+        my_history_count: song.history_count_by(user: user),
+        history_count: song.history_count
+      )
     end
   end
 end

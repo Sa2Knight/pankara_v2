@@ -35,8 +35,12 @@ class Api::BaseController < ApplicationController
   end
 
   # TODO: エラーレスポンスを汎用化させる
-  def raise400
-    render json: { message: 'params_invalid' }, status: :bad_request
+  def raise400(message = 'params_invalid')
+    render json: { message: message }, status: :bad_request
+  end
+
+  def raise404(message = 'not_found')
+    render json: { message: message }, status: :not_found
   end
 
   #
