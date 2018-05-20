@@ -1,6 +1,9 @@
 module JSON
   module User
-    def self.generate(user)
+    #
+    # Userモデルの属性のみ
+    #
+    def self.raw(user)
       return nil if user.blank?
       {
         id: user.id,

@@ -8,7 +8,7 @@ class Api::SongsController < Api::BaseController
     if params[:with_artist]
       render json: songs.map { |song| JSON::Song.index_with_artist(song) }
     else
-      render json: songs.map { |song| JSON::Song.index(song) }
+      render json: songs.map { |song| JSON::Song.raw(song) }
     end
   end
 

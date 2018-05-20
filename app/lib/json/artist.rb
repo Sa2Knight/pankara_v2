@@ -1,6 +1,9 @@
 module JSON
   module Artist
-    def self.generate(artist)
+    #
+    # Artistモデルの属性のみ
+    #
+    def self.raw(artist)
       return nil if artist.blank?
       {
         id: artist.id,

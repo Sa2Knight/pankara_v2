@@ -3,7 +3,7 @@ class Api::EventsController < Api::BaseController
   # イベントの一覧を取得
   #
   def index
-    render json: events.map { |event| JSON::Event.generate(event) }
+    render json: events.map { |event| JSON::Event.index(event) }
   end
 
   private

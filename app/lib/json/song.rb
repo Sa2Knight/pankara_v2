@@ -1,9 +1,9 @@
 module JSON
   module Song
     #
-    # 一覧取得用
+    # Songモデルの属性のみ
     #
-    def self.index(song)
+    def self.raw(song)
       return nil if song.blank?
       {
         id: song.id,
@@ -19,7 +19,9 @@ module JSON
     def self.index_with_artist(song)
       return nil if song.blank?
 
-      self.index(song).merge(artist: JSON::Artist.generate(song.artist))
+      self.raw(song).merge(
+        artist: JSON::Artist.raw(song.artist)
+      )
     end
 
     #

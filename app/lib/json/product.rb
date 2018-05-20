@@ -1,6 +1,9 @@
 module JSON
   module Product
-    def self.generate(product)
+    #
+    # Productモデルの属性のみ
+    #
+    def self.raw(product)
       return nil if product.blank?
       {
         id: product.id,
