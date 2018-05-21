@@ -1,7 +1,9 @@
+require_relative '../../support/common_contexts'
 RSpec.describe 'songs#show', type: :request do
+  include_context 'request spec common'
+
   let(:song)    { FactoryBot.create(:song) }
   let(:song_id) { song.id }
-  let(:body)    { JSON.parse(response.body) }
 
   before do
     before_request if defined? before_request

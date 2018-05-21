@@ -1,4 +1,8 @@
+require_relative '../../support/common_contexts'
+
 RSpec.describe 'songs#index', type: :request do
+  include_context 'request spec common'
+
   let(:with_artist) { nil }
   let(:artist_id)   { nil }
   let(:name)        { nil }
@@ -18,10 +22,6 @@ RSpec.describe 'songs#index', type: :request do
     }
   end
   let(:artist) { FactoryBot.create(:artist) }
-  let(:headers) { response.headers }
-  let(:body)    { JSON.parse(response.body) }
-  let(:first)   { body.first }
-  let(:size)    { body.size }
 
   before do
     before_request if defined? before_request

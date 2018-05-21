@@ -1,4 +1,8 @@
+require_relative '../../support/common_contexts'
+
 RSpec.describe 'events#index', type: :request do
+  include_context 'request spec common'
+
   let(:members)     { nil }
   let(:sort_key)    { nil }
   let(:sort_order)  { nil }
@@ -13,10 +17,6 @@ RSpec.describe 'events#index', type: :request do
       per:         per
     }
   end
-  let(:headers) { response.headers }
-  let(:body)    { JSON.parse(response.body) }
-  let(:first)   { body.first }
-  let(:size)    { body.size }
 
   before do
     before_request if defined? before_request
