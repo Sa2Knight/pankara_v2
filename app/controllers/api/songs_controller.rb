@@ -60,17 +60,10 @@ class Api::SongsController < Api::BaseController
                   else
                     song.histories
                   end
-      histories
-        .order(params[:sort_key] => params[:sort_order])
-        .page(params[:page])
-        .per(params[:per])
-    end
-
-    #
-    # 一覧取得時に並び替え可能なキー
-    #
-    def sortable_keys
-      %w[id artist_id name url]
+      @index = histories
+               .order(params[:sort_key] => params[:sort_order])
+               .page(params[:page])
+               .per(params[:per])
     end
 
     #

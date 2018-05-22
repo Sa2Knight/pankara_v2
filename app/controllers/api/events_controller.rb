@@ -19,8 +19,4 @@ class Api::EventsController < Api::BaseController
                .per(params[:per])
                .includes(%i[product store user_events users])
     end
-
-    def sortable_keys
-      %w[id datetime title plan store_id product_id]
-    end
 end

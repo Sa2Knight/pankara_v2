@@ -1,8 +1,7 @@
 class Api::BaseController < ApplicationController
   before_action :params_reset
 
-  before_action :sort_params_valid?, only: :index
-  after_action :set_respons_header, only: :index
+  after_action :set_respons_header, only: %i[index histories]
 
   #
   # リクエストパラメータの初期化を行う
@@ -24,14 +23,6 @@ class Api::BaseController < ApplicationController
     raise StandardError unless @index
     response.headers['total-count'] = @index.total_count
     response.headers['total-pages'] = @index.total_pages
-  end
-
-  #
-  # 一覧取得APIにおける、ソートパラメータの有効性を検証する
-  #
-  def sort_params_valid?
-    return raise400 unless params[:sort_key].in? sortable_keys
-    raise400 unless params[:sort_order].in? %w[asc desc]
   end
 
   # TODO: エラーレスポンスを汎用化させる
