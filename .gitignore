@@ -11,3 +11,4 @@
 /config/master.key
 *.swp
 spec/examples.txt
+app/assets/javascripts/application.js

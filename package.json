@@ -1,6 +1,9 @@
 {
   "name": "pankara",
   "private": true,
+  "scripts": {
+    "start": "foreman start"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.25.0",
