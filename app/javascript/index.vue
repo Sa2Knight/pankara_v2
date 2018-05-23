@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1>{{ hello }}</h1>
+    <section>
+      <b-notification type="is-warning">
+        {{ hello }}
+      </b-notification>
+    </section>
   </div>
 </template>
 
