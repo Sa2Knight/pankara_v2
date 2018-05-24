@@ -12,3 +12,5 @@
 *.swp
 spec/examples.txt
 app/assets/javascripts/application.js
+public/user_icon/*
+!.gitkeep
