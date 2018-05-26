@@ -1,46 +1,48 @@
 <template>
   <div>
     <div class="title">カラオケ一覧</div>
+    <section>
+
+    </section>
     <b-table
       narrowed
       paginated
       backend-pagination
       :data="events"
-      :columns="columns"
       :total="pager.total"
       :per-page="pager.per"
       :page="pager.page"
       :loading="isLoading"
       @page-change="onPageChanged"
-    />
+    >
+      <template slot-scope="props">
+        <b-table-column label="日付">
+          {{ props.row.datetime  }}
+        </b-table-column>
+        <b-table-column label="タイトル">
+          {{ props.row.title  }}
+        </b-table-column>
+        <b-table-column label="時間">
+          {{ props.row.plan  }}
+        </b-table-column>
+        <b-table-column label="メンバー">
+          {{ props.row.members  }}
+        </b-table-column>
+        <b-table-column label="曲数">
+          {{ props.row.history_size  }}
+        </b-table-column>
+      </template>
+    </b-table>
   </div>
 </template>
 
 <script>
-  import CONST from './lib/constants'
-  import http from './lib/http'
+  import CONST from '../../lib/constants'
+  import http from '../../lib/http'
   export default {
     data: function() {
       return {
         events: [],
-        columns: [
-          {
-            field: 'datetime',
-            label: '日付'
-          },
-          {
-            field: 'title',
-            label: 'タイトル'
-          },
-          {
-            field: 'plan',
-            label: '時間'
-          },
-          {
-            field: 'history_size',
-            label: '曲数'
-          },
-        ],
         pager: {
           total: 0,
           page: 1,
