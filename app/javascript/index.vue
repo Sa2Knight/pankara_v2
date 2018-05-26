@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="title">カラオケ一覧</div>
     <b-table
       narrowed
       paginated
