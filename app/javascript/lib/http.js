@@ -34,8 +34,8 @@ const request = function(method, url, params = {}) {
 /**
  * イベント一覧を取得する
  */
-http.getEvents = function() {
-  return request('GET', '/events', {})
+http.getEvents = function(params = {}) {
+  return request('GET', '/events', params)
 }
 
 export default http
