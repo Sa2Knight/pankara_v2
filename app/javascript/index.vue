@@ -9,6 +9,7 @@
       :total="pager.total"
       :per-page="pager.per"
       :page="pager.page"
+      :loading="isLoading"
       @page-change="onPageChanged"
     />
   </div>
@@ -43,7 +44,8 @@
           total: 0,
           page: 1,
           per:  CONST.PER,
-        }
+        },
+        isLoading: false
       }
     },
     methods: {
@@ -52,9 +54,11 @@
           page: this.pager.page,
           per:  this.pager.per
         }
+        this.isLoading = true
         http.getEvents(params).then((response) => {
           this.events = response.data
           this.pager.total = Number(response.headers['total-count'])
+          this.isLoading = false
         })
       },
       onPageChanged: function(page) {

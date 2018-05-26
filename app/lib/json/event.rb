@@ -7,7 +7,7 @@ module JSON
       return nil if event.blank?
       {
         id: event.id,
-        datetime: event.datetime.strftime(CONSTANT::FORMAT::DATE_TIME),
+        datetime: event.datetime.strftime(CONSTANT::FORMAT::DATE),
         title: event.title,
         plan: event.plan,
         store: JSON::Store.raw(event.store),
