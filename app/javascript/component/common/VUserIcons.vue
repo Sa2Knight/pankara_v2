@@ -10,7 +10,6 @@
   img {
     max-height: 2em;
     border-radius: 50%;
-    margin: 0 5px 0 5px;
   }
 </style>
 

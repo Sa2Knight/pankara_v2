@@ -16,11 +16,11 @@
       @page-change="onPageChanged"
     >
       <template slot-scope="props">
-        <b-table-column label="日付">
-          {{ props.row.datetime  }}
-        </b-table-column>
         <b-table-column label="タイトル">
           {{ props.row.title  }}
+        </b-table-column>
+        <b-table-column label="日付">
+          {{ props.row.datetime  }}
         </b-table-column>
         <b-table-column label="時間">
           {{ props.row.plan  }} 時間
@@ -28,11 +28,11 @@
         <b-table-column label="お店">
           <v-store-label :store="props.row.store" />
         </b-table-column>
-        <b-table-column label="メンバー">
-          <v-user-icons :users="props.row.members" />
-        </b-table-column>
         <b-table-column label="曲数">
           {{ props.row.history_size  }}
+        </b-table-column>
+        <b-table-column label="メンバー">
+          <v-user-icons :users="props.row.members" />
         </b-table-column>
       </template>
     </b-table>
