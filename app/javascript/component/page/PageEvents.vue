@@ -23,10 +23,13 @@
           {{ props.row.title  }}
         </b-table-column>
         <b-table-column label="時間">
-          {{ props.row.plan  }}
+          {{ props.row.plan  }} 時間
+        </b-table-column>
+        <b-table-column label="お店">
+          <v-store-label :store="props.row.store" />
         </b-table-column>
         <b-table-column label="メンバー">
-          {{ props.row.members  }}
+          <v-user-icons :users="props.row.members" />
         </b-table-column>
         <b-table-column label="曲数">
           {{ props.row.history_size  }}
@@ -71,6 +74,10 @@
     },
     mounted: function() {
       this.fetch()
+    },
+    components: {
+      VStoreLabel: require('../common/VStoreLabel').default,
+      VUserIcons:  require('../common/VUserIcons').default
     }
   }
 </script>

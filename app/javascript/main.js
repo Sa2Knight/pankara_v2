@@ -8,7 +8,7 @@ Vue.use(Buefy)
 
 // URLに対応するコンポーネントを定義
 const routes = [
-  { path: '/', component: require('./component/page/events').default }
+  { path: '/', component: require('./component/page/PageEvents').default }
 ]
 const router = new VueRouter({
     routes
