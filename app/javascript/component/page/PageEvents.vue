@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="title">カラオケ一覧</div>
-    <section>
-      <b-field>
+    <section class="block">
+      <b-field class="is-fullhd">
         <b-radio-button v-model="search.target"
           native-value="mine"
           type="is-success">
@@ -14,18 +14,26 @@
           <span>全てのカラオケ</span>
         </b-radio-button>
       </b-field>
+      <b-dropdown v-model="search.sort_key">
+        <button class="button is-prymary" slot="trigger">
+          <span>{{ sortKeyLabel(search.sort_key) }}順</span>
+           <b-icon icon="menu-down" />
+        </button>
+        <b-dropdown-item value="datetime">{{ sortKeyLabel('datetime') }}</b-dropdown-item>
+        <b-dropdown-item value="title">{{ sortKeyLabel('title') }}</b-dropdown-item>
+        <b-dropdown-item value="history_size">{{ sortKeyLabel('history_size') }}</b-dropdown-item>
+      </b-dropdown>
     </section>
     <section>
       <b-table
         narrowed
         paginated
-        pagination-simple
         backend-pagination
         :data="events"
         :total="pager.total"
         :per-page="pager.per"
         :current-page="pager.page"
-        :loading="isLoading"
+        :loading="is_loading"
         @page-change="onPageChanged"
       >
         <template slot-scope="props">
@@ -67,15 +75,19 @@
         },
         search: {
           target: 'mine',
+          sort_key: 'datetime',
           keyword: '',
         },
-        isLoading: false
+        is_loading: false
       }
     },
     watch: {
-      "search.target": function() {
-        this.pager.page = 1
-        this.fetch()
+      search: {
+        handler: function() {
+          this.pager.page = 1
+          this.fetch()
+        },
+        deep: true
       }
     },
     methods: {
@@ -83,18 +95,26 @@
         const params = {
           page: this.pager.page,
           per:  this.pager.per,
-          members: this.search.target == 'mine' ? [11] : null // TODO: ログイン中ユーザに差し替え
+          members: this.search.target == 'mine' ? [11] : null, // TODO: ログイン中ユーザに差し替え
+          sort_key: this.search.sort_key
         }
-        this.isLoading = true
+        this.is_loading = true
         http.getEvents(params).then((response) => {
           this.events = response.data
           this.pager.total = Number(response.headers['total-count'])
-          this.isLoading = false
+          this.is_loading = false
         })
       },
       onPageChanged: function(page) {
         this.pager.page = page
         this.fetch()
+      },
+      sortKeyLabel: function(sort_key) {
+        return {
+          'datetime': '日付',
+          'title': 'タイトル',
+          'history_size': '歌唱履歴数'
+        }[sort_key]
       }
     },
     mounted: function() {
