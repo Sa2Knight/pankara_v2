@@ -1,63 +1,61 @@
 <template>
   <div>
-    <div class="title">カラオケ一覧</div>
-    <section class="block">
-      <b-field class="is-fullhd">
-        <b-radio-button v-model="search.target"
-          native-value="mine"
-          type="is-success">
-          <span>自分が参加したカラオケ</span>
-        </b-radio-button>
-        <b-radio-button v-model="search.target"
-          native-value="all"
-          type="is-info">
-          <span>全てのカラオケ</span>
-        </b-radio-button>
-      </b-field>
-      <b-dropdown v-model="search.sort_key">
-        <button class="button is-prymary" slot="trigger">
-          <span>{{ sortKeyLabel(search.sort_key) }}順</span>
-           <b-icon icon="menu-down" />
-        </button>
-        <b-dropdown-item value="datetime">{{ sortKeyLabel('datetime') }}</b-dropdown-item>
-        <b-dropdown-item value="title">{{ sortKeyLabel('title') }}</b-dropdown-item>
-        <b-dropdown-item value="history_size">{{ sortKeyLabel('history_size') }}</b-dropdown-item>
-      </b-dropdown>
-    </section>
-    <section>
-      <b-table
-        narrowed
-        paginated
-        backend-pagination
-        :data="events"
-        :total="pager.total"
-        :per-page="pager.per"
-        :current-page="pager.page"
-        :loading="is_loading"
-        @page-change="onPageChanged"
+    <v-container fluid grid-list-md>
+      <v-data-iterator
+        :items="events"
+        content-tag="v-layout"
+        disable-initial-sort
+        row
+        wrap
+        hide-actions
       >
-        <template slot-scope="props">
-          <b-table-column label="タイトル">
-            {{ props.row.title  }}
-          </b-table-column>
-          <b-table-column label="日付">
-            {{ props.row.datetime  }}
-          </b-table-column>
-          <b-table-column label="時間">
-            {{ props.row.plan  }} 時間
-          </b-table-column>
-          <b-table-column label="お店">
-            <v-store-label :store="props.row.store" />
-          </b-table-column>
-          <b-table-column label="曲数">
-            {{ props.row.history_size  }}
-          </b-table-column>
-          <b-table-column label="メンバー">
-            <v-user-icons :users="props.row.members" />
-          </b-table-column>
-        </template>
-      </b-table>
-    </section>
+        <v-flex
+          slot="item"
+          slot-scope="props"
+          xs12
+          sm6
+          md3
+          1g1
+        >
+          <v-card hover>
+            <v-card-title primary-title>
+              <h3>{{ props.item.title }}</h3>
+            </v-card-title>
+            <v-divider />
+            <v-list>
+              <v-list-tile>
+                <v-list-tile-content>メンバー</v-list-tile-content>
+                <v-list-tile-content class="align-end">
+                  <v-user-icons :users="props.item.members" />
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-content>日付</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ props.item.datetime }}</v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-content>時間</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ props.item.plan }}</v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-content>お店</v-list-tile-content>
+                <v-list-tile-content class="align-end">
+                  <v-store-label :store="props.item.store" />
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-content>機種</v-list-tile-content>
+                <v-list-tile-content class="align-end">JOYSOUN MAX</v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-content>曲数</v-list-tile-content>
+                <v-list-tile-content class="align-end">{{ props.item.history_size }}</v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+          </v-card>
+        </v-flex>
+      </v-data-iterator>
+    </v-container>
   </div>
 </template>
 
@@ -67,27 +65,19 @@
   export default {
     data: function() {
       return {
+        headers: [
+          { text: '日付', value: 'datetime' },
+          { text: 'タイトル', value: 'title' },
+          { text: '時間', value: 'plan' },
+          { text: '歌唱数', value: 'history_size' }
+        ],
         events: [],
         pager: {
           total: 0,
           page: 1,
           per:  CONST.PER,
         },
-        search: {
-          target: 'mine',
-          sort_key: 'datetime',
-          keyword: '',
-        },
         is_loading: false
-      }
-    },
-    watch: {
-      search: {
-        handler: function() {
-          this.pager.page = 1
-          this.fetch()
-        },
-        deep: true
       }
     },
     methods: {
@@ -95,8 +85,6 @@
         const params = {
           page: this.pager.page,
           per:  this.pager.per,
-          members: this.search.target == 'mine' ? [11] : null, // TODO: ログイン中ユーザに差し替え
-          sort_key: this.search.sort_key
         }
         this.is_loading = true
         http.getEvents(params).then((response) => {
@@ -105,17 +93,6 @@
           this.is_loading = false
         })
       },
-      onPageChanged: function(page) {
-        this.pager.page = page
-        this.fetch()
-      },
-      sortKeyLabel: function(sort_key) {
-        return {
-          'datetime': '日付',
-          'title': 'タイトル',
-          'history_size': '歌唱履歴数'
-        }[sort_key]
-      }
     },
     mounted: function() {
       this.fetch()
