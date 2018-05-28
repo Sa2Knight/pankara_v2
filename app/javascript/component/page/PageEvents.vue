@@ -61,7 +61,8 @@
 
 <script>
   import CONST from '../../lib/constants'
-  import http from '../../lib/http'
+  import http  from '../../lib/http'
+  import { scrollIsBottom } from '../../lib/util'
   export default {
     data: function() {
       return {
@@ -77,7 +78,8 @@
           page: 1,
           per:  CONST.PER,
         },
-        is_loading: false
+        is_loading: false,
+        all_loaded: false
       }
     },
     methods: {
@@ -88,14 +90,26 @@
         }
         this.is_loading = true
         http.getEvents(params).then((response) => {
-          this.events = response.data
-          this.pager.total = Number(response.headers['total-count'])
+          const fetched_events = response.data
+          this.events = this.events.concat(fetched_events)
           this.is_loading = false
+          this.all_loaded = fetched_events.length == 0
+          this.infiniteScroll()
         })
       },
+      infiniteScroll: function() {
+        if (this.is_loading || this.all_loaded) {
+          return
+        }
+        if (scrollIsBottom()) {
+          this.pager.page += 1
+          this.fetch()
+        }
+      }
     },
     mounted: function() {
       this.fetch()
+      window.addEventListener('scroll', this.infiniteScroll)
     },
     components: {
       VStoreLabel: require('../common/VStoreLabel').default,
