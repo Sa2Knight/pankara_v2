@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <v-container fluid grid-list-md>
+  <div app>
+    <v-container v-scroll="infiniteScroll" fluid grid-list-md>
+      <v-radio-group row v-model="search.target">
+        <v-radio label="あなたの" value="mine" />
+        <v-radio label="すべての" value="all" />
+      </v-radio-group>
       <v-data-iterator
         :items="events"
         content-tag="v-layout"
@@ -14,10 +18,12 @@
           slot-scope="props"
           xs12
           sm6
-          md3
-          1g1
+          md4
+          lg3
+          xl2
+          justify-space-between
         >
-          <v-card hover>
+          <v-card hover class="mb-2">
             <v-card-title primary-title>
               <h3>{{ props.item.title }}</h3>
             </v-card-title>
@@ -55,6 +61,20 @@
           </v-card>
         </v-flex>
       </v-data-iterator>
+      <v-fab-transition>
+        <v-btn
+          :v-show="true"
+          color="orange"
+          dark
+          small
+          fixed
+          bottom
+          right
+          fab
+        >
+          <v-icon>keyboard_arrow_up</v-icon>
+        </v-btn>
+      </v-fab-transition>
     </v-container>
   </div>
 </template>
@@ -73,6 +93,9 @@
           { text: '歌唱数', value: 'history_size' }
         ],
         events: [],
+        search: {
+          target: 'mine'
+        },
         pager: {
           total: 0,
           page: 1,
@@ -87,6 +110,7 @@
         const params = {
           page: this.pager.page,
           per:  this.pager.per,
+          members: this.search.target == 'mine' ? [11] : null // ログインユーザに差し替え
         }
         this.is_loading = true
         http.getEvents(params).then((response) => {
@@ -107,13 +131,22 @@
         }
       }
     },
+    watch: {
+      search: {
+        handler: function() {
+          this.pager.page= 1
+          this.events = []
+          this.fetch()
+        },
+        deep: true
+      }
+    },
     mounted: function() {
       this.fetch()
-      window.addEventListener('scroll', this.infiniteScroll)
     },
     components: {
       VStoreLabel: require('../common/VStoreLabel').default,
-      VUserIcons:  require('../common/VUserIcons').default
+      VUserIcons:  require('../common/VUserIcons').default,
     }
   }
 </script>
