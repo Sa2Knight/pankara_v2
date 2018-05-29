@@ -3,6 +3,7 @@ require_relative '../../support/common_contexts'
 RSpec.describe 'events#index', type: :request do
   include_context 'request spec common'
 
+  let(:title)       { nil }
   let(:members)     { nil }
   let(:sort_key)    { nil }
   let(:sort_order)  { nil }
@@ -10,6 +11,7 @@ RSpec.describe 'events#index', type: :request do
   let(:per)         { nil }
   let(:params) do
     {
+      title:       title,
       members:     members,
       sort_key:    sort_key,
       sort_order:  sort_order,
@@ -33,6 +35,37 @@ RSpec.describe 'events#index', type: :request do
         expect(status).to eq 200
         expect(size).to eq 3
         expect(Event.find(first['id'])).to eq Event.first
+      end
+    end
+  end
+
+  describe 'タイトル検索関係' do
+    let(:before_request) do
+      FactoryBot.create(:event, title: 'ABC')
+      FactoryBot.create(:event, title: 'BCD')
+      FactoryBot.create(:event, title: 'CDE')
+    end
+    context 'タイトルを指定しない場合' do
+      let(:title) { '' }
+
+      it '全件取得できる' do
+        expect(size).to eq 3
+      end
+    end
+    context 'タイトルに合致する曲がない場合' do
+      let(:title) { 'F' }
+
+      it '１件も取得できない' do
+        expect(size).to eq 0
+      end
+    end
+    context 'タイトルに合致する曲がある場合' do
+      let(:title) { 'B' }
+
+      it 'Bを含むタイトルのイベントが取得できる' do
+        expect(size).to eq 2
+        expect(body.first['title']).to eq 'ABC'
+        expect(body.second['title']).to eq 'BCD'
       end
     end
   end

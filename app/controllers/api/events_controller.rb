@@ -13,6 +13,7 @@ class Api::EventsController < Api::BaseController
     #
     def events
       @index = Event
+               .title_like(params[:title])
                .by_member(params[:members])
                .order(params[:sort_key] => params[:sort_order])
                .page(params[:page])

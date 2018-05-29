@@ -5,6 +5,15 @@ class Event < ApplicationRecord
   belongs_to :product, optional: true
 
   #
+  # タイトルで絞り込み
+  #
+  def self.title_like(title)
+    return self.all if title.blank?
+
+    self.where("title like '%#{title}%'")
+  end
+
+  #
   # 参加しているユーザで絞り込み
   #
   def self.by_member(*members)
