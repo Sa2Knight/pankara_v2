@@ -110,12 +110,6 @@
   export default {
     data: function() {
       return {
-        headers: [
-          { text: '日付', value: 'datetime' },
-          { text: 'タイトル', value: 'title' },
-          { text: '時間', value: 'plan' },
-          { text: '歌唱数', value: 'history_size' }
-        ],
         events: [],
         query: {
           want_only_mine: false,
@@ -128,14 +122,15 @@
         },
         all_loaded: false,
         is_loading: false,
-        is_show_dialog: true
+        is_show_dialog: false
       }
     },
     methods: {
       fetch: function() {
         const params = {
-          page: this.pager.page,
-          per:  this.pager.per,
+          page:    this.pager.page,
+          per:     this.pager.per,
+          title:   this.query.title,
           members: this.query.want_only_mine ? [9] : null // ログインユーザに差し替え
         }
         this.is_loading = true
