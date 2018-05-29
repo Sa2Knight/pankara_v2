@@ -19,42 +19,7 @@
           xl2
           justify-space-between
         >
-          <v-card hover class="mb-2">
-            <v-card-title primary-title>
-              <h3>{{ props.item.title }}</h3>
-            </v-card-title>
-            <v-divider />
-            <v-list>
-              <v-list-tile>
-                <v-list-tile-content>メンバー</v-list-tile-content>
-                <v-list-tile-content class="align-end">
-                  <v-user-icons :users="props.item.members" />
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-content>日付</v-list-tile-content>
-                <v-list-tile-content class="align-end">{{ props.item.datetime }}</v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-content>時間</v-list-tile-content>
-                <v-list-tile-content class="align-end">{{ props.item.plan }}</v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-content>お店</v-list-tile-content>
-                <v-list-tile-content class="align-end">
-                  <v-store-label :store="props.item.store" />
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-content>機種</v-list-tile-content>
-                <v-list-tile-content class="align-end">JOYSOUN MAX</v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-content>曲数</v-list-tile-content>
-                <v-list-tile-content class="align-end">{{ props.item.history_size }}</v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-          </v-card>
+          <event-card :event="props.item" />
         </v-flex>
       </v-data-iterator>
       <v-fab-transition>
@@ -162,8 +127,7 @@
       this.fetch()
     },
     components: {
-      VStoreLabel: require('../common/VStoreLabel').default,
-      VUserIcons:  require('../common/VUserIcons').default,
+      EventCard:   require('../parts/PageEvents/EventCard').default
     }
   }
 </script>
