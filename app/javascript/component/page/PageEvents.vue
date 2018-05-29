@@ -1,10 +1,6 @@
 <template>
   <div app>
     <v-container v-scroll="infiniteScroll" fluid grid-list-md>
-      <v-radio-group row v-model="search.target">
-        <v-radio label="あなたの" value="mine" />
-        <v-radio label="すべての" value="all" />
-      </v-radio-group>
       <v-data-iterator
         :items="events"
         content-tag="v-layout"
@@ -64,18 +60,46 @@
       <v-fab-transition>
         <v-btn
           :v-show="true"
-          color="orange"
-          dark
-          small
+          color="gray"
+          @click="is_show_dialog = true"
           fixed
+          class="elevation-12"
           bottom
           right
           fab
         >
-          <v-icon>keyboard_arrow_up</v-icon>
+          <v-icon>search</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-container>
+
+    <v-dialog v-model="is_show_dialog" max-width="500px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">カラオケ検索</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex xs12>
+                <v-text-field v-model="query.title" label="タイトル" />
+              </v-flex>
+              <v-flex xs12>
+                <v-checkbox v-model="query.want_only_mine" label="あなたのカラオケのみ表示" />
+              </v-flex>
+              <v-flex xs6>
+                <v-btn @click="search" round class="pk-full-width" color="primary">
+                  検索
+                </v-btn>
+              </v-flex>
+              <v-flex xs6>
+                <v-btn round class="pk-full-width" color="primary">キャンセル</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -93,16 +117,18 @@
           { text: '歌唱数', value: 'history_size' }
         ],
         events: [],
-        search: {
-          target: 'mine'
+        query: {
+          want_only_mine: false,
+          title: '',
         },
         pager: {
           total: 0,
           page: 1,
           per:  CONST.PER,
         },
+        all_loaded: false,
         is_loading: false,
-        all_loaded: false
+        is_show_dialog: true
       }
     },
     methods: {
@@ -110,7 +136,7 @@
         const params = {
           page: this.pager.page,
           per:  this.pager.per,
-          members: this.search.target == 'mine' ? [11] : null // ログインユーザに差し替え
+          members: this.query.want_only_mine ? [9] : null // ログインユーザに差し替え
         }
         this.is_loading = true
         http.getEvents(params).then((response) => {
@@ -129,16 +155,12 @@
           this.pager.page += 1
           this.fetch()
         }
-      }
-    },
-    watch: {
-      search: {
-        handler: function() {
-          this.pager.page= 1
-          this.events = []
-          this.fetch()
-        },
-        deep: true
+      },
+      search: function() {
+        this.is_show_dialog = false
+        this.pager.page = 1
+        this.events = []
+        this.fetch()
       }
     },
     mounted: function() {
