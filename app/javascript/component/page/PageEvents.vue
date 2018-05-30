@@ -1,43 +1,26 @@
 <template>
   <div app>
     <v-container v-scroll="infiniteScroll" fluid grid-list-md>
-      <v-data-iterator
-        :items="events"
-        content-tag="v-layout"
-        disable-initial-sort
-        row
-        wrap
-        hide-actions
-      >
-        <v-flex
-          slot="item"
-          slot-scope="props"
-          xs12
-          sm6
-          md4
-          lg3
-          xl2
-          justify-space-between
-        >
+
+      <!-- フェッチしたカラオケ一覧をイテレータで順に描画 -->
+      <v-data-iterator :items="events" content-tag="v-layout"
+                        row wrap disable-initial-sort hide-actions>
+        <!-- 各カラオケカードをflexboxで描画 -->
+        <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3 xl2 justify-space-between>
           <event-card :event="props.item" />
         </v-flex>
       </v-data-iterator>
+
+      <!-- 検索フォームボタン -->
       <v-fab-transition>
-        <v-btn
-          :v-show="true"
-          color="gray"
-          @click="is_show_dialog = true"
-          fixed
-          class="elevation-12"
-          bottom
-          right
-          fab
-        >
+        <v-btn :v-show="true" @click="is_show_dialog = true"
+               color="gray" class="elevation-12" fixed bottom right fab>
           <v-icon>search</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-container>
 
+    <!-- 検索フォームをダイアログで描画 -->
     <v-dialog v-model="is_show_dialog" max-width="500px">
       <events-search-form
         v-model="query"
