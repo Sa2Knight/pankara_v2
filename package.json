@@ -5,6 +5,7 @@
     "start": "foreman start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "axios": "^0.18.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
