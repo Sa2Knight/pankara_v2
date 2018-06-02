@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Knock::Authenticable
   before_action :check_session
 
   #

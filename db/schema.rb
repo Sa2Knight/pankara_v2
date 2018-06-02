@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_02_173624) do
+ActiveRecord::Schema.define(version: 2018_06_02_175652) do
 
   create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 2018_06_02_173624) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "user_name"
-    t.string "hashed_password"
+    t.string "name"
+    t.string "password_digest"
     t.string "providder"
     t.string "uid"
     t.string "display_name"

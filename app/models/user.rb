@@ -1,11 +1,9 @@
 class User < ApplicationRecord
+  has_secure_password
   has_many :user_events
   has_many :events, through: :user_events
 
-  #
-  # パスワード代入時にハッシュ化する
-  #
-  def password=(new_password)
-    self.hashed_password = Digest::SHA2.new(512).hexdigest(new_password)
+  def self.from_token_request(request)
+    User.first
   end
 end

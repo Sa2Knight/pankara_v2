@@ -1,5 +1,6 @@
 class Api::BaseController < ApplicationController
   before_action :params_reset
+  before_action :authenticate_user
 
   after_action :set_respons_header, only: %i[index histories]
 
