@@ -3,6 +3,7 @@ require_relative '../../support/common_contexts'
 RSpec.describe 'songs#index', type: :request do
   include_context 'request spec common'
 
+  let(:current_user) { FactoryBot.create(:user) }
   let(:with_artist) { nil }
   let(:artist_id)   { nil }
   let(:name)        { nil }
@@ -25,7 +26,7 @@ RSpec.describe 'songs#index', type: :request do
 
   before do
     before_request if defined? before_request
-    get '/api/songs', params: params
+    request(:get, '/api/songs/', params: params, user: current_user)
   end
 
   describe 'シリアライズ関係' do

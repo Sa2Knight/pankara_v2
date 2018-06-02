@@ -23,7 +23,7 @@ RSpec.describe 'songs#histories', type: :request do
 
   before do
     before_request if defined? before_request
-    get "/api/songs/#{song.id}/histories", params: params
+    request(:get, "/api/songs/#{song.id}/histories", params: params, user: user)
   end
 
   describe 'シリアライズ関係' do

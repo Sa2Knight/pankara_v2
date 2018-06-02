@@ -2,12 +2,13 @@ require_relative '../../support/common_contexts'
 RSpec.describe 'songs#show', type: :request do
   include_context 'request spec common'
 
+  let(:current_user) { FactoryBot.create(:user) }
   let(:song)    { FactoryBot.create(:song) }
   let(:song_id) { song.id }
 
   before do
     before_request if defined? before_request
-    get "/api/songs/#{song_id}"
+    request(:get, "/api/songs/#{song_id}", user: current_user)
   end
 
   describe 'シリアライズ関係' do

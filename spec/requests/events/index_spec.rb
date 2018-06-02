@@ -3,6 +3,7 @@ require_relative '../../support/common_contexts'
 RSpec.describe 'events#index', type: :request do
   include_context 'request spec common'
 
+  let(:current_user) { FactoryBot.create(:user) }
   let(:title)       { nil }
   let(:members)     { nil }
   let(:sort_key)    { nil }
@@ -22,7 +23,7 @@ RSpec.describe 'events#index', type: :request do
 
   before do
     before_request if defined? before_request
-    get '/api/events', params: params
+    request(:get, '/api/events', params: params, user: current_user)
   end
 
   describe 'シリアライズ関係' do
