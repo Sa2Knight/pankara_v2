@@ -30,6 +30,18 @@ const request = function(method, url, params = {}) {
   return axios(baseParams)
 }
 
+/**
+ * ログインリクエスト
+ */
+http.login = function(name, password) {
+  const params = {
+    auth: {
+      name: name,
+      password: password
+    }
+  }
+  return request('POST', '/user_token', params)
+}
 
 /**
  * イベント一覧を取得する
