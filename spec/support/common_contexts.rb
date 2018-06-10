@@ -19,7 +19,7 @@ shared_context 'request spec common' do
         password: '1q2w3e4r'
       }
     }
-    post '/user_token', params: auth_params
+    post '/api/user_token', params: auth_params
     @jwt = JSON.parse(response.body)['jwt']
   end
 end
