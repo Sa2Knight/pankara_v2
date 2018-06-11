@@ -1,4 +1,6 @@
 class Api::EventsController < Api::BaseController
+  skip_before_action :authenticate_user
+
   #
   # イベントの一覧を取得
   #

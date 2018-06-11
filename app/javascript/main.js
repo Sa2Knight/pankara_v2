@@ -4,6 +4,7 @@ import Vuetify    from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
+import PageLayout from './component/PageLayout'
 import PageEvents from './component/page/PageEvents'
 
 Vue.use(VueRouter)
@@ -16,8 +17,8 @@ const routes = [
 
 // ページ全体をVueコンポーネント化
 new Vue({
-  data: {
-    is_show_navigation: false
-  },
-  router: new VueRouter({ routes })
+  router: new VueRouter({ routes }),
+  components: {
+    PageLayout: PageLayout
+  }
 }).$mount('#app')

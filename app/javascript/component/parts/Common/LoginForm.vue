@@ -28,7 +28,7 @@
                 </v-btn>
               </v-flex>
               <v-flex xs6>
-                <v-btn round class="pk-full-width" color="primary">
+                <v-btn round @click="cancel" class="pk-full-width" color="primary">
                   キャンセル
                 </v-btn>
               </v-flex>
@@ -60,6 +60,10 @@
         if (this.$refs.form.validate()) {
           this.login()
         }
+      },
+      cancel: function() {
+        this.$refs.form.reset()
+        this.$emit('close')
       },
       login: function() {
         http.login(this.name, this.password)
