@@ -97,9 +97,22 @@
     <!-- ログインフォーム -->
     <v-dialog v-model="isShowLoginForm" max-width="500px">
       <login-form
+        @success="isShowSuccessSnack = true"
+        @failed="isShowFailedSnack = true"
         @close="isShowLoginForm = false"
       />
     </v-dialog>
+
+    <!-- スナック -->
+    <v-snackbar v-model="isShowSuccessSnack" top color="success">
+      ログインに成功しました
+      <v-btn dark flat @click.native="isShowSuccessSnack = false">閉じる</v-btn>
+    </v-snackbar>
+
+    <v-snackbar v-model="isShowFailedSnack" top color="error">
+      ログインに失敗しました
+    </v-snackbar>
+
   </div>
 </template>
 
@@ -108,7 +121,9 @@
     data: function() {
       return {
         isShowNavigation: false,
-        isShowLoginForm: false
+        isShowLoginForm: false,
+        isShowSuccessSnack: false,
+        isShowFailedSnack: false,
       }
     },
     components: {

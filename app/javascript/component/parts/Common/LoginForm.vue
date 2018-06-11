@@ -53,6 +53,7 @@
           v => !!v || 'パスワードを入力してください'
         ],
         valid: false,
+        isShowSuccessSnack: false
       }
     },
     methods: {
@@ -68,13 +69,16 @@
       login: function() {
         http.login(this.name, this.password)
           .then((response) => {
-           console.log(response.data)
+            this.$emit('success')
+            this.$emit('close')
           })
           .catch((err) => {
-            // TODO: トーストとか出す
-            alert("ログイン失敗")
+            this.$emit('failed')
           })
       }
+    },
+    components: {
+      VSuccessSnack: require('./VSuccessSnack').default
     }
   }
 </script>
