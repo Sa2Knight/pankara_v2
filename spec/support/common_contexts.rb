@@ -7,7 +7,11 @@ shared_context 'request spec common' do
   let(:first)   { body.first }
   let(:size)    { body.size }
 
-  def request(method, url, params: nil, user:)
+  shared_examples '404' do
+    it { expect(status).to eq 404 }
+  end
+
+  def request(method, url, params: nil, user: nil)
     login(user) if user && @jwt.blank?
     send(method, url, params: params, headers: { Authorization: @jwt })
   end
