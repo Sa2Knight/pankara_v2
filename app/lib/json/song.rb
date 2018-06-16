@@ -16,7 +16,7 @@ module JSON
     #
     # 一覧取得用(歌手情報付き)
     #
-    def self.index_with_artist(song)
+    def self.raw_with_artist(song)
       return nil if song.blank?
 
       self.raw(song).merge(
@@ -30,7 +30,7 @@ module JSON
     def self.show(song, user = nil)
       return nil if song.blank?
 
-      self.index_with_artist(song).merge(
+      self.raw_with_artist(song).merge(
         my_histories_count: song.histories_count_by(user: user),
         histories_count: song.histories_count
       )

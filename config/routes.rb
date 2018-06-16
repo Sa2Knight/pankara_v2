@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     post :user_token, to: 'user_token#create'
     resources :sessions, only: %i[create]
-    resources :events, only: %i[index]
+    resources :events, only: %i[index show]
     resources :songs, only: %i[index show] do
       member do
         get 'histories'

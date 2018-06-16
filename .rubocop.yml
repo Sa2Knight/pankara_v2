@@ -54,12 +54,20 @@ Metrics/AbcSize:
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 
-# テストコードではブロック長超過を許容
+# シリアライズコード及びテストコードでは各種ルールを許容
 Metrics/BlockLength:
   Exclude:
+      - 'app/lib/json/*.rb'
       - 'spec/**/*.rb'
-
-# テストコードでは一行の文字数超過を許容
 Metrics/LineLength:
   Exclude:
+      - 'app/lib/json/*.rb'
+      - 'spec/**/*.rb'
+Metrics/AbcSize:
+  Exclude:
+      - 'app/lib/json/*.rb'
+      - 'spec/**/*.rb'
+Metrics/MethodLength:
+  Exclude:
+      - 'app/lib/json/*.rb'
       - 'spec/**/*.rb'
