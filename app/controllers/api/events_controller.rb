@@ -35,6 +35,7 @@ class Api::EventsController < Api::BaseController
     # 取得対象のイベント
     #
     def event
-      Event.find(params[:id])
+      return @event if @event.present?
+      (@event = Event.find_by(id: params[:id])) || raise404('event_not_found')
     end
 end

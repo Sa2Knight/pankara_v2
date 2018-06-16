@@ -1,4 +1,5 @@
 class Api::BaseController < ApplicationController
+  include ErrorHandlers
   before_action :params_reset
   before_action :authenticate_user
 
@@ -24,15 +25,6 @@ class Api::BaseController < ApplicationController
     raise StandardError unless @index
     response.headers['total-count'] = @index.total_count
     response.headers['total-pages'] = @index.total_pages
-  end
-
-  # TODO: エラーレスポンスを汎用化させる
-  def raise400(message = 'params_invalid')
-    render json: { message: message }, status: :bad_request
-  end
-
-  def raise404(message = 'not_found')
-    render json: { message: message }, status: :not_found
   end
 
   #

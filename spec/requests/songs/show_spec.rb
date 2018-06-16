@@ -72,9 +72,7 @@ RSpec.describe 'songs#show', type: :request do
   describe 'エラー系' do
     context '存在しないIDを指定した場合' do
       let(:song_id) { 0 }
-      it '404' do
-        expect(response.status).to eq 404
-      end
+      it_behaves_like '404'
     end
   end
 end

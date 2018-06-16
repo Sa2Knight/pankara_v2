@@ -37,7 +37,7 @@ RSpec.describe 'events#show', type: :request do
   end
 
   describe '異常系' do
-    xcontext 'イベントが存在しない場合' do
+    context 'イベントが存在しない場合' do
       let(:event_id) { 0 }
       it_behaves_like '404'
     end

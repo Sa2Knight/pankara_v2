@@ -6,6 +6,7 @@ RSpec.describe 'songs#histories', type: :request do
   let(:song) { FactoryBot.create(:song) }
   let(:user_event) { FactoryBot.create(:user_event, user: user) }
 
+  let(:song_id)     { song.id }
   let(:user_id)     { nil }
   let(:sort_key)    { nil }
   let(:sort_order)  { nil }
@@ -23,7 +24,7 @@ RSpec.describe 'songs#histories', type: :request do
 
   before do
     before_request if defined? before_request
-    request(:get, "/api/songs/#{song.id}/histories", params: params, user: user)
+    request(:get, "/api/songs/#{song_id}/histories", params: params, user: user)
   end
 
   describe 'シリアライズ関係' do
@@ -152,6 +153,13 @@ RSpec.describe 'songs#histories', type: :request do
         expect(body.second['id']).to eq History.second.id
         expect(body.third['id']).to  eq History.first.id
       end
+    end
+  end
+
+  describe '異常系' do
+    context '楽曲が存在しない場合' do
+      let(:song_id) { 0 }
+      it_behaves_like '404'
     end
   end
 end

@@ -68,15 +68,13 @@ class Api::SongsController < Api::BaseController
 
     #
     # 詳細取得対象の楽曲が存在するか?
-    # TODO: 例外処理の汎用化
     #
     def song_exists?
-      raise404 if song.blank?
+      raise404 'song_not_found' if song.blank?
     end
 
     #
     # 歌唱履歴一覧取得対象のユーザが存在するか?
-    # TODO: 例外処理の汎用化
     #
     def user_exists?
       return true if params[:user_id].blank?
