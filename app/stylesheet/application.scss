@@ -1,3 +1,9 @@
 .pk-full-width {
   width: 100%;
 }
+
+.collapse {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
