@@ -50,4 +50,11 @@ http.getEvents = function(params = {}) {
   return request('GET', '/events', params)
 }
 
+/**
+ * イベント詳細を取得する
+ */
+http.getEvent = function(id, params = {}) {
+  return request('GET', `/events/${id}`, params)
+}
+
 export default http
