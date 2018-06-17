@@ -6,8 +6,8 @@
           <v-song-thumbnail :song="history.song" />
         </v-flex>
         <v-flex xs7>
-          <h1>{{ history.song.name }}</h1>
-          <h2>{{ history.song.artist.name }}</h2>
+          <p class="song-name collapse">{{ history.song.name }}</p>
+          <p class="artist-name collapse">{{ history.song.artist.name }}</p>
           <span>キー: {{ history.key }}</span>
           <span>満足度: {{ history.satisfaction }}</span>
           <span>得点: {{ history.score }}</span>
@@ -22,11 +22,18 @@
 
 <style lang="scss">
   .history-card {
-    h1 {
-      font-size: 1.2em;
+    * {
+      margin: 0;
+      padding: 0;
     }
-    h2 {
-      font-size: 1.1em;
+    p {
+      font-weight: bold;
+      &.song-name {
+        font-size: 1.2em;
+      }
+      &.artist-name {
+        font-size: 1.1em;
+      }
     }
     .v-song-thumbnail {
       img {
@@ -47,6 +54,10 @@
     props: {
       history: {
         type: Object,
+        required: true
+      },
+      index: {
+        type: Number,
         required: true
       }
     },
