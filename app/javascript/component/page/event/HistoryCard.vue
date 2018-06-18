@@ -5,7 +5,7 @@
         <v-flex xs4>
           <v-song-thumbnail :song="history.song" />
         </v-flex>
-        <v-flex xs7>
+        <v-flex xs7 @click="select">
           <p class="song-name collapse">{{ history.song.name }}</p>
           <p class="artist-name collapse">{{ history.song.artist.name }}</p>
           <span>キー: {{ history.key }}</span>
@@ -63,10 +63,11 @@
       history: {
         type: Object,
         required: true
-      },
-      index: {
-        type: Number,
-        required: true
+      }
+    },
+    methods: {
+      select: function() {
+        this.$store.dispatch('selectHistory', this.history.id)
       }
     },
     components: {

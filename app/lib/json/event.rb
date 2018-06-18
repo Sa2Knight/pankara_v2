@@ -42,6 +42,7 @@ module JSON
         average_satisfaction: event.average_satisfaction,
         histories: event.histories.includes(:user_event, song: [:artist]).map do |history|
           {
+            id: history.id,
             user: JSON::User.raw(history.user_event.user), # HACK: ユーザIDだけでよくない？
             song: JSON::Song.raw_with_artist(history.song),
             score_type: JSON::ScoreType.raw(history.score_type),
