@@ -12,7 +12,7 @@
           <span>満足度: {{ history.satisfaction }}</span>
           <span>得点: {{ history.score }}</span>
         </v-flex>
-        <v-flex xs1>
+        <v-flex xs1 class="right-column">
           <v-user-icons :user="history.user" />
         </v-flex>
       </v-layout>
@@ -39,6 +39,14 @@
       img {
         width: 100%;
         height: auto;
+      }
+    }
+    .right-column {
+      position: relative;
+      .v-user-icons {
+        position: absolute;
+        right: 0;
+        bottom: 0;
       }
     }
   }

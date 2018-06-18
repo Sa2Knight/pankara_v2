@@ -4,7 +4,10 @@
       <h1>歌唱履歴</h1>
         <v-layout row wrap>
           <v-flex xs12 sm6 md6 lg4 v-for="(history, i) in event.histories">
-            <history-card :index="i + 1" :history="history" />
+            <history-card
+              :index="i"
+              :history="history"
+            />
             <v-divider />
           </v-flex>
         </v-layout>
@@ -17,7 +20,8 @@
   export default {
     data: function() {
       return {
-        event: null
+        event: null,
+        selectedEvent: null,
       }
     },
     methods: {
@@ -25,7 +29,7 @@
         http.getEvent(this.id).then((response) => {
           this.event = response.data
         })
-      }
+      },
     },
     computed: {
       id: function() {
