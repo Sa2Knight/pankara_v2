@@ -32,9 +32,9 @@
 </template>
 
 <script>
-  import CONST from '../../lib/constants'
-  import http  from '../../lib/http'
-  import { scrollIsBottom } from '../../lib/util'
+  import CONST from '../../../lib/constants'
+  import http  from '../../../lib/http'
+  import { scrollIsBottom } from '../../../lib/util'
   export default {
     data: function() {
       return {
@@ -90,8 +90,8 @@
       this.fetch()
     },
     components: {
-      EventCard:   require('../parts/PageEvents/EventCard').default,
-      EventsSearchForm: require('../parts/PageEvents/EventsSearchForm').default
+      EventCard:   require('./EventCard').default,
+      EventsSearchForm: require('./EventsSearchForm').default
     }
   }
 </script>

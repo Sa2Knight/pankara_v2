@@ -5,8 +5,8 @@ import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
 import PageLayout from './component/PageLayout'
-import PageEvents from './component/page/PageEvents'
-import PageEvent  from './component/page/PageEvent'
+import PageEvents from './component/page/events/PageEvents'
+import PageEvent  from './component/page/event/PageEvent'
 
 Vue.use(VueRouter)
 Vue.use(Vuetify)

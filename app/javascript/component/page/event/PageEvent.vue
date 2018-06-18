@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import http  from '../../lib/http'
+  import http  from '../../../lib/http'
   export default {
     data: function() {
       return {
@@ -40,7 +40,7 @@
       this.fetch()
     },
     components: {
-      HistoryCard: require('../parts/PageEvent/HistoryCard').default
+      HistoryCard: require('./HistoryCard').default
     }
   }
 </script>
