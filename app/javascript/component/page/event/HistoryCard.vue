@@ -1,5 +1,5 @@
 <template>
-  <div class="history-card">
+  <div class="history-card" v-bind:class="{ selected: isSelected, 'elevation-10': isSelected }">
     <v-container grid-list-md text-xs-center>
       <v-layout row>
         <v-flex xs4>
@@ -16,6 +16,12 @@
           <v-user-icons :user="history.user" />
         </v-flex>
       </v-layout>
+      <v-layout row justify-space-around v-show="isSelected">
+        <v-icon>fas fa-clipboard-list</v-icon>
+        <v-icon>fas fa-pencil-alt</v-icon>
+        <v-icon>fas fa-trash-alt</v-icon>
+        <v-icon>fas fa-ellipsis-h</v-icon>
+      </v-layout>
     </v-container>
   </div>
 </template>
@@ -25,6 +31,9 @@
     * {
       margin: 0;
       padding: 0;
+    }
+    &.selected {
+      background-color: #feffcd;
     }
     p {
       font-weight: bold;
@@ -53,6 +62,7 @@
 </style>
 
 <script>
+  import { mapState } from 'vuex'
   export default {
     data: function() {
       return {
@@ -64,6 +74,14 @@
         type: Object,
         required: true
       }
+    },
+    computed: {
+      isSelected: function() {
+        return this.history.id == this.selectedHistoryId
+      },
+      ...mapState({
+        selectedHistoryId: state => state.event.selectedHistoryId
+      })
     },
     methods: {
       select: function() {
