@@ -9,15 +9,17 @@ import Event      from './vuex/modules/event'
 import PageLayout from './component/PageLayout'
 import PageEvents from './component/page/events/PageEvents'
 import PageEvent  from './component/page/event/PageEvent'
+import ROUTES     from './lib/routes'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(Vuetify)
+console.log(ROUTES)
 
 // URLに対応するコンポーネントを定義
 const routes = [
-  { path: '/', component: PageEvents },
-  { path: '/events/:id', component: PageEvent },
+  { path: ROUTES.INDEX_PATH, component: PageEvents },
+  { path: ROUTES.EVENT_PATH(':id'), component: PageEvent },
 ]
 
 // vuexモジュールを定義

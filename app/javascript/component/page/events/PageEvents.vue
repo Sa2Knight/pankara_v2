@@ -2,12 +2,13 @@
   <div app>
     <v-container v-scroll="infiniteScroll" fluid grid-list-md>
 
-      <!-- フェッチしたカラオケ一覧をイテレータで順に描画 -->
+      <!-- カラオケ一覧 -->
       <v-data-iterator :items="events" content-tag="v-layout"
                         row wrap disable-initial-sort hide-actions>
-        <!-- 各カラオケカードをflexboxで描画 -->
         <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3 xl2 justify-space-between>
-          <event-card :event="props.item" />
+          <div @click="() => moveToDetail(props.item)">
+            <event-card :event="props.item" />
+          </div>
         </v-flex>
       </v-data-iterator>
 
@@ -32,8 +33,9 @@
 </template>
 
 <script>
-  import CONST from '../../../lib/constants'
-  import http  from '../../../lib/http'
+  import CONST  from '../../../lib/constants'
+  import ROUTES from '../../../lib/routes'
+  import http   from '../../../lib/http'
   import { scrollIsBottom } from '../../../lib/util'
   export default {
     data: function() {
@@ -84,6 +86,9 @@
         this.pager.page = 1
         this.events = []
         this.fetch()
+      },
+      moveToDetail: function(event) {
+        this.$router.push(ROUTES.EVENT_PATH(event.id))
       }
     },
     mounted: function() {
