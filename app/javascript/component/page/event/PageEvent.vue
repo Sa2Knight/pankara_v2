@@ -21,25 +21,20 @@
 </template>
 
 <script>
-  import http  from '../../../lib/http'
+  import { mapState } from 'vuex'
   export default {
-    data: function() {
-      return {
-        event: null,
-        selectedEvent: null,
-      }
-    },
     methods: {
       fetch: function() {
-        http.getEvent(this.id).then((response) => {
-          this.event = response.data
-        })
+        this.$store.dispatch('fetchEvent', this.id)
       },
     },
     computed: {
       id: function() {
         return this.$route.params.id
-      }
+      },
+      ...mapState({
+        event: state => state.event.event
+      })
     },
     mounted: function() {
       this.fetch()
