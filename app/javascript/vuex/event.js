@@ -1,7 +1,7 @@
 /**
   カラオケ詳細画面のストア
 */
-import http from '../../lib/http'
+import http from '../lib/http'
 export default {
   state: {
     // APIからフェッチしたカラオケ詳細

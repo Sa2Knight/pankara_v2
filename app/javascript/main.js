@@ -5,7 +5,7 @@ import Vuetify    from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
-import Event      from './vuex/modules/event'
+import Event      from './vuex/event'
 import PageLayout from './component/PageLayout'
 import PageEvents from './component/page/events/PageEvents'
 import PageEvent  from './component/page/event/PageEvent'
@@ -14,7 +14,6 @@ import ROUTES     from './lib/routes'
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(Vuetify)
-console.log(ROUTES)
 
 // URLに対応するコンポーネントを定義
 const routes = [
