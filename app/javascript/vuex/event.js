@@ -14,21 +14,24 @@ export default {
     setEvent (state, event) {
       state.event = event
     },
-    unsetEvent (state, event) {
-      state.event = null
-    },
     setSelectedHistoryId (state, id) {
       state.selectedHistoryId = id
-    }
+    },
+    unsetEvent (state) {
+      state.event = null
+    },
   },
 
   actions: {
+    // APIからカラオケの詳細を取得する
     fetchEvent ({ commit }, id) {
       commit('unsetEvent')
+
       http.getEvent(id).then((response) => {
         commit('setEvent', response.data)
       })
     },
+    // 歌唱履歴のうち1件を選択状態にする
     selectHistory ({ commit }, id) {
       commit('setSelectedHistoryId', id)
     }

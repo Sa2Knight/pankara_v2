@@ -33,14 +33,13 @@
 </template>
 
 <script>
-  import CONST  from '../../../lib/constants'
-  import ROUTES from '../../../lib/routes'
-  import http   from '../../../lib/http'
+  import { mapState } from 'vuex'
+  import CONST        from '../../../lib/constants'
+  import ROUTES       from '../../../lib/routes'
   import { scrollIsBottom } from '../../../lib/util'
   export default {
     data: function() {
       return {
-        events: [],
         query: {
           title: '',
           want_only_mine: false,
@@ -50,10 +49,15 @@
           page: 1,
           per:  CONST.PER,
         },
-        all_loaded: false,
-        is_loading: false,
         is_show_dialog: false
       }
+    },
+    computed: {
+      ...mapState({
+        events:      state => state.events.events,
+        isLoading:   state => state.events.isLoading,
+        isAllLoaded: state => state.events.isLoading
+      })
     },
     methods: {
       fetch: function() {
@@ -63,17 +67,10 @@
           title:   this.query.title,
           members: this.query.want_only_mine ? [9] : null // ログインユーザに差し替え
         }
-        this.is_loading = true
-        http.getEvents(params).then((response) => {
-          const fetched_events = response.data
-          this.events = this.events.concat(fetched_events)
-          this.is_loading = false
-          this.all_loaded = fetched_events.length == 0
-          this.infiniteScroll()
-        })
+        this.$store.dispatch('fetchEvents', params)
       },
       infiniteScroll: function() {
-        if (this.is_loading || this.all_loaded) {
+        if (this.isLoading || this.isAllLoaded) {
           return
         }
         if (scrollIsBottom()) {
@@ -84,7 +81,6 @@
       search: function() {
         this.is_show_dialog = false
         this.pager.page = 1
-        this.events = []
         this.fetch()
       },
       moveToDetail: function(event) {
