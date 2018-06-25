@@ -8,8 +8,11 @@
   text-overflow: ellipsis;
 }
 
-// メニュー項目オンマウスでグレーに
-.menuable__content__active .list__tile:hover {
-  background-color: #E0E0E0;
+// リストメニュー項目
+.navigation-drawer,.menuable__content__active {
+  .list__tile:hover {
+    background-color: #E0E0E0;
+    cursor: pointer;
+  }
 }
 
