@@ -18,7 +18,7 @@ Vue.use(Vuetify)
 
 // URLに対応するコンポーネントを定義
 const routes = [
-  { path: ROUTES.INDEX_PATH, component: PageEvents },
+  { path: ROUTES.EVENTS_PATH(), component: PageEvents },
   { path: ROUTES.EVENT_PATH(':id'), component: PageEvent },
 ]
 

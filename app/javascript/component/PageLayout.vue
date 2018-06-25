@@ -17,12 +17,16 @@
             <v-list-tile-title>記録を見る</v-list-tile-title>
           </v-list-tile>
 
-          <v-list-tile>
-            <v-list-tile-title>カラオケ一覧</v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon>fa-microphone</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
+          <router-link tag="div" :to="eventsPath">
+            <v-list-tile>
+                <v-list-tile-title>
+                  カラオケ一覧
+                </v-list-tile-title>
+              <v-list-tile-action>
+                  <v-icon>fa-microphone</v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+          </router-link>
 
           <v-list-tile>
             <v-list-tile-title>歌唱履歴</v-list-tile-title>
@@ -117,6 +121,7 @@
 </template>
 
 <script>
+  import ROUTES from '../lib/routes'
   export default {
     data: function() {
       return {
@@ -125,6 +130,9 @@
         isShowSuccessSnack: false,
         isShowFailedSnack: false,
       }
+    },
+    computed: {
+      eventsPath: () => ROUTES.EVENTS_PATH()
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default
