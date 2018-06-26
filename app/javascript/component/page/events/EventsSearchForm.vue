@@ -10,7 +10,7 @@
             <v-text-field v-model="title" label="タイトル" />
           </v-flex>
           <v-flex xs12>
-            <v-checkbox v-model="want_only_mine" label="あなたのカラオケのみ表示" />
+            <v-checkbox v-model="wantOnlyMine" label="あなたのカラオケのみ表示" />
           </v-flex>
           <v-flex xs6>
             <v-btn @click="submit" round class="pk-full-width" color="primary">
@@ -29,39 +29,37 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   export default {
     data: function() {
       return {
         title: '',
-        want_only_mine: false
+        wantOnlyMine: false
       }
+    },
+    computed: {
+      ...mapState({
+        searchQuery: state => state.events.searchQuery
+      })
     },
     methods: {
       init: function() {
-        this.title = this.value.title
-        this.want_only_mine = this.value.want_only_mine
+        this.title = this.searchQuery.title
+        this.wantOnlyMine = this.searchQuery.wantOnlyMine
       },
       submit: function() {
-        this.$emit('input', {
+        this.$store.dispatch('submitSearchDialog', {
           title: this.title,
-          want_only_mine: this.want_only_mine
+          wantOnlyMine: this.wantOnlyMine
         })
-        this.$emit('submit')
-        this.$emit('close')
       },
       cancel: function() {
+        this.$store.dispatch('cancelSearchDialog')
         this.init()
-        this.$emit('close')
       }
     },
     mounted: function() {
       this.init()
     },
-    props: {
-      value: {
-        type: Object,
-        required: true
-      }
-    }
   }
 </script>

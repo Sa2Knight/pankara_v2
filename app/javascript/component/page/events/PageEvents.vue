@@ -14,7 +14,7 @@
 
       <!-- 検索フォームボタン -->
       <v-fab-transition>
-        <v-btn :v-show="true" @click="is_show_dialog = true"
+        <v-btn v-show="true" @click="showSearchDialog"
                color="gray" class="elevation-12" fixed bottom right fab>
           <v-icon>search</v-icon>
         </v-btn>
@@ -22,12 +22,8 @@
     </v-container>
 
     <!-- 検索フォームをダイアログで描画 -->
-    <v-dialog v-model="is_show_dialog" max-width="500px">
-      <events-search-form
-        v-model="query"
-        @submit="search"
-        @close="is_show_dialog = false"
-      />
+    <v-dialog v-model="isShowSearchDialog" max-width="500px">
+      <events-search-form/>
     </v-dialog>
   </div>
 </template>
@@ -38,50 +34,31 @@
   import ROUTES       from '../../../lib/routes'
   import { scrollIsBottom } from '../../../lib/util'
   export default {
-    data: function() {
-      return {
-        query: {
-          title: '',
-          want_only_mine: false,
-        },
-        pager: {
-          total: 0,
-          page: 1,
-          per:  CONST.PER,
-        },
-        is_show_dialog: false
-      }
-    },
     computed: {
       ...mapState({
         events:      state => state.events.events,
         isLoading:   state => state.events.isLoading,
-        isAllLoaded: state => state.events.isLoading
+        isAllLoaded: state => state.events.isLoading,
+        isShowSearchDialog: state => state.events.isShowSearchDialog,
+        searchQuery: state => state.events.searchQuery,
+        pager:       state => state.events.pager,
       })
     },
     methods: {
       fetch: function() {
-        const params = {
-          page:    this.pager.page,
-          per:     this.pager.per,
-          title:   this.query.title,
-          members: this.query.want_only_mine ? [9] : null // ログインユーザに差し替え
-        }
-        this.$store.dispatch('fetchEvents', params)
+        this.$store.dispatch('fetchEvents')
       },
       infiniteScroll: function() {
         if (this.isLoading || this.isAllLoaded) {
           return
         }
         if (scrollIsBottom()) {
-          this.pager.page += 1
+          this.$store.dispatch('pageIncrement')
           this.fetch()
         }
       },
-      search: function() {
-        this.is_show_dialog = false
-        this.pager.page = 1
-        this.fetch()
+      showSearchDialog: function() {
+        this.$store.dispatch('showSearchDialog')
       },
       moveToDetail: function(event) {
         this.$router.push(ROUTES.EVENT_PATH(event.id))
