@@ -99,6 +99,7 @@
     </v-content>
 
     <!-- ログインフォーム -->
+    <!-- TODO: vuexで書き換え-->
     <v-dialog v-model="isShowLoginForm" max-width="500px">
       <login-form
         @success="isShowSuccessSnack = true"
@@ -106,6 +107,9 @@
         @close="isShowLoginForm = false"
       />
     </v-dialog>
+
+    <!-- Youtubeプレイヤー -->
+    <youtube-player v-if="isShowYoutubeDialog"/>
 
     <!-- スナック -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
@@ -121,6 +125,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import ROUTES from '../lib/routes'
   export default {
     data: function() {
@@ -132,10 +137,14 @@
       }
     },
     computed: {
-      eventsPath: () => ROUTES.EVENTS_PATH()
+      eventsPath: () => ROUTES.EVENTS_PATH(),
+      ...mapState({
+        isShowYoutubeDialog: state => state.common.isShowYoutubeDialog
+      })
     },
     components: {
-      LoginForm: require('../component/parts/Common/LoginForm').default
+      LoginForm: require('../component/parts/Common/LoginForm').default,
+      YoutubePlayer: require('../component/parts/Common/YoutubePlayer').default
     }
   }
 </script>

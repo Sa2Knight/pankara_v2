@@ -31,7 +31,7 @@
             <v-icon>fas fa-ellipsis-h</v-icon>
           </v-btn>
           <v-list>
-            <v-list-tile>
+            <v-list-tile @click="showYoutubeDialog">
               <v-list-tile-title>動画再生</v-list-tile-title>
             </v-list-tile>
             <v-list-tile>
@@ -105,9 +105,14 @@
       })
     },
     methods: {
+      // 特定の歌唱履歴を選択状態にする
       select: function() {
         this.$store.dispatch('selectHistory', this.history.id)
-      }
+      },
+      // 特定の歌唱履歴の楽曲のYoutubeダイアログを表示する
+      showYoutubeDialog: function() {
+        this.$store.dispatch('showYoutubeDialog', this.history.song)
+      },
     },
     components: {
       VSongThumbnail: require('../../common/VSongThumbnail').default,

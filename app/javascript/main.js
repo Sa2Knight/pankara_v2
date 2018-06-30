@@ -5,8 +5,6 @@ import Vuetify    from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
-import Events     from './vuex/events'
-import Event      from './vuex/event'
 import PageLayout from './component/PageLayout'
 import PageEvents from './component/page/events/PageEvents'
 import PageEvent  from './component/page/event/PageEvent'
@@ -25,8 +23,9 @@ const routes = [
 // vuexモジュールを定義
 const store = new Vuex.Store({
   modules: {
-    events: Events,
-    event: Event,
+    events: require('./vuex/events').default,
+    event:  require('./vuex/event').default,
+    common: require('./vuex/common').default,
   }
 })
 
