@@ -57,4 +57,10 @@ http.getEvent = function(id, params = {}) {
   return request('GET', `/events/${id}`, params)
 }
 
+/**
+ * 楽曲詳細を取得する
+ */
+http.getSong = function(id, params = {}) {
+  return request('GET', `/songs/${id}`, params)
+}
 export default http

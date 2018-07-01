@@ -1,7 +1,6 @@
 class Api::BaseController < ApplicationController
   include ErrorHandlers
   before_action :params_reset
-  before_action :authenticate_user
 
   after_action :set_respons_header, only: %i[index histories]
 

@@ -1,5 +1,4 @@
 class Api::HistoriesController < Api::BaseController
-  skip_before_action :authenticate_user
 
   #
   # 歌唱履歴の詳細を取得
