@@ -26,33 +26,29 @@ class Event < ApplicationRecord
 
   #
   # 総歌唱履歴数を取得する
-  # TODO: キャッシュしたい
   #
-  def history_count
-    self.histories.size
+  def history_count(user_event: nil)
+    self.histories.by_user_event(user_event).size
   end
 
   #
   # カラオケ内の最高得点を取得する
-  # TODO: キャッシュしたい
   #
-  def max_score
-    self.histories.maximum(:score)
+  def max_score(user_event: nil)
+    self.histories.by_user_event(user_event).maximum(:score)
   end
 
   #
   # カラオケ内の平均得点を取得する
-  # TODO: キャッシュしたい
   #
-  def average_score
-    self.histories.average(:score)
+  def average_score(user_event: nil)
+    self.histories.by_user_event(user_event).average(:score)
   end
 
   #
   # カラオケ内の平均得点を取得する
-  # TODO: キャッシュしたい
   #
-  def average_satisfaction
-    self.histories.average(:satisfaction)
+  def average_satisfaction(user_event: nil)
+    self.histories.by_user_event(user_event).average(:satisfaction)
   end
 end

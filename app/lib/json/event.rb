@@ -35,12 +35,13 @@ module JSON
     def self.show(event)
       return nil if event.blank?
 
+      history_dependents = [:score_type, user_event: [:user], song: [:artist]]
       self.raw(event).merge(
         history_size: event.history_count,
         max_score: event.max_score,
         average_score: event.average_score,
         average_satisfaction: event.average_satisfaction,
-        histories: event.histories.includes(:user_event, song: [:artist]).map do |history|
+        histories: event.histories.includes(history_dependents).map do |history|
           {
             id: history.id,
             user: JSON::User.raw(history.user_event.user), # HACK: ユーザIDだけでよくない？
@@ -56,7 +57,11 @@ module JSON
           {
             user: JSON::User.raw(user_event.user),
             price: user_event.price,
-            comment: user_event.comment
+            comment: user_event.comment,
+            history_size: event.history_count(user_event: user_event),
+            max_score: event.max_score(user_event: user_event),
+            average_score: event.average_score(user_event: user_event),
+            average_satisfaction: event.average_satisfaction(user_event: user_event)
           }
         end
       )

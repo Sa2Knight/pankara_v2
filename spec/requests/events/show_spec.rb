@@ -33,6 +33,8 @@ RSpec.describe 'events#show', type: :request do
       expect(body['history_size']).to eq 6
       expect(body['histories'].size).to eq 6
       expect(body['members'].size).to eq 2
+      expect(body['members'].first['comment']).to eq '楽しかった'
+      expect(body['members'].first['history_size']).to eq 3
     end
   end
 
