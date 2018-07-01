@@ -1,7 +1,7 @@
 <template>
   <v-card hover class="mb-2">
     <v-card-title primary-title>
-      <h3>{{ event.title }}</h3>
+      <h3 class="collapse">{{ event.title }}</h3>
     </v-card-title>
     <v-divider />
     <v-list>
