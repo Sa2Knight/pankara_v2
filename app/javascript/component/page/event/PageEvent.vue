@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="page-event">
     <div v-if="event">
-      <v-tabs icons-and-text fixed-tabs centered dark color="cyan">
+      <v-tabs icons-and-text fixed-tabs centered dark color="grey lighten-5">
         <!-- タブメニュー -->
-        <v-tabs-slider color="yellow"></v-tabs-slider>
+        <v-tabs-slider color="#feffcd"></v-tabs-slider>
         <v-tab href="#overview">
           概要
           <v-icon>fas fa-clipboard-list</v-icon>
@@ -24,10 +24,11 @@
 
         <!-- メンバー -->
         <v-tab-item id="members">
-          メンバー
+          <event-members />
         </v-tab-item>
 
         <!-- 歌唱履歴一覧 -->
+        <!-- TODO: コンポーネント切ったほうが良いかも -->
         <v-tab-item id="histories">
           <v-layout row wrap class="pb-5">
             <v-flex xs12 sm6 md6 lg4 v-for="(history, i) in event.histories">
@@ -35,18 +36,28 @@
               <v-divider />
             </v-flex>
           </v-layout>
+          <v-fab-transition> <!-- 追加ボタン -->
+            <v-btn color="pink" class="elevation-20" fixed bottom right fab dark>
+              <v-icon>add</v-icon>
+            </v-btn>
+          </v-fab-transition>
         </v-tab-item>
       </v-tabs>
 
-      <!-- 追加ボタン -->
-      <v-fab-transition>
-        <v-btn color="pink" class="elevation-20" fixed bottom right fab dark>
-          <v-icon>add</v-icon>
-        </v-btn>
-      </v-fab-transition>
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.page-event {
+  .tabs__item {
+    color: black;
+    .icon {
+      color: black;
+    }
+  }
+}
+</style>
 
 <script>
   import { mapState } from 'vuex'
@@ -68,7 +79,8 @@
       this.fetch()
     },
     components: {
-      HistoryCard: require('./HistoryCard').default
+      HistoryCard:  require('./HistoryCard').default,
+      EventMembers: require('./EventMembers').default
     }
   }
 </script>

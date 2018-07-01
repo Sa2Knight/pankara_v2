@@ -20,3 +20,35 @@
 .container {
   padding: 0;
 }
+
+.arrow-box {
+  padding: 15px;
+  position: relative;
+  background: #fff7dd;
+  border: 3px solid #ffd760;
+  border-radius: 5%;
+  max-width: 350px;
+  min-height: 40px;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  span {
+    display: block;
+    vertical-align: middle;
+    color: black;
+  }
+  &:after {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    bottom: 50%;
+    position: absolute;
+    border-color: rgba(255, 255, 255, 0); // 透過
+    border-width: 10px;
+    pointer-events: none;
+    right: 100%;
+    border-right-color: #ffd760;
+  }
+}
