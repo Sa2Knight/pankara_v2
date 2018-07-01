@@ -11,8 +11,21 @@
           </div>
         </v-flex>
         <v-flex xs9>
-          <div class="comment arrow-box right">
-            {{ comment }}
+          <div class="member-info arrow-box right">
+            <div v-if="isShowComment">{{ comment }}</div>
+            <div v-else>
+              <div>歌唱数: {{ member.history_size }}</div>
+              <div>最高点: {{ member.max_score}}</div>
+              <div>平均点: {{ member.average_score}}</div>
+            </div>
+            <div class="buttons">
+              <v-btn icon v-show="isShowComment" @click="">
+                <v-icon>fas fa-pencil-alt</v-icon>
+              </v-btn>
+              <v-btn icon @click="swipeInfo">
+                <v-icon>fas fa-exchange-alt</v-icon>
+              </v-btn>
+            </div>
           </div>
         </v-flex>
       </v-layout>
@@ -38,9 +51,21 @@
         }
       }
     }
-    .comment {
+    .member-info {
+      position: relative;
       width: 100%;
-      min-height: 96px;
+      min-height: 100px;
+      .buttons {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        .btn--icon {
+          margin: 0px;
+        }
+        .icon {
+          color: #ffd907;
+        }
+      }
     }
   }
 }
@@ -48,6 +73,11 @@
 
 <script>
   export default {
+    data: function() {
+      return {
+        isShowComment: true
+      }
+    },
     props: {
       // comment, price, user{id, display_name, image_url}
       member: {
@@ -59,6 +89,11 @@
       comment: function() {
         return this.member.comment || '未入力'
       }
+    },
+    methods: {
+      swipeInfo: function() {
+        this.isShowComment = !this.isShowComment
+      },
     },
   }
 </script>

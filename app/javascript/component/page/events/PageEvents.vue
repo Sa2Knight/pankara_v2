@@ -13,12 +13,10 @@
       </v-data-iterator>
 
       <!-- 検索フォームボタン -->
-      <v-fab-transition>
-        <v-btn v-show="true" @click="showSearchDialog"
-               color="gray" class="elevation-12" fixed bottom right fab>
-          <v-icon>search</v-icon>
-        </v-btn>
-      </v-fab-transition>
+      <v-btn v-show="true" @click="showSearchDialog"
+             color="gray" class="elevation-12" fixed bottom right fab>
+        <v-icon>search</v-icon>
+      </v-btn>
     </v-container>
 
     <!-- 検索フォームをダイアログで描画 -->

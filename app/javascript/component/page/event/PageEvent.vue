@@ -36,11 +36,9 @@
               <v-divider />
             </v-flex>
           </v-layout>
-          <v-fab-transition> <!-- 追加ボタン -->
-            <v-btn color="pink" class="elevation-20" fixed bottom right fab dark>
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-fab-transition>
+          <v-btn color="pink" class="elevation-20" fixed bottom right fab dark>
+            <v-icon>add</v-icon>
+          </v-btn>
         </v-tab-item>
       </v-tabs>
 
