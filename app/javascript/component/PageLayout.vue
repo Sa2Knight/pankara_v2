@@ -109,7 +109,7 @@
     </v-dialog>
 
     <!-- Youtubeプレイヤー -->
-    <youtube-player v-if="isShowYoutubeDialog"/>
+    <youtube-dialog v-if="isShowYoutubeDialog"/>
 
     <!-- スナック -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
@@ -144,7 +144,7 @@
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default,
-      YoutubePlayer: require('../component/parts/Common/YoutubePlayer').default
+      YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default
     }
   }
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div class="page-event">
     <div v-if="event">
-      <v-tabs icons-and-text fixed-tabs centered dark color="grey lighten-5">
+      <v-tabs icons-and-text centered dark color="grey lighten-5">
+        <v-tabs-slider color="blue"></v-tabs-slider>
         <!-- タブメニュー -->
-        <v-tabs-slider color="#feffcd"></v-tabs-slider>
         <v-tab href="#overview">
           概要
           <v-icon>fas fa-clipboard-list</v-icon>
@@ -45,17 +45,6 @@
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.page-event {
-  .tabs__item {
-    color: black;
-    .icon {
-      color: black;
-    }
-  }
-}
-</style>
 
 <script>
   import { mapState } from 'vuex'

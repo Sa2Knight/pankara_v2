@@ -1,3 +1,5 @@
+// TODO: ちゃんと整理しようね
+
 .pk-full-width {
   width: 100%;
 }
@@ -51,5 +53,12 @@
     pointer-events: none;
     right: 100%;
     border-right-color: #ffd760;
+  }
+}
+
+.tabs__item {
+  color: black;
+  .icon {
+    color: black;
   }
 }
