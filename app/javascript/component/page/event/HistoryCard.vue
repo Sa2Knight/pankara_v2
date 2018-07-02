@@ -34,7 +34,7 @@
             <v-list-tile @click="showYoutubeDialog">
               <v-list-tile-title>動画再生</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile>
+            <v-list-tile @click="moveToSongPage">
               <v-list-tile-title>楽曲詳細</v-list-tile-title>
             </v-list-tile>
             <v-list-tile>
@@ -84,6 +84,7 @@
 
 <script>
   import { mapState } from 'vuex'
+  import ROUTES from '../../../lib/routes'
   export default {
     data: function() {
       return {
@@ -112,6 +113,10 @@
       // 特定の歌唱履歴の楽曲のYoutubeダイアログを表示する
       showYoutubeDialog: function() {
         this.$store.dispatch('showYoutubeDialog', this.history.song)
+      },
+      // 特定の歌唱履歴の楽曲ページに移動する
+      moveToSongPage: function() {
+        this.$router.push(ROUTES.SONG_PATH(this.history.song.id))
       },
     },
     components: {
