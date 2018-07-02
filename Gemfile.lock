@@ -101,7 +101,6 @@ GEM
       bcrypt (~> 3.1)
       jwt (~> 1.5)
       rails (>= 4.2)
-    libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -167,7 +166,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    ref (2.0.0)
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -202,14 +200,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.20.0)
     thread_safe (0.3.6)
-    turbolinks (5.1.1)
-      turbolinks-source (~> 5.1)
-    turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uniform_notifier (1.11.0)
@@ -244,8 +236,6 @@ DEPENDENCIES
   rspec-rails
   selenium-webdriver
   spring-watcher-listen (~> 2.0.0)
-  therubyracer
-  turbolinks (~> 5)
   tzinfo-data
 
 RUBY VERSION

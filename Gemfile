@@ -12,13 +12,19 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # 開発用Webサーバ
 gem 'puma', '~> 3.11'
 
-# TODO: 検証して不要であれば消す
-gem 'turbolinks', '~> 5'
+# Railsの起動を高速化するやつ
 gem 'bootsnap', '>= 1.1.0', require: false
+
+# タイムゾーンを扱うやつ
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'therubyracer', platforms: :ruby
+
+# ページングできるようにするやつ
 gem 'kaminari'
+
+# 暗号化のやつ
 gem 'bcrypt'
+
+# JWT認証用
 gem 'knock'
 
 group :development, :test do
