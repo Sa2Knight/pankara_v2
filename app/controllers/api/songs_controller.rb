@@ -7,7 +7,9 @@ class Api::SongsController < Api::BaseController
   #
   def index
     if params[:with_artist]
-      render json: songs.map { |song| JSON::Song.raw_with_artist(song) }
+      render json: songs.includes(:artist).map do |song|
+        JSON::Song.raw_with_artist(song)
+      end
     else
       render json: songs.map { |song| JSON::Song.raw(song) }
     end
@@ -31,6 +33,7 @@ class Api::SongsController < Api::BaseController
 
     #
     # 一覧取得対象の楽曲一覧
+    # TODO: ABCSize
     #
     def songs
       @index = Song
@@ -39,7 +42,6 @@ class Api::SongsController < Api::BaseController
                .order(params[:sort_key] => params[:sort_order])
                .page(params[:page])
                .per(params[:per])
-               .includes(:artist)
     end
 
     #
