@@ -63,4 +63,12 @@ http.getEvent = function(id, params = {}) {
 http.getSong = function(id, params = {}) {
   return request('GET', `/songs/${id}`, params)
 }
+
+/**
+ * 楽曲の歌唱履歴を取得する
+ */
+http.getSongHistories = function(id, params = {}) {
+  return request('GET', `/songs/${id}/histories`, params)
+}
+
 export default http
