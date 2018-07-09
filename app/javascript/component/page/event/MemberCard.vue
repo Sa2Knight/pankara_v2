@@ -3,12 +3,7 @@
     <div class="inner">
       <v-layout row wrap>
         <v-flex xs3>
-          <div class="icon-wrapper">
-            <div class="icon-inner">
-              <img :src="member.user.image_url">
-              <div class="display-name">{{ member.user.display_name }}</div>
-            </div>
-          </div>
+          <v-user-icon :user="member.user" />
         </v-flex>
         <v-flex xs9>
           <div class="member-info arrow-box right">
@@ -39,18 +34,6 @@
   .inner {
     padding: 0 15px 0 15px;
     height: 100%;
-    .icon-wrapper {
-      height: 100%;
-      text-align: center;
-      .icon-inner {
-        margin-top: 25%;
-        img {
-          width: auto;
-          height: 48px;
-          border-radius: 50%;
-        }
-      }
-    }
     .member-info {
       position: relative;
       width: 100%;
@@ -59,10 +42,10 @@
         position: absolute;
         right: 0px;
         bottom: 0px;
-        .btn--icon {
+        .v-btn--icon {
           margin: 0px;
         }
-        .icon {
+        .v-icon {
           color: #ffd907;
         }
       }
@@ -95,5 +78,8 @@
         this.isShowComment = !this.isShowComment
       },
     },
+    components: {
+      VUserIcon: require('../../common/VUserIcon').default
+    }
   }
 </script>
