@@ -48,4 +48,21 @@ class Song < ApplicationRecord
   def histories_count_by(user: nil)
     self.histories_by(user: user).size
   end
+
+  #
+  # 持ち歌にしているユーザ一覧
+  #
+  def users
+    user_ids = self.histories.joins(:user_event).pluck(:user_id).uniq
+    User.where(id: user_ids)
+  end
+
+  #
+  # ユーザIDごとの歌唱回数
+  # return {1=>3, 3=>1, 5=>1}
+  #
+  def history_count_each_users
+    self.histories.joins(:user_event).group(:user_id).count
+  end
+
 end

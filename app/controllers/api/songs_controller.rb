@@ -1,5 +1,5 @@
 class Api::SongsController < Api::BaseController
-  before_action :song_exists?, only: %i[show histories]
+  before_action :song_exists?, only: %i[show histories users]
   before_action :user_exists?, only: :histories
 
   #
@@ -20,6 +20,19 @@ class Api::SongsController < Api::BaseController
   #
   def show
     render json: JSON::Song.show(song, @current_user)
+  end
+
+  #
+  # 楽曲を持ち歌にしているユーザー一覧を取得
+  #
+  def users
+    history_count_each_users = song.history_count_each_users
+    users_json = song.users.map do |user|
+      JSON::User.raw(user).merge(
+        count: history_count_each_users[user.id]
+      )
+    end
+    render json: users_json
   end
 
   #

@@ -1,8 +1,17 @@
 <template>
   <div class="song-history">
     <v-card hover class="md-2">
-      <v-card-title primary-title>
-        <h1> {{ history.event.title }} </h1>
+      <v-card-title primary-title class="header">
+        <v-layout row wrap>
+          <v-flex xs10>
+            <h1> {{ history.event.title }} </h1>
+          </v-flex>
+          <v-flex xs2>
+            <div class="score">
+              {{ history.score }}
+            </div>
+          </v-flex>
+        </v-layout>
       </v-card-title>
       <v-divider />
       <div class="body">
@@ -14,7 +23,7 @@
           </v-flex>
           <v-flex xs9 class="comment-wrapper">
             <div class="comment arrow-box">
-              楽しかったぞー！
+              {{ history.comment }}
             </div>
           </v-flex>
         </v-layout>
@@ -63,8 +72,13 @@
   width: 100%;
   height: auto;
   padding: 10px;
-  h1 {
-    font-size: 1.1em;
+  .header {
+    h1 {
+      font-size: 1.1em;
+    }
+    .score {
+      text-align: center;
+    }
   }
   .body {
     padding: 0 0.5em 0 0.5em;

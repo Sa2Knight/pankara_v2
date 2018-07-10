@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :histories, only: %i[show]
     resources :songs, only: %i[index show] do
       member do
+        get 'users'
         get 'histories'
       end
     end
