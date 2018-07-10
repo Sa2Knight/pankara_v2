@@ -16,7 +16,7 @@
 
         <v-tab-item id="overview"><song-detail /></v-tab-item>
         <v-tab-item id="history"><song-histories /></v-tab-item>
-        <v-tab-item id="aggregate">集計情報</v-tab-item>
+        <v-tab-item id="aggregate"><song-aggregate /></v-tab-item>
 
       </v-tabs>
     </div>
@@ -43,6 +43,7 @@
     components: {
       SongDetail: require('./SongDetail').default,
       SongHistories: require('./SongHistories').default,
+      SongAggregate: require('./SongAggregate').default,
     },
   }
 </script>
