@@ -21,15 +21,8 @@ class Api::BaseController < ApplicationController
   # 必要に応じてレスポンスヘッダーを設定する
   #
   def set_respons_header
-    raise StandardError unless @index
-    response.headers['total-count'] = @index.total_count
-    response.headers['total-pages'] = @index.total_pages
+    response.headers['total-count'] = @index&.total_count
+    response.headers['total-pages'] = @index&.total_pages
   end
 
-  #
-  # 各子クラスが対象とするモデルを定義する
-  #
-  def model
-    raise NotImplementedError
-  end
 end

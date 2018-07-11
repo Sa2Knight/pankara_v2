@@ -8,7 +8,8 @@ module JSON
       {
         id: product.id,
         brand: product.brand,
-        name: product.name
+        name: product.name,
+        full_name: product.full_name
       }
     end
   end
