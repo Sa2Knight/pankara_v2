@@ -4,7 +4,7 @@
       <v-card-title primary-title class="header">
         <v-layout row wrap>
           <v-flex xs10>
-            <h1> {{ history.event.title }} </h1>
+            <h1 class="collapse"> {{ history.event.title }} </h1>
           </v-flex>
           <v-flex xs2>
             <div class="score">
