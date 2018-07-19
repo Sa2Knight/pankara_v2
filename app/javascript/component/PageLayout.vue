@@ -19,9 +19,7 @@
 
           <router-link tag="div" :to="eventsPath">
             <v-list-tile>
-                <v-list-tile-title>
-                  カラオケ一覧
-                </v-list-tile-title>
+                <v-list-tile-title>カラオケ一覧</v-list-tile-title>
               <v-list-tile-action>
                   <v-icon>fa-microphone</v-icon>
               </v-list-tile-action>
@@ -84,7 +82,7 @@
     <v-toolbar app>
       <v-toolbar-side-icon @click.stop="isShowNavigation = !isShowNavigation">
       </v-toolbar-side-icon>
-      <v-toolbar-title>カラオケ一覧</v-toolbar-title>
+      <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn flat @click="isShowLoginForm = true">ログイン</v-btn>
@@ -139,6 +137,7 @@
     computed: {
       eventsPath: () => ROUTES.EVENTS_PATH(),
       ...mapState({
+        pageTitle: state => state.common.pageTitle,
         isShowYoutubeDialog: state => state.common.isShowYoutubeDialog
       })
     },

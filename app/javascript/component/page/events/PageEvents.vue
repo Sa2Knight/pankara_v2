@@ -63,6 +63,7 @@
       }
     },
     mounted: function() {
+      this.$store.dispatch('setPageTitle', 'カラオケ一覧')
       this.fetch()
     },
     components: {
