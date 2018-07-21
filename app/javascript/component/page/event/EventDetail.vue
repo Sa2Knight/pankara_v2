@@ -1,43 +1,33 @@
 <template>
- <div class="event-detail">
-    <h1>{{ event.title }}</h1>
-    <v-layout row wrap>
-      <v-flex xs12 sm6>
-        <div class="event-info">
-          <div class="key">日付</div>
-          <div class="value">{{ event.datetime }}</div>
-        </div>
-      </v-flex>
-      <v-flex xs12 sm6>
-        <div class="event-info">
-          <div class="key">時間</div>
-          <div class="value">{{ event.plan }}時間</div>
-        </div>
-      </v-flex>
-      <v-flex xs12 sm6>
-        <div class="event-info">
-          <div class="key">お店</div>
-          <div class="value">{{ event.store ? event.store.name : '未登録' }}</div>
-        </div>
-      </v-flex>
-      <v-flex xs12 sm6>
-        <div class="event-info">
-          <div class="key">店舗</div>
-          <div class="value">{{ event.store ? event.store.branch : '' }}</div>
-        </div>
-      </v-flex>
-      <v-flex xs12 sm6>
-        <div class="event-info">
-          <div class="key">機種</div>
-          <div class="value">{{ event.product ? event.product.full_name : '未登録' }}</div>
-        </div>
-      </v-flex>
-    </v-layout>
+  <div class="event-detail">
+    <div class="box">
+      <div class="label center">
+        <span>参加メンバー</span>
+      </div>
+      <div class="members center">
+        <v-user-icons
+          :users="users"
+          showDisplayName
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 .event-detail {
+  .box {
+    border: 1px solid;
+    border-color: #ddd;
+    .label {
+      padding: 10px;
+      background-color: #eee;
+    }
+    .members {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
 }
 </style>
 
@@ -61,12 +51,15 @@
     },
     computed: {
       productMaster: () => CONST.PRODUCTS,
+      users: function() {
+        return this.event.members.map((member) => member.user)
+      },
       ...mapState({
         event: store => store.event.event
       })
     },
     components: {
-      VUserIcon: require('../../common/VUserIcon.vue').default
+      VUserIcons: require('../../common/VUserIcons.vue').default
     }
   }
 </script>
