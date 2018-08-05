@@ -25,14 +25,15 @@ RSpec.configure do |config|
   end
 
   # N + 1で落とす
-  if Bullet.enable?
-    config.before(:each) do
-      Bullet.start_request
-    end
+  # よくわからない落ちかたするのでコメントアウト
+  # if Bullet.enable?
+  #   config.before(:each) do
+  #     Bullet.start_request
+  #   end
 
-    config.after(:each) do
-      Bullet.perform_out_of_channel_notifications if Bullet.notification?
-      Bullet.end_request
-    end
-  end
+  #   config.after(:each) do
+  #     Bullet.perform_out_of_channel_notifications if Bullet.notification?
+  #     Bullet.end_request
+  #   end
+  # end
 end
