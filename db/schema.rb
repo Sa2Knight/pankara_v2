@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_142520) do
+ActiveRecord::Schema.define(version: 2018_08_05_145320) do
 
   create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_142520) do
   create_table "user_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
-    t.integer "price"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
