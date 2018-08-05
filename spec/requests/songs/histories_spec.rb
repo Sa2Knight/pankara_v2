@@ -54,12 +54,6 @@ RSpec.describe 'songs#histories', type: :request do
           expect(event['product']['name']).to eq product.name
         end
       end
-      describe 'Store' do
-        it '店舗情報が取得できる' do
-          store = Store.find(event['store']['id'])
-          expect(event['store']['name']).to eq store.name
-        end
-      end
     end
   end
 

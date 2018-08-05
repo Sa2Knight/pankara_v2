@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_145320) do
+ActiveRecord::Schema.define(version: 2018_08_05_150636) do
 
   create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -22,12 +22,10 @@ ActiveRecord::Schema.define(version: 2018_08_05_145320) do
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "datetime"
     t.string "title"
-    t.bigint "store_id"
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_events_on_product_id"
-    t.index ["store_id"], name: "index_events_on_store_id"
   end
 
   create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -69,15 +67,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_145320) do
     t.index ["artist_id"], name: "index_songs_on_artist_id"
   end
 
-  create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "branch"
-    t.string "url"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "user_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
@@ -100,7 +89,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_145320) do
   end
 
   add_foreign_key "events", "products"
-  add_foreign_key "events", "stores"
   add_foreign_key "histories", "score_types"
   add_foreign_key "histories", "songs"
   add_foreign_key "histories", "user_events"

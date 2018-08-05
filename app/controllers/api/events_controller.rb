@@ -26,7 +26,7 @@ class Api::EventsController < Api::BaseController
                .order(params[:sort_key] => params[:sort_order])
                .page(params[:page])
                .per(params[:per])
-               .includes([:product, :store, user_events: [:user]])
+               .includes([:product, user_events: [:user]])
     end
 
     #
