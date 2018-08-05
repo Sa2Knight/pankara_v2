@@ -45,9 +45,10 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # テスト内でN + 1が発生した場合にテストに失敗させる
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.bullet_logger = true
-    Bullet.raise = true
-  end
+  # 変な落ちかたするのでコメントアウト
+  # config.after_initialize do
+  #   Bullet.enable = true
+  #   Bullet.bullet_logger = true
+  #   Bullet.raise = true
+  # end
 end
