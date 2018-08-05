@@ -38,40 +38,6 @@ RSpec.describe 'events#index', type: :request do
         expect(Event.find(first['id'])).to eq Event.first
       end
     end
-  end
-
-  describe 'タイトル検索関係' do
-    let(:before_request) do
-      FactoryBot.create(:event, title: 'ABC')
-      FactoryBot.create(:event, title: 'BCD')
-      FactoryBot.create(:event, title: 'CDE')
-    end
-    context 'タイトルを指定しない場合' do
-      let(:title) { '' }
-
-      it '全件取得できる' do
-        expect(size).to eq 3
-      end
-    end
-    context 'タイトルに合致する曲がない場合' do
-      let(:title) { 'F' }
-
-      it '１件も取得できない' do
-        expect(size).to eq 0
-      end
-    end
-    context 'タイトルに合致する曲がある場合' do
-      let(:title) { 'B' }
-
-      it 'Bを含むタイトルのイベントが取得できる' do
-        expect(size).to eq 2
-        expect(body.first['title']).to eq 'ABC'
-        expect(body.second['title']).to eq 'BCD'
-      end
-    end
-  end
-
-  describe '参加者一覧関係' do
     context '参加者が居ない場合' do
       let(:before_request) do
         FactoryBot.create(:event)
@@ -110,6 +76,61 @@ RSpec.describe 'events#index', type: :request do
       it 'membersにユーザ情報が二人分含まれている' do
         expect(first['members'].size).to eq 2
         expect(first['members'].second['display_name']).to eq 'BBB'
+      end
+    end
+  end
+
+  describe 'タイトル検索関係' do
+    let(:before_request) do
+      FactoryBot.create(:event, title: 'ABC')
+      FactoryBot.create(:event, title: 'BCD')
+      FactoryBot.create(:event, title: 'CDE')
+    end
+    context 'タイトルを指定しない場合' do
+      let(:title) { '' }
+
+      it '全件取得できる' do
+        expect(size).to eq 3
+      end
+    end
+    context 'タイトルに合致する曲がない場合' do
+      let(:title) { 'F' }
+
+      it '１件も取得できない' do
+        expect(size).to eq 0
+      end
+    end
+    context 'タイトルに合致する曲がある場合' do
+      let(:title) { 'B' }
+
+      it 'Bを含むタイトルのイベントが取得できる' do
+        expect(size).to eq 2
+        expect(body.first['title']).to eq 'ABC'
+        expect(body.second['title']).to eq 'BCD'
+      end
+    end
+  end
+
+  describe '参加者で絞り込み関係' do
+    let(:user1) { FactoryBot.create(:user) }
+    let(:user2) { FactoryBot.create(:user) }
+    let(:event1) { FactoryBot.create(:event) }
+    let(:event2) { FactoryBot.create(:event) }
+    let(:before_request) do
+      event1.user_events.create([user: user1])
+      event2.user_events.create([user: user2])
+    end
+    context '参加者を一人指定した場合' do
+      let(:members) { [user1.id] }
+      it '指定したユーザが参加したカラオケのみ取得できる' do
+        expect(size).to eq 1
+        expect(first['id']).to eq event1.id
+      end
+    end
+    context '参加者を二人指定した場合' do
+      let(:members) { [user1.id, user2.id] }
+      it '指定したユーザが参加したカラオケのみ取得できる' do
+        expect(size).to eq 2
       end
     end
   end

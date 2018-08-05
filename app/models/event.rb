@@ -15,6 +15,7 @@ class Event < ApplicationRecord
 
   #
   # 参加しているユーザで絞り込み
+  # 複数指定がある場合はOR検索
   #
   def self.by_member(*members)
     return self.all if members&.compact.blank?
