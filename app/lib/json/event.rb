@@ -9,7 +9,6 @@ module JSON
         id: event.id,
         datetime: event.datetime.strftime(CONSTANT::FORMAT::DATE),
         title: event.title,
-        plan: event.plan,
         store: JSON::Store.raw(event.store),
         product: JSON::Product.raw(event.product)
       }

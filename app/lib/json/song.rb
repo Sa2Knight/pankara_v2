@@ -18,7 +18,6 @@ module JSON
     #
     def self.raw_with_artist(song)
       return nil if song.blank?
-
       self.raw(song).merge(
         artist: JSON::Artist.raw(song.artist)
       )
