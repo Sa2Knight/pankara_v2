@@ -16,16 +16,6 @@
         <v-list-tile-content class="align-end">{{ event.datetime }}</v-list-tile-content>
       </v-list-tile>
       <v-list-tile>
-        <v-list-tile-content>時間</v-list-tile-content>
-        <v-list-tile-content class="align-end">{{ event.plan }}</v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile>
-        <v-list-tile-content>お店</v-list-tile-content>
-        <v-list-tile-content class="align-end">
-          <v-store-label :store="event.store" />
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile>
         <v-list-tile-content>機種</v-list-tile-content>
         <v-list-tile-content class="align-end">JOYSOUN MAX</v-list-tile-content>
       </v-list-tile>
@@ -46,7 +36,6 @@
       }
     },
     components: {
-      VStoreLabel: require('../../common/VStoreLabel').default,
       VUserIcons:  require('../../common/VUserIcons').default,
     }
   }

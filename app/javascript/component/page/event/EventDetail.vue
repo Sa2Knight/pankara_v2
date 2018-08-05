@@ -39,9 +39,6 @@
       return {
         title: '2018/03/03のカラオケ',
         date: '',
-        plan: 0,
-        storeName: '',
-        storeBranch: '',
         product: null,
         isShowDatePickerModal: false,
         creator: { // DUMMY

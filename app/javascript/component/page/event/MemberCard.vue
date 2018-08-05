@@ -62,7 +62,7 @@
       }
     },
     props: {
-      // comment, price, user{id, display_name, image_url}
+      // comment, user{id, display_name, image_url}
       member: {
         type: Object,
         required: true
