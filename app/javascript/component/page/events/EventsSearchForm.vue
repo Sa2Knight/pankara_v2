@@ -52,6 +52,7 @@
           title: this.title,
           wantOnlyMine: this.wantOnlyMine
         })
+        this.$store.dispatch('fetchEvents')
       },
       cancel: function() {
         this.$store.dispatch('cancelSearchDialog')

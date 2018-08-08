@@ -115,6 +115,9 @@ export default {
     // 検索を実行して検索ダイアログを閉じる
     submitSearchDialog ({ commit }, query) {
       commit('setSearchQuery', query)
+      commit('unsetPager')
+      commit('unsetEvents')
+      commit('unsetIsAllLoaded')
       commit('unsetIsShowSearchDialog')
     },
   }
