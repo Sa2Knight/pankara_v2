@@ -39,7 +39,6 @@
       return {
         title: '2018/03/03のカラオケ',
         date: '',
-        product: null,
         isShowDatePickerModal: false,
         creator: { // DUMMY
           image_url: 'user_icon/sa2knight.png'
@@ -47,7 +46,6 @@
       }
     },
     computed: {
-      productMaster: () => CONST.PRODUCTS,
       users: function() {
         return this.event.members.map((member) => member.user)
       },
