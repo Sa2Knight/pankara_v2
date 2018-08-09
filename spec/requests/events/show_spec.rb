@@ -18,8 +18,8 @@ RSpec.describe 'events#show', type: :request do
       event = FactoryBot.create(:event, title: 'イベントタイトル')
       event.user_events.create(
         [
-          { user: users[0], price: 1000, comment: '楽しかった' },
-          { user: users[1], price: 2000, comment: 'つまらなかった' }
+          { user: users[0], comment: '楽しかった' },
+          { user: users[1], comment: 'つまらなかった' }
         ]
       )
       FactoryBot.create_list(:history, 3, user_event: event.user_events.first)
