@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_150636) do
+ActiveRecord::Schema.define(version: 2018_08_09_125734) do
 
   create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -22,10 +22,9 @@ ActiveRecord::Schema.define(version: 2018_08_05_150636) do
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "datetime"
     t.string "title"
-    t.bigint "product_id"
+    t.integer "product"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_events_on_product_id"
   end
 
   create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -41,14 +40,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_150636) do
     t.index ["score_type_id"], name: "index_histories_on_score_type_id"
     t.index ["song_id"], name: "index_histories_on_song_id"
     t.index ["user_event_id"], name: "index_histories_on_user_event_id"
-  end
-
-  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "brand"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "full_name"
   end
 
   create_table "score_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -88,7 +79,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_150636) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "events", "products"
   add_foreign_key "histories", "score_types"
   add_foreign_key "histories", "songs"
   add_foreign_key "histories", "user_events"
