@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_125734) do
+ActiveRecord::Schema.define(version: 2018_08_09_135000) do
 
   create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -30,23 +30,15 @@ ActiveRecord::Schema.define(version: 2018_08_09_125734) do
   create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_event_id"
     t.bigint "song_id"
-    t.bigint "score_type_id"
+    t.integer "score_type"
     t.integer "score"
     t.integer "satisfaction"
     t.integer "key"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["score_type_id"], name: "index_histories_on_score_type_id"
     t.index ["song_id"], name: "index_histories_on_song_id"
     t.index ["user_event_id"], name: "index_histories_on_user_event_id"
-  end
-
-  create_table "score_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "brand"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -79,7 +71,6 @@ ActiveRecord::Schema.define(version: 2018_08_09_125734) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "histories", "score_types"
   add_foreign_key "histories", "songs"
   add_foreign_key "histories", "user_events"
   add_foreign_key "songs", "artists"
