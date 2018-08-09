@@ -6,4 +6,11 @@ class User < ApplicationRecord
   def self.from_token_request(request)
     User.first
   end
+
+  #
+  # 歌唱履歴一覧
+  #
+  def histories
+    History.where(user_event: self.user_events)
+  end
 end
