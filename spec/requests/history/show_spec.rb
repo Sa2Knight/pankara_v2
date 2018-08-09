@@ -16,7 +16,6 @@ RSpec.describe 'history#show', type: :request do
       expect(User.exists?(body['user']['id'])).to be true
       expect(Event.exists?(body['event']['id'])).to be true
       expect(Song.exists?(body['song']['id'])).to be true
-      expect(ScoreType.exists?(body['score_type']['id'])).to be true
     end
   end
 

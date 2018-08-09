@@ -30,7 +30,7 @@ module JSON
         user: JSON::User.raw(history.user),
         event: JSON::Event.raw(history.event),
         song: JSON::Song.raw_with_artist(history.song),
-        score_type: JSON::ScoreType.raw(history.score_type)
+        score_type: history.score_type
       }
     end
   end

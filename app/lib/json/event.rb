@@ -33,7 +33,7 @@ module JSON
     def self.show(event)
       return nil if event.blank?
 
-      history_dependents = [:score_type, user_event: [:user], song: [:artist]]
+      history_dependents = [user_event: [:user], song: [:artist]]
       self.raw(event).merge(
         history_size: event.history_count,
         max_score: event.max_score,
@@ -44,7 +44,7 @@ module JSON
             id: history.id,
             user: JSON::User.raw(history.user_event.user), # HACK: ユーザIDだけでよくない？
             song: JSON::Song.raw_with_artist(history.song),
-            score_type: JSON::ScoreType.raw(history.score_type),
+            score_type: history.score_type,
             score: history.score,
             satisfaction: history.satisfaction,
             key: history.key,
