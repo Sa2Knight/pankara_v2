@@ -1,6 +1,8 @@
+<!-- TODO: コンポーネント名が不適切 -->
 <template>
   <div class="history-card" v-bind:class="{ selected: isSelected, 'elevation-12': isSelected }">
     <v-container @click="select" grid-list-md text-xs-center>
+      <!-- 歌唱履歴情報-->
       <v-layout row>
         <v-flex xs4>
           <v-song-thumbnail :song="history.song" />
@@ -16,33 +18,42 @@
           <v-user-icons :user="history.user" />
         </v-flex>
       </v-layout>
-      <v-layout row justify-space-around v-show="isSelected">
-        <v-btn icon>
-          <v-icon>fas fa-clipboard-list</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>fas fa-pencil-alt</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>fas fa-trash-alt</v-icon>
-        </v-btn>
-        <v-menu bottom left>
-          <v-btn slot="activator" icon>
-            <v-icon>fas fa-ellipsis-h</v-icon>
+
+      <!-- 歌唱履歴選択時のみ表示される部分 -->
+      <div class="toggle-area" v-show="isSelected">
+        <!-- 歌唱コメント-->
+        <div class="comment">
+          コメントコメント
+        </div>
+        <!-- サブメニュー -->
+        <v-layout row justify-space-around>
+          <v-btn icon>
+            <v-icon>fas fa-clipboard-list</v-icon>
           </v-btn>
-          <v-list>
-            <v-list-tile @click="showYoutubeDialog">
-              <v-list-tile-title>動画再生</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile @click="moveToSongPage">
-              <v-list-tile-title>楽曲詳細</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile>
-              <v-list-tile-title>歌手詳細</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-      </v-layout>
+          <v-btn icon>
+            <v-icon>fas fa-pencil-alt</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>fas fa-trash-alt</v-icon>
+          </v-btn>
+          <v-menu bottom left>
+            <v-btn slot="activator" icon>
+              <v-icon>fas fa-ellipsis-h</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile @click="showYoutubeDialog">
+                <v-list-tile-title>動画再生</v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile @click="moveToSongPage">
+                <v-list-tile-title>楽曲詳細</v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title>歌手詳細</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </v-layout>
+      </div>
     </v-container>
   </div>
 </template>

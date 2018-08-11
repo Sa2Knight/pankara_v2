@@ -14,20 +14,10 @@
         </v-layout>
       </v-card-title>
       <v-divider />
-      <div class="body">
-        <v-layout row wrap>
-          <v-flex xs3>
-            <div class="user-icon">
-              <v-user-icon :user="history.user" />
-            </div>
-          </v-flex>
-          <v-flex xs9 class="comment-wrapper">
-            <div class="comment arrow-box">
-              {{ history.comment }}
-            </div>
-          </v-flex>
-        </v-layout>
-      </div>
+      <v-history-comment
+        :user="history.user"
+        :comment="history.comment"
+      />
       <v-divider />
       <div class="information">
         <div>
@@ -80,17 +70,6 @@
       text-align: center;
     }
   }
-  .body {
-    padding: 0 0.5em 0 0.5em;
-    .comment-wrapper {
-      position: relative;
-      .comment {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-      }
-    }
-  }
   .information {
     padding: 1em 1.5em 0 1.5em;
     .slider {
@@ -119,7 +98,7 @@
       }
     },
     components: {
-      VUserIcon: require('../../common/VUserIcon').default,
+      VHistoryComment: require('../../common/VHistoryComment').default,
       VStars: require('../../common/VStars').default
     }
   }
