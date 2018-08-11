@@ -22,9 +22,10 @@
       <!-- 歌唱履歴選択時のみ表示される部分 -->
       <div class="toggle-area" v-show="isSelected">
         <!-- 歌唱コメント-->
-        <div class="comment">
-          コメントコメント
-        </div>
+        <v-history-comment v-if="history.comment"
+          :user="history.user"
+          :comment="history.comment"
+        />
         <!-- サブメニュー -->
         <v-layout row justify-space-around>
           <v-btn icon>
@@ -133,6 +134,7 @@
     components: {
       VSongThumbnail: require('../../common/VSongThumbnail').default,
       VUserIcons: require('../../common/VUserIcons').default,
+      VHistoryComment: require('../../common/VHistoryComment').default,
     }
   }
 </script>
