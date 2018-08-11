@@ -1,8 +1,6 @@
 <template>
   <div class="page-event">
     <div v-if="event">
-      <div class="title center">{{ event.title }}</div>
-      <v-divider />
       <v-tabs icons-and-text centered dark color="grey lighten-5">
         <v-tabs-slider color="blue"></v-tabs-slider>
         <!-- タブメニュー -->

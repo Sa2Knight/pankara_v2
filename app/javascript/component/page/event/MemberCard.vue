@@ -1,3 +1,4 @@
+<!-- コンポーネント名が不適切? -->
 <template>
   <div class="member-card">
     <div class="inner">
@@ -32,7 +33,7 @@
 .member-card {
   margin: 5px;
   .inner {
-    padding: 0 15px 0 15px;
+    padding: 0 0.5em 0 0.5em;
     height: 100%;
     .member-info {
       position: relative;
