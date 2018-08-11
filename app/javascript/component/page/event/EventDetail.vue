@@ -28,7 +28,7 @@
       </v-flex>
       <v-flex xs6 lg2>
         <v-simple-information header="満足度">
-          {{ average_satisfaction }} %
+          {{ average_satisfaction }}
         </v-simple-information>
       </v-flex>
     </v-layout>
@@ -66,13 +66,25 @@
         return this.event.members[0].user
       },
       average_satisfaction: function() {
-        return this.event.average_satisfaction || '未登録'
+        if (this.event.average_satisfaction) {
+          return this.event.average_satisfaction + '%'
+        } else {
+          return '記録なし'
+        }
       },
       average_score: function() {
-        return this.event.average_score || '未採点'
+        if (this.event.average_score) {
+          return this.event.average_score + '点'
+        } else {
+          return '未採点'
+        }
       },
       max_score: function() {
-        return this.event.max_score || '未採点'
+        if (this.event.max_score) {
+          return this.even.max_score + '点'
+        } else {
+          return '未採点'
+        }
       },
     },
     components: {
