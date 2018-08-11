@@ -1,5 +1,5 @@
 <template>
-  <div class="event-detail">
+  <div class="event-overview">
     <v-box label="カラオケ情報">ここにカラオケ情報</v-box>
     <v-box label="参加メンバー"><event-members /></v-box>
   </div>
