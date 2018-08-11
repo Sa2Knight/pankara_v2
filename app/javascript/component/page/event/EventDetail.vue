@@ -81,7 +81,7 @@
       },
       max_score: function() {
         if (this.event.max_score) {
-          return this.even.max_score + '点'
+          return this.event.max_score + '点'
         } else {
           return '未採点'
         }
