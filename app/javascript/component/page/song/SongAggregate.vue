@@ -8,7 +8,7 @@
       </v-flex>
       <v-flex xs12 sm6 md3>
         <song-aggregate-card title="ユーザ別歌唱回数">
-          歌ってるユーザの円グラフ
+          <v-pie-chart-histories-by-user />
         </song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
@@ -38,7 +38,8 @@
   export default {
     components: {
       SongAggregateCard: require('./SongAggregateCard').default,
-      VBarChartHistoriesByMonth: require('../../common/graph/VBarChartHistoriesByMonth').default
+      VBarChartHistoriesByMonth: require('../../common/graph/VBarChartHistoriesByMonth').default,
+      VPieChartHistoriesByUser:  require('../../common/graph/VPieChartHistoriesByUser').default
     }
   }
 </script>
