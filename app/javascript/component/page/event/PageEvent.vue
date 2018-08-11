@@ -10,20 +10,13 @@
           概要
           <v-icon>fas fa-clipboard-list</v-icon>
         </v-tab>
-        <v-tab href="#members">
-          メンバー
-          <v-icon>fas fa-users</v-icon>
-        </v-tab>
         <v-tab href="#histories">
-          歌唱履歴
+          歌唱記録
           <v-icon>fas fa-list-ol</v-icon>
         </v-tab>
 
         <!-- 概要 -->
         <v-tab-item id="overview"><event-detail /></v-tab-item>
-
-        <!-- メンバー -->
-        <v-tab-item id="members"><event-members /></v-tab-item>
 
         <!-- 歌唱履歴一覧 -->
         <!-- TODO: コンポーネント切ったほうが良いかも -->
@@ -67,7 +60,6 @@
     components: {
       EventDetail:  require('./EventDetail').default,
       HistoryCard:  require('./HistoryCard').default,
-      EventMembers: require('./EventMembers').default
     }
   }
 </script>

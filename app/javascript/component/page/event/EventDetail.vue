@@ -5,10 +5,7 @@
         <span>参加メンバー</span>
       </div>
       <div class="members center">
-        <v-user-icons
-          :users="users"
-          showDisplayName
-        />
+        <event-members />
       </div>
     </div>
   </div>
@@ -54,7 +51,7 @@
       })
     },
     components: {
-      VUserIcons: require('../../common/VUserIcons.vue').default
+      EventMembers: require('./EventMembers').default
     }
   }
 </script>
