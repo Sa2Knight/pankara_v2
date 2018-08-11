@@ -15,12 +15,14 @@
 <style lang="scss">
 .song-aggregate-card {
   margin: 1em;
-  height: 50vh;
   h1 {
     font-size: 1.1em;
   }
   .v-card {
     height: 100%;
+  }
+  .aggregate-body {
+    margin-top: 1em;
   }
 }
 </style>

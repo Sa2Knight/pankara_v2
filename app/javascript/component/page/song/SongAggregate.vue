@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 sm6 md3>
         <song-aggregate-card title="月別歌唱回数">
-          月ごとの歌唱回数棒グラフ
+          <v-bar-chart-histories-by-month />
         </song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
@@ -28,7 +28,7 @@
 <style lang="scss">
 .song-aggregate {
   .aggregate {
-    height: 50%;
+    min-height: 50%;
     border: 1px solid;
   }
 }
@@ -37,7 +37,8 @@
 <script>
   export default {
     components: {
-      SongAggregateCard: require('./SongAggregateCard').default
+      SongAggregateCard: require('./SongAggregateCard').default,
+      VBarChartHistoriesByMonth: require('../../common/graph/VBarChartHistoriesByMonth').default
     }
   }
 </script>
