@@ -18,9 +18,11 @@
               <v-btn icon v-show="isShowComment" @click="">
                 <v-icon>fas fa-pencil-alt</v-icon>
               </v-btn>
+              <!-- 集計情報トグルは一旦非表示にしておく
               <v-btn icon @click="swipeInfo">
                 <v-icon>fas fa-exchange-alt</v-icon>
               </v-btn>
+              -->
             </div>
           </div>
         </v-flex>
