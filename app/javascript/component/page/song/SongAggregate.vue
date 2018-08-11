@@ -18,7 +18,7 @@
       </v-flex>
       <v-flex xs12 sm6 md3>
         <song-aggregate-card title="満足度レート">
-          満足度のレート
+          <v-bar-chart-satisfactions />
         </song-aggregate-card>
       </v-flex>
     </v-layout>
@@ -39,6 +39,7 @@
     components: {
       SongAggregateCard: require('./SongAggregateCard').default,
       VBarChartHistoriesByMonth: require('../../common/graph/VBarChartHistoriesByMonth').default,
+      VBarChartSatisfactions:    require('../../common/graph/VBarChartSatisfactions').default,
       VPieChartHistoriesByUser:  require('../../common/graph/VPieChartHistoriesByUser').default
     }
   }
