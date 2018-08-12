@@ -1,6 +1,6 @@
 <template>
   <div class="song-aggregate">
-    <v-layout row wrap>
+    <v-layout row wrap justify-center>
       <v-flex xs12 sm6 md3>
         <song-aggregate-card title="月別歌唱回数">
           <v-bar-chart-histories-by-month />
@@ -12,8 +12,8 @@
         </song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
-        <song-aggregate-card title="採点結果">
-          採点タイプごとの点数
+        <song-aggregate-card title="採点情報">
+          <v-bar-chart-scores-by-score-type />
         </song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
@@ -38,9 +38,10 @@
   export default {
     components: {
       SongAggregateCard: require('./SongAggregateCard').default,
-      VBarChartHistoriesByMonth: require('../../common/graph/VBarChartHistoriesByMonth').default,
-      VBarChartSatisfactions:    require('../../common/graph/VBarChartSatisfactions').default,
-      VPieChartHistoriesByUser:  require('../../common/graph/VPieChartHistoriesByUser').default
+      VBarChartHistoriesByMonth:  require('../../common/graph/VBarChartHistoriesByMonth').default,
+      VBarChartScoresByScoreType: require('../../common/graph/VBarChartScoresByScoreType').default,
+      VBarChartSatisfactions:     require('../../common/graph/VBarChartSatisfactions').default,
+      VPieChartHistoriesByUser:   require('../../common/graph/VPieChartHistoriesByUser').default
     }
   }
 </script>
