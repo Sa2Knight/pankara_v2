@@ -1,12 +1,19 @@
 <script>
+  import { mapState } from 'vuex'
   import VueCharts from 'vue-chartjs'
   import { Pie }   from 'vue-chartjs'
   export default {
     extends: Pie,
 
+    computed: {
+      ...mapState({
+        labels: state => state.song.song.graph.histories_by_user.labels,
+        data:   state => state.song.song.graph.histories_by_user.data,
+      })
+    },
     mounted () {
       this.renderChart({
-        labels: ['ないと', 'ともちん', 'へたれ', 'ちゃら'],
+        labels: this.labels,
         datasets: [{
           backgroundColor: [
             '#ff6384',
@@ -14,7 +21,7 @@
             '#cc65fe',
             '#ffce56',
           ],
-          data: Array.apply(null, new Array(4)).map(() => Math.floor(Math.random() * 20))
+          data: this.data
         }]
       }, {
         cutoutPercentage: 40,

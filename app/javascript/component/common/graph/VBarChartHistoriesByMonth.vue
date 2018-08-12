@@ -1,9 +1,15 @@
 <script>
+  import { mapState } from 'vuex'
   import VueCharts from 'vue-chartjs'
   import { Bar } from 'vue-chartjs'
   export default {
     extends: Bar,
 
+    computed: {
+      ...mapState({
+        data: state => state.song.song.graph.histories_by_month
+      })
+    },
     mounted () {
       this.renderChart({
         labels: [
@@ -22,7 +28,7 @@
         datasets: [
           {
             backgroundColor: '#f87979',
-            data: Array.apply(null, new Array(12)).map(() => Math.floor(Math.random() * 9)),
+            data: this.data,
           }
         ],
       },

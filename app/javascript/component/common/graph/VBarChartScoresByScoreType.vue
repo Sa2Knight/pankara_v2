@@ -1,9 +1,15 @@
 <script>
+  import { mapState } from 'vuex'
   import VueCharts from 'vue-chartjs'
   import { HorizontalBar } from 'vue-chartjs'
   export default {
     extends: HorizontalBar,
 
+    computed: {
+      ...mapState({
+        data: state => state.song.song.graph.scores_by_score_type
+      })
+    },
     mounted () {
       this.renderChart({
         labels: [
@@ -17,12 +23,12 @@
           {
             label: '平均点',
             backgroundColor: '#f87979',
-            data: Array.apply(null, new Array(5)).map(() => Math.floor(Math.random() * 30) + 70),
+            data: this.data.avg,
           },
           {
             label: '最高点',
             backgroundColor: '#79f879',
-            data: Array.apply(null, new Array(5)).map(() => Math.floor(Math.random() * 30) + 70),
+            data: this.data.max,
           }
         ],
       },

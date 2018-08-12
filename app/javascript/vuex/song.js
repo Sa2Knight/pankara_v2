@@ -12,6 +12,19 @@ export default {
   mutations: {
     setSong (state, song) {
       state.song = song
+      // TODO: サーバ側実装して差し替える
+      state.song.graph = {
+        histories_by_month:  Array.apply(null, new Array(12)).map(() => Math.floor(Math.random() * 9)),
+        satisfactions: Array.apply(null, new Array(10)).map(() => Math.floor(Math.random() * 7)),
+        scores_by_score_type: {
+          max: Array.apply(null, new Array(5)).map(() => Math.floor(Math.random() * 30) + 70),
+          avg: Array.apply(null, new Array(5)).map(() => Math.floor(Math.random() * 30) + 70),
+        },
+        histories_by_user: {
+          labels: ['ないと', 'ともちん', 'へたれ', 'ちゃら'],
+          data: Array.apply(null, new Array(4)).map(() => Math.floor(Math.random() * 20))
+        }
+      }
     },
     setHistories (state, histories) {
       state.histories = histories
