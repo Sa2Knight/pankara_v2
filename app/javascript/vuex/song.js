@@ -14,7 +14,11 @@ export default {
       state.song = song
       // TODO: サーバ側実装して差し替える
       state.song.graph = {
-        histories_by_month:  Array.apply(null, new Array(12)).map(() => Math.floor(Math.random() * 9)),
+        histories_by_month: {
+          '2016': Array.apply(null, new Array(12)).map(() => Math.floor(Math.random() * 9)),
+          '2017': Array.apply(null, new Array(12)).map(() => Math.floor(Math.random() * 9)),
+          '2018': Array.apply(null, new Array(12)).map(() => Math.floor(Math.random() * 9)),
+        },
         satisfactions: Array.apply(null, new Array(10)).map(() => Math.floor(Math.random() * 7)),
         scores_by_score_type: {
           max: Array.apply(null, new Array(5)).map(() => Math.floor(Math.random() * 30) + 70),

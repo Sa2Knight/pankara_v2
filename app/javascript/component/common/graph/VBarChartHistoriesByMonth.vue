@@ -28,7 +28,7 @@
         datasets: [
           {
             backgroundColor: '#f87979',
-            data: this.data,
+            data: this.data['2018'],
           }
         ],
       },
