@@ -9,6 +9,8 @@ class History < ApplicationRecord
   scope :by_user_event, lambda { |user_event|
     user_event.present? ? where(user_event: user_event) : self
   }
+  scope :scored, -> { where.not(score: nil) }
+  scope :satisfied, -> { where.not(satisfaction: nil) }
 
   # mock
   def comment

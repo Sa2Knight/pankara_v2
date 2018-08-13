@@ -9,4 +9,11 @@ module Util
     to   ||= Time.zone.now
     from < to ? Random.rand(from..to) : Time.zone.now
   end
+
+  def number_key_hash_to_array(hash, max: 10, offset: 0, default: nil)
+    (0..max).reduce([]) do |ac, n|
+      ac[n] = hash[n + offset].presence || default
+      ac
+    end
+  end
 end
