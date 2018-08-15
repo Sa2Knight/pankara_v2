@@ -66,8 +66,8 @@ class Song::MakeGraphDataService
       max_results = @histories.scored.group(:score_type).maximum(:score)
       avg_results = @histories.scored.group(:score_type).average(:score)
       {
-        max: Util.number_key_hash_to_array(max_results, max: 4),
-        avg: Util.number_key_hash_to_array(avg_results, max: 4)
+        max: Util.number_key_hash_to_array(max_results, max: 4, offset: 1),
+        avg: Util.number_key_hash_to_array(avg_results, max: 4, offset: 1)
       }
     end
 
