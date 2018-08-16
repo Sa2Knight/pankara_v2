@@ -32,6 +32,7 @@ module JSON
       self.raw_with_artist(song).merge(
         my_histories_count: song.histories_count_by(user: user),
         histories_count: song.histories_count,
+        graph: SongService::MakeGraphData.new(song).perform
       )
     end
   end

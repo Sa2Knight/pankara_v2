@@ -69,6 +69,17 @@ RSpec.describe 'songs#show', type: :request do
     end
   end
 
+  describe '集計情報関係' do
+    # 詳細はサービスクラスのテストが別途ある
+    it 'レスポンスに集計情報が含まれている' do
+      expect(body.key?('graph'))
+      expect(body['graph'].keys).to match_array(
+        %w[histories_by_month satisfactions
+           scores_by_score_type histories_by_user]
+      )
+    end
+  end
+
   describe 'エラー系' do
     context '存在しないIDを指定した場合' do
       let(:song_id) { 0 }
