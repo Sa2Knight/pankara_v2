@@ -1,6 +1,6 @@
-RSpec.describe 'Song::MakeGraphDataService', type: :service do
+RSpec.describe 'SongService::MakeGraphData', type: :service do
   let(:song)    { FactoryBot.create(:song) }
-  let(:service) { Song::MakeGraphDataService.new(song) }
+  let(:service) { SongService::MakeGraphData.new(song) }
 
   before do
     # ユーザ作成

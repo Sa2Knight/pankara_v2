@@ -5,7 +5,7 @@
 # TODO: rubocopそれなりに従う
 # TODO: 非常に高コストになるのでRedisキャッシュ必須
 #
-class Song::MakeGraphDataService
+class SongService::MakeGraphData
   def initialize(song)
     raise ArgumentError unless song.is_a?(Song)
 
