@@ -34,9 +34,9 @@
       },
       {
         scales: {
-          yAxes: [{
+          xAxes: [{
             ticks: {
-              min: 70,
+              min: 65,
               max: 100
             }
           }]
