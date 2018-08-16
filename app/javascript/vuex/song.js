@@ -13,6 +13,9 @@ export default {
     setSong (state, song) {
       state.song = song
     },
+    resetSong (state) {
+      state.song = null
+    },
     setHistories (state, histories) {
       state.histories = histories
     },
@@ -26,6 +29,7 @@ export default {
   actions: {
     // APIから楽曲詳細をフェッチ
     fetchSong ({ commit }, id) {
+      commit('resetSong')
       http.getSong(id).then((response) => {
         commit('setSong', response.data)
       })
