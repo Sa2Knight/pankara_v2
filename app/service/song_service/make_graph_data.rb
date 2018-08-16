@@ -75,6 +75,10 @@ class SongService::MakeGraphData
     # ユーザ別歌唱回数
     #
     def histories_by_user
-      @histories.joins(:user_event, :user).group(:display_name).count
+      results = @histories.joins(:user_event, :user).group(:display_name).count
+      {
+        labels: results.keys,
+        data: results.values
+      }
     end
 end

@@ -16,7 +16,7 @@
         datasets: [
           {
             backgroundColor: '#00A0E9',
-            data: this.data
+            data: this.data.reverse()
           }
         ],
       },
