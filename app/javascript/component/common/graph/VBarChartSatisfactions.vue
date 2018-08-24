@@ -24,6 +24,13 @@
         legend: {
           display: false,
         },
+        scales: {
+          xAxes: [{
+            ticks: {
+              min: 0,
+            }
+          }]
+        }
       },
       )
     }
