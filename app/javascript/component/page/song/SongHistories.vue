@@ -2,7 +2,9 @@
   <div class="song-histories">
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 lg3 v-for="history in histories">
-        <song-history :history="history" />
+        <div @click="() => selectHistory(history.id)">
+          <song-history :history="history" />
+        </div>
       </v-flex>
     </v-layout>
   </div>
@@ -19,11 +21,17 @@
   export default {
     computed: {
       ...mapState({
-        histories: state => state.song.histories
+        histories: state => state.song.histories,
+        isSelectedHistory: state => !!state.song.selectedHistoryId,
       })
     },
     components: {
       SongHistory: require('./SongHistory').default
+    },
+    methods: {
+      selectHistory: function(id) {
+        this.$store.dispatch('showHistoryDialog', id)
+      }
     }
   }
 </script>

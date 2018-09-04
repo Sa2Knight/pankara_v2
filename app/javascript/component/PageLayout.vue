@@ -109,6 +109,10 @@
     <!-- Youtubeプレイヤー -->
     <youtube-dialog v-if="isShowYoutubeDialog"/>
 
+    <!-- 歌唱履歴詳細ダイアログ　-->
+    <history-dialog v-if="isShowHistoryDialog"/>
+
+
     <!-- スナック -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
       ログインに成功しました
@@ -138,12 +142,14 @@
       eventsPath: () => ROUTES.EVENTS_PATH(),
       ...mapState({
         pageTitle: state => state.common.pageTitle,
-        isShowYoutubeDialog: state => state.common.isShowYoutubeDialog
+        isShowYoutubeDialog: state => state.common.isShowYoutubeDialog,
+        isShowHistoryDialog: state => state.common.isShowHistoryDialog,
       })
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default,
-      YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default
+      YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default,
+      HistoryDialog: require('../component/parts/Common/HistoryDialog').default,
     }
   }
 </script>

@@ -71,4 +71,10 @@ http.getSongHistories = function(id, params = {}) {
   return request('GET', `/songs/${id}/histories`, params)
 }
 
+/**
+ * 歌唱履歴の詳細を取得する
+ */
+http.getHistory = function(id, params = {}) {
+  return request('GET', `/histories/${id}`, params)
+}
 export default http
