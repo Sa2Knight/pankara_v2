@@ -11,7 +11,9 @@
             </tr>
             <tr>
               <th>カラオケ名</th>
-              <td>{{ history.event.title }}</td>
+              <td>
+                <a @click="link_to_event">{{ history.event.title }}</a>
+              </td>
             </tr>
             <tr>
               <th>日時</th>
@@ -23,7 +25,9 @@
             </tr>
             <tr>
               <th>曲名</th>
-              <td>{{ history.song.name }}</td>
+              <td>
+                <a @click="link_to_song">{{ history.song.name }}</a>
+              </td>
             </tr>
             <tr>
               <th>歌手名</th>
@@ -68,6 +72,7 @@
 <script>
   // TODO: YoutubeDialogとmixinなりできる？
   import { mapState } from 'vuex'
+  import ROUTES from '../../../lib/routes'
   export default {
     data: function() {
       return {
@@ -89,6 +94,17 @@
     },
     mounted: function() {
       this.isShow = this.isShowHistoryDialog
+    },
+    methods: {
+      link_to_event: function() {
+        // TODO: 各リンクでdispatchするの辛いのでなんとかする
+        this.$router.push(ROUTES.EVENT_PATH(this.history.event.id))
+        this.$store.dispatch('hideHistoryDialog')
+      },
+      link_to_song: function() {
+        this.$router.push(ROUTES.SONG_PATH(this.history.song.id))
+        this.$store.dispatch('hideHistoryDialog')
+      }
     },
     components: {
       VUserIcon: require('../../common/VUserIcon').default
