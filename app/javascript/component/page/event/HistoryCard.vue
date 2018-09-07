@@ -1,8 +1,7 @@
 <!-- TODO: コンポーネント名が不適切 -->
 <template>
-  <div class="history-card" v-bind:class="{ selected: isSelected, 'elevation-12': isSelected }">
-    <v-container @click="select" grid-list-md text-xs-center>
-      <!-- 歌唱履歴情報-->
+  <div class="history-card" v-bind:class="{ selected: isMouseOver, 'elevation-12': isMouseOver }">
+    <v-container @click="select" @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
       <v-layout row>
         <v-flex xs4>
           <v-song-thumbnail :song="history.song" />
@@ -18,43 +17,6 @@
           <v-user-icons :user="history.user" />
         </v-flex>
       </v-layout>
-
-      <!-- 歌唱履歴選択時のみ表示される部分 -->
-      <div class="toggle-area" v-show="isSelected">
-        <!-- 歌唱コメント-->
-        <v-history-comment v-if="history.comment"
-          :user="history.user"
-          :comment="history.comment"
-        />
-        <!-- サブメニュー -->
-        <v-layout row justify-space-around>
-          <v-btn icon>
-            <v-icon>fas fa-clipboard-list</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>fas fa-pencil-alt</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>fas fa-trash-alt</v-icon>
-          </v-btn>
-          <v-menu bottom left>
-            <v-btn slot="activator" icon>
-              <v-icon>fas fa-ellipsis-h</v-icon>
-            </v-btn>
-            <v-list>
-              <v-list-tile @click="showYoutubeDialog">
-                <v-list-tile-title>動画再生</v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile @click="moveToSongPage">
-                <v-list-tile-title>楽曲詳細</v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-title>歌手詳細</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </v-layout>
-      </div>
     </v-container>
   </div>
 </template>
@@ -100,7 +62,7 @@
   export default {
     data: function() {
       return {
-
+        isMouseOver: false
       }
     },
     props: {
@@ -114,27 +76,29 @@
         return this.history.id == this.selectedHistoryId
       },
       ...mapState({
-        selectedHistoryId: state => state.event.selectedHistoryId
+        selectedHistoryId: function(state) {
+          if (state.common.showingHistory) {
+            return state.common.showingHistory.id
+          }
+          return null;
+        }
       })
     },
     methods: {
       // 特定の歌唱履歴を選択状態にする
       select: function() {
-        this.$store.dispatch('selectHistory', this.history.id)
+        this.$store.dispatch('showHistoryDialog', this.history.id)
       },
-      // 特定の歌唱履歴の楽曲のYoutubeダイアログを表示する
-      showYoutubeDialog: function() {
-        this.$store.dispatch('showYoutubeDialog', this.history.song)
+      enter: function() {
+        this.isMouseOver = true
       },
-      // 特定の歌唱履歴の楽曲ページに移動する
-      moveToSongPage: function() {
-        this.$router.push(ROUTES.SONG_PATH(this.history.song.id))
-      },
+      leave: function() {
+        this.isMouseOver = false
+      }
     },
     components: {
       VSongThumbnail: require('../../common/VSongThumbnail').default,
       VUserIcons: require('../../common/VUserIcons').default,
-      VHistoryComment: require('../../common/VHistoryComment').default,
     }
   }
 </script>

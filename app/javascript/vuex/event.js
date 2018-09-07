@@ -6,16 +6,11 @@ export default {
   state: {
     // APIからフェッチしたカラオケ詳細
     event: null,
-    // 選択中の歌唱履歴ID
-    selectedHistoryId: null
   },
 
   mutations: {
     setEvent (state, event) {
       state.event = event
-    },
-    setSelectedHistoryId (state, id) {
-      state.selectedHistoryId = id
     },
     unsetEvent (state) {
       state.event = null
@@ -31,9 +26,5 @@ export default {
         commit('setEvent', response.data)
       })
     },
-    // 歌唱履歴のうち1件を選択状態にする
-    selectHistory ({ commit }, id) {
-      commit('setSelectedHistoryId', id)
-    }
   }
 }

@@ -25,12 +25,8 @@
               <v-divider />
             </v-flex>
           </v-layout>
-          <v-btn color="pink" class="elevation-20" fixed bottom right fab dark>
-            <v-icon>add</v-icon>
-          </v-btn>
         </v-tab-item>
       </v-tabs>
-
     </div>
   </div>
 </template>
