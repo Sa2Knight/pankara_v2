@@ -27,6 +27,9 @@ gem 'bcrypt'
 # JWT認証用
 gem 'knock'
 
+# Wikipediaクライアント
+gem 'wikipedia-client'
+
 group :development, :test do
   # Pryによるデバッグ用gem
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
