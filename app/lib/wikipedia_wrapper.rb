@@ -5,7 +5,6 @@ module WikipediaWrapper
   # 指定したタイトルで記事を検索し、そのサマリーを戻す
   #
   def fetch_sammary(title:)
-    Wikipedia.find(title).summary
+    Wikipedia.find(title).summary.presence
   end
-
 end
