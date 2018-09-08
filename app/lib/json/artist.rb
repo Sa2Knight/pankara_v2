@@ -1,13 +1,17 @@
 module JSON
   module Artist
+    module_function
+
     #
-    # Artistモデルの属性のみ
+    # 詳細取得用
     #
-    def self.raw(artist)
+    def show(artist)
       return nil if artist.blank?
       {
         id: artist.id,
-        name: artist.name
+        name: artist.name,
+        description: artist.description,
+        url: artist.url
       }
     end
   end
