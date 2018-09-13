@@ -14,7 +14,9 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: 1q2w3e4r
+  database: pankara_development
+  host: pankara_db
   socket: /var/run/mysqld/mysqld.sock
 
 development:
