@@ -5,7 +5,7 @@ module JSON
     #
     # 詳細取得用
     #
-    def show(artist)
+    def raw(artist)
       return nil if artist.blank?
       {
         id: artist.id,
