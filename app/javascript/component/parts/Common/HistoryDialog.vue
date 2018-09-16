@@ -27,7 +27,9 @@
             </tr>
             <tr>
               <th>歌手名</th>
-              <td>{{ history.song.artist.name }}</td>
+              <td>
+                <a @click="link_to_artist">{{ history.song.artist.name }}</a>
+              </td>
             </tr>
             <tr>
               <th>キー</th>
@@ -99,6 +101,10 @@
       },
       link_to_song: function() {
         this.$router.push(ROUTES.SONG_PATH(this.history.song.id))
+        this.$store.dispatch('hideHistoryDialog')
+      },
+      link_to_artist: function() {
+        this.$router.push(ROUTES.ARTIST_PATH(this.history.song.artist.id))
         this.$store.dispatch('hideHistoryDialog')
       }
     },
