@@ -16,10 +16,6 @@
         <v-list-tile-content class="align-end">{{ event.datetime }}</v-list-tile-content>
       </v-list-tile>
       <v-list-tile>
-        <v-list-tile-content>機種</v-list-tile-content>
-        <v-list-tile-content class="align-end">JOYSOUN MAX</v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile>
         <v-list-tile-content>曲数</v-list-tile-content>
         <v-list-tile-content class="align-end">{{ event.history_size }}</v-list-tile-content>
       </v-list-tile>

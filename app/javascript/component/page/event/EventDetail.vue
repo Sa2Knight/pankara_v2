@@ -7,11 +7,6 @@
         </v-simple-information>
       </v-flex>
       <v-flex xs6 lg2>
-        <v-simple-information header="機種">
-          {{ event.product }}
-        </v-simple-information>
-      </v-flex>
-      <v-flex xs6 lg2>
         <v-simple-information header="平均点">
           {{ average_score }}
         </v-simple-information>

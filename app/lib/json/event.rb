@@ -9,7 +9,6 @@ module JSON
         id: event.id,
         datetime: event.datetime.strftime(CONSTANT::FORMAT::DATE),
         title: event.title,
-        product: event.product
       }
     end
 

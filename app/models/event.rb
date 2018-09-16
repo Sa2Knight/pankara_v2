@@ -2,7 +2,6 @@ class Event < ApplicationRecord
   has_many :user_events, dependent: :destroy
   has_many :users, through: :user_events
   has_many :histories, through: :user_events
-  enum product: { JOYSOUND: 0, DAM: 1, その他: 2 }
 
   #
   # タイトルで絞り込み

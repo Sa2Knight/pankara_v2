@@ -20,10 +20,6 @@
               <td>{{ history.event.datetime }}</td>
             </tr>
             <tr>
-              <th>機種名</th>
-              <td>{{ history.event.product }}</td>
-            </tr>
-            <tr>
               <th>曲名</th>
               <td>
                 <a @click="link_to_song">{{ history.song.name }}</a>
