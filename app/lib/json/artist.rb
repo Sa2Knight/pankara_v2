@@ -3,7 +3,7 @@ module JSON
     module_function
 
     #
-    # 詳細取得用
+    # 生データ
     #
     def raw(artist)
       return nil if artist.blank?
@@ -13,6 +13,14 @@ module JSON
         description: artist.description,
         url: artist.url
       }
+    end
+
+    #
+    # 詳細取得用
+    #
+    def show(artist)
+      return nil if artist.blank?
+      raw(artist)
     end
   end
 end
