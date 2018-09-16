@@ -14,7 +14,7 @@ class History < ApplicationRecord
 
   # mock
   def comment
-    [
+    super || [
       'このキーが一番歌いやすいcs',
       'ガチで楽しかった',
       '難しいなぁこの曲、練習あるのみだ',
