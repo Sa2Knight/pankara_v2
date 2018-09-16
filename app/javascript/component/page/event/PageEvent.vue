@@ -20,7 +20,7 @@
         <!-- TODO: コンポーネント切ったほうが良いかも -->
         <v-tab-item id="histories">
           <v-layout row wrap class="pb-5">
-            <v-flex xs12 sm6 md6 lg4 v-for="(history, i) in event.histories">
+            <v-flex xs12 sm6 md6 lg4 v-for="history in event.histories">
               <v-history-card :history="history" />
               <v-divider />
             </v-flex>
