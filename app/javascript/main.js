@@ -26,6 +26,7 @@ const store = new Vuex.Store({
     events: require('./vuex/events').default,
     event:  require('./vuex/event').default,
     song:   require('./vuex/song').default,
+    artist: require('./vuex/artist').default,
     common: require('./vuex/common').default,
   }
 })
