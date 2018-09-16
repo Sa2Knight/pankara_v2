@@ -10,6 +10,8 @@ class Api::ArtistsController < Api::BaseController
 
   private
 
+    #---showのprivateメソッド
+
     #
     # 対象の歌手を取得
     #

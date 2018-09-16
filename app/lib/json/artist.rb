@@ -11,7 +11,10 @@ module JSON
         id: artist.id,
         name: artist.name,
         description: artist.description,
-        url: artist.url
+        url: artist.url,
+        songs: artist.songs.map do |song|
+          JSON::Song.raw(song)
+        end
       }
     end
 

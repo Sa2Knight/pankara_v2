@@ -18,7 +18,13 @@ RSpec.describe 'artists#show', type: :request do
           :id,
           :name,
           :description,
-          :url
+          :url,
+          :songs,
+          # graph: [
+          #   :histories_by_month,
+          #   :histories_by_song,
+          #   :histories_by_users
+          # ]
         )
       end
     end
