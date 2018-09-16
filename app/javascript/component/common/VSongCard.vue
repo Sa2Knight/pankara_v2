@@ -67,6 +67,7 @@
     methods: {
       // 楽曲詳細ページへリンク
       select: function() {
+        this.$router.push(ROUTES.SONG_PATH(this.song.id))
       },
       // オンマウス状態にする
       enter: function() {
