@@ -54,6 +54,11 @@ Metrics/AbcSize:
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 
+# メモ変数の名前をメソッド名を揃えなくても良い
+# @indexなど、複数のメソッドで共有のインスタンス変数を使いたいので
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
 # シリアライズコード及びテストコードでは各種ルールを許容
 Metrics/BlockLength:
   Exclude:
