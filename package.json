@@ -2,7 +2,8 @@
   "name": "pankara",
   "private": true,
   "scripts": {
-    "start": "foreman start"
+    "server": "bundle exec rails s -b 0.0.0.0 -p 80",
+    "client": "webpack --watch --mode development"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
