@@ -1,9 +1,9 @@
 <template>
-  <div class="song-histories">
+  <div class="page-song-histories">
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 lg3 v-for="history in histories">
         <div @click="() => selectHistory(history.id)">
-          <song-history :history="history" />
+          <v-song-history :history="history" />
         </div>
       </v-flex>
     </v-layout>
@@ -11,7 +11,7 @@
 </template>
 
 <style lang="scss">
-.song-histories {
+.page-song-histories {
   padding: 15px;
 }
 </style>
@@ -26,7 +26,7 @@
       })
     },
     components: {
-      SongHistory: require('./SongHistory').default
+      VSongHistory: require('./parts/VSongHistory').default
     },
     methods: {
       selectHistory: function(id) {

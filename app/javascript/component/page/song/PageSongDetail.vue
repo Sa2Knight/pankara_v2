@@ -1,5 +1,5 @@
 <template>
-  <div class="song-detail mb-2">
+  <div class="page-song-detail mb-2">
     <div class="header py-3">
       <h1>{{ song.name }}</h1>
       <h2>{{ song.artist.name}}</h2>
@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss">
-.song-detail {
+.page-song-detail {
   text-align: center;
 }
 </style>

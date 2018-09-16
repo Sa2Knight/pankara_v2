@@ -1,5 +1,5 @@
 <template>
-  <div class="song-aggregate-card">
+  <div class="v-song-aggregate-card">
     <v-card hover class="md-2">
       <v-card-title prymary-title class="header">
         <h1>{{ title }}</h1>
@@ -13,7 +13,7 @@
 </template>
 
 <style lang="scss">
-.song-aggregate-card {
+.v-song-aggregate-card {
   margin: 1em;
   h1 {
     font-size: 1.1em;

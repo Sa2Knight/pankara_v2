@@ -1,32 +1,32 @@
 <template>
-  <div class="song-aggregate">
+  <div class="page-song-aggregate">
     <v-layout row wrap justify-center>
       <v-flex xs12 sm6 md3>
-        <song-aggregate-card title="月別歌唱回数">
+        <v-song-aggregate-card title="月別歌唱回数">
           <v-bar-chart-histories-by-month />
-        </song-aggregate-card>
+        </v-song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
-        <song-aggregate-card title="ユーザ別歌唱回数">
+        <v-song-aggregate-card title="ユーザ別歌唱回数">
           <v-pie-chart-histories-by-user />
-        </song-aggregate-card>
+        </v-song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
-        <song-aggregate-card title="採点情報">
+        <v-song-aggregate-card title="採点情報">
           <v-bar-chart-scores-by-score-type />
-        </song-aggregate-card>
+        </v-song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
-        <song-aggregate-card title="満足度レート">
+        <v-song-aggregate-card title="満足度レート">
           <v-bar-chart-satisfactions />
-        </song-aggregate-card>
+        </v-song-aggregate-card>
       </v-flex>
     </v-layout>
   </div>
 </template>
 
 <style lang="scss">
-.song-aggregate {
+.page-song-aggregate {
   .aggregate {
     min-height: 50%;
     border: 1px solid;
@@ -37,7 +37,7 @@
 <script>
   export default {
     components: {
-      SongAggregateCard: require('./SongAggregateCard').default,
+      VSongAggregateCard: require('./parts/VSongAggregateCard').default,
       VBarChartHistoriesByMonth:  require('../../common/graph/VBarChartHistoriesByMonth').default,
       VBarChartScoresByScoreType: require('../../common/graph/VBarChartScoresByScoreType').default,
       VBarChartSatisfactions:     require('../../common/graph/VBarChartSatisfactions').default,

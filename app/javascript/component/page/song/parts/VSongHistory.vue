@@ -1,5 +1,5 @@
 <template>
-  <div class="song-history">
+  <div class="v-song-history">
     <v-card hover class="md-2">
       <v-card-title primary-title class="header">
         <v-layout row wrap>
@@ -58,7 +58,7 @@
 </template>
 
 <style lang="scss">
-.song-history {
+.v-song-history {
   width: 100%;
   height: auto;
   padding: 10px;
@@ -98,8 +98,8 @@
       }
     },
     components: {
-      VHistoryComment: require('../../common/VHistoryComment').default,
-      VStars: require('../../common/VStars').default
+      VHistoryComment: require('../../../common/VHistoryComment').default,
+      VStars: require('../../../common/VStars').default
     }
   }
 </script>
