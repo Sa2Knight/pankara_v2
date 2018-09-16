@@ -33,5 +33,15 @@ module JSON
         score_type: history.score_type
       }
     end
+
+    #
+    # Artist.history用
+    #
+    def self.artist_index(history)
+      return nil if history.blank?
+      self.raw(history).merge(
+        song: JSON::Song.raw(history.song)
+      )
+    end
   end
 end

@@ -14,6 +14,10 @@ Rails.application.routes.draw do
         get 'histories'
       end
     end
-    resources :artists, only: %i[show]
+    resources :artists, only: %i[show] do
+      member do
+        get 'histories'
+      end
+    end
   end
 end
