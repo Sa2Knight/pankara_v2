@@ -26,6 +26,7 @@
     },
     mounted: function() {
       this.$store.dispatch('setPageTitle', '歌手詳細')
+      this.$store.dispatch('fetchArtist', this.$route.params.id)
     },
     components: {
       PageArtistOverview: require('./PageArtistOverview').default,
