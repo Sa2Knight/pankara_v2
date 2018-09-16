@@ -1,6 +1,5 @@
-<!-- TODO: コンポーネント名が不適切 -->
 <template>
-  <div class="history-card" v-bind:class="{ selected: isMouseOver, 'elevation-12': isMouseOver }">
+  <div class="v-history-card" v-bind:class="{ selected: isMouseOver, 'elevation-12': isMouseOver }">
     <v-container @click="select" @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
       <v-layout row>
         <v-flex xs4>
@@ -22,7 +21,7 @@
 </template>
 
 <style lang="scss">
-  .history-card {
+  .v-history-card {
     * {
       margin: 0;
       padding: 0;
@@ -58,7 +57,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import ROUTES from '../../../lib/routes'
+  import ROUTES from '../../lib/routes'
   export default {
     data: function() {
       return {
@@ -71,34 +70,23 @@
         required: true
       }
     },
-    computed: {
-      isSelected: function() {
-        return this.history.id == this.selectedHistoryId
-      },
-      ...mapState({
-        selectedHistoryId: function(state) {
-          if (state.common.showingHistory) {
-            return state.common.showingHistory.id
-          }
-          return null;
-        }
-      })
-    },
     methods: {
-      // 特定の歌唱履歴を選択状態にする
+      // 歌唱履歴詳細ダイアログを開く
       select: function() {
         this.$store.dispatch('showHistoryDialog', this.history.id)
       },
+      // オンマウス状態にする
       enter: function() {
         this.isMouseOver = true
       },
+      // オンマウス状態を解除する
       leave: function() {
         this.isMouseOver = false
       }
     },
     components: {
-      VSongThumbnail: require('../../common/VSongThumbnail').default,
-      VUserIcons: require('../../common/VUserIcons').default,
+      VSongThumbnail: require('./VSongThumbnail').default,
+      VUserIcons: require('./VUserIcons.vue').default,
     }
   }
 </script>

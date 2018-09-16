@@ -21,7 +21,7 @@
         <v-tab-item id="histories">
           <v-layout row wrap class="pb-5">
             <v-flex xs12 sm6 md6 lg4 v-for="(history, i) in event.histories">
-              <history-card :history="history" />
+              <v-history-card :history="history" />
               <v-divider />
             </v-flex>
           </v-layout>
@@ -53,7 +53,7 @@
     },
     components: {
       EventOverview:  require('./EventOverview').default,
-      HistoryCard:  require('./HistoryCard').default,
+      VHistoryCard:  require('../../common/VHistoryCard').default,
     }
   }
 </script>
