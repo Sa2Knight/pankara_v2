@@ -123,6 +123,9 @@
       ログインに失敗しました
     </v-snackbar>
 
+    <!-- ローディングビュー-->
+    <v-loading-view v-if="isLoading" />
+
   </div>
 </template>
 
@@ -144,12 +147,14 @@
         pageTitle: state => state.common.pageTitle,
         isShowYoutubeDialog: state => state.common.isShowYoutubeDialog,
         isShowHistoryDialog: state => state.common.isShowHistoryDialog,
+        isLoading: state => state.common.isLoading,
       })
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default,
       YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default,
       HistoryDialog: require('../component/parts/Common/HistoryDialog').default,
-    }
+      VLoadingView:  require('../component/parts/Common/VLoadingView').default
+    },
   }
 </script>

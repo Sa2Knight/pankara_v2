@@ -1,6 +1,6 @@
 <template>
   <div class="v-loading-view">
-    <img src="images/loading.png" class="rotate-image" v-if="enable">
+    <img src="images/loading.png" class="rotate-image">
   </div>
 </template>
 
@@ -64,11 +64,5 @@
 
 <script>
   export default {
-    props: {
-      enable: {
-        type: Boolean,
-        required: true
-      }
-    }
   }
 </script>

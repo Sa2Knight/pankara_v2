@@ -17,10 +17,12 @@ export default {
   },
   actions: {
     // APIから歌手詳細をフェッチ
-    fetchArtist ({ commit }, id) {
+    fetchArtist ({ commit, dispatch }, id) {
+      dispatch('showLoadingView')
       commit('resetArtist')
       http.getArtist(id).then((response) => {
         commit('setArtist', response.data)
+        dispatch('hideLoadingView')
       })
     },
   }

@@ -7,8 +7,6 @@ export default {
   state: {
     // APIからフェッチしたカラオケ一覧
     events: [],
-    // APIからフェッチ中であるか？
-    isLoading: false,
     // 全カラオケをフェッチ済みか？
     isAllLoaded: false,
     // 検索ダイアログが表示されている？
@@ -30,9 +28,6 @@ export default {
     appendEvents (state, events) {
       state.events = state.events.concat(events)
     },
-    setIsLoading (state) {
-      state.isLoading = true
-    },
     setIsAllLoaded (state) {
       state.isAllLoaded = true
     },
@@ -50,9 +45,6 @@ export default {
     },
     unsetEvents (state) {
       state.events = []
-    },
-    unsetIsLoading (state) {
-      state.isLoading = false
     },
     unsetIsAllLoaded (state) {
       state.isAllLoaded = false
@@ -77,8 +69,8 @@ export default {
 
   actions: {
     // APIからカラオケの詳細を取得する
-    fetchEvents ({ state, commit }) {
-      commit('setIsLoading')
+    fetchEvents ({ state, commit, dispatch }) {
+      dispatch('showLoadingView')
 
       const params = {
         page: state.pager.page,
@@ -89,7 +81,7 @@ export default {
       }
       http.getEvents(params).then((response) => {
         commit('appendEvents', response.data)
-        commit('unsetIsLoading')
+        dispatch('hideLoadingView')
         commit('setPager', { total: Number(response.headers['total-count']) })
 
         if (response.data.length == 0) {

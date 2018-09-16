@@ -35,8 +35,8 @@
     computed: {
       ...mapState({
         events:      state => state.events.events,
-        isLoading:   state => state.events.isLoading,
-        isAllLoaded: state => state.events.isLoading,
+        isLoading:   state => state.common.isLoading,
+        isAllLoaded: state => state.common.isLoading,
         isShowSearchDialog: state => state.events.isShowSearchDialog,
         searchQuery: state => state.events.searchQuery,
         pager:       state => state.events.pager,

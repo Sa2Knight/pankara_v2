@@ -14,6 +14,8 @@ export default {
     isShowHistoryDialog: false,
     // 歌唱履歴詳細ダイアログに表示してる歌唱履歴
     showingHistory: null,
+    // ローディング中か？
+    isLoading: false,
   },
 
   mutations: {
@@ -46,6 +48,12 @@ export default {
     },
     unsetShowingHistory (state) {
       state.showingHistory = null
+    },
+    setIsLoading (state) {
+      state.isLoading = true
+    },
+    unsetIsLoading (state) {
+      state.isLoading = false
     }
   },
   actions: {
@@ -64,10 +72,13 @@ export default {
       commit('unsetShowingYoutubeSong')
     },
     // 歌唱履歴ダイアログを表示する
-    showHistoryDialog ({ commit }, historyId) {
+    showHistoryDialog ({ commit, dispatch }, historyId) {
+      dispatch('showLoadingView')
       commit('setIsShowHistoryDialog')
+
       http.getHistory(historyId).then((res) => {
         commit('setShowingHistory', res.data)
+        dispatch('hideLoadingView')
       })
     },
     // 歌唱履歴ダイアログを終了する
@@ -75,5 +86,13 @@ export default {
       commit('unsetIsShowHistoryDialog')
       commit('unsetShowingHistory')
     },
+    // ローディングビューを表示する
+    showLoadingView ({ commit }) {
+      commit('setIsLoading')
+    },
+    // ローディングビューを非表示にする
+    hideLoadingView ({ commit }) {
+      commit('unsetIsLoading')
+    }
   }
 }

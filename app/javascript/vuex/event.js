@@ -19,11 +19,13 @@ export default {
 
   actions: {
     // APIからカラオケの詳細を取得する
-    fetchEvent ({ commit }, id) {
+    fetchEvent ({ dispatch, commit }, id) {
+      dispatch('showLoadingView')
       commit('unsetEvent')
 
       http.getEvent(id).then((response) => {
         commit('setEvent', response.data)
+        dispatch('hideLoadingView')
       })
     },
   }
