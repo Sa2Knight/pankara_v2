@@ -2,6 +2,7 @@
   カラオケ一覧画面のストア
 */
 import http from '../lib/http'
+import util from '../lib/util'
 import CONST from '../lib/constants'
 export default {
   state: {
@@ -80,6 +81,7 @@ export default {
           total: Number(response.headers['total-count']),
           totalPages: Number(response.headers['total-pages'])
         })
+        util.scrollToTop()
       })
     },
     // ページを切り替える
