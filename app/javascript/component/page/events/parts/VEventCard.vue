@@ -32,7 +32,7 @@
       }
     },
     components: {
-      VUserIcons:  require('../../common/VUserIcons').default,
+      VUserIcons:  require('../../../common/VUserIcons').default,
     }
   }
 </script>
