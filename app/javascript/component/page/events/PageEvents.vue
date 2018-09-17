@@ -1,6 +1,6 @@
 <template>
   <div app>
-    <v-container v-scroll="infiniteScroll" fluid grid-list-md>
+    <v-container fluid grid-list-md>
 
       <!-- カラオケ一覧 -->
       <v-data-iterator :items="events" content-tag="v-layout"
@@ -30,13 +30,10 @@
   import { mapState } from 'vuex'
   import CONST        from '../../../lib/constants'
   import ROUTES       from '../../../lib/routes'
-  import { scrollIsBottom } from '../../../lib/util'
   export default {
     computed: {
       ...mapState({
         events:      state => state.events.events,
-        isLoading:   state => state.common.isLoading,
-        isAllLoaded: state => state.common.isLoading,
         isShowSearchDialog: state => state.events.isShowSearchDialog,
         searchQuery: state => state.events.searchQuery,
         pager:       state => state.events.pager,
@@ -45,15 +42,6 @@
     methods: {
       fetch: function() {
         this.$store.dispatch('fetchEvents')
-      },
-      infiniteScroll: function() {
-        if (this.isLoading || this.isAllLoaded) {
-          return
-        }
-        if (scrollIsBottom()) {
-          this.$store.dispatch('pageIncrement')
-          this.fetch()
-        }
       },
       showSearchDialog: function() {
         this.$store.dispatch('showSearchDialog')

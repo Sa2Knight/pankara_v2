@@ -7,8 +7,6 @@ export default {
   state: {
     // APIからフェッチしたカラオケ一覧
     events: [],
-    // 全カラオケをフェッチ済みか？
-    isAllLoaded: false,
     // 検索ダイアログが表示されている？
     isShowSearchDialog: false,
     // 検索条件
@@ -28,9 +26,6 @@ export default {
     appendEvents (state, events) {
       state.events = state.events.concat(events)
     },
-    setIsAllLoaded (state) {
-      state.isAllLoaded = true
-    },
     setIsShowSearchDialog (state) {
       state.isShowSearchDialog = true
     },
@@ -45,9 +40,6 @@ export default {
     },
     unsetEvents (state) {
       state.events = []
-    },
-    unsetIsAllLoaded (state) {
-      state.isAllLoaded = false
     },
     unsetIsShowSearchDialog (state) {
       state.isShowSearchDialog = false
@@ -83,12 +75,6 @@ export default {
         commit('appendEvents', response.data)
         dispatch('hideLoadingView')
         commit('setPager', { total: Number(response.headers['total-count']) })
-
-        if (response.data.length == 0) {
-          commit('setIsAllLoaded')
-        } else {
-          commit('unsetIsAllLoaded')
-        }
       })
     },
     // ページを切り替える
@@ -109,7 +95,6 @@ export default {
       commit('setSearchQuery', query)
       commit('unsetPager')
       commit('unsetEvents')
-      commit('unsetIsAllLoaded')
       commit('unsetIsShowSearchDialog')
     },
   }
