@@ -63,6 +63,7 @@ export default {
     // APIからカラオケの詳細を取得する
     fetchEvents ({ state, commit, dispatch }) {
       dispatch('showLoadingView')
+      commit('unsetEvents')
 
       const params = {
         page: state.pager.page,
