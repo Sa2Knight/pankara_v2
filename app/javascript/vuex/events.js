@@ -17,14 +17,15 @@ export default {
     // ページャ
     pager: {
       total: 0,
+      totalPages: 0,
       page: 1,
       per: CONST.PER
     },
   },
 
   mutations: {
-    appendEvents (state, events) {
-      state.events = state.events.concat(events)
+    setEvents (state, events) {
+      state.events = events
     },
     setIsShowSearchDialog (state) {
       state.isShowSearchDialog = true
@@ -53,6 +54,7 @@ export default {
     unsetPager (state) {
       state.pager = {
         total: 0,
+        totalPages: 0,
         page: 1,
         per: CONST.PER
       }
@@ -63,7 +65,6 @@ export default {
     // APIからカラオケの詳細を取得する
     fetchEvents ({ state, commit, dispatch }) {
       dispatch('showLoadingView')
-      commit('unsetEvents')
 
       const params = {
         page: state.pager.page,
@@ -73,14 +74,17 @@ export default {
         members: state.searchQuery.wantOnlyMine ? [9] : null // TODO: ログインユーザに差し替え
       }
       http.getEvents(params).then((response) => {
-        commit('appendEvents', response.data)
+        commit('setEvents', response.data)
         dispatch('hideLoadingView')
-        commit('setPager', { total: Number(response.headers['total-count']) })
+        commit('setPager', {
+          total: Number(response.headers['total-count']),
+          totalPages: Number(response.headers['total-pages'])
+        })
       })
     },
     // ページを切り替える
-    pageIncrement ({ state, commit }) {
-      commit('setPager', { page:  state.pager.page + 1 })
+    changePage ({ state, commit }, page) {
+      commit('setPager', { page: page })
     },
     // 検索ダイアログを表示する
     showSearchDialog ({ commit }) {
