@@ -21,7 +21,7 @@
     </v-container>
 
     <!-- 検索フォームをダイアログで描画 -->
-    <v-dialog v-model="isShowSearchDialog" max-width="500px">
+    <v-dialog v-model="isShowSearchDialog" max-width="500px" persistent>
       <the-events-search-form/>
     </v-dialog>
   </div>
