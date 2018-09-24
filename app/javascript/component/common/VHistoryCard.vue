@@ -7,7 +7,7 @@
         </v-flex>
         <v-flex xs7>
           <p class="song-name collapse">{{ history.song.name }}</p>
-          <p class="artist-name collapse">{{ history.song.artist.name }}</p>
+          <p class="artist-name collapse">{{ artistName }}</p>
           <span>キー: {{ history.key }}</span>
           <span>満足度: {{ history.satisfaction }}</span>
           <span>得点: {{ history.score }}</span>
@@ -68,6 +68,15 @@
       history: {
         type: Object,
         required: true
+      },
+      artist: { // historyに含まれている場合不要
+        type: Object,
+        required: false
+      }
+    },
+    computed: {
+      artistName: function() {
+        return this.artist ? this.artist.name : this.history.song.artist.name
       }
     },
     methods: {

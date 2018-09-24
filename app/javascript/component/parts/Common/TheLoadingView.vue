@@ -1,5 +1,5 @@
 <template>
-  <div class="v-loading-view">
+  <div class="the-loading-view">
     <img src="images/loading.png" class="rotate-image">
   </div>
 </template>
@@ -7,7 +7,7 @@
 <style lang="scss">
 /* http://on-ze.com/archives/510 */
 
-.v-loading-view {
+.the-loading-view {
  width: 100%;
  height: 100%;
  z-index: 9999;

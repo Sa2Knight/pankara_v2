@@ -79,6 +79,13 @@ http.getArtist = function(id, params = {}) {
 }
 
 /**
+ * 歌手の歌唱履歴を取得する
+ */
+http.getArtistHistories = function(id, params = {}) {
+  return request('GET', `/artists/${id}/histories`, params)
+}
+
+/**
  * 歌唱履歴の詳細を取得する
  */
 http.getHistory = function(id, params = {}) {

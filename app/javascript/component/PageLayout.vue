@@ -124,7 +124,7 @@
     </v-snackbar>
 
     <!-- ローディングビュー-->
-    <v-loading-view v-if="isLoading" />
+    <the-loading-view v-if="isLoading" />
 
   </div>
 </template>
@@ -154,7 +154,7 @@
       LoginForm: require('../component/parts/Common/LoginForm').default,
       YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default,
       HistoryDialog: require('../component/parts/Common/HistoryDialog').default,
-      VLoadingView:  require('../component/parts/Common/VLoadingView').default
+      TheLoadingView:  require('../component/parts/Common/TheLoadingView').default
     },
   }
 </script>
