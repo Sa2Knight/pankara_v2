@@ -32,15 +32,18 @@ export default {
       dispatch('showLoadingView')
       commit('resetSong')
 
-      http.getSong(id).then((response) => {
-        commit('setSong', response.data)
-      }).then(() => {
-        http.getSongHistories(id).then((response) => {
-          commit('setHistories', response.data)
+      Promise.resolve()
+        .then(() => {
+          http.getSong(id).then((response) => {
+            commit('setSong', response.data)
+          })
+        }).then(() => {
+          http.getSongHistories(id).then((response) => {
+            commit('setHistories', response.data)
+          })
+        }).then(() => {
+          dispatch('hideLoadingView')
         })
-      }).then(() => {
-        dispatch('hideLoadingView')
-      })
     },
   }
 }
