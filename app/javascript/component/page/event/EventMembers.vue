@@ -9,11 +9,13 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'event'
+
   export default {
     computed: {
-      ...mapState({
-        members: state => state.event.event.members
+      ...mapState(namespace, {
+        members: state => state.event.members
       })
     },
     components: {

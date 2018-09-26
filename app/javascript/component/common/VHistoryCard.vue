@@ -56,8 +56,10 @@
 </style>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapActions } from 'vuex'
   import ROUTES from '../../lib/routes'
+  const namespace = 'common'
+
   export default {
     data: function() {
       return {
@@ -80,9 +82,12 @@
       }
     },
     methods: {
+      ...mapActions(namespace, [
+        'showHistoryDialog'
+      ]),
       // 歌唱履歴詳細ダイアログを開く
       select: function() {
-        this.$store.dispatch('showHistoryDialog', this.history.id)
+        this.showHistoryDialog(this.history.id)
       },
       // オンマウス状態にする
       enter: function() {

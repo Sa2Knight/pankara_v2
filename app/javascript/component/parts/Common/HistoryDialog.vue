@@ -1,3 +1,4 @@
+<!-- TODO: TheHistoryDialogにするべきで、partsではないだろ -->
 <template>
   <div class="history-dialog">
     <v-dialog v-model="isShow" scrollable max-width="350px">
@@ -69,8 +70,9 @@
 
 <script>
   // TODO: YoutubeDialogとmixinなりできる？
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   import ROUTES from '../../../lib/routes'
+  const namespace = 'common'
   export default {
     data: function() {
       return {
@@ -78,35 +80,40 @@
       }
     },
     computed: {
-      ...mapState({
-        isShowHistoryDialog: state => state.common.isShowHistoryDialog,
-        history: state => state.common.showingHistory,
+      ...mapState(namespace, {
+        isShowHistoryDialog: state => state.isShowHistoryDialog,
+        history: state => state.showingHistory,
       })
     },
+    methods: {
+      ...mapActions(namespace, [
+        'hideHistoryDialog',
+      ]),
+      link_to_event: function() {
+        // TODO: 各リンクでdispatchするの辛いのでなんとかする
+        this.$router.push(ROUTES.EVENT_PATH(this.history.event.id))
+        this.hideHistoryDialog()
+      },
+      link_to_song: function() {
+        this.$router.push(ROUTES.SONG_PATH(this.history.song.id))
+        this.hideHistoryDialog()
+      },
+      link_to_artist: function() {
+        this.$router.push(ROUTES.ARTIST_PATH(this.history.song.artist.id))
+        this.hideHistoryDialog()
+      }
+    },
     watch: {
-      isShow: function(val) {
-        if (this.isShowHistoryDialog && !this.isShow) {
-          this.$store.dispatch('hideHistoryDialog')
-        }
+      isShow: {
+        handler: function(val) {
+          if (this.isShowHistoryDialog && !this.isShow) {
+            this.hideHistoryDialog()
+          }
+        },
       }
     },
     mounted: function() {
       this.isShow = this.isShowHistoryDialog
-    },
-    methods: {
-      link_to_event: function() {
-        // TODO: 各リンクでdispatchするの辛いのでなんとかする
-        this.$router.push(ROUTES.EVENT_PATH(this.history.event.id))
-        this.$store.dispatch('hideHistoryDialog')
-      },
-      link_to_song: function() {
-        this.$router.push(ROUTES.SONG_PATH(this.history.song.id))
-        this.$store.dispatch('hideHistoryDialog')
-      },
-      link_to_artist: function() {
-        this.$router.push(ROUTES.ARTIST_PATH(this.history.song.artist.id))
-        this.$store.dispatch('hideHistoryDialog')
-      }
     },
     components: {
       VUserIcon: require('../../common/VUserIcon').default

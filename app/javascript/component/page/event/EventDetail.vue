@@ -51,11 +51,13 @@
 </style>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'event'
+
   export default {
     computed: {
-      ...mapState({
-        event: state => state.event.event
+      ...mapState(namespace, {
+        event: state => state.event
       }),
       owner: function() {
         return this.event.members[0].user

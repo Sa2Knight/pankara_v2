@@ -32,24 +32,26 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'event'
+
   export default {
-    methods: {
-      fetch: function() {
-        this.$store.dispatch('fetchEvent', this.id)
-      },
-    },
     computed: {
+      ...mapState(namespace, {
+        event: state => state.event
+      }),
       id: function() {
         return this.$route.params.id
       },
-      ...mapState({
-        event: state => state.event.event
-      })
+    },
+    methods: {
+      ...mapActions(namespace, [
+        'fetchEvent'
+      ])
     },
     mounted: function() {
-      this.$store.dispatch('setPageTitle', 'カラオケ詳細')
-      this.fetch()
+      this.$store.dispatch('common/setPageTitle', 'カラオケ詳細')
+      this.fetchEvent(this.id)
     },
     components: {
       EventOverview:  require('./EventOverview').default,

@@ -14,11 +14,13 @@
 </style>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'event'
+
   export default {
     computed: {
-      ...mapState({
-        event_title: state => state.event.event.title
+      ...mapState(namespace, {
+        event_title: state => state.event.title
       })
     },
     components: {

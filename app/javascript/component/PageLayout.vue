@@ -132,6 +132,8 @@
 <script>
   import { mapState } from 'vuex'
   import ROUTES from '../lib/routes'
+  const namespace = 'common'
+
   export default {
     data: function() {
       return {
@@ -142,13 +144,13 @@
       }
     },
     computed: {
+      ...mapState(namespace, {
+        pageTitle: state => state.pageTitle,
+        isShowYoutubeDialog: state => state.isShowYoutubeDialog,
+        isShowHistoryDialog: state => state.isShowHistoryDialog,
+        isLoading: state => state.isLoading,
+      }),
       eventsPath: () => ROUTES.EVENTS_PATH(),
-      ...mapState({
-        pageTitle: state => state.common.pageTitle,
-        isShowYoutubeDialog: state => state.common.isShowYoutubeDialog,
-        isShowHistoryDialog: state => state.common.isShowHistoryDialog,
-        isLoading: state => state.common.isLoading,
-      })
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default,

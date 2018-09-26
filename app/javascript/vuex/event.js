@@ -21,12 +21,12 @@ export default {
   actions: {
     // APIからカラオケの詳細を取得する
     fetchEvent ({ dispatch, commit }, id) {
-      dispatch('showLoadingView')
+      dispatch('common/showLoadingView', null, { root: true })
       commit('unsetEvent')
 
       http.getEvent(id).then((response) => {
         commit('setEvent', response.data)
-        dispatch('hideLoadingView')
+        dispatch('common/hideLoadingView', null, { root: true })
       })
     },
   }
