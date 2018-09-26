@@ -29,7 +29,9 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'events'
+
   export default {
     data: function() {
       return {
@@ -38,24 +40,29 @@
       }
     },
     computed: {
-      ...mapState({
-        searchQuery: state => state.events.searchQuery
+      ...mapState(namespace, {
+        searchQuery: state => state.searchQuery
       })
     },
     methods: {
+      ...mapActions(namespace, [
+        'submitSearchDialog',
+        'cancelSearchDialog',
+        'fetchEvents',
+      ]),
       init: function() {
         this.title = this.searchQuery.title
         this.wantOnlyMine = this.searchQuery.wantOnlyMine
       },
       submit: function() {
-        this.$store.dispatch('submitSearchDialog', {
+        this.submitSearchDialog({
           title: this.title,
           wantOnlyMine: this.wantOnlyMine
         })
-        this.$store.dispatch('fetchEvents')
+        this.fetchEvents()
       },
       cancel: function() {
-        this.$store.dispatch('cancelSearchDialog')
+        this.cancelSearchDialog()
         this.init()
       }
     },

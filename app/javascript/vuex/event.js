@@ -3,6 +3,7 @@
 */
 import http from '../lib/http'
 export default {
+  namespaced: true,
   state: {
     // APIからフェッチしたカラオケ詳細
     event: null,

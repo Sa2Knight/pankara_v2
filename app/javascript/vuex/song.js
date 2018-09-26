@@ -3,6 +3,7 @@
 */
 import http from '../lib/http'
 export default {
+  namespaced: true,
   state: {
     // 表示中の楽曲
     song: null,

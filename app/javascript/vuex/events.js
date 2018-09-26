@@ -5,6 +5,7 @@ import http from '../lib/http'
 import util from '../lib/util'
 import CONST from '../lib/constants'
 export default {
+  namespaced: true,
   state: {
     // APIからフェッチしたカラオケ一覧
     events: [],
@@ -65,7 +66,7 @@ export default {
   actions: {
     // APIからカラオケの詳細を取得する
     fetchEvents ({ state, commit, dispatch }) {
-      dispatch('showLoadingView')
+      dispatch('common/showLoadingView', null, { root: true })
 
       const params = {
         page: state.pager.page,
@@ -76,7 +77,7 @@ export default {
       }
       http.getEvents(params).then((response) => {
         commit('setEvents', response.data)
-        dispatch('hideLoadingView')
+        dispatch('common/hideLoadingView', null, { root: true })
         commit('setPager', {
           total: Number(response.headers['total-count']),
           totalPages: Number(response.headers['total-pages'])

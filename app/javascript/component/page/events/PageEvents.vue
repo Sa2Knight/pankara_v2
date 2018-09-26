@@ -19,26 +19,26 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   import CONST        from '../../../lib/constants'
+  const namespace = 'events'
+
   export default {
     computed: {
-      ...mapState({
-        isShowSearchDialog: state => state.events.isShowSearchDialog,
-        searchQuery: state => state.events.searchQuery,
+      ...mapState(namespace, {
+        isShowSearchDialog: state => state.isShowSearchDialog,
+        searchQuery: state => state.searchQuery,
       })
     },
     methods: {
-      fetch: function() {
-        this.$store.dispatch('fetchEvents')
-      },
-      showSearchDialog: function() {
-        this.$store.dispatch('showSearchDialog')
-      },
+      ...mapActions(namespace, [
+        'fetchEvents',
+        'showSearchDialog'
+      ])
     },
     mounted: function() {
-      this.$store.dispatch('setPageTitle', 'カラオケ一覧')
-      this.fetch()
+      this.$store.dispatch('common/setPageTitle', 'カラオケ一覧')
+      this.fetchEvents()
     },
     components: {
       TheEventCards: require('./parts/TheEventCards').default,

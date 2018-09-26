@@ -3,7 +3,7 @@
     <v-pagination-wrapper
       :pageOrigin="pageOrigin"
       :totalPages="totalPages"
-      :changePage="changePage"
+      :changePage="fetchWithPaging"
     >
       <v-data-iterator :items="events" content-tag="v-layout"
                         row wrap disable-initial-sort hide-actions>
@@ -18,23 +18,29 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   import ROUTES from '../../../../lib/routes'
+  const namespace = 'events'
+
   export default {
     computed: {
-      ...mapState({
-        events: store => store.events.events,
-        pageOrigin: store => store.events.pager.page,
-        totalPages: store => store.events.pager.totalPages,
+      ...mapState(namespace, {
+        events: store => store.events,
+        pageOrigin: store => store.pager.page,
+        totalPages: store => store.pager.totalPages,
       })
     },
     methods: {
+      ...mapActions(namespace, [
+        'changePage',
+        'fetchEvents',
+      ]),
       moveToDetail: function(event) {
         this.$router.push(ROUTES.EVENT_PATH(event.id))
       },
-      changePage: function(page) {
-        this.$store.dispatch('changePage', page)
-        this.$store.dispatch('fetchEvents')
+      fetchWithPaging: function(page) {
+        this.changePage(page)
+        this.fetchEvents()
       }
     },
     components: {
