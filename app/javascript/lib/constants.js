@@ -1,5 +1,5 @@
 const CONST = {
-  PER: 10,
+  PER: 20,
 }
 
 export default CONST

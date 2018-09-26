@@ -1,0 +1,62 @@
+<template>
+  <div class="v-pagination-wrapper">
+    <div class="pager">
+      <v-pagination
+        v-model="page"
+        :length="totalPages"
+        @input="changePage"
+      />
+    </div>
+    <slot />
+    <div class="pager">
+      <v-pagination
+        v-model="page"
+        :length="totalPages"
+        @input="changePage"
+      />
+    </div>
+  </div>
+</template>
+
+<style lang="scss">
+.v-pagination-wrapper {
+  .pager {
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  padding-bottom: 3em;
+}
+</style>
+
+<script>
+  export default {
+    data: function() {
+      return {
+        page: 1
+      }
+    },
+    props: {
+      pageOrigin: {
+        required: true,
+        type: Number
+      },
+      totalPages: {
+        required: true,
+        type: Number
+      },
+      changePage: {
+        required: true,
+        type: Function
+      }
+    },
+    methods: {
+    },
+    watch: {
+      pageOrigin: {
+        handler: function() { this.page = this.pageOrigin },
+        immediate: true
+      }
+    }
+  }
+</script>
