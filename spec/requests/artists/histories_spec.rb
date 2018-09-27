@@ -7,9 +7,18 @@ RSpec.describe 'artists#histories', type: :request do
   let(:song)         { FactoryBot.create(:song, artist: artist) }
   let(:artist_id)    { artist.id }
 
-  let(:page) { nil }
-  let(:per)  { nil }
-  let(:params) { { page: page, per: per } }
+  let(:page)       { nil }
+  let(:per)        { nil }
+  let(:sort_key)   { nil }
+  let(:sort_order) { nil }
+  let(:params) do
+    {
+      page: page,
+      per: per,
+      sort_key: sort_key,
+      sort_order: sort_order
+    }
+  end
   let(:request_api) do
     request(:get, "/api/artists/#{artist_id}/histories",
             user: current_user, params: params)
@@ -75,6 +84,24 @@ RSpec.describe 'artists#histories', type: :request do
           expect(subject[0]['id']).to eq histories[2].id
           expect(subject[1]['id']).to eq histories[3].id
         end
+      end
+    end
+  end
+
+  describe 'ソート' do
+    subject do
+      request_api
+      body.pluck('id')
+    end
+
+    context 'sort_key=id sort_order=desc を指定した場合' do
+      let!(:histories) do
+        FactoryBot.create_list(:history, 3, song: song)
+      end
+      let(:sort_key)   { 'id' }
+      let(:sort_order) { 'desc' }
+      it '登録が新しい順になる' do
+        expect(subject).to eq History.ids.reverse
       end
     end
   end

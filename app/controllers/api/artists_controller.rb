@@ -45,6 +45,7 @@ class Api::ArtistsController < Api::BaseController
     @index ||= artist.histories
                      .page(params[:page])
                      .per(params[:per])
+                     .order(params[:sort_key] => params[:sort_order])
                      .includes(:user, :event, :song)
   end
 end
