@@ -34,7 +34,7 @@ export default {
     },
     setHistoriesPager (state, pager) {
       state.historiesPager = {
-        ...state.pager,
+        ...state.historiesPager,
         ...pager
       }
     },
@@ -48,32 +48,42 @@ export default {
     }
   },
   actions: {
+    //
     // APIから歌手詳細をフェッチ
+    //
     fetchArtist ({ commit, dispatch }, id) {
       dispatch('common/showLoadingView', null, { root: true })
       commit('resetArtist')
       commit('resetHistories')
+      return http.getArtist(id).then((response) => {
+        commit('setArtist', response.data)
+        dispatch('common/hideLoadingView', null, { root: true })
+      })
+    },
 
-      // TODO: Promiseの使い方間違ってね
-      Promise.resolve()
-        .then(() => {
-          return http.getArtist(id).then((response) => {
-            commit('setArtist', response.data)
-          })
+    //
+    // APIから歌手の歌唱履歴をフェッチ
+    // 歌手詳細情報が取得済みであることが前提
+    //
+    fetchHistoriesByPage ({ state, commit, dispatch }, page) {
+      commit('setHistoriesPager', { page: page })
+
+      const id = state.artist.id
+      const params = {
+        page: state.historiesPager.page,
+        per:  state.historiesPager.per
+      }
+
+      dispatch('common/showLoadingView', null, { root: true })
+      return http.getArtistHistories(id, params).then((response) => {
+        commit('setHistories', response.data)
+        commit('setHistoriesPager', {
+          total: Number(response.headers['total-count']),
+          totalPages: Number(response.headers['total-pages'])
         })
-        .then(() => {
-          return http.getArtistHistories(id).then((response) => {
-            commit('setHistories', response.data)
-            commit('setPager', {
-              total: Number(response.headers['total-count']),
-              totalPages: Number(response.headers['total-pages'])
-            })
-            util.scrollToTop() // TODO ページングごとにこれ書いてそう
-          })
-        })
-        .then(() => {
-          dispatch('common/hideLoadingView', null, { root: true })
-        })
+        dispatch('common/hideLoadingView', null, { root: true })
+        util.scrollToTop() // TODO ページングごとにこれ書いてそう
+      })
     },
   }
 }

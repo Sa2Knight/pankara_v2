@@ -3,7 +3,7 @@
     <v-pagination-wrapper
       :pageOrigin="pageOrigin"
       :totalPages="totalPages"
-      :changePage="changePage"
+      :changePage="fetchHistoriesByPage"
     >
       <!-- TODO PageEventの歌唱履歴と同じなら汎用化 -->
       <v-layout row wrap class="pb-5">
@@ -31,13 +31,14 @@
     },
     methods: {
       ...mapActions(namespace, [
-        'fetchHistories',
-        'changePage'
+        'fetchArtist',
+        'fetchHistoriesByPage'
       ]),
-      changeHistoriesPage: function() {
-        this.changePage(page)
-        this.fetchHistories()
-      }
+    },
+    mounted: function() {
+      Promise.resolve()
+      .then(() => this.fetchArtist(this.$route.params.id))
+      .then(() => this.fetchHistoriesByPage(this.pageOrigin))
     },
     components: {
       VPaginationWrapper: require('../../common/VPaginationWrapper').default,
