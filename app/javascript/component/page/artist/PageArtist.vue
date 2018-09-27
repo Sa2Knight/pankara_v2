@@ -25,12 +25,15 @@
   export default {
     methods: {
       ...mapActions(namespace, [
-        'fetchArtist'
+        'fetchArtist',
+        'fetchHistoriesByPage'
       ])
     },
     mounted: function() {
       this.$store.dispatch('common/setPageTitle', '歌手詳細')
-      this.fetchArtist(this.$route.params.id)
+      Promise.resolve()
+      .then(() => this.fetchArtist(this.$route.params.id))
+      .then(() => this.fetchHistoriesByPage(this.pageOrigin))
     },
     components: {
       PageArtistOverview: require('./PageArtistOverview').default,

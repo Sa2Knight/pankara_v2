@@ -31,14 +31,8 @@
     },
     methods: {
       ...mapActions(namespace, [
-        'fetchArtist',
         'fetchHistoriesByPage'
       ]),
-    },
-    mounted: function() {
-      Promise.resolve()
-      .then(() => this.fetchArtist(this.$route.params.id))
-      .then(() => this.fetchHistoriesByPage(this.pageOrigin))
     },
     components: {
       VPaginationWrapper: require('../../common/VPaginationWrapper').default,

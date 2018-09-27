@@ -38,16 +38,18 @@
     },
     props: {
       pageOrigin: {
-        required: true,
-        type: Number
+        required: false,
+        type: Number,
+        default: 1
       },
       totalPages: {
-        required: true,
-        type: Number
+        required: false,
+        type: Number,
+        default: 0,
       },
       changePage: {
         required: true,
-        type: Function
+        type: Function,
       }
     },
     methods: {
