@@ -17,12 +17,14 @@
 </style>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'song'
+
   export default {
     computed: {
-      ...mapState({
-        histories: state => state.song.histories,
-        isSelectedHistory: state => !!state.song.selectedHistoryId,
+      ...mapState(namespace, {
+        histories: state => state.histories,
+        isSelectedHistory: state => !!state.selectedHistoryId,
       })
     },
     components: {
@@ -30,7 +32,7 @@
     },
     methods: {
       selectHistory: function(id) {
-        this.$store.dispatch('showHistoryDialog', id)
+        this.$store.dispatch('common/showHistoryDialog', id)
       }
     }
   }

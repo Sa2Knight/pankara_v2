@@ -24,17 +24,22 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'song'
+
   export default {
     computed: {
-      ...mapState({
-        song: store => store.song.song
+      ...mapState(namespace, {
+        song: store => store.song
       })
     },
     methods: {
+      ...mapActions(namespace, [
+        'fetchSong'
+      ]),
       // APIから楽曲詳細をフェッチ
       fetch: function() {
-        this.$store.dispatch('fetchSong', this.$route.params.id)
+        this.fetchSong(this.$route.params.id)
       }
     },
     mounted: function() {

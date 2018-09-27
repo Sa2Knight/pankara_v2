@@ -16,10 +16,12 @@
 
 <script>
 import { mapState } from 'vuex'
+const namespace = 'song'
+
 export default {
   computed: {
-    ...mapState({
-      song: state => state.song.song
+    ...mapState(namespace, {
+      song: state => state.song
     })
   },
   components: {

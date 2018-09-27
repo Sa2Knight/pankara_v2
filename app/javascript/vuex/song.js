@@ -30,7 +30,7 @@ export default {
   actions: {
     // APIから楽曲詳細をフェッチ
     fetchSong ({ commit, dispatch }, id) {
-      dispatch('showLoadingView')
+      dispatch('common/showLoadingView', null, { root: true })
       commit('resetSong')
 
       Promise.resolve()
@@ -43,7 +43,7 @@ export default {
             commit('setHistories', response.data)
           })
         }).then(() => {
-          dispatch('hideLoadingView')
+          dispatch('common/hideLoadingView', null, { root: true })
         })
     },
   }
