@@ -17,20 +17,26 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'artist'
+
   export default {
     computed: {
-      ...mapState({
-        artist:    state => state.artist.artist,
-        histories: state => state.artist.histories,
-        pageOrigin: state => state.artist.historiesPager.page,
-        totalPages: state => state.artist.historiesPager.totalPages,
+      ...mapState(namespace, {
+        artist:    state => state.artist,
+        histories: state => state.histories,
+        pageOrigin: state => state.historiesPager.page,
+        totalPages: state => state.historiesPager.totalPages,
       })
     },
     methods: {
-      changePage: function() {
-        this.$store.dispatch('changePage', page)
-        this.$store.dispatch('fetchHistories')
+      ...mapActions(namespace, [
+        'fetchHistories',
+        'changePage'
+      ]),
+      changeHistoriesPage: function() {
+        this.changePage(page)
+        this.fetchHistories()
       }
     },
     components: {

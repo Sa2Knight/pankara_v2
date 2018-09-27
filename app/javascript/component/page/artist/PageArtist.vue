@@ -19,14 +19,18 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  export default {
-    computed: {
+  import { mapState, mapActions } from 'vuex'
+  const namespace = 'artist'
 
+  export default {
+    methods: {
+      ...mapActions(namespace, [
+        'fetchArtist'
+      ])
     },
     mounted: function() {
-      this.$store.dispatch('setPageTitle', '歌手詳細')
-      this.$store.dispatch('fetchArtist', this.$route.params.id)
+      this.$store.dispatch('common/setPageTitle', '歌手詳細')
+      this.fetchArtist(this.$route.params.id)
     },
     components: {
       PageArtistOverview: require('./PageArtistOverview').default,

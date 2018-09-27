@@ -50,7 +50,7 @@ export default {
   actions: {
     // APIから歌手詳細をフェッチ
     fetchArtist ({ commit, dispatch }, id) {
-      dispatch('common/showLoadingView')
+      dispatch('common/showLoadingView', null, { root: true })
       commit('resetArtist')
       commit('resetHistories')
 
@@ -72,7 +72,7 @@ export default {
           })
         })
         .then(() => {
-          dispatch('hideLoadingView')
+          dispatch('common/hideLoadingView', null, { root: true })
         })
     },
   }
