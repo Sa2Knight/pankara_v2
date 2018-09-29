@@ -3,22 +3,22 @@
     <v-layout row wrap justify-center>
       <v-flex xs12 sm6 md3>
         <v-song-aggregate-card title="月別歌唱回数">
-          <v-bar-chart-histories-by-month />
+          <the-bar-chart-histories-by-month />
         </v-song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
         <v-song-aggregate-card title="ユーザ別歌唱回数">
-          <v-pie-chart-histories-by-user />
+          <the-pie-chart-histories-by-user />
         </v-song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
         <v-song-aggregate-card title="採点情報">
-          <v-bar-chart-scores-by-score-type />
+          <the-bar-chart-scores-by-score-type />
         </v-song-aggregate-card>
       </v-flex>
       <v-flex xs12 sm6 md3>
         <v-song-aggregate-card title="満足度レート">
-          <v-bar-chart-satisfactions />
+          <the-bar-chart-satisfactions />
         </v-song-aggregate-card>
       </v-flex>
     </v-layout>
@@ -39,14 +39,14 @@
     components: {
       VSongAggregateCard:
         require('./parts/VSongAggregateCard').default,
-      VBarChartHistoriesByMonth:
-        require('./parts/VBarChartHistoriesByMonth').default,
-      VBarChartScoresByScoreType:
-        require('./parts/VBarChartScoresByScoreType').default,
-      VBarChartSatisfactions:
-        require('./parts/VBarChartSatisfactions').default,
-      VPieChartHistoriesByUser:
-        require('./parts/VPieChartHistoriesByUser').default
+      TheBarChartHistoriesByMonth:
+        require('./parts/TheBarChartHistoriesByMonth').default,
+      TheBarChartScoresByScoreType:
+        require('./parts/TheBarChartScoresByScoreType').default,
+      TheBarChartSatisfactions:
+        require('./parts/TheBarChartSatisfactions').default,
+      ThePieChartHistoriesByUser:
+        require('./parts/ThePieChartHistoriesByUser').default
     }
   }
 </script>
