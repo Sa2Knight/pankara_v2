@@ -52,8 +52,9 @@
       ])
     },
     mounted: function() {
-      this.$store.dispatch('common/setPageTitle', 'カラオケ詳細')
-      this.fetchEvent(this.id)
+      this.fetchEvent(this.id).then(() => {
+        this.$store.dispatch('common/setPageTitle', this.event.title)
+      })
     },
     components: {
       PageEventOverview:  require('./PageEventOverview').default,

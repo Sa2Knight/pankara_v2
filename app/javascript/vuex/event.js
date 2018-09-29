@@ -24,7 +24,7 @@ export default {
       dispatch('common/showLoadingView', null, { root: true })
       commit('unsetEvent')
 
-      http.getEvent(id).then((response) => {
+      return http.getEvent(id).then((response) => {
         commit('setEvent', response.data)
         dispatch('common/hideLoadingView', null, { root: true })
       })
