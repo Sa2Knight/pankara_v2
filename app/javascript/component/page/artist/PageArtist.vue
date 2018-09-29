@@ -8,12 +8,8 @@
       <v-tab href="#history">
         歌唱履歴<v-icon>fas fa-list-ul</v-icon>
       </v-tab>
-      <v-tab href="#aggregate">
-        集計<v-icon>fas fa-chart-pie</v-icon>
-      </v-tab>
       <v-tab-item id="overview"><page-artist-overview /></v-tab-item>
       <v-tab-item id="history"><page-artist-histories /></v-tab-item>
-      <v-tab-item id="aggregate"><page-artist-aggregation /></v-tab-item>
     </v-tabs>
   </div>
 </template>
@@ -43,7 +39,6 @@
     components: {
       PageArtistOverview: require('./PageArtistOverview').default,
       PageArtistHistories: require('./PageArtistHistories').default,
-      PageArtistAggregation: require('./PageArtistAggregation').default
     }
   }
 </script>
