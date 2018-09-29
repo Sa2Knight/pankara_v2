@@ -43,7 +43,7 @@
       }
     },
     mounted: function() {
-      this.$store.dispatch('setPageTitle', '楽曲詳細')
+      this.$store.dispatch('common/setPageTitle', '楽曲詳細')
       this.fetch()
     },
     components: {
