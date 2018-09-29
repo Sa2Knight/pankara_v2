@@ -1,5 +1,5 @@
 <template>
-  <div class="page-song-detail mb-2">
+  <div class="outer mb-2">
     <div class="header py-3">
       <h1>{{ song.name }}</h1>
       <h2>{{ song.artist.name}}</h2>
@@ -8,10 +8,10 @@
   </div>
 </template>
 
-<style lang="scss">
-.page-song-detail {
-  text-align: center;
-}
+<style lang="scss" scoped>
+  .outer {
+    text-align: center;
+  }
 </style>
 
 <script>
@@ -25,7 +25,8 @@ export default {
     })
   },
   components: {
-    YoutubePlayer: require('../../parts/Common/YoutubePlayer').default
+    VBox: require('../../common/VBox').default,
+    YoutubePlayer: require('../../parts/Common/YoutubePlayer').default,
   }
 }
 </script>

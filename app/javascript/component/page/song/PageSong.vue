@@ -14,9 +14,9 @@
           集計<v-icon>fas fa-chart-pie</v-icon>
         </v-tab>
 
-        <v-tab-item id="overview"><page-song-detail /></v-tab-item>
+        <v-tab-item id="overview"><page-song-overview /></v-tab-item>
         <v-tab-item id="history"><page-song-histories /></v-tab-item>
-        <v-tab-item id="aggregate"><page-song-aggregate /></v-tab-item>
+        <v-tab-item id="aggregate"><page-song-aggregations /></v-tab-item>
 
       </v-tabs>
     </div>
@@ -47,9 +47,9 @@
       this.fetch()
     },
     components: {
-      PageSongDetail: require('./PageSongDetail').default,
+      PageSongOverview: require('./PageSongOverview').default,
       PageSongHistories: require('./PageSongHistories').default,
-      PageSongAggregate: require('./PageSongAggregate').default,
+      PageSongAggregations: require('./PageSongAggregations').default,
     },
   }
 </script>
