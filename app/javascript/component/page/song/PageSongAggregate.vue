@@ -37,11 +37,16 @@
 <script>
   export default {
     components: {
-      VSongAggregateCard: require('./parts/VSongAggregateCard').default,
-      VBarChartHistoriesByMonth:  require('../../common/graph/VBarChartHistoriesByMonth').default,
-      VBarChartScoresByScoreType: require('../../common/graph/VBarChartScoresByScoreType').default,
-      VBarChartSatisfactions:     require('../../common/graph/VBarChartSatisfactions').default,
-      VPieChartHistoriesByUser:   require('../../common/graph/VPieChartHistoriesByUser').default
+      VSongAggregateCard:
+        require('./parts/VSongAggregateCard').default,
+      VBarChartHistoriesByMonth:
+        require('./parts/VBarChartHistoriesByMonth').default,
+      VBarChartScoresByScoreType:
+        require('./parts/VBarChartScoresByScoreType').default,
+      VBarChartSatisfactions:
+        require('./parts/VBarChartSatisfactions').default,
+      VPieChartHistoriesByUser:
+        require('./parts/VPieChartHistoriesByUser').default
     }
   }
 </script>
