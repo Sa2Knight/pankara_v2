@@ -4,6 +4,7 @@
       <h1>{{ song.name }}</h1>
       <h2>{{ song.artist.name}}</h2>
     </div>
+
     <youtube-player :song="song" />
   </div>
 </template>

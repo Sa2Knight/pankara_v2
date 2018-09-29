@@ -39,11 +39,12 @@
       ]),
       // APIから楽曲詳細をフェッチ
       fetch: function() {
-        this.fetchSong(this.$route.params.id)
+        this.fetchSong(this.$route.params.id).then(() => {
+          this.$store.dispatch('common/setPageTitle', this.song.name)
+        })
       }
     },
     mounted: function() {
-      this.$store.dispatch('common/setPageTitle', '楽曲詳細')
       this.fetch()
     },
     components: {
