@@ -1,6 +1,6 @@
 <!-- コンポーネント名が不適切? -->
 <template>
-  <div class="member-card">
+  <div class="outer">
     <div class="inner">
       <v-layout row wrap>
         <v-flex xs3>
@@ -31,8 +31,8 @@
   </div>
 </template>
 
-<style lang="scss">
-.member-card {
+<style lang="scss" scoped>
+.outer {
   margin: 5px;
   .inner {
     padding: 0 0.5em 0 0.5em;
@@ -82,7 +82,7 @@
       },
     },
     components: {
-      VUserIcon: require('../../common/VUserIcon').default
+      VUserIcon: require('../../../common/VUserIcon').default
     }
   }
 </script>

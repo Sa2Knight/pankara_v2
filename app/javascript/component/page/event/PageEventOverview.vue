@@ -1,15 +1,13 @@
 <template>
-  <div class="event-overview">
-    <v-box :label="event_title"><event-detail /></v-box>
-    <v-box label="参加メンバー"><event-members /></v-box>
+  <div>
+    <v-box :label="event_title"><the-event-detail /></v-box>
+    <v-box label="参加メンバー"><the-event-members /></v-box>
   </div>
 </template>
 
-<style lang="scss">
-.event-overview {
-  .v-box {
-    margin: 0.5em 0 0.5em 0;
-  }
+<style lang="scss" scoped>
+.v-box {
+  margin: 0.5em 0 0.5em 0;
 }
 </style>
 
@@ -24,8 +22,8 @@
       })
     },
     components: {
-      EventDetail:  require('./EventDetail').default,
-      EventMembers: require('./EventMembers').default,
+      TheEventDetail:  require('./parts/TheEventDetail').default,
+      TheEventMembers: require('./parts/TheEventMembers').default,
       VBox: require('../../common/VBox').default,
     }
   }

@@ -1,11 +1,9 @@
 <template>
-  <div class="event-members">
-    <v-layout row wrap>
-      <v-flex xs12 sm6 md4 v-for="member in members">
-        <member-card :member="member"/>
-      </v-flex>
-    </v-layout>
-  </div>
+  <v-layout row wrap>
+    <v-flex xs12 sm6 md4 v-for="member in members">
+      <v-member-card :member="member"/>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -19,7 +17,7 @@
       })
     },
     components: {
-      MemberCard: require('./MemberCard').default
+      VMemberCard: require('./VMemberCard').default
     },
   }
 </script>

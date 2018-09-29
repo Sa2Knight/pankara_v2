@@ -14,7 +14,9 @@
         </v-tab>
 
         <!-- 概要 -->
-        <v-tab-item id="overview"><event-overview /></v-tab-item>
+        <v-tab-item id="overview">
+          <page-event-overview />
+        </v-tab-item>
 
         <!-- 歌唱履歴一覧 -->
         <!-- TODO: コンポーネント切ったほうが良いかも -->
@@ -54,7 +56,7 @@
       this.fetchEvent(this.id)
     },
     components: {
-      EventOverview:  require('./EventOverview').default,
+      PageEventOverview:  require('./PageEventOverview').default,
       VHistoryCard:  require('../../common/VHistoryCard').default,
     }
   }
