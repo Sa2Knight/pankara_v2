@@ -23,6 +23,11 @@
   const namespace = 'artist'
 
   export default {
+    computed: {
+      ...mapState(namespace, {
+        artist: state => state.artist
+      })
+    },
     methods: {
       ...mapActions(namespace, [
         'fetchArtist',
@@ -30,10 +35,10 @@
       ])
     },
     mounted: function() {
-      this.$store.dispatch('common/setPageTitle', '歌手詳細')
       Promise.resolve()
       .then(() => this.fetchArtist(this.$route.params.id))
       .then(() => this.fetchHistoriesByPage(this.pageOrigin))
+      .then(() => this.$store.dispatch('common/setPageTitle', this.artist.name))
     },
     components: {
       PageArtistOverview: require('./PageArtistOverview').default,
