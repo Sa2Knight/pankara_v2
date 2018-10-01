@@ -1,6 +1,11 @@
 FactoryBot.define do
   factory :history do
-    user_event   { FactoryBot.create(:user_event) }
+    transient do
+      user  { FactoryBot.create(:user) }
+      event { FactoryBot.create(:event) }
+    end
+
+    user_event   { FactoryBot.create(:user_event, event: event, user: user) }
     song         { FactoryBot.create(:song) }
     score        { Random.rand(0..100) }
     satisfaction { Random.rand(1..10) }

@@ -1,6 +1,25 @@
 module JSON
   module History
     #
+    # History及び関連レコードの情報を一通り揃えたオブジェクト
+    # TODO: これだけで良いと思う
+    #
+    def self.make(history)
+      return nil if history.blank?
+      {
+        id: history.id,
+        key: history.key,
+        satisfaction: history.satisfaction,
+        comment: history.comment,
+        score: history.score,
+        score_type: history.score_type,
+        user: JSON::User.raw(history.user),
+        event: JSON::Event.raw(history.event),
+        song: JSON::Song.raw_with_artist(history.song)
+      }
+    end
+
+    #
     # Historyモデルの属性のみ
     #
     def self.raw(history)

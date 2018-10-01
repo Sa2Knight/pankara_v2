@@ -34,7 +34,7 @@ RSpec.describe 'artists#histories', type: :request do
 
       it 'レスポンスの構成が正しい' do
         expect include(
-          id: history.id,
+          id: 3,
           key: history.key,
           satisfaction: history.satisfaction,
           comment: history.comment,
