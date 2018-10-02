@@ -38,18 +38,6 @@ module JSON
         max_score: event.max_score,
         average_score: event.average_score,
         average_satisfaction: event.average_satisfaction,
-        histories: event.histories.includes(history_dependents).map do |history|
-          {
-            id: history.id,
-            user: JSON::User.raw(history.user_event.user), # HACK: ユーザIDだけでよくない？
-            song: JSON::Song.raw_with_artist(history.song),
-            score_type: history.score_type,
-            score: history.score,
-            satisfaction: history.satisfaction,
-            key: history.key,
-            comment: history.comment
-          }
-        end,
         members: event.user_events.includes(:user).map do |user_event|
           {
             user: JSON::User.raw(user_event.user),
