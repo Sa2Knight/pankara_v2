@@ -20,7 +20,7 @@ module JSON
     #
     def show(artist)
       return nil if artist.blank?
-      raw.merge(
+      raw(artist).merge(
         songs: artist.songs.map do |song|
           JSON::Song.raw(song)
         end

@@ -8,16 +8,6 @@ class Api::ArtistsController < Api::BaseController
     render json: JSON::Artist.show(artist)
   end
 
-  #
-  # 歌手の歌唱履歴を取得
-  #
-  def histories
-    histories_json = artist_histories.map do |history|
-      JSON::History.artist_index(history)
-    end
-    render json: histories_json
-  end
-
   private
 
   #--- 共通privateメソッド
@@ -36,16 +26,4 @@ class Api::ArtistsController < Api::BaseController
     raise404 'artist_not_found' if artist.blank?
   end
 
-  #--- histories用privateメソッド
-
-  #
-  # 対象歌手の歌唱履歴
-  #
-  def artist_histories
-    @index ||= artist.histories
-                     .page(params[:page])
-                     .per(params[:per])
-                     .order(params[:sort_key] => params[:sort_order])
-                     .includes(:user, :event, :song)
-  end
 end

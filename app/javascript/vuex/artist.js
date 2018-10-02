@@ -67,15 +67,14 @@ export default {
     //
     fetchHistoriesByPage ({ state, commit, dispatch }, page) {
       commit('setHistoriesPager', { page: page })
+      dispatch('common/showLoadingView', null, { root: true })
 
-      const id = state.artist.id
       const params = {
+        artist_id: state.artist.id,
         page: state.historiesPager.page,
         per:  state.historiesPager.per
       }
-
-      dispatch('common/showLoadingView', null, { root: true })
-      return http.getArtistHistories(id, params).then((response) => {
+      return http.getHistories(params).then((response) => {
         commit('setHistories', response.data)
         commit('setHistoriesPager', {
           total: Number(response.headers['total-count']),
