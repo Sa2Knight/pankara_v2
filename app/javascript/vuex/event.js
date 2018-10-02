@@ -7,6 +7,8 @@ export default {
   state: {
     // APIからフェッチしたカラオケ詳細
     event: null,
+    // APIからフェッチしたカラオケの歌唱履歴
+    histories: null,
   },
 
   mutations: {
@@ -16,18 +18,40 @@ export default {
     unsetEvent (state) {
       state.event = null
     },
+    setHistories (state, histories) {
+      state.histories = histories
+    },
+    unsetHistories (state) {
+      state.histories = null
+    }
   },
 
   actions: {
-    // APIからカラオケの詳細を取得する
-    fetchEvent ({ dispatch, commit }, id) {
+    //
+    // APIからカラオケの詳細及び歌唱履歴を全て取得する
+    //
+    fetchEvent ({ state, dispatch, commit }, id) {
       dispatch('common/showLoadingView', null, { root: true })
       commit('unsetEvent')
 
-      return http.getEvent(id).then((response) => {
-        commit('setEvent', response.data)
-        dispatch('common/hideLoadingView', null, { root: true })
-      })
+      return Promise.resolve()
+        .then(() => {
+          return http.getEvent(id).then((response) => {
+            commit('setEvent', response.data)
+          })
+        })
+        .then(() => {
+          const params = {
+            event_id: state.event.id,
+            per: 100, // それ以上のイベントが出そうならページャ導入
+          }
+          return http.getHistories(params).then((response) => {
+            commit('setHistories', response.data)
+          })
+        })
+        .then(() => {
+          dispatch('common/hideLoadingView', null, { root: true })
+        })
     },
   }
 }

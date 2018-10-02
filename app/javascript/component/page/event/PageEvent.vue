@@ -22,7 +22,7 @@
         <!-- TODO: コンポーネント切ったほうが良いかも -->
         <v-tab-item id="histories">
           <v-layout row wrap class="pb-5">
-            <v-flex xs12 sm6 md6 lg4 v-for="history in event.histories">
+            <v-flex xs12 sm6 md6 lg4 v-for="history in histories">
               <v-history-card :history="history" />
               <v-divider />
             </v-flex>
@@ -40,7 +40,8 @@
   export default {
     computed: {
       ...mapState(namespace, {
-        event: state => state.event
+        event: state => state.event,
+        histories: state => state.histories
       }),
       id: function() {
         return this.$route.params.id

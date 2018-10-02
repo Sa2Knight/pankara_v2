@@ -10,6 +10,6 @@ module CONSTANT
     SORT_ORDER = 'asc'.freeze
   end
   module CAP
-    PER_PAGE = 50
+    PER_PAGE = 100
   end
 end
