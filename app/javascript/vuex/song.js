@@ -28,7 +28,9 @@ export default {
     },
   },
   actions: {
-    // APIから楽曲詳細をフェッチ
+    //
+    // APIから楽曲詳細及び歌唱履歴をフェッチ
+    //
     fetchSong ({ commit, dispatch }, id) {
       dispatch('common/showLoadingView', null, { root: true })
       commit('resetSong')
@@ -39,7 +41,11 @@ export default {
             commit('setSong', response.data)
           })
         }).then(() => {
-          return http.getSongHistories(id).then((response) => {
+          const params = {
+            song_id: id,
+            per: 100, // TODO ページャ対応
+          }
+          return http.getHistories(params).then((response) => {
             commit('setHistories', response.data)
           })
         }).then(() => {
