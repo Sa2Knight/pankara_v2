@@ -122,13 +122,14 @@ RSpec.describe 'songs#index', type: :request do
     end
     context '上限を超える件数を指定した場合' do
       let(:before_request) do
-        FactoryBot.create_list(:song, 51, artist: FactoryBot.create(:artist))
+        stub_const('CONSTANT::CAP::PER_PAGE', 3)
+        FactoryBot.create_list(:song, 4, artist: FactoryBot.create(:artist))
       end
       let(:page) { 1 }
-      let(:per)  { 51 }
+      let(:per)  { 4 }
 
       it '上限分のみ取得できる' do
-        expect(size).to eq 50
+        expect(size).to eq 3
       end
     end
   end
