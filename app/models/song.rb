@@ -35,18 +35,20 @@ class Song < ApplicationRecord
 
   #
   # 歌唱回数
-  # NOTE: これもカウンターキャッシュあっても良いかも？
   #
   def histories_count
-    self.histories.size
+    RedisClient.get_or_set(key: redis_histories_count_key('all')) do
+      self.histories.size
+    end
   end
 
   #
   # 特定ユーザの歌唱回数
-  # NOTE: これもどうにかキャッシュしたい
   #
-  def histories_count_by(user: nil)
-    self.histories_by(user: user).size
+  def histories_count_by(user:)
+    RedisClient.get_or_set(key: redis_histories_count_key(user.id)) do
+      self.histories_by(user: user).size
+    end
   end
 
   #
@@ -64,5 +66,11 @@ class Song < ApplicationRecord
   def history_count_each_users
     self.histories.joins(:user_event).group(:user_id).count
   end
+
+  private
+
+    def redis_histories_count_key(user_id)
+      "song:#{self.id}:histories_count:#{user_id}"
+    end
 
 end
