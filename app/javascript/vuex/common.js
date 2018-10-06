@@ -74,12 +74,10 @@ export default {
     },
     // 歌唱履歴ダイアログを表示する
     showHistoryDialog ({ commit, dispatch }, historyId) {
-      dispatch('showLoadingView')
       commit('setIsShowHistoryDialog')
 
       http.getHistory(historyId).then((res) => {
         commit('setShowingHistory', res.data)
-        dispatch('hideLoadingView')
       })
     },
     // 歌唱履歴ダイアログを終了する
