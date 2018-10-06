@@ -43,6 +43,8 @@ export default {
         }).then(() => {
           const params = {
             song_id: id,
+            sort_key: 'event_date',
+            sort_order: 'desc',
             per: 100, // TODO ページャ対応
           }
           return http.getHistories(params).then((response) => {

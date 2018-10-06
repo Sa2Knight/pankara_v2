@@ -72,7 +72,9 @@ export default {
       const params = {
         artist_id: state.artist.id,
         page: state.historiesPager.page,
-        per:  state.historiesPager.per
+        per:  state.historiesPager.per,
+        sort_key: 'event_date',
+        sort_order: 'desc'
       }
       return http.getHistories(params).then((response) => {
         commit('setHistories', response.data)
