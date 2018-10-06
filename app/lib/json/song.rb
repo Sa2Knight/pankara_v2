@@ -9,7 +9,8 @@ module JSON
         id: song.id,
         artist_id: song.artist_id,
         name: song.name,
-        url: song.url
+        url: song.url,
+        histories_count: song.histories_count,
       }
     end
 

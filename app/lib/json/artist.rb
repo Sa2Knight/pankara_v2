@@ -17,6 +17,7 @@ module JSON
 
     #
     # 詳細取得用
+    # TODO: songsは別APIにしても良いのでは
     #
     def show(artist)
       return nil if artist.blank?
