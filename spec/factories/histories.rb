@@ -12,5 +12,9 @@ FactoryBot.define do
     key          { Random.rand(-7..7) }
     comment      { SecureRandom.hex(20) }
     score_type { Random.rand(1..5) }
+
+    after(:create) do |history|
+      history.update(event_date: history.event.datetime)
+    end
   end
 end

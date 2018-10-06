@@ -3,6 +3,15 @@ class Event < ApplicationRecord
   has_many :users, through: :user_events
   has_many :histories, through: :user_events
 
+  after_update :sync_histories_date
+
+  #
+  # [コールバック] 更新時に関連する歌唱履歴の日付を同期する
+  #
+  def sync_histories_date
+    self.histories.update(event_date: self.datetime)
+  end
+
   #
   # タイトルで絞り込み
   #
