@@ -67,10 +67,11 @@ class Song < ApplicationRecord
     self.histories.joins(:user_event).group(:user_id).count
   end
 
-  private
-
-    def redis_histories_count_key(user_id)
-      "song:#{self.id}:histories_count:#{user_id}"
-    end
+  #
+  # 歌唱回数記録用のRedisキー
+  #
+  def redis_histories_count_key(user_id)
+    "song:#{self.id}:histories_count:#{user_id}"
+  end
 
 end
