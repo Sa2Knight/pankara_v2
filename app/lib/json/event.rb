@@ -41,7 +41,6 @@ module JSON
         members: event.user_events.includes(:user).map do |user_event|
           {
             user: JSON::User.raw(user_event.user),
-            comment: user_event.comment,
             history_size: event.history_count(user_event: user_event),
             max_score: event.max_score(user_event: user_event),
             average_score: event.average_score(user_event: user_event),
