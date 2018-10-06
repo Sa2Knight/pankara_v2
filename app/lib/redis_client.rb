@@ -5,6 +5,9 @@
 module RedisClient
   module_function
 
+  # 強制的に再計算させる場合にtrueにする
+  @active = true
+
   #
   # Redisクライアント本体
   #
@@ -24,6 +27,8 @@ module RedisClient
   # Redisからデータを取得する
   #
   def get(key:, type: Integer)
+    return nil unless @active
+
     result = redis.get(key)
     return nil if result.nil?
 
@@ -48,5 +53,19 @@ module RedisClient
     return result if result
 
     set(key: key, value: yield)
+  end
+
+  #
+  # キャッシュを利用可能状態にする
+  #
+  def activate
+    @active = true
+  end
+
+  #
+  # キャッシュを利用不可状態にする
+  #
+  def inactivate
+    @active = false
   end
 end
