@@ -59,6 +59,10 @@ Rails/LexicallyScopedActionFilter:
 Naming/MemoizedInstanceVariableName:
   Enabled: false
 
+# タイムゾーンに関する指摘を無視
+Rails/TimeZone:
+  Enabled: false
+
 # シリアライズコード及びテストコードでは各種ルールを許容
 Metrics/BlockLength:
   Exclude:
