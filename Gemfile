@@ -30,6 +30,9 @@ gem 'knock'
 # Wikipediaクライアント
 gem 'wikipedia-client'
 
+# Redisクライアント
+gem 'redis'
+
 group :development, :test do
   # Pryによるデバッグ用gem
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
