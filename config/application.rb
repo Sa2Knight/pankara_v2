@@ -13,6 +13,7 @@ module Pankara
 
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('lib', 'constants')
+    config.autoload_paths << Rails.root.join('app', 'modules')
 
     config.generators do |g|
       g.javascripts false
