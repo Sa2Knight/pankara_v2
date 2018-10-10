@@ -28,7 +28,7 @@ class Song < ApplicationRecord
   # 特定ユーザの歌唱履歴一覧
   #
   def histories_by(user: nil)
-    return [] if user.blank?
+    return none if user.blank?
     History.joins(:user_event)
            .where(song: self, user_events: { user: user })
   end
