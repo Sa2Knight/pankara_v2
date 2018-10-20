@@ -5,7 +5,7 @@ class Api::ArtistsController < Api::BaseController
   # 歌手の詳細を取得
   #
   def show
-    render json: JSON::Artist.show(artist)
+    render json: JSON::Artist.show(artist, user: @current_user)
   end
 
   private

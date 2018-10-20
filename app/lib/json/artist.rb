@@ -19,11 +19,11 @@ module JSON
     # 詳細取得用
     # TODO: songsは別APIにしても良いのでは
     #
-    def show(artist)
+    def show(artist, user: nil)
       return nil if artist.blank?
       raw(artist).merge(
-        songs: artist.songs.map do |song|
-          JSON::Song.raw(song)
+        songs: artist.songs.sort_by(&:histories_count).reverse.map do |song|
+          JSON::Song.raw(song, user: user)
         end
       )
     end

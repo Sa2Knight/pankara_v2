@@ -1,4 +1,4 @@
-<!-- TODO VHistoryCardと共通部分どうにかしよ -->
+<!-- TODO VHistoryCardと共通部分(オンマウスにするとどうとか)どうにかしよ -->
 <template>
   <div class="v-song-card" v-bind:class="{ selected: isMouseOver, 'elevation-12': isMouseOver }">
     <v-container @click="select" @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
@@ -6,47 +6,51 @@
         <v-flex xs4>
           <v-song-thumbnail :song="song" />
         </v-flex>
-        <v-flex xs8>
-          <p class="song-name collapse">{{ song.name }}</p>
+        <v-flex xs8 class="song-detail">
+          <div class="song-name collapse">{{ song.name }}</div>
+          <div class="histories-count-outer">
+            <v-chip small color="green" text-color="white">
+              <v-avatar class="green darken-4">{{ song.histories_count }}回</v-avatar>全体
+            </v-chip>
+            <v-chip small color="blue" text-color="white">
+              <v-avatar class="blue darken-4">{{ song.histories_count_by_me }}回</v-avatar>自分
+            </v-chip>
+          </div>
         </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
 
-<style lang="scss">
-  .v-song-card {
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    &.selected {
-      background-color: #feffcd;
-    }
-    p {
-      font-weight: bold;
-      &.song-name {
-        font-size: 1.2em;
-      }
-      &.artist-name {
-        font-size: 1.1em;
-      }
-    }
-    .v-song-thumbnail {
-      img {
-        max-width: 100%;
-        max-height: 100%;
-      }
-    }
-    .right-column {
-      position: relative;
-      .v-user-icons {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-      }
-    }
+<style lang="scss" scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+.selected {
+  background-color: #feffcd;
+}
+.song-detail {
+  position: relative;
+  .song-name {
+    font-weight: bold;
+    font-size: 1.5em;
   }
+}
+.v-song-thumbnail {
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+.right-column {
+  position: relative;
+  .v-user-icons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
 </style>
 
 <script>

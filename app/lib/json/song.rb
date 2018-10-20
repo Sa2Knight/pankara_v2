@@ -3,7 +3,7 @@ module JSON
     #
     # Songモデルの属性のみ
     #
-    def self.raw(song)
+    def self.raw(song, user: nil)
       return nil if song.blank?
       {
         id: song.id,
@@ -11,6 +11,7 @@ module JSON
         name: song.name,
         url: song.url,
         histories_count: song.histories_count,
+        histories_count_by_me: user ? song.histories_count_by(user: user) : 0
       }
     end
 

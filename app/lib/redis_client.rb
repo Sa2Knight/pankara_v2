@@ -21,6 +21,8 @@ module RedisClient
   # Redisにデータをセットする
   #
   def set(key:, value:)
+    return value if Rails.env.test?
+
     redis.set(key, value)
     value
   end
@@ -29,6 +31,7 @@ module RedisClient
   # Redisからデータを取得する
   #
   def get(key:, type: Integer)
+    return nil if Rails.env.test?
     return nil unless @active
 
     result = redis.get(key)
