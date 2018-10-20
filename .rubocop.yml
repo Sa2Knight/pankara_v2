@@ -63,6 +63,10 @@ Naming/MemoizedInstanceVariableName:
 Rails/TimeZone:
   Enabled: false
 
+# ガード節の直後に空行なくても許す
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
 # シリアライズコード及びテストコードでは各種ルールを許容
 Metrics/BlockLength:
   Exclude:
