@@ -20,7 +20,7 @@ RSpec.describe 'artists#show', type: :request do
           :name,
           :description,
           :url,
-          :songs,
+          :songs
         )
       end
     end

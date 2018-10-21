@@ -14,6 +14,10 @@
   text-overflow: ellipsis;
 }
 
+.link {
+  cursor: pointer;
+}
+
 // リストメニュー項目
 .v-navigation-drawer,.v-menuable__content__active {
   .v-list__tile:hover {
