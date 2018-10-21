@@ -4,6 +4,17 @@ class Song < ApplicationRecord
   belongs_to :artist
 
   #
+  # 歌手を歌手名で指定された場合、
+  # 既存があればそれを、なければ新規作成する
+  #
+  attr_accessor :artist_name
+  def artist_name=(artist_name)
+    return if artist_name.nil?
+
+    self.artist = Artist.find_or_create_by(name: artist_name)
+  end
+
+  #
   # ArtistIDで絞り込み
   #
   def self.artist_by(artist_id)
