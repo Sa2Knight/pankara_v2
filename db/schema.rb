@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_06_053053) do
+ActiveRecord::Schema.define(version: 2018_10_21_093928) do
 
   create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_10_06_053053) do
     t.date "event_date"
     t.bigint "song_id"
     t.integer "score_type"
-    t.integer "score"
+    t.float "score"
     t.integer "satisfaction"
     t.integer "key"
     t.text "comment"
