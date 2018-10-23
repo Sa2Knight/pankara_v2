@@ -5,14 +5,12 @@
         <v-flex xs4>
           <v-song-thumbnail :song="history.song" />
         </v-flex>
-        <v-flex xs7>
+        <v-flex xs8>
           <p class="song-name collapse">{{ history.song.name }}</p>
           <p class="artist-name collapse">{{ artistName }}</p>
           <span>キー: {{ history.key }}</span>
           <span>満足度: {{ history.satisfaction }}</span>
-          <span>得点: {{ history.score }}</span>
-        </v-flex>
-        <v-flex xs1 class="right-column">
+          <v-score-label v-if="history.score" :score="history.score" />
           <v-user-icons :user="history.user" />
         </v-flex>
       </v-layout>
@@ -20,44 +18,46 @@
   </div>
 </template>
 
-<style lang="scss">
-  .v-history-card {
-    * {
-      margin: 0;
-      padding: 0;
+<style lang="scss" scoped>
+.v-history-card {
+  position: relative;
+  &.selected {
+    background-color: #feffcd;
+  }
+  p {
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    &.song-name {
+      font-size: 1.2em;
     }
-    &.selected {
-      background-color: #feffcd;
-    }
-    p {
-      font-weight: bold;
-      &.song-name {
-        font-size: 1.2em;
-      }
-      &.artist-name {
-        font-size: 1.1em;
-      }
-    }
-    .v-song-thumbnail {
-      img {
-        max-width: 100%;
-        max-height: 100%;
-      }
-    }
-    .right-column {
-      position: relative;
-      .v-user-icons {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-      }
+    &.artist-name {
+      font-size: 1.1em;
     }
   }
+  .v-song-thumbnail {
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  .v-score-label {
+    position: absolute;
+    right: 3px;
+    top: 5px;
+  }
+  .v-user-icons {
+    position: absolute;
+    right: 2px;
+    bottom: 5px;
+  }
+}
 </style>
 
 <script>
   import { mapActions } from 'vuex'
   import ROUTES from '../../lib/routes'
+  import Util from '../../lib/util'
   const namespace = 'common'
 
   export default {
@@ -79,7 +79,7 @@
     computed: {
       artistName: function() {
         return this.artist ? this.artist.name : this.history.song.artist.name
-      }
+     },
     },
     methods: {
       ...mapActions(namespace, [
@@ -100,7 +100,8 @@
     },
     components: {
       VSongThumbnail: require('./VSongThumbnail').default,
-      VUserIcons: require('./VUserIcons.vue').default,
+      VUserIcons: require('./VUserIcons').default,
+      VScoreLabel: require('./VScoreLabel').default
     }
   }
 </script>
