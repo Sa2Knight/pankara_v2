@@ -9,8 +9,8 @@
         <v-flex xs9>
           <div class="member-info arrow-box right">
             <div>歌唱数: {{ member.history_size }}</div>
-            <div>最高点: {{ member.max_score}}</div>
-            <div>平均点: {{ member.average_score}}</div>
+            <div>最高点: {{ max_score}}</div>
+            <div>平均点: {{ average_score}}</div>
           </div>
         </v-flex>
       </v-layout>
@@ -45,6 +45,7 @@
 </style>
 
 <script>
+  import Util from '../../../../lib/util'
   export default {
     data: function() {
       return {
@@ -57,6 +58,14 @@
         type: Object,
         required: true
       },
+    },
+    computed: {
+      max_score: function() {
+        return Util.round(this.member.max_score, 2)
+      },
+      average_score: function() {
+        return Util.round(this.member.average_score, 2)
+      }
     },
     components: {
       VUserIcon: require('../../../common/VUserIcon').default

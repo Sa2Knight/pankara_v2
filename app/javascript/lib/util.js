@@ -12,11 +12,15 @@ export default {
   //
   round: function(number, digit) {
     const num = Math.floor(number * Math.pow(10, digit)) / Math.pow(10, digit)
-    let str = num.toString()
-    if (str.indexOf('.') > 0) {
+    const str = num.toString()
+    const numbers = str.split('.')
+    if (numbers.length == 1) {
+      return str + '.' + '0'.repeat(digit)
+    } else if (numbers[1].length == digit) {
+      console.log(numbers)
       return str
     } else {
-      return str + '.0'
+      return str + '0'.repeat(digit - numbers[1].length)
     }
   }
 }

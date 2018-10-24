@@ -48,6 +48,7 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import Util from '../../../../lib/util'
   const namespace = 'event'
 
   export default {
@@ -60,21 +61,21 @@
       },
       average_satisfaction: function() {
         if (this.event.average_satisfaction) {
-          return this.event.average_satisfaction + '%'
+          return Util.round(this.event.average_satisfaction, 2) + '%'
         } else {
           return '記録なし'
         }
       },
       average_score: function() {
         if (this.event.average_score) {
-          return this.event.average_score + '点'
+          return Util.round(this.event.average_score, 2) + '点'
         } else {
           return '未採点'
         }
       },
       max_score: function() {
         if (this.event.max_score) {
-          return this.event.max_score + '点'
+          return Util.round(this.event.max_score, 2) + '点'
         } else {
           return '未採点'
         }
