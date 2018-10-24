@@ -1,26 +1,25 @@
 <template>
   <div class="v-history-card" v-bind:class="{ selected: isMouseOver, 'elevation-12': isMouseOver }">
-    <v-container @click="select" @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
-      <v-layout row>
-        <v-flex xs4>
-          <v-song-thumbnail :song="history.song" />
-        </v-flex>
-        <v-flex xs8>
-          <p class="song-name collapse">{{ history.song.name }}</p>
-          <p class="artist-name collapse">{{ artistName }}</p>
-          <span>キー: {{ history.key }}</span>
-          <span>満足度: {{ history.satisfaction }}</span>
-          <v-score-label v-if="history.score" :score="history.score" />
-          <v-user-icons :user="history.user" />
-        </v-flex>
-      </v-layout>
+    <v-container @click="select" class="outer" @mouseenter="enter" @mouseleave="leave" grid-list-md>
+      <div class="thumbnail">
+        <v-song-thumbnail :song="history.song" />
+      </div>
+      <div class="description">
+        <p class="song-name collapse">{{ history.song.name }}</p>
+        <p class="artist-name collapse">{{ artistName }}</p>
+        <span>キー: {{ history.key }}</span>
+        <span>満足度: {{ history.satisfaction }}</span>
+        <v-score-label v-if="history.score" :score="history.score" />
+        <v-user-icons :user="history.user" />
+      </div>
     </v-container>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.v-history-card {
+.outer {
   position: relative;
+  display: table;
   &.selected {
     background-color: #feffcd;
   }
@@ -35,21 +34,25 @@
       font-size: 1.1em;
     }
   }
-  .v-song-thumbnail {
-    img {
-      max-width: 100%;
-      max-height: 100%;
+  .thumbnail {
+    width: 150px;
+    min-width: 150px;
+    display: table-cell;
+  }
+  .description {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 1em;
+    .v-score-label {
+      position: absolute;
+      right: 3px;
+      top: 5px;
     }
-  }
-  .v-score-label {
-    position: absolute;
-    right: 3px;
-    top: 5px;
-  }
-  .v-user-icons {
-    position: absolute;
-    right: 2px;
-    bottom: 5px;
+    .v-user-icons {
+      position: absolute;
+      right: 2px;
+      bottom: 5px;
+    }
   }
 }
 </style>
