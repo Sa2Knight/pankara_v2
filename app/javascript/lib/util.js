@@ -17,7 +17,6 @@ export default {
     if (numbers.length == 1) {
       return str + '.' + '0'.repeat(digit)
     } else if (numbers[1].length == digit) {
-      console.log(numbers)
       return str
     } else {
       return str + '0'.repeat(digit - numbers[1].length)
