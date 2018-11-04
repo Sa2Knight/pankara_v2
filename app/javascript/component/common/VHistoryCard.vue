@@ -41,6 +41,7 @@
   }
   .description {
     display: table-cell;
+    max-width: 0px;
     vertical-align: middle;
     padding-left: 1em;
     .v-score-label {
