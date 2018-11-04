@@ -9,6 +9,15 @@
         <p class="artist-name collapse">{{ artistName }}</p>
         <span>キー: {{ history.key }}</span>
         <span>満足度: {{ history.satisfaction }}</span>
+        <v-rating
+          :value="history.satisfaction"
+          :length="10"
+          hover
+          readonly
+          color="red lighten-3"
+          small
+          background-color="grey lighten-1"
+        ></v-rating>
         <v-score-label v-if="history.score" :score="history.score" />
         <v-user-icons :user="history.user" />
       </div>
@@ -16,8 +25,8 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-.outer {
+<style lang="scss">
+.v-history-card .outer {
   position: relative;
   display: table;
   &.selected {
@@ -53,6 +62,9 @@
       right: 2px;
       bottom: 5px;
     }
+  }
+  .v-rating .v-icon {
+    padding: 0 !important;
   }
 }
 </style>
