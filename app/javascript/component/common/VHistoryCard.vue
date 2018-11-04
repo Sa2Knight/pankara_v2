@@ -8,16 +8,7 @@
         <p class="song-name collapse">{{ history.song.name }}</p>
         <p class="artist-name collapse">{{ artistName }}</p>
         <span>キー: {{ history.key }}</span>
-        <span>満足度: {{ history.satisfaction }}</span>
-        <v-rating
-          :value="history.satisfaction"
-          :length="10"
-          hover
-          readonly
-          color="red lighten-3"
-          small
-          background-color="grey lighten-1"
-        ></v-rating>
+        <v-satisfaction-rate :satisfaction="history.satisfaction" />
         <v-score-label v-if="history.score" :score="history.score" />
         <v-user-icons :user="history.user" />
       </div>
@@ -116,7 +107,8 @@
     components: {
       VSongThumbnail: require('./VSongThumbnail').default,
       VUserIcons: require('./VUserIcons').default,
-      VScoreLabel: require('./VScoreLabel').default
+      VScoreLabel: require('./VScoreLabel').default,
+      VSatisfactionRate: require('./VSatisfactionRate').default
     }
   }
 </script>
