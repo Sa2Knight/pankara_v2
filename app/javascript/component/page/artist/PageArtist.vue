@@ -5,10 +5,14 @@
       <v-tab href="#overview">
         概要<v-icon>fas fa-clipboard-list</v-icon>
       </v-tab>
+      <v-tab href="#songs">
+        楽曲一覧<v-icon>fas fa-music</v-icon>
+      </v-tab>
       <v-tab href="#history">
         歌唱履歴<v-icon>fas fa-list-ul</v-icon>
       </v-tab>
       <v-tab-item id="overview"><page-artist-overview /></v-tab-item>
+      <v-tab-item id="songs"><page-artist-songs /></v-tab-item>
       <v-tab-item id="history"><page-artist-histories /></v-tab-item>
     </v-tabs>
   </div>
@@ -38,6 +42,7 @@
     },
     components: {
       PageArtistOverview: require('./PageArtistOverview').default,
+      PageArtistSongs:    require('./PageArtistSongs').default,
       PageArtistHistories: require('./PageArtistHistories').default,
     }
   }

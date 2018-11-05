@@ -1,23 +1,15 @@
 <!-- TODO VHistoryCardと共通部分(オンマウスにするとどうとか)どうにかしよ -->
 <template>
-  <div class="v-song-card" v-bind:class="{ selected: isMouseOver, 'elevation-12': isMouseOver }">
+  <div class="v-song-card" v-bind:class="{ hover: isMouseOver, 'elevation-12': isMouseOver }">
     <v-container @click="select" @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
-      <v-layout row>
-        <v-flex xs4>
-          <v-song-thumbnail :song="song" />
-        </v-flex>
-        <v-flex xs8 class="song-detail">
-          <div class="song-name collapse">{{ song.name }}</div>
-          <div class="histories-count-outer">
-            <v-chip small color="green" text-color="white">
-              <v-avatar class="green darken-4">{{ song.histories_count }}回</v-avatar>全体
-            </v-chip>
-            <v-chip small color="blue" text-color="white">
-              <v-avatar class="blue darken-4">{{ song.histories_count_by_me }}回</v-avatar>自分
-            </v-chip>
-          </div>
-        </v-flex>
-      </v-layout>
+      <div class="header">
+        <div class="song-name collapse">{{ song.name }}</div>
+      </div>
+      <v-song-thumbnail :song="song" />
+      <div class="histories-count-outer">
+        <v-chip small color="primary" text-color="white">{{ song.histories_count }}回</v-chip>
+        <v-chip small color="green" text-color="white">{{ song.histories_count_by_me }}回</v-chip>
+      </div>
     </v-container>
   </div>
 </template>
@@ -27,15 +19,11 @@
   margin: 0;
   padding: 0;
 }
-.selected {
-  background-color: #feffcd;
+.song-name {
+  font-size: 1.2em;
 }
-.song-detail {
-  position: relative;
-  .song-name {
-    font-weight: bold;
-    font-size: 1.5em;
-  }
+.hover {
+  background-color: #feffcd;
 }
 .v-song-thumbnail {
   img {
@@ -43,12 +31,9 @@
     max-height: 100%;
   }
 }
-.right-column {
-  position: relative;
-  .v-user-icons {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+.histories-count-outer {
+  > * {
+    height: 1.2em;
   }
 }
 </style>

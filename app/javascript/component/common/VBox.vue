@@ -1,7 +1,8 @@
 <template>
   <div class="v-box">
     <div class="label">
-      {{ label }}
+      <span v-if="label">{{ label }}</span>
+      <slot name="header"></slot>
     </div>
     <div class="content">
       <slot></slot>
@@ -26,7 +27,7 @@
     props: {
       label: {
         type: String,
-        required: true
+        required: false
       }
     }
   }
