@@ -5,8 +5,9 @@
         <v-song-thumbnail :song="history.song" />
       </div>
       <div class="description">
+        <p v-if="showDate" class="date">{{ history.event.datetime }}</p>
         <p class="song-name collapse">{{ history.song.name }}</p>
-        <p class="artist-name collapse">{{ artistName }}</p>
+        <p v-if="showArtistName" class="artist-name collapse">{{ artistName }}</p>
         <span>キー: {{ history.key }}</span>
         <v-satisfaction-rate :satisfaction="history.satisfaction" />
         <v-score-label v-if="history.score" :score="history.score" />
@@ -74,13 +75,28 @@
       }
     },
     props: {
+      // 表示する歌唱履歴オブジェクト
       history: {
         type: Object,
         required: true
       },
-      artist: { // historyに含まれている場合不要
+      // 歌手情報(historyに含まれている場合は不要
+      // NOTE: こういうの辞めたい
+      artist: {
         type: Object,
         required: false
+      },
+      // 歌手名を表示するか
+      showArtistName: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      // 日付を表示するか
+      showDate: {
+        type: Boolean,
+        required: false,
+        default: false
       }
     },
     computed: {
