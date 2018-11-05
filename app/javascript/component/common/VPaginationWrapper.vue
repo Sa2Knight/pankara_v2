@@ -1,6 +1,6 @@
 <template>
   <div class="v-pagination-wrapper">
-    <div class="pager">
+    <div class="pager" v-if="hasMultiPage">
       <v-pagination
         v-model="page"
         :length="totalPages"
@@ -8,7 +8,7 @@
       />
     </div>
     <slot />
-    <div class="pager">
+    <div class="pager" v-if="hasMultiPage">
       <v-pagination
         v-model="page"
         :length="totalPages"
@@ -50,6 +50,11 @@
       changePage: {
         required: true,
         type: Function,
+      }
+    },
+    computed: {
+      hasMultiPage: function() {
+        return this.totalPages > 1
       }
     },
     methods: {
