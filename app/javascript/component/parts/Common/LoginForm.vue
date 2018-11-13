@@ -40,7 +40,6 @@
 </template>
 
 <script>
-  import http from '../../../lib/http'
   export default {
     data: function() {
       return {
@@ -53,32 +52,18 @@
           v => !!v || 'パスワードを入力してください'
         ],
         valid: false,
-        isShowSuccessSnack: false
       }
     },
     methods: {
       submit: function () {
         if (this.$refs.form.validate()) {
-          this.login()
+          this.$emit('submit', this.name, this.password)
         }
       },
       cancel: function() {
         this.$refs.form.reset()
         this.$emit('close')
       },
-      login: function() {
-        http.login(this.name, this.password)
-          .then((response) => {
-            this.$emit('success')
-            this.$emit('close')
-          })
-          .catch((err) => {
-            this.$emit('failed')
-          })
-      }
     },
-    components: {
-      VSuccessSnack: require('./VSuccessSnack').default
-    }
   }
 </script>

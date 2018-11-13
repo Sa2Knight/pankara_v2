@@ -5,6 +5,10 @@ import http from '../lib/http'
 export default {
   namespaced: true,
   state: {
+    // ログイン中か？
+    isLogin: null,
+    // ログイン用トークン
+    jwtToken: null,
     // ヘッダーに表示されるページタイトル
     pageTitle: '',
     // Youtubeダイアログを表示してる？
@@ -20,6 +24,12 @@ export default {
   },
 
   mutations: {
+    setIsLogin (state, isLogin) {
+      state.isLogin = isLogin
+    },
+    setJwtToken (state, token) {
+      state.jwtToken = token
+    },
     setPageTitle (state, title) {
       state.pageTitle = title
     },
@@ -58,6 +68,22 @@ export default {
     }
   },
   actions: {
+    // ログインする
+    login ({ commit, dispatch }, {name, password}) {
+      dispatch('showLoadingView')
+
+      return http.login(name, password)
+        .then((response) => {
+          localStorage.setItem('jwt', response.data.jwt)
+          commit('setJwtToken', response.data.jwt)
+          commit('setIsLogin', true)
+          dispatch('hideLoadingView')
+        })
+        .catch((err) => {
+          dispatch('hideLoadingView')
+          return Promise.reject()
+        })
+    },
     // ページタイトルを差し替える
     setPageTitle ({ commit }, pageTitle) {
       commit('setPageTitle', pageTitle)

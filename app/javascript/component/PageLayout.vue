@@ -97,11 +97,9 @@
     </v-content>
 
     <!-- ログインフォーム -->
-    <!-- TODO: vuexで書き換え-->
     <v-dialog v-model="isShowLoginForm" max-width="500px">
       <login-form
-        @success="isShowSuccessSnack = true"
-        @failed="isShowFailedSnack = true"
+        @submit="login"
         @close="isShowLoginForm = false"
       />
     </v-dialog>
@@ -148,9 +146,23 @@
         pageTitle: state => state.pageTitle,
         isShowYoutubeDialog: state => state.isShowYoutubeDialog,
         isShowHistoryDialog: state => state.isShowHistoryDialog,
-        isLoading: state => state.isLoading,
+        isLoading: state => state.isLoading
       }),
       eventsPath: () => ROUTES.EVENTS_PATH(),
+    },
+    methods: {
+      login (name, password) {
+        this.$store.dispatch('common/login', { name, password })
+          .then(() => {
+            this.isShowSuccessSnack = true
+            this.isShowFailedSnack = false
+            this.isShowLoginForm = false
+          })
+          .catch((err) => {
+            this.isShowFailedSnack = true
+            this.isShowSuccessSnack = false
+          })
+      }
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default,
