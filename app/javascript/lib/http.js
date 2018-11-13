@@ -8,19 +8,23 @@ const http = {}
 /**
  * axiosの共通設定
  */
-const axios = axiosBase.create({
+let axiosConfig = {
   baseURL: '/api',
   headers: {
     'ContentType': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
   },
   responseType: 'json'
-})
+}
 
 /**
  * リクエストオブジェクトを生成
  */
 const request = function(method, url, params = {}) {
+  const jwtToken = localStorage.jwt
+  axiosConfig.headers.Authorization = `Bearer ${jwtToken}`
+
+  const axios = axiosBase.create(axiosConfig)
   const baseParams = {method, url}
   if (method === 'GET') {
     baseParams.params = params
