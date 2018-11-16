@@ -1,4 +1,5 @@
 class Api::UsersController < Api::BaseController
+  before_action :authorized?, only: :myself
   before_action :user_exists?, only: :show
 
   #
@@ -6,6 +7,13 @@ class Api::UsersController < Api::BaseController
   #
   def show
     render json: JSON::User.raw(user)
+  end
+
+  #
+  # ログイン中の自身の情報を取得
+  #
+  def myself
+    render json: JSON::User.raw(current_user)
   end
 
   private

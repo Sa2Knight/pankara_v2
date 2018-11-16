@@ -27,4 +27,11 @@ class Api::BaseController < ApplicationController
     response.headers['total-pages'] = @index&.total_pages
   end
 
+  #
+  # ログインしていない場合、401エラーを戻す
+  #
+  def authorized?
+    raise401 if current_user.blank?
+  end
+
 end

@@ -2,6 +2,7 @@
 module ErrorHandlers
   extend ActiveSupport::Concern
   class BadRequestError < StandardError; end
+  class UnAuthorizedError < StandardError; end
   class ForbiddenError < StandardError; end
   class NotFoundError < StandardError; end
   class ServerError < StandardError; end
@@ -9,6 +10,7 @@ module ErrorHandlers
   included do
     rescue_from ServerError, with: :rescue500
     rescue_from BadRequestError, with: :rescue400
+    rescue_from UnAuthorizedError, with: :rescue401
     rescue_from ForbiddenError, with: :rescue403
     rescue_from NotFoundError, with: :rescue404
   end
@@ -19,8 +21,7 @@ module ErrorHandlers
     define_method("rescue#{status}".to_sym) do |exception|
       output_log(exception)
       render(
-        json: { message: exception.message,
-                display_message: I18n.t("v2.errors.#{exception.message}") },
+        json: { message: exception.message },
         status: status.to_i
       )
     end
@@ -28,12 +29,16 @@ module ErrorHandlers
 
   private
 
-    [400, 403, 404, 500].each do |status|
+    [400, 401, 403, 404, 500].each do |status|
       generate_method(status)
     end
 
     def raise400(message = 'params_invalid')
       raise BadRequestError, message
+    end
+
+    def raise401(message = 'user_unauthorized')
+      raise UnAuthorizedError, message
     end
 
     def raise403(message = 'forbidden')
