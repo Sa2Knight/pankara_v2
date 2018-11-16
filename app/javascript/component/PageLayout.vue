@@ -84,8 +84,19 @@
       </v-toolbar-side-icon>
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
+      <!-- ユーザメニュー or ログインボタン -->
       <v-toolbar-items>
-        <v-btn flat @click="isShowLoginForm = true">ログイン</v-btn>
+        <v-menu v-if="currentUser" transition="slide-y-transition" bottom>
+          <v-btn class="login-user-icon-outer" slot="activator" >
+            <img :src="currentUser.image_url" >
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="(item, i) in userMenu" :key="i" @click="">
+              <v-list-tile-title>{{ item.label }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+        <v-btn v-else flat @click="isShowLoginForm = true">ログイン</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -127,6 +138,17 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+.login-user-icon-outer {
+  position: relative;
+  img {
+    position: absolute;
+    max-width: 60%;
+    border-radius: 50%;
+  }
+}
+</style>
+
 <script>
   import { mapState } from 'vuex'
   import ROUTES from '../lib/routes'
@@ -135,6 +157,10 @@
   export default {
     data: function() {
       return {
+        userMenu: [
+          { label: 'マイページ' },
+          { label: 'ログアウト' }
+        ],
         isShowNavigation: false,
         isShowLoginForm: false,
         isShowSuccessSnack: false,
@@ -143,6 +169,7 @@
     },
     computed: {
       ...mapState(namespace, {
+        currentUser: state => state.currentUser,
         pageTitle: state => state.pageTitle,
         isShowYoutubeDialog: state => state.isShowYoutubeDialog,
         isShowHistoryDialog: state => state.isShowHistoryDialog,
@@ -168,7 +195,8 @@
       LoginForm: require('../component/parts/Common/LoginForm').default,
       YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default,
       HistoryDialog: require('../component/parts/Common/HistoryDialog').default,
-      TheLoadingView:  require('../component/parts/Common/TheLoadingView').default
+      TheLoadingView:  require('../component/parts/Common/TheLoadingView').default,
+      VUserIcon: require('../component/common/VUserIcon').default
     },
   }
 </script>
