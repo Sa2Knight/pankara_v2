@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     post :user_token, to: 'user_token#create'
     resources :sessions, only: %i[create]
-    resources :users, only: %i[show]
+    resources :users, only: %i[show] do
+      collection do
+        get :myself
+      end
+    end
     resources :events, only: %i[index show]
     resources :histories, only: %i[index show]
     resources :songs, only: %i[index show] do

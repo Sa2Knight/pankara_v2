@@ -9,6 +9,8 @@ export default {
     isLogin: null,
     // ログイン用トークン
     jwtToken: null,
+    // ログイン中ユーザ情報
+    currentUser: null,
     // ヘッダーに表示されるページタイトル
     pageTitle: '',
     // Youtubeダイアログを表示してる？
@@ -29,6 +31,9 @@ export default {
     },
     setJwtToken (state, token) {
       state.jwtToken = token
+    },
+    setCurrentUser (state, currentUser) {
+      state.currentUser = currentUser
     },
     setPageTitle (state, title) {
       state.pageTitle = title
@@ -72,12 +77,17 @@ export default {
     login ({ commit, dispatch }, {name, password}) {
       dispatch('showLoadingView')
 
+      // TODO: Promise勉強しなおそ
       return http.login(name, password)
         .then((response) => {
           localStorage.setItem('jwt', response.data.jwt)
           commit('setJwtToken', response.data.jwt)
           commit('setIsLogin', true)
           dispatch('hideLoadingView')
+          return http.getMySelf()
+        })
+        .then((response) => {
+          commit('setCurrentUser', response.data)
         })
         .catch((err) => {
           dispatch('hideLoadingView')

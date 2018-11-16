@@ -48,6 +48,13 @@ http.login = function(name, password) {
 }
 
 /**
+ * 自身の情報を取得
+ */
+http.getMySelf = function(params = {}) {
+  return request('GET', '/users/myself', params)
+}
+
+/**
  * イベント一覧を取得する
  */
 http.getEvents = function(params = {}) {
