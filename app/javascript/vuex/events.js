@@ -73,7 +73,7 @@ export default {
         per: state.pager.per,
         title: state.searchQuery.title,
         sort_order: 'desc',
-        members: state.searchQuery.wantOnlyMine ? [9] : null // TODO: ログインユーザに差し替え
+        members: state.searchQuery.members
       }
       http.getEvents(params).then((response) => {
         commit('setEvents', response.data)

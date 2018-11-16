@@ -9,7 +9,7 @@
           <v-flex xs12>
             <v-text-field v-model="title" label="タイトル" />
           </v-flex>
-          <v-flex xs12>
+          <v-flex xs12 v-if="currentUser">
             <v-checkbox v-model="wantOnlyMine" label="あなたのカラオケのみ表示" />
           </v-flex>
           <v-flex xs6>
@@ -42,6 +42,9 @@
     computed: {
       ...mapState(namespace, {
         searchQuery: state => state.searchQuery
+      }),
+      ...mapState('common', {
+        currentUser: state => state.currentUser
       })
     },
     methods: {
@@ -57,7 +60,7 @@
       submit: function() {
         this.submitSearchDialog({
           title: this.title,
-          wantOnlyMine: this.wantOnlyMine
+          members: this.wantOnlyMine ? [this.currentUser.id] : null
         })
         this.fetchEvents()
       },
