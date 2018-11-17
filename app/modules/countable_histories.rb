@@ -36,6 +36,8 @@ module CountableHistories
   # 特定ユーザの歌唱回数
   #
   def histories_count_by(user:)
+    return 0 if user.blank?
+
     RedisClient.get_or_set(key: redis_histories_count_key(user.id)) do
       self.histories_by(user: user).size
     end
