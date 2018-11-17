@@ -19,7 +19,7 @@ class Api::SongsController < Api::BaseController
   # 楽曲の詳細を取得
   #
   def show
-    render json: JSON::Song.show(song, @current_user)
+    render json: JSON::Song.show(song, current_user)
   end
 
   #
