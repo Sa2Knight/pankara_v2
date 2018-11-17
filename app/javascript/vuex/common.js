@@ -103,9 +103,13 @@ export default {
         commit('setCurrentUser', response.data)
       })
       .catch((err) => {
-        localStorage.removeItem('jwt')
-        commit('setCurrentUser', null)
+        dispatch('loout')
       })
+    },
+    // ログアウト
+    logout ({ commit }) {
+      localStorage.removeItem('jwt')
+      commit('setCurrentUser', null)
     },
     // ページタイトルを差し替える
     setPageTitle ({ commit }, pageTitle) {

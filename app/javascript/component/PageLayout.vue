@@ -91,8 +91,10 @@
             <img :src="currentUser.image_url" >
           </v-btn>
           <v-list>
-            <v-list-tile v-for="(item, i) in userMenu" :key="i" @click="">
-              <v-list-tile-title>{{ item.label }}</v-list-tile-title>
+            <v-list-tile>
+              <a>
+                <v-list-tile-title @click="logout">ログアウト</v-list-tile-title>
+              </a>
             </v-list-tile>
           </v-list>
         </v-menu>
@@ -122,14 +124,14 @@
     <history-dialog v-if="isShowHistoryDialog"/>
 
 
-    <!-- スナック -->
+    <!-- スナック TODO: もう少し汎用化したいね -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
-      ログインに成功しました
+      {{ successSnackLabel }}
       <v-btn dark flat @click.native="isShowSuccessSnack = false">閉じる</v-btn>
     </v-snackbar>
 
     <v-snackbar v-model="isShowFailedSnack" top color="error">
-      ログインに失敗しました
+      {{ failedSnackLabel }}
     </v-snackbar>
 
     <!-- ローディングビュー-->
@@ -157,14 +159,12 @@
   export default {
     data: function() {
       return {
-        userMenu: [
-          { label: 'マイページ' },
-          { label: 'ログアウト' }
-        ],
         isShowNavigation: false,
         isShowLoginForm: false,
         isShowSuccessSnack: false,
         isShowFailedSnack: false,
+        successSnackLabel: '',
+        failedSnackLabel: ''
       }
     },
     computed: {
@@ -179,7 +179,7 @@
     },
     methods: {
       ...mapActions(namespace, [
-        'loginByToken'
+        'loginByToken',
       ]),
       login (name, password) {
         this.$store.dispatch('common/login', { name, password })
@@ -187,11 +187,18 @@
             this.isShowSuccessSnack = true
             this.isShowFailedSnack = false
             this.isShowLoginForm = false
+            this.successSnackLabel = 'ログインしました'
           })
           .catch((err) => {
             this.isShowFailedSnack = true
             this.isShowSuccessSnack = false
+            this.failedSnackLabel = 'ログインに失敗しました'
           })
+      },
+      logout () {
+        this.$store.dispatch('common/logout')
+        this.isShowSuccessSnack = true
+        this.successSnackLabel = 'ログアウトしました'
       }
     },
     mounted() {
