@@ -73,7 +73,7 @@ export default {
     }
   },
   actions: {
-    // ログインする
+    // ユーザ名/パスワードを用いてログイン
     login ({ commit, dispatch }, {name, password}) {
       dispatch('showLoadingView')
 
@@ -93,6 +93,19 @@ export default {
           dispatch('hideLoadingView')
           return Promise.reject()
         })
+    },
+    // LocalStorage内のトークンを用いてログイン
+    loginByToken ({ commit, dispatch }) {
+      if (!localStorage.getItem('jwt')) return
+
+      http.getMySelf()
+      .then((response) => {
+        commit('setCurrentUser', response.data)
+      })
+      .catch((err) => {
+        localStorage.removeItem('jwt')
+        commit('setCurrentUser', null)
+      })
     },
     // ページタイトルを差し替える
     setPageTitle ({ commit }, pageTitle) {

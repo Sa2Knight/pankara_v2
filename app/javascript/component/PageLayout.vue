@@ -150,7 +150,7 @@
 </style>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   import ROUTES from '../lib/routes'
   const namespace = 'common'
 
@@ -178,6 +178,9 @@
       eventsPath: () => ROUTES.EVENTS_PATH(),
     },
     methods: {
+      ...mapActions(namespace, [
+        'loginByToken'
+      ]),
       login (name, password) {
         this.$store.dispatch('common/login', { name, password })
           .then(() => {
@@ -190,6 +193,10 @@
             this.isShowSuccessSnack = false
           })
       }
+    },
+    mounted() {
+      // 初回描画時、ログイントークンを持っていたらログイン
+      this.loginByToken()
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default,
