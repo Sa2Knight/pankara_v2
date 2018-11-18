@@ -5,10 +5,21 @@
         <v-song-thumbnail :song="history.song" />
       </div>
       <div class="description">
-        <p v-if="showDate" class="date">{{ history.event.datetime }}</p>
-        <p class="song-name collapse">{{ history.song.name }}</p>
-        <p v-if="showArtistName" class="artist-name collapse">{{ artistName }}</p>
-        <span>キー: {{ history.key }}</span>
+        <p v-if="showDate" class="date">
+          {{ history.event.datetime }}
+        </p>
+        <p v-if="showEventTitle" class="collapse">
+          {{ history.event.title }}
+        </p>
+        <p v-if="showSongName" class="song-name collapse">
+          {{ history.song.name }}
+        </p>
+        <p v-if="showArtistName" class="artist-name collapse">
+          {{ artistName }}
+        </p>
+        <span>
+          キー: {{ history.key }}
+        </span>
         <v-satisfaction-rate :satisfaction="history.satisfaction" />
         <v-score-label v-if="history.score" :score="history.score" />
         <v-user-icons :user="history.user" />
@@ -86,6 +97,12 @@
         type: Object,
         required: false
       },
+      // 曲名を表示するか
+      showSongName: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
       // 歌手名を表示するか
       showArtistName: {
         type: Boolean,
@@ -94,6 +111,12 @@
       },
       // 日付を表示するか
       showDate: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      // カラオケ名を表示するか
+      showEventTitle: {
         type: Boolean,
         required: false,
         default: false

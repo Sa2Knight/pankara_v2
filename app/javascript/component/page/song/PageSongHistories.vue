@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 lg3 v-for="history in histories">
         <div @click="() => selectHistory(history.id)">
-          <v-song-history :history="history" />
+          <v-history-card :history="history" showEventTitle showDate/>
         </div>
       </v-flex>
     </v-layout>
@@ -28,7 +28,7 @@
       })
     },
     components: {
-      VSongHistory: require('./parts/VSongHistory').default
+      VHistoryCard: require('../../common/VHistoryCard').default
     },
     methods: {
       selectHistory: function(id) {
