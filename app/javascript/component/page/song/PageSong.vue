@@ -10,13 +10,9 @@
         <v-tab href="#history">
           歌唱履歴<v-icon>fas fa-list-ul</v-icon>
         </v-tab>
-        <v-tab href="#aggregate">
-          集計<v-icon>fas fa-chart-pie</v-icon>
-        </v-tab>
 
         <v-tab-item id="overview"><page-song-overview /></v-tab-item>
         <v-tab-item id="history"><page-song-histories /></v-tab-item>
-        <v-tab-item id="aggregate"><page-song-aggregations /></v-tab-item>
 
       </v-tabs>
     </div>
@@ -50,7 +46,6 @@
     components: {
       PageSongOverview: require('./PageSongOverview').default,
       PageSongHistories: require('./PageSongHistories').default,
-      PageSongAggregations: require('./PageSongAggregations').default,
     },
   }
 </script>
