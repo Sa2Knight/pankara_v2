@@ -14,6 +14,7 @@ Vue.use(Vuetify)
 
 // URLに対応するコンポーネントを定義
 const routes = [
+  { path: ROUTES.INDEX_PATH(),       redirect: ROUTES.EVENTS_PATH() },
   { path: ROUTES.EVENTS_PATH(),      component: require('./component/page/events/PageEvents').default },
   { path: ROUTES.EVENT_PATH(':id'),  component: require('./component/page/event/PageEvent').default },
   { path: ROUTES.SONG_PATH(':id'),   component: require('./component/page/song/PageSong').default },

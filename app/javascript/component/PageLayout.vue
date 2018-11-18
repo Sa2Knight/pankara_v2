@@ -9,72 +9,18 @@
           </v-list-tile-action>
           <v-list-tile-title>トップ</v-list-tile-title>
         </v-list-tile>
-        <v-list-group
-          prepend-icon="fa-database"
-          no-action
-        >
-          <v-list-tile slot="activator">
-            <v-list-tile-title>記録を見る</v-list-tile-title>
-          </v-list-tile>
+        <v-list-tile slot="activator">
+          <v-list-tile-title>記録を見る</v-list-tile-title>
+        </v-list-tile>
 
-          <router-link tag="div" :to="eventsPath">
-            <v-list-tile>
-                <v-list-tile-title>カラオケ一覧</v-list-tile-title>
-              <v-list-tile-action>
-                  <v-icon>fa-microphone</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </router-link>
-
+        <router-link tag="div" :to="eventsPath">
           <v-list-tile>
-            <v-list-tile-title>歌唱履歴</v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon>fa-list-ol</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-
-          <v-list-tile>
-            <v-list-tile-title>楽曲一覧</v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon>fa-music</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-
-          <v-list-tile>
-            <v-list-tile-title>アーティスト一覧</v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon>fa-users</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list-group>
-        <v-list-group
-          prepend-icon="fa-plus"
-          no-action
-        >
-          <v-list-tile slot="activator">
-            <v-list-tile-title>記録をする</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile>
-            <v-list-tile-title>カラオケ新規作成</v-list-tile-title>
             <v-list-tile-action>
               <v-icon>fa-microphone</v-icon>
             </v-list-tile-action>
+            <v-list-tile-title>カラオケ一覧</v-list-tile-title>
           </v-list-tile>
-
-          <v-list-tile>
-            <v-list-tile-title>歌唱履歴を追加</v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon>fa-list-ol</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list-group>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>fas fa-cog</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>設定</v-list-tile-title>
-        </v-list-tile>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
 
