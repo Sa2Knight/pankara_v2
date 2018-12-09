@@ -1,30 +1,32 @@
 <template>
   <div class="v-history-card" v-bind:class="{ selected: isMouseOver, 'elevation-12': isMouseOver }">
-    <v-container @click="select" class="outer" @mouseenter="enter" @mouseleave="leave" grid-list-md>
-      <div class="thumbnail">
-        <v-song-thumbnail :song="history.song" />
-      </div>
-      <div class="description">
-        <p v-if="showDate" class="date">
-          {{ history.event.datetime }}
-        </p>
-        <p v-if="showEventTitle" class="collapse">
-          {{ history.event.title }}
-        </p>
-        <p v-if="showSongName" class="song-name collapse">
-          {{ history.song.name }}
-        </p>
-        <p v-if="showArtistName" class="artist-name collapse">
-          {{ artistName }}
-        </p>
-        <span>
-          キー: {{ history.key }}
-        </span>
-        <v-satisfaction-rate :satisfaction="history.satisfaction" />
-        <v-score-label v-if="history.score" :score="history.score" />
-        <v-user-icons :user="history.user" />
-      </div>
-    </v-container>
+    <a @click="select">
+      <v-container class="outer" @mouseenter="enter" @mouseleave="leave" grid-list-md>
+        <div class="thumbnail">
+          <v-song-thumbnail :song="history.song" />
+        </div>
+        <div class="description">
+          <p v-if="showDate" class="date">
+            {{ history.event.datetime }}
+          </p>
+          <p v-if="showEventTitle" class="collapse">
+            {{ history.event.title }}
+          </p>
+          <p v-if="showSongName" class="song-name collapse">
+            {{ history.song.name }}
+          </p>
+          <p v-if="showArtistName" class="artist-name collapse">
+            {{ artistName }}
+          </p>
+          <span>
+            キー: {{ history.key }}
+          </span>
+          <v-satisfaction-rate :satisfaction="history.satisfaction" />
+          <v-score-label v-if="history.score" :score="history.score" />
+          <v-user-icons :user="history.user" />
+        </div>
+      </v-container>
+    </a>
   </div>
 </template>
 
