@@ -1,15 +1,17 @@
 <!-- TODO VHistoryCardと共通部分(オンマウスにするとどうとか)どうにかしよ -->
 <template>
   <div class="v-song-card" v-bind:class="{ hover: isMouseOver, 'elevation-12': isMouseOver }">
-    <v-container @click="select" @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
-      <div class="header">
-        <div class="song-name collapse">{{ song.name }}</div>
-      </div>
-      <v-song-thumbnail :song="song" />
-      <div class="histories-count-outer">
-        <v-chip small color="primary" text-color="white">{{ song.histories_count }}回</v-chip>
-        <v-chip small color="green" text-color="white">{{ song.histories_count_by_me }}回</v-chip>
-      </div>
+    <v-container @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
+      <a :href="getSongHref(song)">
+        <div class="header">
+          <div class="song-name collapse">{{ song.name }}</div>
+        </div>
+        <v-song-thumbnail :song="song" />
+        <div class="histories-count-outer">
+          <v-chip small color="primary" text-color="white">{{ song.histories_count }}回</v-chip>
+          <v-chip small color="green" text-color="white">{{ song.histories_count_by_me }}回</v-chip>
+        </div>
+      </a>
     </v-container>
   </div>
 </template>
@@ -54,9 +56,14 @@
       },
     },
     methods: {
-      // 楽曲詳細ページへリンク
-      select: function() {
-        this.$router.push(ROUTES.SONG_PATH(this.song.id))
+      // 楽曲詳細ページのurlを取得
+      getSongHref: function() {
+        return this.$router.resolve({
+          name: 'Song',
+          params: {
+            id: this.song.id
+          }
+        }).href
       },
       // オンマウス状態にする
       enter: function() {
