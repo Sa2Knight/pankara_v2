@@ -22,6 +22,10 @@ body {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+}
+
 // リストメニュー項目
 .v-navigation-drawer,.v-menuable__content__active {
   .v-list__tile:hover {

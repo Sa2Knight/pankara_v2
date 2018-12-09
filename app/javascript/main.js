@@ -14,11 +14,31 @@ Vue.use(Vuetify)
 
 // URLに対応するコンポーネントを定義
 const routes = [
-  { path: ROUTES.INDEX_PATH(),       redirect: ROUTES.EVENTS_PATH() },
-  { path: ROUTES.EVENTS_PATH(),      component: require('./component/page/events/PageEvents').default },
-  { path: ROUTES.EVENT_PATH(':id'),  component: require('./component/page/event/PageEvent').default },
-  { path: ROUTES.SONG_PATH(':id'),   component: require('./component/page/song/PageSong').default },
-  { path: ROUTES.ARTIST_PATH(':id'), component: require('./component/page/artist/PageArtist').default },
+  {
+    name: 'Index',
+    path: ROUTES.INDEX_PATH(),
+    redirect: ROUTES.EVENTS_PATH()
+  },
+  {
+    name: 'Events',
+    path: ROUTES.EVENTS_PATH(),
+    component: require('./component/page/events/PageEvents').default
+  },
+  {
+    name: 'Event',
+    path: ROUTES.EVENT_PATH(':id'),
+    component: require('./component/page/event/PageEvent').default
+  },
+  {
+    name: 'Song',
+    path: ROUTES.SONG_PATH(':id'),
+    component: require('./component/page/song/PageSong').default
+  },
+  {
+    name: 'Artist',
+    path: ROUTES.ARTIST_PATH(':id'),
+    component: require('./component/page/artist/PageArtist').default
+  },
 ]
 
 // vuexモジュールを定義

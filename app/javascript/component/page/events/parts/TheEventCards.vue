@@ -8,9 +8,9 @@
       <v-data-iterator :items="events" content-tag="v-layout"
                         row wrap disable-initial-sort hide-actions>
         <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3 xl2 justify-space-between>
-          <div @click="() => moveToDetail(props.item)">
+          <a :href="getEventPath(props.item)">
             <v-event-card :event="props.item" />
-          </div>
+          </a>
         </v-flex>
       </v-data-iterator>
     </v-pagination-wrapper>
@@ -35,8 +35,13 @@
         'changePage',
         'fetchEvents',
       ]),
-      moveToDetail: function(event) {
-        this.$router.push(ROUTES.EVENT_PATH(event.id))
+      getEventPath: function(event) {
+        return this.$router.resolve({
+          name: 'Event',
+          params: {
+            id: event.id
+          }
+        }).href
       },
       fetchWithPaging: function(page) {
         this.changePage(page)
