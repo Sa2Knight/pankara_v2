@@ -1,3 +1,4 @@
+<!-- 使い勝手が悪すぎるので不要説 -->
 <template>
   <div class="v-user-icon">
     <div class="icon-wrapper">

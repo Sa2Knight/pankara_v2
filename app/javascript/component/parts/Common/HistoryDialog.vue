@@ -1,69 +1,59 @@
 <!-- TODO: TheHistoryDialogにするべきで、partsではないだろ -->
 <template>
   <div class="history-dialog">
-    <v-dialog v-model="isShow" scrollable max-width="350px">
+    <v-dialog v-model="isShow" scrollable max-width="100%">
       <v-card class="history-detail" v-if="history">
-        <v-card-title class="headline">歌唱履歴詳細</v-card-title>
-        <v-card-text>
-          <table class="history-table">
-            <tr>
-              <th>ユーザー</th>
-              <td><v-user-icon :user="history.user" show-display-name /></td>
-            </tr>
-            <tr>
-              <th>カラオケ名</th>
-              <td>
-                <a @click="link_to_event">{{ history.event.title }}</a>
-              </td>
-            </tr>
-            <tr>
-              <th>日時</th>
-              <td>{{ history.event.datetime }}</td>
-            </tr>
-            <tr>
-              <th>曲名</th>
-              <td>
-                <a @click="link_to_song">{{ history.song.name }}</a>
-              </td>
-            </tr>
-            <tr>
-              <th>歌手名</th>
-              <td>
-                <a @click="link_to_artist">{{ history.song.artist.name }}</a>
-              </td>
-            </tr>
-            <tr>
-              <th>キー</th>
-              <td>{{ history.key }}</td>
-            </tr>
-            <tr>
-              <th>満足度</th>
-              <td>{{ history.satisfaction }}</td>
-            </tr>
-            <tr>
-              <th>採点方法</th>
-              <td>{{ history.score_type }}</td>
-            </tr>
-            <tr>
-              <th>得点</th>
-              <td>{{ history.score }}</td>
-            </tr>
-          </table>
-        </v-card-text>
+        <div class="top clearfix">
+          <div class="song-info">
+            <h1 class="collapse">{{ history.song.name }}</h1>
+            <h2 class="collapse">{{ history.song.artist.name }}</h2>
+          </div>
+          <div class="avatar">
+            <img :src="history.user.image_url" >
+            <span class="collapse">{{ history.user.display_name }}</span>
+          </div>
+        </div>
+        <div class="middle">
+          <YoutubePlayer :song="history.song" />
+        </div>
+        <div class="bottom">
+          <div class="history-info">
+            history-info
+            <div class="left"></div>
+            <div class="right"></div>
+          </div>
+          <div class="comment"></div>
+        </div>
       </v-card>
     </v-dialog>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.history-table {
+.history-detail {
   width: 100%;
-  text-align: center;
-  tr {
-    border: 1px solid;
-  }
-  td {
-    display: inline-block;
+  padding: 1em 2em;
+  .top {
+    .song-info {
+      float: left;
+      width: 85%;
+      h1,h2 {
+        text-align: center;
+      }
+    }
+    .avatar {
+      float: right;
+      width: 15%;
+      text-align: center;
+      img {
+        width: 90%;
+        border-radius: 50%;
+      }
+      span {
+        display: inline-block;
+        margin-top: -0.5em;
+      }
+    }
   }
 }
 </style>
@@ -72,6 +62,7 @@
   // TODO: YoutubeDialogとmixinなりできる？
   import { mapState, mapActions } from 'vuex'
   import ROUTES from '../../../lib/routes'
+  import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
   const namespace = 'common'
   export default {
     data: function() {
@@ -116,7 +107,7 @@
       this.isShow = this.isShowHistoryDialog
     },
     components: {
-      VUserIcon: require('../../common/VUserIcon').default
+      YoutubePlayer,
     }
   }
 </script>
