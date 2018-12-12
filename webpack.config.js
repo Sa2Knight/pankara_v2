@@ -55,6 +55,9 @@ module.exports = {
     // vueを事前にコンパイル
     alias: {
       vue: 'vue/dist/vue.esm.js',
+      '@component': path.join(__dirname, '/app/javascript/component'),
+      '@vuex': path.join(__dirname, '/app/javascript/vuex'),
+      '@lib': path.join(__dirname, '/app/javascript/lib'),
     },
     extensions: ['.vue', '.js'],
   },
