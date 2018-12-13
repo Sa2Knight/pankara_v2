@@ -18,8 +18,8 @@
         </div>
         <div class="bottom">
           <div class="history-info">
-            <div class="left">
-              <table class="company">
+            <div>
+              <table>
                 <tr>
                   <th class="nowrap">日付</th>
                   <td class="nowrap">{{ history.event.datetime }}</td>
@@ -42,9 +42,7 @@
                 </tr>
               </table>
             </div>
-            <div class="right"></div>
           </div>
-          <div class="comment"></div>
         </div>
       </v-card>
     </v-dialog>
@@ -81,52 +79,45 @@
   }
   .bottom {
     .history-info {
+      width: 100%;
       padding-top: 1em;
+      table {
+        width: 100%;
+        margin: 0 auto;
+        border-collapse: separate;
+        td, th {
+          padding: 0.3em;
+        }
+        th {
+          background: #295890;
+          vertical-align: middle;
+          width: 100px;
+          overflow: visible;
+          position: relative;
+          color: #fff;
+          font-weight: normal;
+          &:after {
+            left: 100%;
+            top: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(136, 183, 213, 0);
+            border-left-color: #295890;
+            border-width: 0.5em;
+            margin-top: -0.5em;
+          }
+        }
+        td {
+          background: #f8f8f8;
+          padding-left: 20px;
+        }
+      }
     }
   }
-}
-
-
-table.company {
-  width: 100%;
-  margin: 0 auto;
-  border-collapse: separate;
-}
-
-table.company th,
-table.company td {
-  padding: 0.5em;
-}
-
-table.company th {
-  background: #295890;
-  vertical-align: middle;
-  width: 100px;
-  overflow: visible;
-  position: relative;
-  color: #fff;
-  font-weight: normal;
-  font-size: 15px;
-}
-
-table.company th:after {
-  left: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(136, 183, 213, 0);
-  border-left-color: #295890;
-  border-width: 0.5em;
-  margin-top: -0.5em;
-}
-
-table.company td {
-  background: #f8f8f8;
-  padding-left: 20px;
 }
 </style>
 
