@@ -4,15 +4,20 @@
       <h1>{{ song.name }}</h1>
       <h2 class="link" @click="moveToArtistPage">{{ song.artist.name}}</h2>
     </div>
-
-    <youtube-player :song="song" />
+    <div class="player">
+      <youtube-player :song="song" />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .outer {
-    text-align: center;
+.outer {
+  text-align: center;
+  .player {
+    width: 80%;
+    margin: 0 10%;
   }
+}
 </style>
 
 <script>
