@@ -97,7 +97,7 @@ export default {
         commit('setCurrentUser', response.data)
       })
       .catch((err) => {
-        dispatch('loout')
+        dispatch('logout')
       })
     },
     // ログアウト
