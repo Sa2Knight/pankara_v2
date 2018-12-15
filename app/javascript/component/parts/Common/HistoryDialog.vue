@@ -50,9 +50,11 @@
                   <th class="nowrap">キー</th>
                   <td class="nowrap">{{ history.key }}</td>
                 </tr>
-                <tr>
+                <tr v-if="history.satisfaction">
                   <th class="nowrap">満足度</th>
-                  <td class="nowrap">{{ history.satisfaction }}</td>
+                  <td class="nowrap">
+                    <VSatisfactionRate narrow :satisfaction="history.satisfaction" />
+                  </td>
                 </tr>
                 <template v-if="history.score_type && history.score">
                 <tr>
@@ -121,11 +123,11 @@
         th {
           background: #295890;
           vertical-align: middle;
-          width: 100px;
           overflow: visible;
           position: relative;
           color: #fff;
           font-weight: normal;
+          white-space: nowrap;
           &:after {
             left: 100%;
             top: 50%;
@@ -157,6 +159,7 @@
   import ROUTES from '../../../lib/routes'
   import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
   import VScoreTypeLabel from '@component/common/VScoreTypeLabel'
+  import VSatisfactionRate from '@component/common/VSatisfactionRate'
   const namespace = 'common'
   export default {
     data: function() {
@@ -213,7 +216,8 @@
     },
     components: {
       YoutubePlayer,
-      VScoreTypeLabel
+      VScoreTypeLabel,
+      VSatisfactionRate
     }
   }
 </script>
