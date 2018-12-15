@@ -36,6 +36,18 @@
                   <th class="nowrap">満足度</th>
                   <td class="nowrap">{{ history.satisfaction }}</td>
                 </tr>
+                <template v-if="history.score_type && history.score">
+                <tr>
+                  <th class="nowrap">採点</th>
+                  <td class="nowrap">
+                    <VScoreTypeLabel :type="history.score_type" />
+                  </td>
+                </tr>
+                <tr>
+                  <th class="nowrap">得点</th>
+                  <td class="nowrap">{{ history.score }} 点</td>
+                </tr>
+                </template>
                 <tr>
                   <th class="nowrap">コメント</th>
                   <td>{{ history.comment }}</td>
@@ -86,7 +98,7 @@
         margin: 0 auto;
         border-collapse: separate;
         td, th {
-          padding: 0.3em;
+          padding: 0.2em;
         }
         th {
           background: #295890;
@@ -126,6 +138,7 @@
   import { mapState, mapActions } from 'vuex'
   import ROUTES from '../../../lib/routes'
   import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
+  import VScoreTypeLabel from '@component/common/VScoreTypeLabel'
   const namespace = 'common'
   export default {
     data: function() {
@@ -171,6 +184,7 @@
     },
     components: {
       YoutubePlayer,
+      VScoreTypeLabel
     }
   }
 </script>
