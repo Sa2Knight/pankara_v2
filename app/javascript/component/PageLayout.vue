@@ -67,7 +67,18 @@
     <youtube-dialog v-if="isShowYoutubeDialog"/>
 
     <!-- 歌唱履歴詳細ダイアログ　-->
-    <history-dialog v-if="isShowHistoryDialog"/>
+    <div class="history-dialog-outer" v-if="isShowHistoryDialog">
+      <history-dialog />
+      <v-btn
+        v-show="true"
+        @click="hideHistoryDialog"
+        color="pink accent-1"
+        class="close-button elevation-12"
+        fixed bottom right fab
+      >
+        <v-icon>close</v-icon>
+      </v-btn>
+    </div>
 
 
     <!-- スナック TODO: もう少し汎用化したいね -->
@@ -93,6 +104,12 @@
     position: absolute;
     max-width: 60%;
     border-radius: 50%;
+  }
+}
+.history-dialog-outer {
+  .close-button {
+    z-index: 999;
+    opacity: 0.4;
   }
 }
 </style>
@@ -126,6 +143,7 @@
     methods: {
       ...mapActions(namespace, [
         'loginByToken',
+        'hideHistoryDialog'
       ]),
       login (name, password) {
         this.$store.dispatch('common/login', { name, password })
