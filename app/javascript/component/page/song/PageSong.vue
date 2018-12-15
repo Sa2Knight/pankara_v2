@@ -21,9 +21,11 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import PageCommonMixin from '@mixin/PageCommonMixin'
   const namespace = 'song'
 
   export default {
+    mixins: [PageCommonMixin],
     computed: {
       ...mapState(namespace, {
         song: store => store.song

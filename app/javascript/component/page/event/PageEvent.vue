@@ -35,9 +35,11 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import PageCommonMixin from '@mixin/PageCommonMixin'
   const namespace = 'event'
 
   export default {
+    mixins: [PageCommonMixin],
     computed: {
       ...mapState(namespace, {
         event: state => state.event,

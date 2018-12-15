@@ -25,6 +25,9 @@ body {
 a {
   text-decoration: none;
   color: #000;
+  &.underline {
+    text-decoration: underline;
+  }
 }
 
 .clearfix::after {

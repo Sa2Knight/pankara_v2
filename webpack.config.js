@@ -57,6 +57,7 @@ module.exports = {
       vue: 'vue/dist/vue.esm.js',
       '@component': path.join(__dirname, '/app/javascript/component'),
       '@vuex': path.join(__dirname, '/app/javascript/vuex'),
+      '@mixin': path.join(__dirname, '/app/javascript/mixin'),
       '@lib': path.join(__dirname, '/app/javascript/lib'),
     },
     extensions: ['.vue', '.js'],
