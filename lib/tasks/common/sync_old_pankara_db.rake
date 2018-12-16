@@ -3,7 +3,8 @@ namespace :common do
   desc '旧パンカラとデータを同期する'
 
   task sync_old_pankara_db: :environment do
-    dump = JSON.parse(Net::HTTP.get(URI.parse(ENV['DUMP_URL']))).deep_symbolize_keys
+    dump = JSON.parse(Net::HTTP.get(URI.parse(ENV['DUMP_URL'])))
+               .deep_symbolize_keys
 
     # 実行前にDBとキャッシュをリセット
     Rake::Task['db:reset'].invoke
@@ -47,7 +48,9 @@ namespace :common do
       History.create(
         id: history[:history_id],
         song_id: history[:song_id],
-        user_event: UserEvent.find_or_create_by(user_id: history[:user_id], event_id: history[:karaoke_id]),
+        user_event: UserEvent.find_or_create_by(
+          user_id: history[:user_id], event_id: history[:karaoke_id]
+        ),
         score: history[:score],
         score_type: history[:score_type], # TODO: 正規化
         satisfaction: history[:satisfaction],
@@ -58,6 +61,6 @@ namespace :common do
     # History.event_date 取得
     Rake::Task['histories:sync_history_event_date'].invoke
 
-    # TODO Artist.description取得
+    # TODO: Artist.description取得
   end
 end
