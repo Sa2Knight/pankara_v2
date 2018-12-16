@@ -1,5 +1,5 @@
 <template>
-  <div class="v-satisfaction-rate">
+  <div class="v-satisfaction-rate narrow">
     <v-rating v-if="satisfaction"
       :value="satisfaction"
       :length="10"
@@ -15,6 +15,14 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+.narrow {
+  /deep/ .v-icon {
+    padding: 0;
+  }
+}
+</style>
+
 <script>
   export default {
     props: {
@@ -25,6 +33,12 @@
       emptyString: {
         type: String,
         required: false
+      },
+      // 星のpaddingを0にする場合true
+      narrow: {
+        type: Boolean,
+        required: false,
+        default: false
       }
     }
   }

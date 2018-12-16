@@ -44,8 +44,8 @@ export default {
     setShowingYoutubeSong (state, song) {
       state.showingYoutubeSong = song
     },
-    setIsShowHistoryDialog (state) {
-      state.isShowHistoryDialog = true
+    setIsShowHistoryDialog (state, value) {
+      state.isShowHistoryDialog = value
     },
     setShowingHistory (state, history) {
       state.showingHistory = history
@@ -58,12 +58,6 @@ export default {
     },
     unsetShowingYoutubeSong (state) {
       state.showingYoutubeSong = null
-    },
-    unsetIsShowHistoryDialog (state) {
-      state.isShowHistoryDialog = false
-    },
-    unsetShowingHistory (state) {
-      state.showingHistory = null
     },
     setIsLoading (state) {
       state.isLoading = true
@@ -103,7 +97,7 @@ export default {
         commit('setCurrentUser', response.data)
       })
       .catch((err) => {
-        dispatch('loout')
+        dispatch('logout')
       })
     },
     // ログアウト
@@ -127,7 +121,7 @@ export default {
     },
     // 歌唱履歴ダイアログを表示する
     showHistoryDialog ({ commit, dispatch }, historyId) {
-      commit('setIsShowHistoryDialog')
+      commit('setIsShowHistoryDialog', true)
 
       http.getHistory(historyId).then((res) => {
         commit('setShowingHistory', res.data)
@@ -135,8 +129,8 @@ export default {
     },
     // 歌唱履歴ダイアログを終了する
     hideHistoryDialog ({ commit }) {
-      commit('unsetIsShowHistoryDialog')
-      commit('unsetShowingHistory')
+      commit('setIsShowHistoryDialog', false)
+      commit('setShowingHistory', null)
     },
     // ローディングビューを表示する
     showLoadingView ({ commit }) {

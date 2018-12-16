@@ -5,12 +5,19 @@
       <v-card class="history-detail" v-if="history">
         <div class="top clearfix">
           <div class="song-info">
-            <h1 class="collapse">{{ history.song.name }}</h1>
-            <h2 class="collapse">{{ history.song.artist.name }}</h2>
+            <h1 class="collapse">
+              <router-link class="underline" :to="songPage">
+                {{ history.song.name }}
+              </router-link>
+            </h1>
+            <h2 class="collapse">
+              <router-link  class="underline" :to="artistPage">
+                {{ history.song.artist.name }}
+              </router-link>
+            </h2>
           </div>
           <div class="avatar">
             <img :src="history.user.image_url" >
-            <span class="collapse">{{ history.user.display_name }}</span>
           </div>
         </div>
         <div class="middle">
@@ -26,16 +33,41 @@
                 </tr>
                 <tr>
                   <th class="nowrap">カラオケ</th>
-                  <td class="nowrap">{{ history.event.title }}</td>
+                  <td class="nowrap">
+                    <router-link class="underline" :to="eventPage">
+                      {{ history.event.title }}
+                    </router-link>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <th class="nowrap">ユーザー</th>
+                  <td class="nowrap">
+                    {{ history.user.display_name }}
+                  </td>
                 </tr>
                 <tr>
                   <th class="nowrap">キー</th>
                   <td class="nowrap">{{ history.key }}</td>
                 </tr>
-                <tr>
+                <tr v-if="history.satisfaction">
                   <th class="nowrap">満足度</th>
-                  <td class="nowrap">{{ history.satisfaction }}</td>
+                  <td class="nowrap">
+                    <VSatisfactionRate narrow :satisfaction="history.satisfaction" />
+                  </td>
                 </tr>
+                <template v-if="history.score_type && history.score">
+                <tr>
+                  <th class="nowrap">採点</th>
+                  <td class="nowrap">
+                    <VScoreTypeLabel :type="history.score_type" />
+                  </td>
+                </tr>
+                <tr>
+                  <th class="nowrap">得点</th>
+                  <td class="nowrap">{{ history.score }} 点</td>
+                </tr>
+                </template>
                 <tr>
                   <th class="nowrap">コメント</th>
                   <td>{{ history.comment }}</td>
@@ -68,7 +100,7 @@
       width: 15%;
       text-align: center;
       img {
-        width: 90%;
+        width: 100%;
         border-radius: 50%;
       }
       span {
@@ -86,16 +118,16 @@
         margin: 0 auto;
         border-collapse: separate;
         td, th {
-          padding: 0.3em;
+          padding: 0.2em;
         }
         th {
           background: #295890;
           vertical-align: middle;
-          width: 100px;
           overflow: visible;
           position: relative;
           color: #fff;
           font-weight: normal;
+          white-space: nowrap;
           &:after {
             left: 100%;
             top: 50%;
@@ -126,6 +158,8 @@
   import { mapState, mapActions } from 'vuex'
   import ROUTES from '../../../lib/routes'
   import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
+  import VScoreTypeLabel from '@component/common/VScoreTypeLabel'
+  import VSatisfactionRate from '@component/common/VSatisfactionRate'
   const namespace = 'common'
   export default {
     data: function() {
@@ -137,25 +171,36 @@
       ...mapState(namespace, {
         isShowHistoryDialog: state => state.isShowHistoryDialog,
         history: state => state.showingHistory,
-      })
+      }),
+      eventPage: function() {
+        return {
+          name: 'Event',
+          params: {
+            id: this.history.event.id
+          }
+        }
+      },
+      songPage: function() {
+        return {
+          name: 'Song',
+          params: {
+            id: this.history.song.id
+          }
+        }
+      },
+      artistPage: function() {
+        return {
+          name: 'Artist',
+          params: {
+            id: this.history.song.artist.id
+          }
+        }
+      }
     },
     methods: {
       ...mapActions(namespace, [
         'hideHistoryDialog',
-      ]),
-      link_to_event: function() {
-        // TODO: 各リンクでdispatchするの辛いのでなんとかする
-        this.$router.push(ROUTES.EVENT_PATH(this.history.event.id))
-        this.hideHistoryDialog()
-      },
-      link_to_song: function() {
-        this.$router.push(ROUTES.SONG_PATH(this.history.song.id))
-        this.hideHistoryDialog()
-      },
-      link_to_artist: function() {
-        this.$router.push(ROUTES.ARTIST_PATH(this.history.song.artist.id))
-        this.hideHistoryDialog()
-      }
+      ])
     },
     watch: {
       isShow: {
@@ -171,6 +216,8 @@
     },
     components: {
       YoutubePlayer,
+      VScoreTypeLabel,
+      VSatisfactionRate
     }
   }
 </script>

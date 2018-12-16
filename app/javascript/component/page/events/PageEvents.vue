@@ -20,10 +20,12 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import PageCommonMixin from '@mixin/PageCommonMixin'
   import CONST        from '../../../lib/constants'
   const namespace = 'events'
 
   export default {
+    mixins: [PageCommonMixin],
     computed: {
       ...mapState(namespace, {
         isShowSearchDialog: state => state.isShowSearchDialog,

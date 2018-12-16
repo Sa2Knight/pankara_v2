@@ -20,9 +20,11 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import PageCommonMixin from '@mixin/PageCommonMixin'
   const namespace = 'artist'
 
   export default {
+    mixins: [PageCommonMixin],
     computed: {
       ...mapState(namespace, {
         artist: state => state.artist
