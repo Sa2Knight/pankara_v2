@@ -44,6 +44,15 @@ namespace :common do
     end
 
     # 歌唱履歴を登録する
+    score_type_map = {
+      1 => 1, # JOY 全国
+      2 => 2, # JOY 分析
+      3 => 5, # JOYその他 to その他
+      4 => 3, # DAM ランキング
+      5 => 4, # DAM 精密
+      6 => 5, # DAMその他 to その他
+      7 => 6  # その他
+    }
     dump[:histories].each do |history|
       History.create(
         id: history[:history_id],
@@ -52,7 +61,7 @@ namespace :common do
           user_id: history[:user_id], event_id: history[:karaoke_id]
         ),
         score: history[:score],
-        score_type: history[:score_type], # TODO: 正規化
+        score_type: score_type_map[history[:score_type]],
         satisfaction: history[:satisfaction],
         key: history[:song_key]
       )
