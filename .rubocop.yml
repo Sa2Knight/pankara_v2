@@ -67,11 +67,12 @@ Rails/TimeZone:
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
-# シリアライズコード及びテストコードでは各種ルールを許容
+# 一部ファイルは制限を緩和
 Metrics/BlockLength:
   Exclude:
       - 'app/lib/json/*.rb'
       - 'spec/**/*.rb'
+      - 'lib/tasks/**/*.rake'
 Metrics/LineLength:
   Exclude:
       - 'app/lib/json/*.rb'

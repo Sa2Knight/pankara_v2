@@ -3,7 +3,7 @@
     <a @click="select">
       <v-container class="outer" @mouseenter="enter" @mouseleave="leave" grid-list-md>
         <div class="thumbnail">
-          <v-song-thumbnail :song="history.song" />
+          <VSongThumbnail :song="history.song" />
         </div>
         <div class="description">
           <p v-if="showDate" class="date">
@@ -21,9 +21,9 @@
           <span>
             キー: {{ history.key }}
           </span>
-          <v-satisfaction-rate :satisfaction="history.satisfaction" />
-          <v-score-label v-if="history.score" :score="history.score" />
-          <v-user-icons :user="history.user" />
+          <VSatisfactionRate narrow :satisfaction="history.satisfaction" />
+          <VScoreLabel v-if="history.score" :score="history.score" />
+          <VUserIcons :user="history.user" />
         </div>
       </v-container>
     </a>
@@ -69,9 +69,6 @@
       bottom: 5px;
     }
   }
-  .v-rating .v-icon {
-    padding: 0 !important;
-  }
 }
 </style>
 
@@ -79,9 +76,19 @@
   import { mapActions } from 'vuex'
   import ROUTES from '../../lib/routes'
   import Util from '../../lib/util'
+  import VSongThumbnail from '@component/common/VSongThumbnail'
+  import VUserIcons from '@component/common/VUserIcons'
+  import VScoreLabel from '@component/common/VScoreLabel'
+  import VSatisfactionRate from '@component/common/VSatisfactionRate'
   const namespace = 'common'
 
   export default {
+    components: {
+      VSongThumbnail,
+      VUserIcons,
+      VScoreLabel,
+      VSatisfactionRate
+    },
     data: function() {
       return {
         isMouseOver: false
@@ -146,11 +153,5 @@
         this.isMouseOver = false
       }
     },
-    components: {
-      VSongThumbnail: require('./VSongThumbnail').default,
-      VUserIcons: require('./VUserIcons').default,
-      VScoreLabel: require('./VScoreLabel').default,
-      VSatisfactionRate: require('./VSatisfactionRate').default
-    }
   }
 </script>
