@@ -1,5 +1,5 @@
 <template>
-  <div class="page-artist-songs">
+  <div class="the-artist-songs">
     <div class="chips-outer">
       <v-chip small color="primary" text-color="white">みんなの歌唱回数</v-chip>
       <v-chip small color="green" text-color="white">あなたの歌唱回数</v-chip>

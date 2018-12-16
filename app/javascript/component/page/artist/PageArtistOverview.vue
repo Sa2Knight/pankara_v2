@@ -1,12 +1,16 @@
 <template>
   <div class="page-artist-overview">
     <template v-if="artist">
+      <h1>{{ artist.name }}</h1>
       <p class="description">
         {{ description }}
         <a v-if="wikipediaUrl" :href="wikipediaUrl">
           (wikipedia引用)
         </a>
       </p>
+      <v-divider />
+      <h1>楽曲一覧</h1>
+      <TheArtistSongs />
     </template>
   </div>
 </template>
@@ -24,9 +28,13 @@
 
 <script>
   import { mapState } from 'vuex'
+  import TheArtistSongs from '@component/page/artist/TheArtistSongs'
   const namespace = 'artist'
 
   export default {
+    components: {
+      TheArtistSongs
+    },
     computed: {
       ...mapState(namespace, {
         artist: store => store.artist,
