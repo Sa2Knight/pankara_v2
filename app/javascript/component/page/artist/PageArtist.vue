@@ -8,8 +8,12 @@
       <v-tab href="#history">
         歌唱履歴<v-icon>fas fa-list-ul</v-icon>
       </v-tab>
-      <v-tab-item id="overview"><page-artist-overview /></v-tab-item>
-      <v-tab-item id="history"><page-artist-histories /></v-tab-item>
+      <v-tab-item id="overview">
+        <PageArtistOverview />
+      </v-tab-item>
+      <v-tab-item id="history">
+        <PageArtistHistories />
+      </v-tab-item>
     </v-tabs>
   </div>
 </template>
@@ -17,10 +21,16 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import PageCommonMixin from '@mixin/PageCommonMixin'
+  import PageArtistOverview from '@component/page/artist/PageArtistOverview'
+  import PageArtistHistories from '@component/page/artist/PageArtistHistories'
   const namespace = 'artist'
 
   export default {
     mixins: [PageCommonMixin],
+    components: {
+      PageArtistOverview,
+      PageArtistHistories
+    },
     computed: {
       ...mapState(namespace, {
         artist: state => state.artist
@@ -38,9 +48,5 @@
       .then(() => this.fetchHistoriesByPage(this.pageOrigin))
       .then(() => this.$store.dispatch('common/setPageTitle', this.artist.name))
     },
-    components: {
-      PageArtistOverview: require('./PageArtistOverview').default,
-      PageArtistHistories: require('./PageArtistHistories').default,
-    }
   }
 </script>
