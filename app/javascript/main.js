@@ -6,7 +6,7 @@ import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
 import PageLayout from './component/PageLayout'
-import ROUTES     from './lib/routes'
+import { ROUTES } from './lib/routes'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)

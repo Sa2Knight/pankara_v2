@@ -156,7 +156,7 @@
 <script>
   // TODO: YoutubeDialogとmixinなりできる？
   import { mapState, mapActions } from 'vuex'
-  import ROUTES from '../../../lib/routes'
+  import { ROUTES } from '../../../lib/routes'
   import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
   import VScoreTypeLabel from '@component/common/VScoreTypeLabel'
   import VSatisfactionRate from '@component/common/VSatisfactionRate'

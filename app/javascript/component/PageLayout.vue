@@ -116,7 +116,7 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import ROUTES from '../lib/routes'
+  import { ROUTES } from '../lib/routes'
   const namespace = 'common'
 
   export default {

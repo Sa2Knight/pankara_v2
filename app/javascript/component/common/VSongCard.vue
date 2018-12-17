@@ -42,7 +42,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import ROUTES from '../../lib/routes'
+  import { ROUTES } from '../../lib/routes'
   export default {
     data: function() {
       return {

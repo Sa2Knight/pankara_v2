@@ -74,7 +74,7 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import ROUTES from '../../lib/routes'
+  import { ROUTES } from '../../lib/routes'
   import Util from '../../lib/util'
   import VSongThumbnail from '@component/common/VSongThumbnail'
   import VUserIcons from '@component/common/VUserIcons'
