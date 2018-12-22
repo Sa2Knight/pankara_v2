@@ -1,7 +1,8 @@
 /**
   各画面共通のストア
 */
-import http from '../lib/http'
+import http from '@lib/http'
+import { router } from '@lib/routes'
 export default {
   namespaced: true,
   state: {
@@ -125,12 +126,14 @@ export default {
 
       http.getHistory(historyId).then((res) => {
         commit('setShowingHistory', res.data)
+        router.push({query: { historyDialog: res.data.id }})
       })
     },
     // 歌唱履歴ダイアログを終了する
     hideHistoryDialog ({ commit }) {
       commit('setIsShowHistoryDialog', false)
       commit('setShowingHistory', null)
+      router.push({query: {}})
     },
     // ローディングビューを表示する
     showLoadingView ({ commit }) {
