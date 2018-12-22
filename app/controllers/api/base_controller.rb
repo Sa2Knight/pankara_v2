@@ -1,4 +1,5 @@
 class Api::BaseController < ApplicationController
+  include Authentications
   include ErrorHandlers
 
   # REVIEW: ページングを使う一覧系APIごとに呼び出すで良いかも

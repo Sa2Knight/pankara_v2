@@ -4,12 +4,20 @@ class Event < ApplicationRecord
   has_many :histories, through: :user_events
   belongs_to :user
 
-  after_update :sync_histories_date
+  validates :title, length: { maximum: 24, message: 'タイトルは24文字までです' }
 
   #
-  # [コールバック] 更新時に関連する歌唱履歴の日付を同期する
+  # カラオケ作成後、作成者を参加させる
   #
-  def sync_histories_date
+  after_create do
+    self.user_events.create(user_id: self.user_id)
+  end
+
+  #
+  # カラオケ更新後、歌唱履歴の日付を更新する
+  # TODO: datetimeが更新された場合のみ発火で良いと思う
+  #
+  after_update do
     self.histories.update(event_date: self.datetime)
   end
 

@@ -29,27 +29,27 @@ module ErrorHandlers
 
   private
 
-    [400, 401, 403, 404, 500].each do |status|
-      generate_method(status)
-    end
+  [400, 401, 403, 404, 500].each do |status|
+    generate_method(status)
+  end
 
-    def raise400(message = 'params_invalid')
-      raise BadRequestError, message
-    end
+  def raise400(message = 'params_invalid')
+    raise BadRequestError, message
+  end
 
-    def raise401(message = 'user_unauthorized')
-      raise UnAuthorizedError, message
-    end
+  def raise401(message = 'user_unauthorized')
+    raise UnAuthorizedError, message
+  end
 
-    def raise403(message = 'forbidden')
-      raise ForbiddenError, message
-    end
+  def raise403(message = 'forbidden')
+    raise ForbiddenError, message
+  end
 
-    def raise404(message = 'not_found')
-      raise NotFoundError, message
-    end
+  def raise404(message = 'not_found')
+    raise NotFoundError, message
+  end
 
-    def output_log(exception)
-      logger.error exception.message
-    end
+  def output_log(exception)
+    logger.error exception.message
+  end
 end

@@ -14,4 +14,20 @@ class User < ApplicationRecord
   def histories
     History.where(user_event: self.user_events)
   end
+
+  #
+  # 友達一覧
+  # Note: 現在はみんな友だち。いずれフレンド機能を実装する
+  #
+  def friends
+    User.where.not(id: self.id)
+  end
+
+  #
+  # 指定したIDのユーザが全て友達か？
+  #
+  def friend_all?(user_ids)
+    return true if Array(user_ids).blank?
+    self.friends.where(id: user_ids).size == user_ids.size
+  end
 end

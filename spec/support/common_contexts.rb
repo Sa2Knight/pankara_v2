@@ -6,8 +6,10 @@ shared_context 'request spec common' do
   let(:first)   { body.first }
   let(:size)    { body.size }
 
-  shared_examples '404' do
-    it { expect(status).to eq 404 }
+  %w[400 401 403 404].each do |n|
+    shared_examples n do
+      it { expect(status).to eq n.to_i }
+    end
   end
 
   def request(method, url, params: nil, user: nil)
