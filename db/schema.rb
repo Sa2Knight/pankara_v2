@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_093928) do
+ActiveRecord::Schema.define(version: 2018_12_22_095252) do
 
   create_table "artists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 2018_10_21_093928) do
   end
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
     t.datetime "datetime"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fk_rails_0cb5590091"
   end
 
   create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -71,6 +73,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_093928) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "events", "users"
   add_foreign_key "histories", "songs"
   add_foreign_key "histories", "user_events"
   add_foreign_key "songs", "artists"
