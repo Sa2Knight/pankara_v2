@@ -14,7 +14,7 @@ namespace :common do
     # 初期パスワードはユーザ名で設定
     # 画像URLはユーザ名.pngで固定
     dump[:users].each do |user|
-      User.create(
+      User.create!(
         id: user[:id],
         name: user[:username],
         display_name: user[:screenname],
@@ -25,7 +25,7 @@ namespace :common do
 
     # 楽曲と歌手を登録する
     dump[:songs].each do |song|
-      Song.create(
+      Song.create!(
         id: song[:song_id],
         name: song[:song_name],
         artist_name: song[:artist_name],
@@ -35,11 +35,11 @@ namespace :common do
 
     # イベントを登録する
     dump[:events].each do |event|
-      Event.create(
+      Event.create!(
         id: event[:id],
         title: event[:name],
         datetime: event[:datetime], # TODO: dateに変更
-        # created_by: event[:created_by] TODO: 追加
+        user_id: 1 # この数値は後で書き換える
       )
     end
 
@@ -54,7 +54,7 @@ namespace :common do
       7 => 6  # その他
     }
     dump[:histories].each do |history|
-      History.create(
+      History.create!(
         id: history[:history_id],
         song_id: history[:song_id],
         user_event: UserEvent.find_or_create_by(
@@ -67,9 +67,16 @@ namespace :common do
       )
     end
 
+    # Event.user_idの設定
+    Event.includes(:user_events).each do |e|
+      e.update!(user_id: e.user_events.first.user_id)
+    end
+
     # History.event_date 取得
     Rake::Task['histories:sync_history_event_date'].invoke
 
-    # TODO: Artist.description取得
+    # Artist.description取得
+    # 重いので基本的にやらない
+    # Rake::Task['artists:fetch_wikipedia_summary'].invoke
   end
 end
