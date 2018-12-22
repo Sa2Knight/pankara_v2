@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         get :myself
       end
     end
-    resources :events, only: %i[index show]
+    resources :events, only: %i[index show create]
     resources :histories, only: %i[index show]
     resources :songs, only: %i[index show] do
       member do

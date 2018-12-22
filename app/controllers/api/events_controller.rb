@@ -1,4 +1,7 @@
 class Api::EventsController < Api::BaseController
+  before_action :logged_in_or_401, only: :create
+  before_action :event_params_valid_or_400, only: :create
+
   #
   # イベントの一覧を取得
   #
@@ -17,6 +20,13 @@ class Api::EventsController < Api::BaseController
   # イベントを新規作成
   #
   def create
+    event = Event.create!(event_params.merge(user_id: current_user.id))
+    Array(params[:users]).each do |user_id|
+      event.user_events.create!(user_id: user_id)
+    end
+    render json: JSON::Event.show(event)
+  rescue ActiveRecord::RecordInvalid => e
+    raise400 e.record.full_error_message
   end
 
   private
@@ -48,10 +58,18 @@ class Api::EventsController < Api::BaseController
   # 作成更新で許可するパラメータ
   #
   def event_params
-    params.permit(
-      :title,
-      :datetime,
-      :users
-    )
+    params.permit(:title, :datetime)
+  end
+
+  #
+  # 作成更新で許可するパラメータが不正なら400
+  # 日付は入力必須
+  # 日付は過去でなければならない
+  # 参加者は全て友達でなければならない
+  #
+  def event_params_valid_or_400
+    raise400 unless Date.valid_by?(params[:datetime])
+    raise400 if Date.parse(params[:datetime]).future?
+    raise400 unless current_user.friend_all?(params[:user_ids])
   end
 end
