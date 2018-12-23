@@ -1,7 +1,16 @@
 //
 // Pageコンポーネントの共通処理を定義するミックスイン
 //
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState('common', {
+      currentUser: state => state.currentUser
+    }),
+    isLogin: function() {
+      return !!this.currentUser
+    }
+  },
   watch: {
     // URLの変更を検知して、ダイアログの非表示を切り替え
     '$route': {
