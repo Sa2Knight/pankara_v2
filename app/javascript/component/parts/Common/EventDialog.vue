@@ -40,7 +40,7 @@
           <v-btn round color="primary">
             登録
           </v-btn>
-          <v-btn round color="primary">
+          <v-btn round color="primary" @click="hideEventDialog">
             キャンセル
           </v-btn>
         </v-card-actions>
