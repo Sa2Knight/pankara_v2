@@ -21,6 +21,15 @@
             <v-list-tile-title>カラオケ一覧</v-list-tile-title>
           </v-list-tile>
         </router-link>
+
+        <router-link v-show="!!currentUser" tag="div" :to="eventsPath">
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon>fa-plus-square</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>カラオケ新規登録</v-list-tile-title>
+          </v-list-tile>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
 
