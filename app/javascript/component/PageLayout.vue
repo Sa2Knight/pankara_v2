@@ -37,9 +37,6 @@
       />
     </v-dialog>
 
-    <!-- Youtubeプレイヤー -->
-    <youtube-dialog v-if="isShowYoutubeDialog"/>
-
     <!-- 歌唱履歴詳細ダイアログ　-->
     <div class="history-dialog-outer" v-if="isShowHistoryDialog">
       <history-dialog />
@@ -53,7 +50,6 @@
         <v-icon>close</v-icon>
       </v-btn>
     </div>
-
 
     <!-- スナック TODO: もう少し汎用化したいね -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
@@ -107,7 +103,6 @@
       ...mapState(namespace, {
         currentUser: state => state.currentUser,
         pageTitle: state => state.pageTitle,
-        isShowYoutubeDialog: state => state.isShowYoutubeDialog,
         isShowHistoryDialog: state => state.isShowHistoryDialog,
         isLoading: state => state.isLoading
       }),
@@ -144,7 +139,6 @@
     },
     components: {
       LoginForm: require('../component/parts/Common/LoginForm').default,
-      YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default,
       HistoryDialog: require('../component/parts/Common/HistoryDialog').default,
       TheLoadingView:  require('../component/parts/Common/TheLoadingView').default,
       VUserIcon: require('../component/common/VUserIcon').default
