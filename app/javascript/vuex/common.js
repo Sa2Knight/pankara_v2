@@ -128,14 +128,17 @@ export default {
       commit('setShowingHistory', null)
       router.push({query: {}})
     },
-    // カラオケダイアログを表示する(新規の場合eventIdはnull)
+    // カラオケダイアログを表示する
     showEventDialog ({ commit, dispatch }, eventId) {
       commit('setIsShowEventDialog', true)
 
-      http.getEvent(eventId).then((res) => {
-        commit('setShowingEvent', res.data)
-        router.push({query: { eventDialog: res.data.id }})
-      })
+      // 新規の場合はnullが入ってるので
+      if (eventId) {
+        return http.getEvent(eventId).then((res) => {
+          commit('setShowingEvent', res.data)
+          router.push({query: { eventDialog: res.data.id }})
+        })
+      }
     },
     // 歌唱履歴ダイアログを終了する
     hideEventDialog ({ commit }) {

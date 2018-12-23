@@ -104,6 +104,7 @@
   import { ROUTES } from '../lib/routes'
   import LoginForm from '@component/parts/Common/LoginForm'
   import HistoryDialog from '@component/parts/Common/HistoryDialog'
+  import EventDialog from '@component/parts/Common/EventDialog'
   import TheLoadingView from '@component/parts/Common/TheLoadingView'
   import VUserIcon from '@component/common/VUserIcon'
   const namespace = 'common'
@@ -112,6 +113,7 @@
     components: {
       LoginForm,
       HistoryDialog,
+      EventDialog,
       TheLoadingView,
       VUserIcon,
     },

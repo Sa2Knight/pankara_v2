@@ -12,7 +12,7 @@
         </v-btn>
 
         <!-- 新規作成ボタン-->
-        <v-btn v-show="isLogin" @click="showSearchDialog"
+        <v-btn v-show="isLogin" @click="() => showEventDialog(null)"
                color="pink" class="create-btn elevation-12" fixed bottom right fab dark small>
           <v-icon>add</v-icon>
         </v-btn>
@@ -55,6 +55,9 @@
       ...mapActions(namespace, [
         'fetchEvents',
         'showSearchDialog'
+      ]),
+      ...mapActions('common', [
+        'showEventDialog'
       ])
     },
     mounted: function() {
