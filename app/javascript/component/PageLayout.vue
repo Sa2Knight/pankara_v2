@@ -1,42 +1,7 @@
 <template>
   <div>
-    <!-- サイドメニュー -->
-    <v-navigation-drawer v-model="isShowNavigation" app>
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>fas fa-home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>トップ</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile slot="activator">
-          <v-list-tile-title>記録を見る</v-list-tile-title>
-        </v-list-tile>
-
-        <router-link tag="div" :to="eventsPath">
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon>fa-microphone</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-title>カラオケ一覧</v-list-tile-title>
-          </v-list-tile>
-        </router-link>
-
-        <router-link v-show="!!currentUser" tag="div" :to="eventsPath">
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon>fa-plus-square</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-title>カラオケ新規登録</v-list-tile-title>
-          </v-list-tile>
-        </router-link>
-      </v-list>
-    </v-navigation-drawer>
-
     <!-- ヘッダーツールバー -->
     <v-toolbar app>
-      <v-toolbar-side-icon @click.stop="isShowNavigation = !isShowNavigation">
-      </v-toolbar-side-icon>
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- ユーザメニュー or ログインボタン -->
@@ -131,7 +96,6 @@
   export default {
     data: function() {
       return {
-        isShowNavigation: false,
         isShowLoginForm: false,
         isShowSuccessSnack: false,
         isShowFailedSnack: false,
