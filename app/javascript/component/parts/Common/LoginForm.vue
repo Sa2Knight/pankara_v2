@@ -1,7 +1,7 @@
 <template>
   <v-card>
-    <v-card-title>
-      <span class="headline">ログイン</span>
+    <v-card-title class="headline grey lighten-2">
+      ログイン
     </v-card-title>
     <v-card-text>
       <v-container grid-list-md>
