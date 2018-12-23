@@ -37,7 +37,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn round color="primary">
+          <v-btn round color="primary" @click="submit">
             登録
           </v-btn>
           <v-btn round color="primary" @click="hideEventDialog">
@@ -83,7 +83,20 @@
     methods: {
       ...mapActions(namespace, [
         'hideEventDialog',
-      ])
+      ]),
+      ...mapActions('events', [
+        'createEvent'
+      ]),
+      submit: function() {
+        const params = {
+          title: this.title,
+          datetime: this.datetime,
+          users: []
+        }
+        this.createEvent(params).then(() => {
+          this.hideEventDialog()
+        })
+      }
     },
     watch: {
       isShow: {
