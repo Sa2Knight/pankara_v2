@@ -18,6 +18,10 @@ export default {
     isShowHistoryDialog: false,
     // 歌唱履歴詳細ダイアログに表示してる歌唱履歴
     showingHistory: null,
+    // カラオケ作成編集ダイアログを表示してる？
+    isShowEventDialog: false,
+    // カラオケ作成編集ダイアログで表示しているカラオケ
+    showingEvent: null,
     // ローディング中か？
     isLoading: false,
   },
@@ -38,14 +42,17 @@ export default {
     setIsShowYoutubeDialog (state) {
       state.isShowYoutubeDialog = true
     },
-    setShowingYoutubeSong (state, song) {
-      state.showingYoutubeSong = song
-    },
     setIsShowHistoryDialog (state, value) {
       state.isShowHistoryDialog = value
     },
     setShowingHistory (state, history) {
       state.showingHistory = history
+    },
+    setIsShowEventDialog (state, value) {
+      state.isShowEventDialog = value
+    },
+    setShowingEvent (state, event) {
+      state.showingEvent = event
     },
     unsetPageTitle (state) {
       state.pageTitle = ''
@@ -119,6 +126,21 @@ export default {
     hideHistoryDialog ({ commit }) {
       commit('setIsShowHistoryDialog', false)
       commit('setShowingHistory', null)
+      router.push({query: {}})
+    },
+    // カラオケダイアログを表示する(新規の場合eventIdはnull)
+    showEventDialog ({ commit, dispatch }, eventId) {
+      commit('setIsShowEventDialog', true)
+
+      http.getEvent(eventId).then((res) => {
+        commit('setShowingEvent', res.data)
+        router.push({query: { eventDialog: res.data.id }})
+      })
+    },
+    // 歌唱履歴ダイアログを終了する
+    hideEventDialog ({ commit }) {
+      commit('setIsShowEventDialog', false)
+      commit('setShowingEvent', null)
       router.push({query: {}})
     },
     // ローディングビューを表示する

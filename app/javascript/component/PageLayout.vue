@@ -51,6 +51,21 @@
       </v-btn>
     </div>
 
+    <!-- カラオケ作成/編集ダイアログ -->
+    <div class="event-dialog-outer" v-if="isShowEventDialog">
+      <EventDialog />
+      <!-- TODO: この辺共通化したい-->
+      <v-btn
+        v-show="true"
+        @click="hideEventDialog"
+        color="pink accent-1"
+        class="close-button elevation-12"
+        fixed bottom right fab
+      >
+        <v-icon>close</v-icon>
+      </v-btn>
+    </div>
+
     <!-- スナック TODO: もう少し汎用化したいね -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
       {{ successSnackLabel }}
@@ -87,9 +102,19 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import { ROUTES } from '../lib/routes'
+  import LoginForm from '@component/parts/Common/LoginForm'
+  import HistoryDialog from '@component/parts/Common/HistoryDialog'
+  import TheLoadingView from '@component/parts/Common/TheLoadingView'
+  import VUserIcon from '@component/common/VUserIcon'
   const namespace = 'common'
 
   export default {
+    components: {
+      LoginForm,
+      HistoryDialog,
+      TheLoadingView,
+      VUserIcon,
+    },
     data: function() {
       return {
         isShowLoginForm: false,
@@ -104,14 +129,15 @@
         currentUser: state => state.currentUser,
         pageTitle: state => state.pageTitle,
         isShowHistoryDialog: state => state.isShowHistoryDialog,
+        isShowEventDialog: state => state.isShowEventDialog,
         isLoading: state => state.isLoading
-      }),
-      eventsPath: () => ROUTES.EVENTS_PATH(),
+      })
     },
     methods: {
       ...mapActions(namespace, [
         'loginByToken',
-        'hideHistoryDialog'
+        'hideHistoryDialog',
+        'hideEventDialog'
       ]),
       login (name, password) {
         this.$store.dispatch('common/login', { name, password })
@@ -136,12 +162,6 @@
     mounted() {
       // 初回描画時、ログイントークンを持っていたらログイン
       this.loginByToken()
-    },
-    components: {
-      LoginForm: require('../component/parts/Common/LoginForm').default,
-      HistoryDialog: require('../component/parts/Common/HistoryDialog').default,
-      TheLoadingView:  require('../component/parts/Common/TheLoadingView').default,
-      VUserIcon: require('../component/common/VUserIcon').default
     },
   }
 </script>
