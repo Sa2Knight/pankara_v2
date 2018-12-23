@@ -1,33 +1,7 @@
 <template>
   <div>
-    <!-- サイドメニュー -->
-    <v-navigation-drawer v-model="isShowNavigation" app>
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>fas fa-home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>トップ</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile slot="activator">
-          <v-list-tile-title>記録を見る</v-list-tile-title>
-        </v-list-tile>
-
-        <router-link tag="div" :to="eventsPath">
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon>fa-microphone</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-title>カラオケ一覧</v-list-tile-title>
-          </v-list-tile>
-        </router-link>
-      </v-list>
-    </v-navigation-drawer>
-
     <!-- ヘッダーツールバー -->
     <v-toolbar app>
-      <v-toolbar-side-icon @click.stop="isShowNavigation = !isShowNavigation">
-      </v-toolbar-side-icon>
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- ユーザメニュー or ログインボタン -->
@@ -63,9 +37,6 @@
       />
     </v-dialog>
 
-    <!-- Youtubeプレイヤー -->
-    <youtube-dialog v-if="isShowYoutubeDialog"/>
-
     <!-- 歌唱履歴詳細ダイアログ　-->
     <div class="history-dialog-outer" v-if="isShowHistoryDialog">
       <history-dialog />
@@ -80,6 +51,10 @@
       </v-btn>
     </div>
 
+    <!-- カラオケ作成/編集ダイアログ -->
+    <div class="event-dialog-outer" v-if="isShowEventDialog">
+      <EventDialog />
+    </div>
 
     <!-- スナック TODO: もう少し汎用化したいね -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
@@ -117,12 +92,23 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import { ROUTES } from '../lib/routes'
+  import LoginForm from '@component/parts/Common/LoginForm'
+  import HistoryDialog from '@component/parts/Common/HistoryDialog'
+  import EventDialog from '@component/parts/Common/EventDialog'
+  import TheLoadingView from '@component/parts/Common/TheLoadingView'
+  import VUserIcon from '@component/common/VUserIcon'
   const namespace = 'common'
 
   export default {
+    components: {
+      LoginForm,
+      HistoryDialog,
+      EventDialog,
+      TheLoadingView,
+      VUserIcon,
+    },
     data: function() {
       return {
-        isShowNavigation: false,
         isShowLoginForm: false,
         isShowSuccessSnack: false,
         isShowFailedSnack: false,
@@ -134,16 +120,16 @@
       ...mapState(namespace, {
         currentUser: state => state.currentUser,
         pageTitle: state => state.pageTitle,
-        isShowYoutubeDialog: state => state.isShowYoutubeDialog,
         isShowHistoryDialog: state => state.isShowHistoryDialog,
+        isShowEventDialog: state => state.isShowEventDialog,
         isLoading: state => state.isLoading
-      }),
-      eventsPath: () => ROUTES.EVENTS_PATH(),
+      })
     },
     methods: {
       ...mapActions(namespace, [
         'loginByToken',
-        'hideHistoryDialog'
+        'hideHistoryDialog',
+        'hideEventDialog'
       ]),
       login (name, password) {
         this.$store.dispatch('common/login', { name, password })
@@ -168,13 +154,6 @@
     mounted() {
       // 初回描画時、ログイントークンを持っていたらログイン
       this.loginByToken()
-    },
-    components: {
-      LoginForm: require('../component/parts/Common/LoginForm').default,
-      YoutubeDialog: require('../component/parts/Common/YoutubeDialog').default,
-      HistoryDialog: require('../component/parts/Common/HistoryDialog').default,
-      TheLoadingView:  require('../component/parts/Common/TheLoadingView').default,
-      VUserIcon: require('../component/common/VUserIcon').default
     },
   }
 </script>

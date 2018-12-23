@@ -14,14 +14,14 @@ export default {
     currentUser: null,
     // ヘッダーに表示されるページタイトル
     pageTitle: '',
-    // Youtubeダイアログを表示してる？
-    isShowYoutubeDialog: false,
-    // Youtubeダイアログで表示している楽曲
-    showingYoutubeSong: null,
     // 歌唱履歴詳細ダイアログを表示してる？
     isShowHistoryDialog: false,
     // 歌唱履歴詳細ダイアログに表示してる歌唱履歴
     showingHistory: null,
+    // カラオケ作成編集ダイアログを表示してる？
+    isShowEventDialog: false,
+    // カラオケ作成編集ダイアログで表示しているカラオケ
+    showingEvent: null,
     // ローディング中か？
     isLoading: false,
   },
@@ -42,14 +42,17 @@ export default {
     setIsShowYoutubeDialog (state) {
       state.isShowYoutubeDialog = true
     },
-    setShowingYoutubeSong (state, song) {
-      state.showingYoutubeSong = song
-    },
     setIsShowHistoryDialog (state, value) {
       state.isShowHistoryDialog = value
     },
     setShowingHistory (state, history) {
       state.showingHistory = history
+    },
+    setIsShowEventDialog (state, value) {
+      state.isShowEventDialog = value
+    },
+    setShowingEvent (state, event) {
+      state.showingEvent = event
     },
     unsetPageTitle (state) {
       state.pageTitle = ''
@@ -110,16 +113,6 @@ export default {
     setPageTitle ({ commit }, pageTitle) {
       commit('setPageTitle', pageTitle)
     },
-    // Youtubeダイアログを表示する
-    showYoutubeDialog ({ commit }, song) {
-      commit('setIsShowYoutubeDialog')
-      commit('setShowingYoutubeSong', song)
-    },
-    // Youtubeダイアログを終了する
-    hideYoutubeDialog ({ commit }) {
-      commit('unsetIsShowYoutubeDialog')
-      commit('unsetShowingYoutubeSong')
-    },
     // 歌唱履歴ダイアログを表示する
     showHistoryDialog ({ commit, dispatch }, historyId) {
       commit('setIsShowHistoryDialog', true)
@@ -133,6 +126,24 @@ export default {
     hideHistoryDialog ({ commit }) {
       commit('setIsShowHistoryDialog', false)
       commit('setShowingHistory', null)
+      router.push({query: {}})
+    },
+    // カラオケダイアログを表示する
+    showEventDialog ({ commit, dispatch }, eventId) {
+      commit('setIsShowEventDialog', true)
+
+      // 新規の場合はnullが入ってるので
+      if (eventId) {
+        return http.getEvent(eventId).then((res) => {
+          commit('setShowingEvent', res.data)
+          router.push({query: { eventDialog: res.data.id }})
+        })
+      }
+    },
+    // 歌唱履歴ダイアログを終了する
+    hideEventDialog ({ commit }) {
+      commit('setIsShowEventDialog', false)
+      commit('setShowingEvent', null)
       router.push({query: {}})
     },
     // ローディングビューを表示する

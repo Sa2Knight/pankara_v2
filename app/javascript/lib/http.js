@@ -69,6 +69,13 @@ http.getEvent = function(id, params = {}) {
 }
 
 /**
+ * イベントを作成する
+ */
+http.postEvents = function(params = {}) {
+  return request('POST', `/events`, params)
+}
+
+/**
  * 楽曲詳細を取得する
  */
 http.getSong = function(id, params = {}) {

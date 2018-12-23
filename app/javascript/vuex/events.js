@@ -85,6 +85,14 @@ export default {
         util.scrollToTop()
       })
     },
+    // APIにカラオケ新規作成をリクエストする
+    createEvent ({ state, commit, dispatch }, params) {
+      dispatch('common/showLoadingView', null, { root: true })
+
+      http.postEvents(params).then((response) => {
+        dispatch('common/hideLoadingView', null, { root: true })
+      })
+    },
     // ページを切り替える
     changePage ({ state, commit }, page) {
       commit('setPager', { page: page })
