@@ -54,16 +54,6 @@
     <!-- カラオケ作成/編集ダイアログ -->
     <div class="event-dialog-outer" v-if="isShowEventDialog">
       <EventDialog />
-      <!-- TODO: この辺共通化したい-->
-      <v-btn
-        v-show="true"
-        @click="hideEventDialog"
-        color="pink accent-1"
-        class="close-button elevation-12"
-        fixed bottom right fab
-      >
-        <v-icon>close</v-icon>
-      </v-btn>
     </div>
 
     <!-- スナック TODO: もう少し汎用化したいね -->
