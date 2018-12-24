@@ -68,4 +68,12 @@ class Event < ApplicationRecord
   def average_satisfaction(user_event: nil)
     self.histories.by_user_event(user_event).average(:satisfaction)
   end
+
+  #
+  # 指定したユーザで編集可能か？
+  # 現状はカラオケオーナーのみ編集可能
+  #
+  def editable_by?(user:)
+    self.user == user
+  end
 end

@@ -67,6 +67,10 @@ Rails/TimeZone:
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
+# 一行のIF式を許可
+Style/IfUnlessModifier:
+  Enabled: false
+
 # 一部ファイルは制限を緩和
 Metrics/BlockLength:
   Exclude:
