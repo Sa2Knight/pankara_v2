@@ -1,6 +1,6 @@
 require_relative '../../support/common_contexts'
 
-describe 'events#index', type: :request do
+describe 'events#create', type: :request do
   include_context 'request spec common'
 
   let(:current_user) { FactoryBot.create(:user) }

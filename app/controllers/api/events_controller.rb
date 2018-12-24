@@ -1,23 +1,29 @@
 class Api::EventsController < Api::BaseController
-  before_action :logged_in_or_401, only: :create
-  before_action :event_params_valid_or_400, only: :create
+  # 事前認証
+  before_action :logged_in_or_401, only: %i[create update]
+  before_action :updatable_or_403, only: :update
+
+  # パラメータチェック
+  before_action :datetime_present_or_400, only: :create
+  before_action :datetime_past_or_400, only: %i[create update]
+  before_action :users_valid_or_400, only: :create
 
   #
-  # イベントの一覧を取得
+  # [endpoint] 一覧
   #
   def index
     render json: events.map { |event| JSON::Event.index(event) }
   end
 
   #
-  # イベントの詳細を取得
+  # [endpoint] 詳細
   #
   def show
     render json: JSON::Event.show(event)
   end
 
   #
-  # イベントを新規作成
+  # [endpoint] 作成
   #
   def create
     event = Event.create!(event_params.merge(user_id: current_user.id))
@@ -29,12 +35,19 @@ class Api::EventsController < Api::BaseController
     raise400 e.record.full_error_message
   end
 
+  #
+  # [endpoint] 更新
+  #
+  def update
+    event.update!(event_params.to_h.compact)
+    render json: JSON::Event.show(event)
+  rescue ActiveRecord::RecordInvalid => e
+    raise400 e.record.full_error_message
+  end
+
   private
 
-  #
-  # 一覧取得対象のイベント一覧
   # rubocop: disable Metrics/AbcSize
-  #
   def events
     @index = Event
              .title_like(params[:title])
@@ -46,30 +59,41 @@ class Api::EventsController < Api::BaseController
   end
   # rubocop: enable Metrics/AbcSize
 
-  #
-  # 取得対象のイベント
-  #
   def event
     return @event if @event.present?
     (@event = Event.find_by(id: params[:id])) || raise404('event_not_found')
   end
 
-  #
-  # 作成更新で許可するパラメータ
-  #
   def event_params
     params.permit(:title, :datetime)
   end
 
+  # [check] 編集/削除可能か？
+  def updatable_or_403
+    event.editable_by?(user: current_user) || raise403
+  end
+
   #
-  # 作成更新で許可するパラメータが不正なら400
-  # 日付は入力必須
-  # 日付は過去でなければならない
-  # 参加者は全て友達でなければならない
+  # TODO: この辺カスタムバリデーション入れたほうが絶対良い
+  # コントローラでやることじゃないと思う。
   #
-  def event_params_valid_or_400
+
+  # [check] datetimeが指定されているか？
+  def datetime_present_or_400
+    raise400 if params[:datetime].blank?
+  end
+
+  # [check] datetimeが有効な過去の日付か？
+  def datetime_past_or_400
+    return if params[:datetime].blank?
+
     raise400 unless Date.valid_by?(params[:datetime])
     raise400 if Date.parse(params[:datetime]).future?
+  end
+
+  # [check] usersが全てフレンドか？
+  def users_valid_or_400
+    return if params[:user_ids].blank?
     raise400 unless current_user.friend_all?(params[:user_ids])
   end
 end
