@@ -3,11 +3,6 @@ class Api::EventsController < Api::BaseController
   before_action :logged_in_or_401, only: %i[create update]
   before_action :updatable_or_403, only: :update
 
-  # パラメータチェック
-  before_action :datetime_present_or_400, only: :create
-  before_action :datetime_past_or_400, only: %i[create update]
-  before_action :users_valid_or_400, only: :create
-
   #
   # [endpoint] 一覧
   #
@@ -71,29 +66,5 @@ class Api::EventsController < Api::BaseController
   # [check] 編集/削除可能か？
   def updatable_or_403
     event.editable_by?(user: current_user) || raise403
-  end
-
-  #
-  # TODO: この辺カスタムバリデーション入れたほうが絶対良い
-  # コントローラでやることじゃないと思う。
-  #
-
-  # [check] datetimeが指定されているか？
-  def datetime_present_or_400
-    raise400 if params[:datetime].blank?
-  end
-
-  # [check] datetimeが有効な過去の日付か？
-  def datetime_past_or_400
-    return if params[:datetime].blank?
-
-    raise400 unless Date.valid_by?(params[:datetime])
-    raise400 if Date.parse(params[:datetime]).future?
-  end
-
-  # [check] usersが全てフレンドか？
-  def users_valid_or_400
-    return if params[:user_ids].blank?
-    raise400 unless current_user.friend_all?(params[:user_ids])
   end
 end
