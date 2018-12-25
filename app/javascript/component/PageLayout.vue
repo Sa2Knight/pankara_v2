@@ -4,21 +4,28 @@
     <v-toolbar app>
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <!-- ユーザメニュー or ログインボタン -->
       <v-toolbar-items>
-        <v-menu v-if="currentUser" transition="slide-y-transition" bottom>
-          <v-btn class="login-user-icon-outer" slot="activator" >
+        <v-menu bottom left>
+          <v-btn v-if="currentUser" class="login-user-icon-outer" slot="activator" >
             <img :src="currentUser.image_url" >
+          </v-btn>
+          <v-btn v-else slot="activator" black icon>
+            <v-icon>more_vert</v-icon>
           </v-btn>
           <v-list>
             <v-list-tile>
-              <a>
-                <v-list-tile-title @click="logout">ログアウト</v-list-tile-title>
-              </a>
+              <router-link :to="{ name: 'Events' }">
+                <v-list-tile-title>カラオケ一覧</v-list-tile-title>
+              </router-link>
+            </v-list-tile>
+            <v-list-tile v-if="currentUser" @click="logout">
+              <a><v-list-tile-title>ログアウト</v-list-tile-title></a>
+            </v-list-tile>
+            <v-list-tile v-else @click="isShowLoginForm = true">
+              <a><v-list-tile-title>ログイン</v-list-tile-title></a>
             </v-list-tile>
           </v-list>
         </v-menu>
-        <v-btn v-else flat @click="isShowLoginForm = true">ログイン</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
