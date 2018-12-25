@@ -29,7 +29,9 @@ const request = function(method, url, params = {}) {
   if (method === 'GET') {
     baseParams.params = params
   } else {
+    const token = document.querySelector("input[name=authenticity_token]").value
     baseParams.data = params
+    baseParams.data.authenticity_token = token
   }
   return axios(baseParams)
 }
