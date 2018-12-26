@@ -22,6 +22,10 @@ module Pankara
       require l
     end
 
+    #
+    # Generatorの生成物の設定
+    # 基本的に必要に応じて手動で生成するので全てオフ
+    #
     config.generators do |g|
       g.javascripts false
       g.stylesheets false
@@ -31,8 +35,8 @@ module Pankara
                        view_specs: false,
                        helper_specs: false,
                        routing_specs: false,
-                       controller_specs: true,
-                       request_specs: true
+                       controller_specs: false,
+                       request_specs: false
     end
   end
 end
