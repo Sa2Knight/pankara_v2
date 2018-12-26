@@ -12,7 +12,7 @@ module Pankara
     config.load_defaults 5.2
 
     # 追加で読み込むファイルを指定
-    config.autoload_paths += %w[{config.root}/app/models/validators]
+    config.autoload_paths += %W[#{config.root}/app/models/validators]
     config.autoload_paths += %W[#{config.root}/lib]
     Dir["#{config.root}/lib/core_ext/*.rb"].each do |l|
       require l
