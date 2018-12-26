@@ -35,12 +35,13 @@ namespace :common do
 
     # イベントを登録する
     dump[:events].each do |event|
-      Event.create!(
+      e = Event.create!(
         id: event[:id],
         title: event[:name],
         datetime: event[:datetime], # TODO: dateに変更
         user_id: 1 # この数値は後で書き換える
       )
+      e.user_events.first.destroy
     end
 
     # 歌唱履歴を登録する
