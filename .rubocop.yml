@@ -1,6 +1,8 @@
 # Rubyのバージョンを指定
 AllCops:
   TargetRubyVersion: 2.5
+  Exclude:
+    - 'config/**/*.rb'
 
 # Railsモードで動作
 Rails:
