@@ -16,11 +16,8 @@ Rails.application.configure do
   # TODO: どのように配信するか要検討
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  # JSの圧縮ライブラリにはuglifierを使用
-  config.assets.js_compressor = :uglifier
-
-  # アセットのコンパイルは行わない
-  # TODO: 要検討
+  # アセットパイプラインを使わない
+  config.assets.enabled = false
   config.assets.compile = false
 
   # ActiveStorageはクラウドでなくローカルを使う
