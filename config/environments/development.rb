@@ -24,35 +24,31 @@ Rails.application.configure do
   # ActiveStorageはクラウドでなくローカルを使う
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
+  # メール送信に失敗してもエラーを表示しない
   config.action_mailer.raise_delivery_errors = false
 
+  # メールテンプレートのキャッシュはしない
   config.action_mailer.perform_caching = false
 
-  # Print deprecation notices to the Rails logger.
+  # Railsログに非推奨レポートを出力する
   config.active_support.deprecation = :log
 
-  # Raise an error on page load if there are pending migrations.
+  # ページロード前に全てのmigrationが走っているかを確認する
   config.active_record.migration_error = :page_load
 
-  # Highlight code that triggered database queries in logs.
+  # ログでSQLをハイライトする
   config.active_record.verbose_query_logs = true
 
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
+  # 開発環境ではassetのプリプロセッサを実行しない
   config.assets.debug = true
 
-  # Suppress logger output for asset requests.
+  # assetに対するリクエストをログに出力しない
   config.assets.quiet = true
 
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
-
-  # Use an evented file watcher to asynchronously detect changes in source code,
-  # routes, locales, etc. This feature depends on the listen gem.
+  # ファイルの変更を検知するクラスを指定
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # Bulletを用いてN+1を検出してログに吐き出す
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true
