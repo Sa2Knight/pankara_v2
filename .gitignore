@@ -14,3 +14,6 @@ spec/examples.txt
 app/assets/javascripts/application.js
 !.gitkeep
 tags
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
