@@ -4,7 +4,7 @@ Rails.application.configure do
   config.cache_classes = true
 
   # 全ての名前空間を事前に読み込む
-  config.eager_load = true
+  config.eager_load = false
 
   # Railsのエラーをレスポンスに含まない
   config.consider_all_requests_local       = false
@@ -16,19 +16,14 @@ Rails.application.configure do
   # TODO: どのように配信するか要検討
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  # JSの圧縮ライブラリにはuglifierを使用
-  config.assets.js_compressor = :uglifier
-
-  # アセットのコンパイルは行わない
-  # TODO: 要検討
-  config.assets.compile = false
+  # アセットのコンパイルを行う
+  config.assets.compile = true
 
   # ActiveStorageはクラウドでなくローカルを使う
   config.active_storage.service = :local
 
   # ログは警告以上のみ表示
-  # REVIEW: デバッグ情報本当にいらない？
-  config.log_level = :warn
+  config.log_level = :debug
 
   # ログにrequest_idを含むようにする
   config.log_tags = [ :request_id ]
