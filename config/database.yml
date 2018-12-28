@@ -19,5 +19,4 @@ test:
 production:
   <<: *default
   database: pankara_production
-  username: pankara
   password: <%= Rails.application.credentials.dig(:production, :database, :password) %>
