@@ -1,4 +1,4 @@
-class EventValidator < ActiveModel::Validator
+class EventValidators < ActiveModel::Validator
   def validate(record)
     @record = record
 

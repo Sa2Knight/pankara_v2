@@ -8,20 +8,20 @@ Bundler.require(*Rails.groups)
 
 module Pankara
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
+    # Rails 5.2の推奨設定を利用
     config.load_defaults 5.2
 
-    config.autoload_paths << Rails.root.join('lib')
-    config.autoload_paths << Rails.root.join('lib', 'constants')
-    config.autoload_paths << Rails.root.join('lib', 'core_ext', '*.rb')
-    config.autoload_paths << Rails.root.join('app', 'modules')
-
-    # TODO: この辺なんとかしたい
-    Dir[Rails.root.join('lib', 'core_ext', '*.rb')].each { |l| require l }
-    Dir[Rails.root.join('app', 'models', 'validators', '*.rb')].each do |l|
+    # 追加で読み込むファイルを指定
+    config.autoload_paths += %W[#{config.root}/app/models/validators]
+    config.autoload_paths += %W[#{config.root}/lib]
+    Dir["#{config.root}/lib/core_ext/*.rb"].each do |l|
       require l
     end
 
+    #
+    # Generatorの生成物の設定
+    # 基本的に必要に応じて手動で生成するので全てオフ
+    #
     config.generators do |g|
       g.javascripts false
       g.stylesheets false
@@ -31,8 +31,8 @@ module Pankara
                        view_specs: false,
                        helper_specs: false,
                        routing_specs: false,
-                       controller_specs: true,
-                       request_specs: true
+                       controller_specs: false,
+                       request_specs: false
     end
   end
 end

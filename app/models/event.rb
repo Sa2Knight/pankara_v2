@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   validates :title, length: { maximum: 24, message: 'タイトルは24文字までです' }
 
   include ActiveModel::Validations
-  validates_with EventValidator
+  validates_with EventValidators
 
   #
   # カラオケ作成後、作成者を参加させる

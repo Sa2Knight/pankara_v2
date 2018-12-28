@@ -1,64 +1,54 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
 
-  # In the development environment your application's code is reloaded on
-  # every request. This slows down response time but is perfect for development
-  # since you don't have to restart the web server when you make code changes.
+  # ソースに変更を加えた場合次回リクエスト時にリロードする
   config.cache_classes = false
 
-  # Do not eager load code on boot.
+  # 全ての名前空間は事前に読み込まずに必要になった段階で読み込む
   config.eager_load = false
 
-  # Show full error reports.
+  # Railsのエラーをレスポンスに含む
   config.consider_all_requests_local = true
 
-  # Enable/disable caching. By default caching is disabled.
-  # Run rails dev:cache to toggle caching.
+  # 開発環境では rails dev:cache コマンドでキャッシュを使うかを切り替える
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
-
     config.cache_store = :memory_store
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
 
-  # Store uploaded files on the local file system (see config/storage.yml for options)
+  # ActiveStorageはクラウドでなくローカルを使う
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
+  # メール送信に失敗してもエラーを表示しない
   config.action_mailer.raise_delivery_errors = false
 
+  # メールテンプレートのキャッシュはしない
   config.action_mailer.perform_caching = false
 
-  # Print deprecation notices to the Rails logger.
+  # Railsログに非推奨レポートを出力する
   config.active_support.deprecation = :log
 
-  # Raise an error on page load if there are pending migrations.
+  # ページロード前に全てのmigrationが走っているかを確認する
   config.active_record.migration_error = :page_load
 
-  # Highlight code that triggered database queries in logs.
+  # ログでSQLをハイライトする
   config.active_record.verbose_query_logs = true
 
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
+  # 開発環境ではassetのプリプロセッサを実行しない
   config.assets.debug = true
 
-  # Suppress logger output for asset requests.
+  # assetに対するリクエストをログに出力しない
   config.assets.quiet = true
 
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
-
-  # Use an evented file watcher to asynchronously detect changes in source code,
-  # routes, locales, etc. This feature depends on the listen gem.
+  # ファイルの変更を検知するクラスを指定
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # Bulletを用いてN+1を検出してログに吐き出す
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true
