@@ -1,9 +1,6 @@
 <template>
   <div class="the-artist-songs">
-    <div class="chips-outer">
-      <v-chip small color="primary" text-color="white">みんなの歌唱回数</v-chip>
-      <v-chip small color="green" text-color="white">あなたの歌唱回数</v-chip>
-    </div>
+    <TheSangCountRemarks />
     <v-layout row wrap class="pb-5">
       <v-flex xs6 sm4 md3 lg2 v-for="song in artist.songs">
         <v-song-card :song="song" />
@@ -25,16 +22,19 @@
 
 <script>
   import { mapState } from 'vuex'
+  import TheSangCountRemarks from '@component/the/TheSangCountRemarks'
+  import VSongCard from '@component/common/VSongCard'
   const namespace = 'artist'
 
   export default {
+    components: {
+      TheSangCountRemarks,
+      VSongCard
+    },
     computed: {
       ...mapState(namespace, {
         artist: store => store.artist,
       }),
     },
-    components: {
-      VSongCard: require('../../common/VSongCard').default,
-    }
   }
 </script>
