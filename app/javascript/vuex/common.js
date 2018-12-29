@@ -108,6 +108,7 @@ export default {
     logout ({ commit }) {
       localStorage.removeItem('jwt')
       commit('setCurrentUser', null)
+      router.push('/')
     },
     // ページタイトルを差し替える
     setPageTitle ({ commit }, pageTitle) {
