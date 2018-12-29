@@ -64,6 +64,7 @@
     },
     mounted: function() {
       this.$store.dispatch('common/setPageTitle', '歌唱履歴一覧')
+      this.fetchHistoriesByPage()
     },
   }
 </script>
