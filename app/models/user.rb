@@ -1,12 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :user_events
+  has_many :user_events, dependent: :destroy
   has_many :events, through: :user_events
   has_many :own_events, class_name: 'Event', dependent: :nullify
-
-  def self.from_token_request(request)
-    User.first
-  end
 
   #
   # 歌唱履歴一覧
@@ -21,6 +17,17 @@ class User < ApplicationRecord
   #
   def friends
     User.where.not(id: self.id)
+  end
+
+  #
+  # 持ち歌一覧
+  # 一度以上歌ったことのある楽曲のIDリストを戻す
+  # 結果は全てRedisにキャッシュされる
+  #
+  def my_song_ids
+    RedisClient.get_or_set(key: "user_#{self.id}_song_list", type: Array) do
+      self.histories.pluck(:song_id).uniq
+    end
   end
 
   #

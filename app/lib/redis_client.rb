@@ -1,7 +1,9 @@
 #
 # 【楽曲の歌唱回数】song:#{id}:histories_count:#{user|all}
 #   History(CUD)
-# 【歌手の歌手回数】artist#{id}:histories_count:#{user|all}
+# 【歌手の歌手回数】artist:#{id}:histories_count:#{user|all}
+#   History(CUD)
+# 【ユーザの持ち歌一覧】user:#{id}:song_list
 #   History(CUD)
 #
 module RedisClient
