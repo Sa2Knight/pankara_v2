@@ -52,9 +52,18 @@
         this.fetchHistories(this.currentUser.id)
       }
     },
+    watch: {
+      // ページリロード時はcurrentUserが取得できていないので、
+      // 取得でき次第APIを叩く
+      currentUser: {
+        handler: function() {
+          this.fetchHistoriesByPage()
+        },
+        immediately: true
+      }
+    },
     mounted: function() {
       this.$store.dispatch('common/setPageTitle', '歌唱履歴一覧')
-      this.fetchHistories(this.currentUser.id)
     },
   }
 </script>
