@@ -9,6 +9,7 @@ RSpec.describe 'history#index', type: :request do
   let(:song_id)     { nil }
   let(:artist_id)   { nil }
   let(:event_id)    { nil }
+  let(:user_id)     { nil }
   let(:sort_key)    { nil }
   let(:sort_order)  { nil }
   let(:page)        { nil }
@@ -18,6 +19,7 @@ RSpec.describe 'history#index', type: :request do
       song_id: song_id,
       artist_id: artist_id,
       event_id: event_id,
+      user_id: user_id,
       sort_key: sort_key,
       sort_order: sort_order,
       page: page,
@@ -139,6 +141,29 @@ RSpec.describe 'history#index', type: :request do
       it do
         expect(size).to eq 1
         expect(first['song']['artist']['name']).to eq artist2.name
+      end
+    end
+  end
+
+  describe 'ユーザによる絞り込み' do
+    let(:user1) { FactoryBot.create(:user) }
+    let(:user2) { FactoryBot.create(:user) }
+    let(:before_request) do
+      FactoryBot.create(:history, user: user1)
+      FactoryBot.create(:history, user: user2)
+    end
+    context 'user1を指定した場合' do
+      let(:user_id) { user1.id }
+      it do
+        expect(size).to eq 1
+        expect(first['user']['id']).to eq user1.id
+      end
+    end
+    context 'user2を指定した場合' do
+      let(:user_id) { user2.id }
+      it do
+        expect(size).to eq 1
+        expect(first['user']['id']).to eq user2.id
       end
     end
   end
