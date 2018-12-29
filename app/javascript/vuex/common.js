@@ -126,7 +126,9 @@ export default {
     hideHistoryDialog ({ commit }) {
       commit('setIsShowHistoryDialog', false)
       commit('setShowingHistory', null)
-      router.push({query: {}})
+      const urlQuery = Object.assign({}, router.currentRoute.query)
+      delete urlQuery.historyDialog
+      router.push({query: urlQuery })
     },
     // カラオケダイアログを表示する
     showEventDialog ({ commit, dispatch }, eventId) {
@@ -144,7 +146,9 @@ export default {
     hideEventDialog ({ commit }) {
       commit('setIsShowEventDialog', false)
       commit('setShowingEvent', null)
-      router.push({query: {}})
+      const urlQuery = Object.assign({}, router.currentRoute.query)
+      delete urlQuery.eventDialog
+      router.push({query: urlQuery })
     },
     // ローディングビューを表示する
     showLoadingView ({ commit }) {
