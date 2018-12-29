@@ -2,6 +2,7 @@
   <div app>
     <v-container fluid grid-list-md>
       <h1>持ち歌一覧</h1>
+      <TheSangCountRemarks />
       <VPaginationWrapper v-if="mySongs"
         :pageOrigin="pageOrigin"
         :totalPages="totalPages"
@@ -9,7 +10,7 @@
       >
         <v-layout row wrap class="pb-5">
           <v-flex xs6 sm4 md3 lg2 v-for="song in mySongs">
-            <v-song-card :song="song" />
+            <v-song-card showArtistName :song="song" />
             <v-divider />
           </v-flex>
         </v-layout>
@@ -18,22 +19,21 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
-
 <script>
   import { mapState, mapActions } from 'vuex'
   import PageCommonMixin from '@mixin/PageCommonMixin'
   import CONST from '@lib/constants'
   import VPaginationWrapper from '@component/common/VPaginationWrapper'
   import VSongCard from '@component/common/VSongCard'
+  import TheSangCountRemarks from '@component/the/TheSangCountRemarks'
   const namespace = 'user'
 
   export default {
     mixins: [PageCommonMixin],
     components: {
+      TheSangCountRemarks,
       VPaginationWrapper,
-      VSongCard
+      VSongCard,
     },
     computed: {
       ...mapState(namespace, {

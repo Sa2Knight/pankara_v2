@@ -4,7 +4,8 @@
     <v-container @mouseenter="enter" @mouseleave="leave" grid-list-md text-xs-center>
       <a :href="getSongHref(song)">
         <div class="header">
-          <div class="song-name collapse">{{ song.name }}</div>
+          <h1 class="song-name collapse">{{ song.name }}</h1>
+          <h2 v-if="showArtistName" class="artist-name collapse">{{ song.artist.name }}</h2>
         </div>
         <v-song-thumbnail :song="song" />
         <div class="histories-count-outer">
@@ -21,8 +22,13 @@
   margin: 0;
   padding: 0;
 }
-.song-name {
+h1.song-name {
   font-size: 1.2em;
+  font-weight: bold;
+}
+h2.artist-name {
+  font-size: 0.9em;
+  font-weight: bold;
 }
 .hover {
   background-color: #feffcd;
@@ -50,10 +56,17 @@
       }
     },
     props: {
+      // 表示する楽曲オブジェクト
       song: {
         type: Object,
         required: true
       },
+      // 歌手名を表示するか
+      showArtistName: {
+        type: Boolean,
+        required: false,
+        default: false
+      }
     },
     methods: {
       // 楽曲詳細ページのurlを取得
