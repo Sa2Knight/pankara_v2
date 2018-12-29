@@ -82,7 +82,7 @@ export default {
           commit('setJwtToken', response.data.jwt)
           commit('setIsLogin', true)
           dispatch('hideLoadingView')
-          router.go()
+          location.reload()
         })
         .catch((err) => {
           dispatch('hideLoadingView')
