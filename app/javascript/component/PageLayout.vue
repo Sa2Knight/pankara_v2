@@ -23,6 +23,11 @@
             <!-- ログイン中ユーザのみのメニュー -->
             <template v-if="currentUser">
               <v-list-tile>
+                <router-link :to="{ name: 'UserMySongs', params: { id: currentUser.id } }">
+                  <v-list-tile-title>持ち歌一覧</v-list-tile-title>
+                </router-link>
+              </v-list-tile>
+              <v-list-tile>
                 <router-link :to="{ name: 'Histories' }">
                   <v-list-tile-title>歌唱履歴</v-list-tile-title>
                 </router-link>
