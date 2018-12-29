@@ -15,13 +15,13 @@ RSpec.describe 'history#index', type: :request do
   let(:per)         { nil }
   let(:params) do
     {
-      song_id:     song_id,
-      artist_id:   artist_id,
-      event_id:    event_id,
-      sort_key:    sort_key,
-      sort_order:  sort_order,
-      page:        page,
-      per:         per
+      song_id: song_id,
+      artist_id: artist_id,
+      event_id: event_id,
+      sort_key: sort_key,
+      sort_order: sort_order,
+      page: page,
+      per: per
     }
   end
 
@@ -58,6 +58,8 @@ RSpec.describe 'history#index', type: :request do
           artist_id: history.song.artist_id,
           name: history.song.name,
           url: history.song.url,
+          histories_count: 1,
+          histories_count_by_me: 0,
           artist: {
             id: history.song.artist.id,
             name: history.song.artist.name,
@@ -172,5 +174,6 @@ RSpec.describe 'history#index', type: :request do
   end
 
   describe '異常系' do
+    # 今の所制限なし
   end
 end
