@@ -82,10 +82,7 @@ export default {
           commit('setJwtToken', response.data.jwt)
           commit('setIsLogin', true)
           dispatch('hideLoadingView')
-          return http.getMySelf()
-        })
-        .then((response) => {
-          commit('setCurrentUser', response.data)
+          router.go()
         })
         .catch((err) => {
           dispatch('hideLoadingView')
