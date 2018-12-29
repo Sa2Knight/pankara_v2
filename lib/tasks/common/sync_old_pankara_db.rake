@@ -54,13 +54,23 @@ namespace :common do
       6 => 5, # DAMその他 to その他
       7 => 6  # その他
     }
+    user_event_hash = {}
     dump[:histories].each do |history|
+      user_event_key = "#{history[:user_id]}_#{history[:karaoke_id]}"
+      user_event = if user_event_hash.key?(user_event_key)
+                     user_event_hash[user_event_key]
+                   else
+                     ue = UserEvent.create(
+                       user_id: history[:user_id],
+                       event_id: history[:karaoke_id]
+                     )
+                    user_event_hash[user_event_key] = ue
+                   end
+
       History.create!(
         id: history[:history_id],
         song_id: history[:song_id],
-        user_event: UserEvent.find_or_create_by(
-          user_id: history[:user_id], event_id: history[:karaoke_id]
-        ),
+        user_event: user_event,
         score: history[:score],
         score_type: score_type_map[history[:score_type]],
         satisfaction: history[:satisfaction],

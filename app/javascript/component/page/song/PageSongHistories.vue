@@ -11,9 +11,6 @@
 </template>
 
 <style lang="scss">
-.page-song-histories {
-  padding: 15px;
-}
 </style>
 
 <script>

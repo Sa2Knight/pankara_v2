@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 export const ROUTES = {
   INDEX_PATH: () => '/',
   EVENTS_PATH: () => '/events',
+  HISTORIES_PATH: () => '/histories',
   EVENT_PATH: event_id => `/events/${event_id}`,
   SONG_PATH: song_id => `/songs/${song_id}`,
   ARTIST_PATH: artist_id => `/artists/${artist_id}`,
@@ -19,6 +20,11 @@ export const router = (() => {
       name: 'Events',
       path: ROUTES.EVENTS_PATH(),
       component: require('@component/page/events/PageEvents').default
+    },
+    {
+      name: 'Histories',
+      path: ROUTES.HISTORIES_PATH(),
+      component: require('@component/page/histories/PageHistories').default
     },
     {
       name: 'Event',

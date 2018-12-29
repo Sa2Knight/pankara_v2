@@ -15,11 +15,12 @@ Vue.use(Vuetify)
 // vuexモジュールを定義
 const store = new Vuex.Store({
   modules: {
-    events: require('@vuex/events').default,
-    event:  require('@vuex/event').default,
-    song:   require('@vuex/song').default,
-    artist: require('@vuex/artist').default,
-    common: require('@vuex/common').default
+    events:    require('@vuex/events').default,
+    event:     require('@vuex/event').default,
+    histories: require('@vuex/histories').default,
+    song:      require('@vuex/song').default,
+    artist:    require('@vuex/artist').default,
+    common:    require('@vuex/common').default
   }
 })
 

@@ -9,19 +9,21 @@ RSpec.describe 'history#index', type: :request do
   let(:song_id)     { nil }
   let(:artist_id)   { nil }
   let(:event_id)    { nil }
+  let(:user_id)     { nil }
   let(:sort_key)    { nil }
   let(:sort_order)  { nil }
   let(:page)        { nil }
   let(:per)         { nil }
   let(:params) do
     {
-      song_id:     song_id,
-      artist_id:   artist_id,
-      event_id:    event_id,
-      sort_key:    sort_key,
-      sort_order:  sort_order,
-      page:        page,
-      per:         per
+      song_id: song_id,
+      artist_id: artist_id,
+      event_id: event_id,
+      user_id: user_id,
+      sort_key: sort_key,
+      sort_order: sort_order,
+      page: page,
+      per: per
     }
   end
 
@@ -58,6 +60,8 @@ RSpec.describe 'history#index', type: :request do
           artist_id: history.song.artist_id,
           name: history.song.name,
           url: history.song.url,
+          histories_count: 1,
+          histories_count_by_me: 0,
           artist: {
             id: history.song.artist.id,
             name: history.song.artist.name,
@@ -141,6 +145,29 @@ RSpec.describe 'history#index', type: :request do
     end
   end
 
+  describe 'ユーザによる絞り込み' do
+    let(:user1) { FactoryBot.create(:user) }
+    let(:user2) { FactoryBot.create(:user) }
+    let(:before_request) do
+      FactoryBot.create(:history, user: user1)
+      FactoryBot.create(:history, user: user2)
+    end
+    context 'user1を指定した場合' do
+      let(:user_id) { user1.id }
+      it do
+        expect(size).to eq 1
+        expect(first['user']['id']).to eq user1.id
+      end
+    end
+    context 'user2を指定した場合' do
+      let(:user_id) { user2.id }
+      it do
+        expect(size).to eq 1
+        expect(first['user']['id']).to eq user2.id
+      end
+    end
+  end
+
   describe 'ページング関係' do
     let(:histories) { FactoryBot.create_list(:history, 5) }
     let(:before_request) { histories }
@@ -172,5 +199,6 @@ RSpec.describe 'history#index', type: :request do
   end
 
   describe '異常系' do
+    # 今の所制限なし
   end
 end

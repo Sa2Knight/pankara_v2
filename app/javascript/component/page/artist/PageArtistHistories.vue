@@ -5,7 +5,6 @@
       :totalPages="totalPages"
       :changePage="fetchHistoriesByPage"
     >
-      <!-- TODO PageEventの歌唱履歴と同じなら汎用化 -->
       <v-layout row wrap class="pb-5">
         <v-flex xs12 sm12 md6 lg4 v-for="history in histories">
           <VHistoryCard :history="history" :artist="artist" showSongName showDate/>

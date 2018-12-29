@@ -36,6 +36,14 @@ class History < ApplicationRecord
     self.where(song: Song.where(artist_id: artist_id))
   end
 
+  #
+  # ユーザIDで絞り込み
+  #
+  def self.by_user_id(user_id)
+    return all if user_id.blank?
+    where(user_event: UserEvent.where(user_id: user_id))
+  end
+
   # mock
   def comment
     super || [

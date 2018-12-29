@@ -6,6 +6,7 @@ class Song < ApplicationRecord
   #
   # 歌手を歌手名で指定された場合、
   # 既存があればそれを、なければ新規作成する
+  # rubocop: disable Lint/DuplicateMethods
   #
   attr_accessor :artist_name
   def artist_name=(artist_name)
@@ -13,6 +14,7 @@ class Song < ApplicationRecord
 
     self.artist = Artist.find_or_create_by(name: artist_name)
   end
+  # rubocop: enable Lint/DuplicateMethods
 
   #
   # ArtistIDで絞り込み

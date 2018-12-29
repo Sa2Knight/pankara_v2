@@ -13,17 +13,31 @@
             <v-icon>more_vert</v-icon>
           </v-btn>
           <v-list>
+            <!-- 全体向けのメニュー -->
             <v-list-tile>
               <router-link :to="{ name: 'Events' }">
                 <v-list-tile-title>カラオケ一覧</v-list-tile-title>
               </router-link>
             </v-list-tile>
-            <v-list-tile v-if="currentUser" @click="logout">
-              <a><v-list-tile-title>ログアウト</v-list-tile-title></a>
-            </v-list-tile>
-            <v-list-tile v-else @click="isShowLoginForm = true">
-              <a><v-list-tile-title>ログイン</v-list-tile-title></a>
-            </v-list-tile>
+
+            <!-- ログイン中ユーザのみのメニュー -->
+            <template v-if="currentUser">
+              <v-list-tile>
+                <router-link :to="{ name: 'Histories' }">
+                  <v-list-tile-title>歌唱履歴</v-list-tile-title>
+                </router-link>
+              </v-list-tile>
+              <v-list-tile @click="logout">
+                <a><v-list-tile-title>ログアウト</v-list-tile-title></a>
+              </v-list-tile>
+            </template>
+
+            <!-- 未ログイン中ユーザのみのメニュー -->
+            <template v-else>
+              <v-list-tile @click="isShowLoginForm = true">
+                <a><v-list-tile-title>ログイン</v-list-tile-title></a>
+              </v-list-tile>
+            </template>
           </v-list>
         </v-menu>
       </v-toolbar-items>
