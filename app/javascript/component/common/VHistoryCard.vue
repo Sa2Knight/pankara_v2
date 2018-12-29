@@ -18,7 +18,7 @@
           <p v-if="showArtistName" class="artist-name collapse">
             {{ artistName }}
           </p>
-          <span>
+          <span v-if="showKey">
             キー: {{ history.key }}
           </span>
           <VSatisfactionRate narrow :satisfaction="history.satisfaction" />
@@ -58,6 +58,9 @@
     max-width: 0px;
     vertical-align: middle;
     padding-left: 1em;
+    .date {
+      font-size: 0.75em;
+    }
     .v-score-label {
       position: absolute;
       right: 3px;
@@ -126,6 +129,12 @@
       },
       // カラオケ名を表示するか
       showEventTitle: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      // キー情報表示するか
+      showKey: {
         type: Boolean,
         required: false,
         default: false
