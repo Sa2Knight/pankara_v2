@@ -20,6 +20,17 @@ class User < ApplicationRecord
   end
 
   #
+  # 持ち歌一覧
+  # 一度以上歌ったことのある楽曲のIDリストを戻す
+  # 結果は全てRedisにキャッシュされる
+  #
+  def my_song_ids
+    RedisClient.get_or_set(key: "user_#{self.id}_song_list", type: Array) do
+      self.histories.pluck(:song_id).uniq
+    end
+  end
+
+  #
   # 指定したIDのユーザが全て友達か？
   #
   def friend_all?(user_ids)
