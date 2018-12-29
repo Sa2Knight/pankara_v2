@@ -15,6 +15,7 @@ Vue.use(Vuetify)
 // vuexモジュールを定義
 const store = new Vuex.Store({
   modules: {
+    user:      require('@vuex/user').default,
     events:    require('@vuex/events').default,
     event:     require('@vuex/event').default,
     histories: require('@vuex/histories').default,

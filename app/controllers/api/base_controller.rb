@@ -5,7 +5,7 @@ class Api::BaseController < ApplicationController
   # REVIEW: ページングを使う一覧系APIごとに呼び出すで良いかも
   #         と考えるとここじゃなくてconcernで良いかも
   before_action :params_reset
-  after_action :set_respons_header, only: %i[index histories]
+  after_action :set_respons_header, only: %i[index histories my_songs]
 
   #
   # リクエストパラメータの初期化を行う

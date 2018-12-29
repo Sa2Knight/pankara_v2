@@ -57,6 +57,13 @@ http.getMySelf = function(params = {}) {
 }
 
 /**
+ * ユーザの持ち歌一覧を取得する
+ */
+http.getUserMySongs = function(userId, params = {}) {
+  return request('GET', `/users/${userId}/my_songs`, params)
+}
+
+/**
  * イベント一覧を取得する
  */
 http.getEvents = function(params = {}) {

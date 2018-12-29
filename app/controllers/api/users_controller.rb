@@ -36,10 +36,10 @@ class Api::UsersController < Api::BaseController
   # 対象ユーザの持ち歌一覧
   #
   def users_my_songs
-    Song.where(id: user.my_song_ids)
-        .page(params[:page])
-        .per(params[:per])
-        .includes(:artist)
+    @index = Song.where(id: user.my_song_ids)
+                 .page(params[:page])
+                 .per(params[:per])
+                 .includes(:artist)
   end
 
   #

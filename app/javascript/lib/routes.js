@@ -7,6 +7,7 @@ export const ROUTES = {
   EVENT_PATH: event_id => `/events/${event_id}`,
   SONG_PATH: song_id => `/songs/${song_id}`,
   ARTIST_PATH: artist_id => `/artists/${artist_id}`,
+  USER_MY_SONGS: user_id => `/users/${user_id}/my_songs`
 }
 
 export const router = (() => {
@@ -40,6 +41,11 @@ export const router = (() => {
       name: 'Artist',
       path: ROUTES.ARTIST_PATH(':id'),
       component: require('@component/page/artist/PageArtist').default
+    },
+    {
+      name: 'UserMySongs',
+      path: ROUTES.USER_MY_SONGS(':id'),
+      component: require('@component/page/user/PageUserMySongs').default
     },
   ]
   return new VueRouter({ routes })
