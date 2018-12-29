@@ -18,9 +18,9 @@ module JSON
     #
     # 一覧取得用(歌手情報付き)
     #
-    def self.raw_with_artist(song)
+    def self.raw_with_artist(song, user: nil)
       return nil if song.blank?
-      self.raw(song).merge(
+      self.raw(song, user: user).merge(
         artist: JSON::Artist.raw(song.artist)
       )
     end
