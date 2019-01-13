@@ -7,7 +7,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: パッケージを最新化
+          name: システムパッケージのインストール
           command: |
             apt-get update -qq
             apt-get install -y mysql-client build-essential
+      - run:
+          name: bundle install
+          command: bundle install
