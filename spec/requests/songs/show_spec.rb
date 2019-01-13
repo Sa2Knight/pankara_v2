@@ -32,7 +32,6 @@ RSpec.describe 'songs#show', type: :request do
     context 'ログインしている場合' do
       context '歌唱履歴が存在する場合' do
         let(:before_request) do
-          current_user = FactoryBot.create(:user)
           other_user   = FactoryBot.create(:user)
           event        = FactoryBot.create(:event)
           user_events = event.user_events.create(
@@ -61,16 +60,20 @@ RSpec.describe 'songs#show', type: :request do
         end
       end
     end
-    xcontext 'ログインしていない場合' do
-      # TODO: ログイン系実装後に追加
-      it 'my_histories_countが0になる' do
+    context 'ログインしていない場合' do
+      let(:current_user) { nil }
+      let(:before_request) do
+        FactoryBot.create(:history, song: song)
+      end
+      it 'my_histories_countは0になる' do
         expect(body['my_histories_count']).to eq 0
+        expect(body['histories_count']).to eq 1
       end
     end
   end
 
-  describe '集計情報関係' do
-    # 詳細はサービスクラスのテストが別途ある
+  # NOTE: 現在は含まれてないためpending
+  xdescribe '集計情報関係' do
     it 'レスポンスに集計情報が含まれている' do
       expect(body.key?('graph'))
       expect(body['graph'].keys).to match_array(
