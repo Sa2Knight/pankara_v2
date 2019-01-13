@@ -49,10 +49,12 @@ export default {
       dispatch('common/showLoadingView', null, { root: true })
 
       const params = {
+        with_artist: true,
+        user_id: userId,
         page: state.mySongsPager.page,
         per: state.mySongsPager.per,
       }
-      http.getUserMySongs(userId, params).then((response) => {
+      http.getSongs(params).then((response) => {
         commit('setMySongs', response.data)
         dispatch('common/hideLoadingView', null, { root: true })
         commit('setMySongsPager', {
