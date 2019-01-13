@@ -16,6 +16,8 @@ export default {
       page: 1,
       per: CONST.PER
     },
+    // 持ち歌一覧の検索ダイアログが表示されているか
+    isShowMySongsSearchDialog: false,
   },
 
   mutations: {
@@ -35,6 +37,9 @@ export default {
         page: 1,
         per: CONST.PER
       }
+    },
+    setIsShowMySongsSearchDialog (state, val) {
+      state.isShowMySongsSearchDialog = val
     }
   },
 
@@ -61,5 +66,9 @@ export default {
     changePage ({ state, commit }, page) {
       commit('setMySongsPager', { page: page })
     },
+    // 持ち歌一覧検索ダイアログを開く
+    showMySongsSearchDialog ({ commit }) {
+      commit('setIsShowMySongsSearchDialog', true)
+    }
   }
 }

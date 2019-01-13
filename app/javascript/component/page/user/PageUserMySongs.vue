@@ -1,6 +1,8 @@
 <template>
   <div app>
     <v-container fluid grid-list-md>
+
+      <!-- 持ち歌一覧 -->
       <h1>持ち歌一覧</h1>
       <TheSangCountRemarks />
       <VPaginationWrapper v-if="mySongs"
@@ -15,7 +17,21 @@
           </v-flex>
         </v-layout>
       </VPaginationWrapper>
+
+      <!-- 検索ボタン -->
+      <!-- TODO: 他の検索ボタンとまとめてコンポーネント化? -->
+      <v-btn v-show="true" @click="showMySongsSearchDialog"
+             color="gray" class="elevation-12" fixed bottom right fab dark small>
+        <v-icon>search</v-icon>
+      </v-btn>
+
     </v-container>
+
+    <!-- 検索フォーム -->
+    <v-dialog v-model="isShowMySongsSearchDialog" max-width="500px" persistent>
+      <TheMySongsSearchForm />
+    </v-dialog>
+
   </div>
 </template>
 
@@ -26,18 +42,23 @@
   import VPaginationWrapper from '@component/common/VPaginationWrapper'
   import VSongCard from '@component/common/VSongCard'
   import TheSangCountRemarks from '@component/the/TheSangCountRemarks'
+  import TheMySongsSearchForm from '@component/page/user/the/TheMySongsSearchForm'
   const namespace = 'user'
 
   export default {
     mixins: [PageCommonMixin],
     components: {
       TheSangCountRemarks,
+      TheMySongsSearchForm,
       VPaginationWrapper,
       VSongCard,
     },
     computed: {
+      ...mapState(namespace, [
+        'mySongs',
+        'isShowMySongsSearchDialog'
+      ]),
       ...mapState(namespace, {
-        mySongs: state => state.mySongs,
         pageOrigin: state => state.mySongsPager.page,
         totalPages: state => state.mySongsPager.totalPages,
       })
@@ -45,7 +66,8 @@
     methods: {
       ...mapActions(namespace, [
         'fetchMySongs',
-        'changePage'
+        'changePage',
+        'showMySongsSearchDialog'
       ]),
       fetchMySongsByPage: function(page) {
         this.changePage(page)
