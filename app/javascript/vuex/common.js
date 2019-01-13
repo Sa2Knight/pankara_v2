@@ -113,10 +113,12 @@ export default {
     },
     // 歌唱履歴ダイアログを表示する
     showHistoryDialog ({ commit, dispatch }, historyId) {
+      dispatch('showLoadingView')
       commit('setIsShowHistoryDialog', true)
 
       http.getHistory(historyId).then((res) => {
         commit('setShowingHistory', res.data)
+        dispatch('hideLoadingView')
         router.push({query: { historyDialog: res.data.id }})
       })
     },
