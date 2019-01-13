@@ -1,3 +1,4 @@
+<!-- TODO: カラオケ検索ダイアログとmixinできない? -->
 <template>
   <v-card>
     <v-card-title class="headline grey lighten-2">
@@ -7,7 +8,7 @@
       <v-container grid-list-md>
         <v-layout wrap>
           <v-flex xs12>
-            <v-text-field v-model="songName" label="曲名" />
+            <v-text-field v-model="name" label="曲名" />
           </v-flex>
           <v-flex xs12>
             <v-text-field v-model="artistName" label="歌手名" />
@@ -30,24 +31,47 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  const namespace = 'users'
+  const namespace = 'user'
 
   export default {
     data: function() {
       return {
-        songName: '',
+        name: '',
         artistName: ''
       }
     },
     computed: {
+      ...mapState(namespace, [
+        'mySongsSearchQuery'
+      ]),
+      ...mapState('common', [
+        'currentUser'
+      ])
     },
     methods: {
+      ...mapActions(namespace, [
+        'submitMySongsSearchDialog',
+        'cancelMySongsSearchDialog',
+        'fetchMySongs'
+      ]),
+      init() {
+        this.name = this.mySongsSearchQuery.name
+        this.artistName = this.mySongsSearchQuery.artistName
+      },
       submit() {
+        this.submitMySongsSearchDialog({
+          name: this.name,
+          artist_name: this.artistName
+        })
+        this.fetchMySongs(this.currentUser.id)
       },
       cancel() {
+        this.init()
+        this.cancelMySongsSearchDialog()
       }
     },
     mounted: function() {
+      this.init()
     },
   }
 </script>
