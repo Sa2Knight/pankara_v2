@@ -35,41 +35,42 @@ class Api::SongsController < Api::BaseController
     render json: users_json
   end
 
-  private
+  #
+  # 一覧取得対象の楽曲一覧
+  # rubocop: disable Metrics/AbcSize
+  #
+  def songs
+    @index = Song
+             .user_by(params[:user_id])
+             .artist_by(params[:artist_id])
+             .artist_name_by(params[:artist_name])
+             .name_by(params[:name])
+             .order(params[:sort_key] => params[:sort_order])
+             .page(params[:page])
+             .per(params[:per])
+  end
+  # rubocop: enable Metrics/AbcSize
 
-    #
-    # 一覧取得対象の楽曲一覧
-    # TODO: ABCSize
-    #
-    def songs
-      @index = Song
-               .artist_by(params[:artist_id])
-               .name_by(params[:name])
-               .order(params[:sort_key] => params[:sort_order])
-               .page(params[:page])
-               .per(params[:per])
-    end
+  #
+  # 詳細取得対象の楽曲
+  #
+  def song
+    @song ||= Song.find_by(id: params[:id])
+  end
 
-    #
-    # 詳細取得対象の楽曲
-    #
-    def song
-      @song ||= Song.find_by(id: params[:id])
-    end
+  #
+  # 詳細取得対象の楽曲が存在するか?
+  #
+  def song_exists?
+    raise404 'song_not_found' if song.blank?
+  end
 
-    #
-    # 詳細取得対象の楽曲が存在するか?
-    #
-    def song_exists?
-      raise404 'song_not_found' if song.blank?
-    end
-
-    #
-    # 歌唱履歴一覧取得対象のユーザが存在するか?
-    #
-    def user_exists?
-      return true if params[:user_id].blank?
-      return true if User.exists?(params[:user_id])
-      raise404 'user_not_found'
-    end
+  #
+  # 歌唱履歴一覧取得対象のユーザが存在するか?
+  #
+  def user_exists?
+    return true if params[:user_id].blank?
+    return true if User.exists?(params[:user_id])
+    raise404 'user_not_found'
+  end
 end

@@ -16,6 +16,13 @@ export default {
       page: 1,
       per: CONST.PER
     },
+    // 持ち歌一覧の検索ダイアログが表示されているか
+    isShowMySongsSearchDialog: false,
+    // 持ち歌一覧の検索条件
+    mySongsSearchQuery: {
+      name: '',
+      artist_name: ''
+    }
   },
 
   mutations: {
@@ -35,6 +42,18 @@ export default {
         page: 1,
         per: CONST.PER
       }
+    },
+    setIsShowMySongsSearchDialog (state, val) {
+      state.isShowMySongsSearchDialog = val
+    },
+    setMySongsSearchQuery (state, query) {
+      state.mySongsSearchQuery = query
+    },
+    unsetMySongsSearchQuery (state) {
+      state.mySongsSearchQuery = {
+        name: '',
+        artist_name: ''
+      }
     }
   },
 
@@ -44,10 +63,13 @@ export default {
       dispatch('common/showLoadingView', null, { root: true })
 
       const params = {
+        ...state.mySongsSearchQuery,
+        with_artist: true,
+        user_id: userId,
         page: state.mySongsPager.page,
         per: state.mySongsPager.per,
       }
-      http.getUserMySongs(userId, params).then((response) => {
+      http.getSongs(params).then((response) => {
         commit('setMySongs', response.data)
         dispatch('common/hideLoadingView', null, { root: true })
         commit('setMySongsPager', {
@@ -60,6 +82,20 @@ export default {
     // ページを切り替える
     changePage ({ state, commit }, page) {
       commit('setMySongsPager', { page: page })
+    },
+    // 持ち歌一覧検索ダイアログを開く
+    showMySongsSearchDialog ({ commit }) {
+      commit('setIsShowMySongsSearchDialog', true)
+    },
+    // 検索結果を反映せずに検索ダイアログを閉じる
+    cancelMySongsSearchDialog ({ commit }) {
+      commit('setIsShowMySongsSearchDialog', false)
+    },
+    // 検索結果を反映して検索ダイアログを閉じる
+    submitMySongsSearchDialog ({ commit }, query) {
+      commit('setMySongsSearchQuery', query)
+      commit('unsetMySongsPager')
+      commit('setIsShowMySongsSearchDialog', false)
     },
   }
 }

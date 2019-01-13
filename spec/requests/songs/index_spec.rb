@@ -5,7 +5,9 @@ RSpec.describe 'songs#index', type: :request do
 
   let(:current_user) { FactoryBot.create(:user) }
   let(:with_artist) { nil }
+  let(:user_id)     { nil }
   let(:artist_id)   { nil }
+  let(:artist_name) { nil }
   let(:name)        { nil }
   let(:sort_key)    { nil }
   let(:sort_order)  { nil }
@@ -14,12 +16,14 @@ RSpec.describe 'songs#index', type: :request do
   let(:params) do
     {
       with_artist: with_artist,
-      artist_id:   artist_id,
-      name:        name,
-      sort_key:    sort_key,
-      sort_order:  sort_order,
-      page:        page,
-      per:         per
+      user_id: user_id,
+      artist_id: artist_id,
+      artist_name: artist_name,
+      name: name,
+      sort_key: sort_key,
+      sort_order: sort_order,
+      page: page,
+      per: per
     }
   end
   let(:artist) { FactoryBot.create(:artist) }
@@ -55,8 +59,8 @@ RSpec.describe 'songs#index', type: :request do
 
   describe '絞り込み関係' do
     let(:before_request) do
-      artist_a = FactoryBot.create(:artist)
-      artist_b = FactoryBot.create(:artist)
+      artist_a = FactoryBot.create(:artist, name: '123')
+      artist_b = FactoryBot.create(:artist, name: '456')
       FactoryBot.create(:song, name: 'AAA', artist: artist_a)
       FactoryBot.create(:song, name: 'BBB', artist: artist_b)
       FactoryBot.create(:song, name: 'ABC', artist: artist_b)
@@ -69,6 +73,14 @@ RSpec.describe 'songs#index', type: :request do
         expect(size).to eq 2
         expect(body.first['name']).to eq 'BBB'
         expect(body.second['name']).to eq 'ABC'
+      end
+    end
+    context '歌手名を指定した場合' do
+      let(:artist_name) { '2' }
+
+      it 'artist_1の楽曲のみ取得できる' do
+        expect(size).to eq 1
+        expect(body.first['name']).to eq 'AAA'
       end
     end
     context '名前を指定した場合' do
@@ -87,6 +99,29 @@ RSpec.describe 'songs#index', type: :request do
       it '名前と歌手ID両方に合致する楽曲のみ取得できる' do
         expect(size).to eq 1
         expect(body.first['name']).to eq 'ABC'
+      end
+    end
+    context 'ユーザIDを指定した場合' do
+      let(:user) { FactoryBot.create(:user) }
+      let(:user_id) { user.id }
+
+      context '歌唱履歴がない場合' do
+        it '何も取得しない' do
+          expect(size).to be_zero
+        end
+      end
+
+      context '歌唱履歴がある場合' do
+        let(:before_request) do
+          song_a = FactoryBot.create(:song, name: 'AAA')
+          song_b = FactoryBot.create(:song, name: 'BBB')
+          FactoryBot.create(:history, song: song_a, user: user)
+          FactoryBot.create(:history, song: song_b, user: FactoryBot.create(:user))
+        end
+        it 'ユーザの持ち歌のみ取得できる' do
+          expect(size).to eq 1
+          expect(body.first['name']).to eq 'AAA'
+        end
       end
     end
   end

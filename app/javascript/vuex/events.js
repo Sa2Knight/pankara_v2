@@ -103,7 +103,6 @@ export default {
     },
     // 検索を実行せずに検索ダイアログを閉じる
     cancelSearchDialog ({ commit }) {
-      commit('unsetSeachQuery')
       commit('unsetIsShowSearchDialog')
     },
     // 検索を実行して検索ダイアログを閉じる
