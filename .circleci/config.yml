@@ -21,5 +21,8 @@ jobs:
           name: bundle install
           command: bundle install
       - run:
+          name: create db
+          command: bundle exec rails db:setup test
+      - run:
           name: rspec
           command: bundle exec rspec -f d
