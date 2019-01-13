@@ -7,9 +7,6 @@ Rails.application.routes.draw do
     post :user_token, to: 'user_token#create'
     resources :sessions, only: %i[create]
     resources :users, only: %i[show] do
-      member do
-        get :my_songs
-      end
       collection do
         get :myself
       end

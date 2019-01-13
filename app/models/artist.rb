@@ -6,6 +6,15 @@ class Artist < ApplicationRecord
   scope :no_descriptions, -> { where(description: nil).or(where(url: nil)) }
 
   #
+  # 歌手名で検索
+  #
+  def self.name_by(keyword)
+    return self.all if keyword.blank?
+
+    self.where("name like '%#{keyword}%'")
+  end
+
+  #
   # 歌唱履歴
   # NOTE: has_manyだけで表現できる?
   #

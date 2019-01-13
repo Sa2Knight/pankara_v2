@@ -17,7 +17,7 @@ class Song < ApplicationRecord
   # rubocop: enable Lint/DuplicateMethods
 
   #
-  # ArtistIDで絞り込み
+  # ArtistIDで検索
   #
   def self.artist_by(artist_id)
     return self.all if artist_id.blank?
@@ -26,12 +26,33 @@ class Song < ApplicationRecord
   end
 
   #
-  # キーワードで絞り込み
+  # 曲名で検索
   #
   def self.name_by(keyword)
     return self.all if keyword.blank?
 
     self.where("name like '%#{keyword}%'")
+  end
+
+  #
+  # 歌手名で検索
+  #
+  def self.artist_name_by(keyword)
+    return self.all if keyword.blank?
+
+    self.artist_by(Artist.name_by(keyword))
+  end
+
+  #
+  # ユーザで検索
+  #
+  def self.user_by(user_id)
+    return self.all if user_id.blank?
+
+    user = User.find_by(id: user_id)
+    return Song.none if user.blank?
+
+    self.where(id: user.my_song_ids)
   end
 
   #
