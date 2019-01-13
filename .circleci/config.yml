@@ -8,4 +8,6 @@ jobs:
       - checkout
       - run:
           name: パッケージを最新化
-          command: apt-get update -qq
+          command: |
+            apt-get update -qq
+            apt-get install -y mysql-client build-essential
