@@ -6,4 +6,6 @@ jobs:
     working_directory: /usr/local/pankara
     steps:
       - checkout
-      - run: apt-get update -qq
+      - run:
+          name: パッケージを最新化
+          command: apt-get update -qq
