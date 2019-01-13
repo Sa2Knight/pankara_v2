@@ -1,0 +1,9 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: ruby:2.5.1
+    working_directory: /usr/local/pankara
+    steps:
+      - checkout
+
