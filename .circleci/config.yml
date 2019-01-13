@@ -7,6 +7,6 @@ jobs:
     steps:
       - checkout
       - run:
-        name: runテスト
-        command: echo 'hoge'
+          name: runテスト
+          command: echo 'hoge'
 
