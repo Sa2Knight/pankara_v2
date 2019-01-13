@@ -7,10 +7,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: システムパッケージのインストール
+          name: apt-get install
           command: |
             apt-get update -qq
             apt-get install -y mysql-client build-essential
       - run:
           name: bundle install
           command: bundle install
+      - run:
+          name: rspec
+          command: bundle exec rspec -f d
