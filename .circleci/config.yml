@@ -6,4 +6,7 @@ jobs:
     working_directory: /usr/local/pankara
     steps:
       - checkout
+      - run:
+        name: runテスト
+        command: echo 'hoge'
 
