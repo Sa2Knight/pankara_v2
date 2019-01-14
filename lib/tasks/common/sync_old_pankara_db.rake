@@ -38,7 +38,7 @@ namespace :common do
       e = Event.create!(
         id: event[:id],
         title: event[:name],
-        datetime: event[:datetime], # TODO: dateに変更
+        date: event[:datetime],
         user_id: 1 # この数値は後で書き換える
       )
       e.user_events.first.destroy

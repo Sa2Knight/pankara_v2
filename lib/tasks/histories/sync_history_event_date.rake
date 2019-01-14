@@ -3,7 +3,7 @@ namespace :histories do
 
   task sync_history_event_date: :environment do
     History.all.includes(user_event: :event).find_each do |history|
-      history.update(event_date: history.user_event.event.datetime)
+      history.update(event_date: history.user_event.event.date)
     end
   end
 end
