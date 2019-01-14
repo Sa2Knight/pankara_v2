@@ -43,6 +43,7 @@ class Api::SongsController < Api::BaseController
     @index = Song
              .user_by(params[:user_id])
              .artist_by(params[:artist_id])
+             .artist_name_by(params[:artist_name])
              .name_by(params[:name])
              .order(params[:sort_key] => params[:sort_order])
              .page(params[:page])
