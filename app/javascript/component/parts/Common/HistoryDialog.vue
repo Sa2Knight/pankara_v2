@@ -29,7 +29,7 @@
               <table>
                 <tr>
                   <th class="nowrap">日付</th>
-                  <td class="nowrap">{{ history.event.datetime }}</td>
+                  <td class="nowrap">{{ history.event.date }}</td>
                 </tr>
                 <tr>
                   <th class="nowrap">カラオケ</th>

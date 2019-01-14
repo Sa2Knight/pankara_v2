@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs6 lg2>
       <v-simple-information header="日付">
-        {{ event.datetime }}
+        {{ event.date }}
       </v-simple-information>
     </v-flex>
     <v-flex xs6 lg2>

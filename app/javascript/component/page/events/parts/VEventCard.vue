@@ -13,7 +13,7 @@
       </v-list-tile>
       <v-list-tile>
         <v-list-tile-content>日付</v-list-tile-content>
-        <v-list-tile-content class="align-end">{{ event.datetime }}</v-list-tile-content>
+        <v-list-tile-content class="align-end">{{ event.date }}</v-list-tile-content>
       </v-list-tile>
       <v-list-tile>
         <v-list-tile-content>曲数</v-list-tile-content>
