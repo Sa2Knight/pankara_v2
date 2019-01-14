@@ -13,8 +13,9 @@ development:
 
 test:
   <<: *default
-  password: <%= Rails.application.credentials.dig(:development, :database, :password) %>
+  host: <%= ENV['CI'] ? '127.0.0.1' : 'pankara_db' %>
   database: pankara_test
+  password: 1q2w3e4r
 
 production:
   <<: *default

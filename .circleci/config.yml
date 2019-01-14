@@ -1,0 +1,28 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: ruby:2.5.1
+      - image: mysql:5.7
+        environment:
+          MYSQL_DATABASE: pankara_test
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: 1q2w3e4r
+        command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --init-connect="SET NAMES utf8"
+    working_directory: /usr/local/pankara
+    steps:
+      - checkout
+      - run:
+          name: apt-get install
+          command: |
+            apt-get update -qq
+            apt-get install -y mysql-client build-essential
+      - run:
+          name: bundle install
+          command: bundle install
+      - run:
+          name: create db
+          command: bundle exec rails db:setup test
+      - run:
+          name: rspec
+          command: bundle exec rspec -f d

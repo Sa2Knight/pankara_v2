@@ -108,10 +108,10 @@ RSpec.describe 'SongService::MakeGraphData', type: :service do
     subject { service.send(:histories_by_user) }
 
     it 'ユーザ名が含まれてる' do
-      expect(subject[:labels]).to eq %w[ちゃら ないと]
+      expect(subject[:labels]).to match_array %w[ないと ちゃら]
     end
     it '歌唱回数が含まれている' do
-      expect(subject[:data]).to eq [1, 3]
+      expect(subject[:data]).to match_array [3, 1]
     end
   end
 end

@@ -12,12 +12,12 @@ RSpec.describe 'events#index', type: :request do
   let(:per)         { nil }
   let(:params) do
     {
-      title:       title,
-      members:     members,
-      sort_key:    sort_key,
-      sort_order:  sort_order,
-      page:        page,
-      per:         per
+      title: title,
+      members: members,
+      sort_key: sort_key,
+      sort_order: sort_order,
+      page: page,
+      per: per
     }
   end
 
@@ -40,7 +40,8 @@ RSpec.describe 'events#index', type: :request do
     end
     context '参加者が居ない場合' do
       let(:before_request) do
-        FactoryBot.create(:event)
+        event = FactoryBot.create(:event)
+        event.user_events.delete_all
       end
 
       it 'membersが空になっている' do
@@ -49,12 +50,7 @@ RSpec.describe 'events#index', type: :request do
     end
     context '参加者が一人の場合' do
       let(:before_request) do
-        event = FactoryBot.create(:event)
-        event.user_events.create(
-          [
-            { user: FactoryBot.create(:user, display_name: 'AAA') }
-          ]
-        )
+        FactoryBot.create(:event, user: FactoryBot.create(:user, display_name: 'AAA'))
       end
 
       it 'membersにユーザ情報が含まれている' do
@@ -64,12 +60,9 @@ RSpec.describe 'events#index', type: :request do
     end
     context '参加者が二人の場合' do
       let(:before_request) do
-        event = FactoryBot.create(:event)
+        event = FactoryBot.create(:event, user: FactoryBot.create(:user, display_name: 'AAA'))
         event.user_events.create(
-          [
-            { user: FactoryBot.create(:user, display_name: 'AAA') },
-            { user: FactoryBot.create(:user, display_name: 'BBB') }
-          ]
+          user: FactoryBot.create(:user, display_name: 'BBB')
         )
       end
 
