@@ -21,6 +21,9 @@ jobs:
           name: bundle install
           command: bundle install
       - run:
+          name: authentication config
+          command: rails generate knock:install
+      - run:
           name: create db
           command: bundle exec rails db:setup test
       - run:
