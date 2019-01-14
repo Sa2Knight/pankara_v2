@@ -20,12 +20,12 @@
             >
               <v-text-field
                 slot="activator"
-                v-model="datetime"
+                v-model="date"
                 label="日付"
                 readonly
               />
               <v-date-picker
-                v-model="datetime"
+                v-model="date"
                 @input="showingDatePicker = false"
                 :max="datePickerMax"
                 locale="ja"
@@ -67,7 +67,7 @@
         titleRules: [
           v => v.length <= 24 || 'タイトルは24文字以下で入力してください'
         ],
-        datetime: null,
+        date: null,
         showingDatePicker: false,
       }
     },
@@ -90,7 +90,7 @@
       submit: function() {
         const params = {
           title: this.title,
-          datetime: this.datetime,
+          date: this.date,
           users: []
         }
         this.createEvent(params).then(() => {

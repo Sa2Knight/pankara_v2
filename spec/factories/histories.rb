@@ -14,7 +14,7 @@ FactoryBot.define do
     score_type { Random.rand(1..5) }
 
     after(:create) do |history|
-      history.update(event_date: history.event.datetime)
+      history.update(event_date: history.event.date)
     end
   end
 end

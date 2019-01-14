@@ -7,7 +7,7 @@
         </div>
         <div class="description">
           <p v-if="showDate" class="date">
-            {{ history.event.datetime }}
+            {{ history.event.date }}
           </p>
           <p v-if="showEventTitle" class="collapse">
             {{ history.event.title }}

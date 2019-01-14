@@ -7,15 +7,15 @@ describe 'events#create', type: :request do
   let(:params) do
     {
       title: title,
-      datetime: datetime,
+      date: date,
       users: users
     }
   end
   let(:title) { nil }
-  let(:datetime) { Time.zone.today.to_s }
+  let(:date) { Time.zone.today.to_s }
   let(:users) { nil }
 
-  let(:created_event) { Event.find_by(datetime: datetime) }
+  let(:created_event) { Event.find_by(date: date) }
 
   before do
     before_request if defined? before_request
@@ -48,7 +48,7 @@ describe 'events#create', type: :request do
       end
     end
     context '日付が過去の場合' do
-      let(:datetime) { (Time.zone.today - 1).to_s }
+      let(:date) { (Time.zone.today - 1).to_s }
       it_behaves_like '登録に成功する'
     end
     context 'メンバーを指定した場合' do
@@ -72,15 +72,15 @@ describe 'events#create', type: :request do
       it_behaves_like '400'
     end
     context '日付を指定してない場合' do
-      let(:datetime) { nil }
+      let(:date) { nil }
       it_behaves_like '400'
     end
     context '日付のフォーマットがおかしい場合' do
-      let(:datetime) { '今日' }
+      let(:date) { '今日' }
       it_behaves_like '400'
     end
     context '日付が未来を示している場合' do
-      let(:datetime) { (Time.zone.today + 1).to_s }
+      let(:date) { (Time.zone.today + 1).to_s }
       it_behaves_like '400'
     end
     context 'メンバーに存在しないユーザを含んでいる場合' do

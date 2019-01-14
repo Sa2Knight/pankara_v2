@@ -3,7 +3,6 @@
     <v-container fluid grid-list-md>
 
       <!-- 持ち歌一覧 -->
-      <h1>持ち歌一覧</h1>
       <TheSangCountRemarks />
       <VPaginationWrapper v-if="mySongs"
         :pageOrigin="pageOrigin"

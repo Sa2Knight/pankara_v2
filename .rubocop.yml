@@ -3,6 +3,7 @@ AllCops:
   TargetRubyVersion: 2.5
   Exclude:
     - 'config/**/*.rb'
+    - 'db/**/*.rb'
 
 # Railsモードで動作
 Rails:

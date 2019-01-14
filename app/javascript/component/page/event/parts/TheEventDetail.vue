@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs6 lg2>
       <v-simple-information header="日付">
-        {{ event.datetime }}
+        {{ event.date }}
       </v-simple-information>
     </v-flex>
     <v-flex xs6 lg2>
@@ -61,7 +61,7 @@
       },
       average_satisfaction: function() {
         if (this.event.average_satisfaction) {
-          return Util.round(this.event.average_satisfaction, 2) + '%'
+          return Util.round(this.event.average_satisfaction, 2)
         } else {
           return '記録なし'
         }

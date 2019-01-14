@@ -52,7 +52,7 @@ RSpec.describe 'history#index', type: :request do
         },
         event: {
           id: history.event.id,
-          datetime: history.event.datetime.strftime(CONSTANT::FORMAT::DATE),
+          date: history.event.date.strftime(CONSTANT::FORMAT::DATE),
           title: history.event.title
         },
         song: {
