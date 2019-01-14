@@ -21,9 +21,6 @@ jobs:
           name: bundle install
           command: bundle install
       - run:
-          name: authentication config
-          command: rails runner 'p Rails.application.credentials.secret_key_base'
-      - run:
           name: create db
           command: bundle exec rails db:setup test
       - run:
