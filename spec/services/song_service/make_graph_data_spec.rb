@@ -8,9 +8,9 @@ RSpec.describe 'SongService::MakeGraphData', type: :service do
     user2 = FactoryBot.create(:user, display_name: 'ちゃら')
 
     # カラオケ作成
-    event1 = FactoryBot.create(:event, datetime: Time.zone.parse('2017/05/01'))
-    event2 = FactoryBot.create(:event, datetime: Time.zone.parse('2017/12/31'))
-    event3 = FactoryBot.create(:event, datetime: Time.zone.parse('2018/04/04'))
+    event1 = FactoryBot.create(:event, date: Time.zone.parse('2017/05/01'))
+    event2 = FactoryBot.create(:event, date: Time.zone.parse('2017/12/31'))
+    event3 = FactoryBot.create(:event, date: Time.zone.parse('2018/04/04'))
 
     # 歌唱履歴作成
     FactoryBot.create(

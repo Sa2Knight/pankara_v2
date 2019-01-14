@@ -60,7 +60,7 @@ class Api::EventsController < Api::BaseController
   end
 
   def event_params
-    params.permit(:title, :datetime)
+    params.permit(:title, :date)
   end
 
   # [check] 編集/削除可能か？

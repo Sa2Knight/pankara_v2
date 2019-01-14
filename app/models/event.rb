@@ -18,10 +18,10 @@ class Event < ApplicationRecord
 
   #
   # カラオケ更新後、歌唱履歴の日付を更新する
-  # TODO: datetimeが更新された場合のみ発火で良いと思う
+  # TODO: dateが更新された場合のみ発火で良いと思う
   #
   after_update do
-    self.histories.update(event_date: self.datetime)
+    self.histories.update(event_date: self.date)
   end
 
   #
