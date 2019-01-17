@@ -7,7 +7,7 @@
           カラオケ新規登録
         </v-card-title>
         <v-card-text>
-          <v-form>
+          <v-form ref="form">
             <v-text-field label="カラオケタイトル"
               v-model="title"
               :rules="titleRules"
@@ -21,6 +21,7 @@
               <v-text-field
                 slot="activator"
                 v-model="date"
+                :rules="dateRules"
                 label="日付"
                 readonly
               />
@@ -64,11 +65,14 @@
       return {
         isShow: false,
         title: '',
+        date: null,
+        showingDatePicker: false,
         titleRules: [
           v => v.length <= 24 || 'タイトルは24文字以下で入力してください'
         ],
-        date: null,
-        showingDatePicker: false,
+        dateRules: [
+          v => !!v || '日付を入力してください'
+        ],
       }
     },
     computed: {
@@ -88,6 +92,8 @@
         'createEvent'
       ]),
       submit: function() {
+        if (!this.$refs.form.validate()) { return }
+
         const params = {
           title: this.title,
           date: this.date,

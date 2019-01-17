@@ -18,6 +18,9 @@ module Pankara
       require l
     end
 
+    # タイムゾーンを日本に
+    Rails.application.config.time_zone = 'Tokyo'
+
     #
     # Generatorの生成物の設定
     # 基本的に必要に応じて手動で生成するので全てオフ
