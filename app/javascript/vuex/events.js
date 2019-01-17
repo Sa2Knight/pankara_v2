@@ -4,6 +4,8 @@
 import http from '../lib/http'
 import util from '../lib/util'
 import CONST from '../lib/constants'
+import { ROUTES, router } from '@lib/routes'
+
 export default {
   namespaced: true,
   state: {
@@ -91,6 +93,9 @@ export default {
 
       http.postEvents(params).then((response) => {
         dispatch('common/hideLoadingView', null, { root: true })
+
+        const createdEventId = response.data.id
+        router.push(ROUTES.EVENT_PATH(createdEventId))
       })
     },
     // ページを切り替える
