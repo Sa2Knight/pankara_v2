@@ -78,6 +78,13 @@ http.postEvents = function(params = {}) {
 }
 
 /**
+ * イベントを更新する
+ */
+http.patchEvent = function(id, params = {}) {
+  return request('PATCH', `/events/${id}`, params)
+}
+
+/**
  * 楽曲一覧を取得する
  */
 http.getSongs = function(params = {}) {

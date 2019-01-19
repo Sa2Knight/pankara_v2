@@ -55,9 +55,12 @@
       ])
     },
     mounted: function() {
-      this.fetchEvent(this.id).then(() => {
+      this.fetchEvent(this.id).then()
+    },
+    watch: {
+      event: function() {
         this.$store.dispatch('common/setPageTitle', this.event.title)
-      })
+      }
     },
     components: {
       PageEventOverview:  require('./PageEventOverview').default,

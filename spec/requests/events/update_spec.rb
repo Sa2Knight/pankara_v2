@@ -17,7 +17,7 @@ describe 'events#update', type: :request do
   let(:date) { nil }
 
   before do
-    request(:put, "/api/events/#{event_id}", params: params, user: current_user)
+    request(:patch, "/api/events/#{event_id}", params: params, user: current_user)
   end
 
   shared_examples '更新に成功する' do

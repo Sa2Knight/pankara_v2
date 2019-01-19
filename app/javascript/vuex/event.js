@@ -2,6 +2,7 @@
   カラオケ詳細画面のストア
 */
 import http from '../lib/http'
+import { ROUTES, router } from '@lib/routes'
 export default {
   namespaced: true,
   state: {
@@ -53,5 +54,29 @@ export default {
           dispatch('common/hideLoadingView', null, { root: true })
         })
     },
+    //
+    // APIにカラオケ新規作成をリクエストする
+    //
+    createEvent ({ dispatch }, params) {
+      dispatch('common/showLoadingView', null, { root: true })
+
+      http.postEvents(params).then((response) => {
+        dispatch('common/hideLoadingView', null, { root: true })
+
+        const createdEventId = response.data.id
+        router.push(ROUTES.EVENT_PATH(createdEventId))
+      })
+    },
+    //
+    // APIにカラオケ更新をリクエストする
+    //
+    updateEvent ({ commit, dispatch }, { id, params }) {
+      dispatch('common/showLoadingView', null, { root: true })
+
+      http.patchEvent(id, params).then((response) => {
+        commit('setEvent', response.data)
+        dispatch('common/hideLoadingView', null, { root: true })
+      })
+    }
   }
 }
