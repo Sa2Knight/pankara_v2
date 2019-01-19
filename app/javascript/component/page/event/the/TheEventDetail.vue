@@ -1,29 +1,29 @@
 <template>
   <v-layout row wrap>
     <v-flex xs6 lg2>
-      <v-simple-information header="日付">
+      <VSimpleInformation header="日付">
         {{ event.date }}
-      </v-simple-information>
+      </VSimpleInformation>
     </v-flex>
     <v-flex xs6 lg2>
-      <v-simple-information header="平均点">
+      <VSimpleInformation header="平均点">
         {{ average_score }}
-      </v-simple-information>
+      </VSimpleInformation>
     </v-flex>
     <v-flex xs6 lg2>
-      <v-simple-information header="最高点">
+      <VSimpleInformation header="最高点">
         {{ max_score }}
-      </v-simple-information>
+      </VSimpleInformation>
     </v-flex>
     <v-flex xs6 lg2>
-      <v-simple-information header="曲数">
+      <VSimpleInformation header="曲数">
         {{ event.history_size }} 曲
-      </v-simple-information>
+      </VSimpleInformation>
     </v-flex>
     <v-flex xs6 lg2>
-      <v-simple-information header="満足度">
+      <VSimpleInformation header="満足度">
         {{ average_satisfaction }}
-      </v-simple-information>
+      </VSimpleInformation>
     </v-flex>
   </v-layout>
 </template>
@@ -49,11 +49,14 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import Util from '../../../../lib/util'
-  const namespace = 'event'
+  import VSimpleInformation from '@component/common/VSimpleInformation'
 
   export default {
+    components: {
+      VSimpleInformation
+    },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('event', {
         event: state => state.event
       }),
       owner: function() {
@@ -80,9 +83,6 @@
           return '未採点'
         }
       },
-    },
-    components: {
-      VSimpleInformation: require('../../../common/VSimpleInformation').default
     },
   }
 </script>

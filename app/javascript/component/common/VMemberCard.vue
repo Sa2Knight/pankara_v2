@@ -4,7 +4,7 @@
     <div class="inner">
       <v-layout row wrap>
         <v-flex xs3>
-          <v-user-icon :user="member.user" />
+          <VUserIcon :user="member.user" />
         </v-flex>
         <v-flex xs9>
           <div class="member-info arrow-box right">
@@ -45,8 +45,12 @@
 </style>
 
 <script>
-  import Util from '../../../../lib/util'
+  import Util from '@lib/util'
+  import VUserIcon from '@component/common/VUserIcon'
   export default {
+    components: {
+      VUserIcon
+    },
     data: function() {
       return {
         isShowComment: true
@@ -67,8 +71,5 @@
         return Util.round(this.member.average_score, 2)
       }
     },
-    components: {
-      VUserIcon: require('../../../common/VUserIcon').default
-    }
   }
 </script>
