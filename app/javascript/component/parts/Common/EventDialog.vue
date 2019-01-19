@@ -68,6 +68,7 @@
         date: null,
         showingDatePicker: false,
         titleRules: [
+          v => !!v || 'タイトルを入力してください',
           v => v.length <= 24 || 'タイトルは24文字以下で入力してください'
         ],
         dateRules: [
