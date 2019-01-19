@@ -4,7 +4,7 @@
     <v-dialog v-model="isShow" scrollable max-width="450px">
       <v-card class="event-detail">
         <v-card-title class="headline grey lighten-2">
-          カラオケ新規登録
+          {{ dialogTitle }}
         </v-card-title>
         <v-card-text>
           <v-form ref="form">
@@ -59,7 +59,6 @@
   // TODO: YoutubeDialogとmixinなりできる？
   import { mapState, mapActions } from 'vuex'
   import moment from 'moment'
-  const namespace = 'common'
   export default {
     data: function() {
       return {
@@ -77,32 +76,46 @@
       }
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('common', {
         isShowEventDialog: state => state.isShowEventDialog,
         event: state => state.showingEvent,
       }),
+      isUpdateMode: function() {
+        return !!this.event
+      },
       datePickerMax: () => {
         return moment().format('YYYY-MM-DD')
+      },
+      dialogTitle: function() {
+        return this.event ? 'カラオケ編集' : 'カラオケ新規登録'
+      },
+      requestParams: function() {
+        return {
+          title: this.title,
+          date: this.date
+        }
       }
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('common', [
         'hideEventDialog',
       ]),
-      ...mapActions('events', [
-        'createEvent'
+      ...mapActions('event', [
+        'createEvent',
+        'updateEvent'
       ]),
       submit: function() {
         if (!this.$refs.form.validate()) { return }
 
-        const params = {
-          title: this.title,
-          date: this.date,
-          users: []
+        if (this.isUpdateMode) {
+          this.updateEvent({id: this.event.id, params: this.requestParams}).then(() => {
+            this.hideEventDialog()
+          })
+        } else {
+          this.createEvent(this.requestParams).then(() => {
+            this.hideEventDialog()
+          })
         }
-        this.createEvent(params).then(() => {
-          this.hideEventDialog()
-        })
       }
     },
     watch: {
@@ -115,6 +128,10 @@
       }
     },
     mounted: function() {
+      if (this.isUpdateMode) {
+        this.title = this.event.title
+        this.date = this.event.date
+      }
       this.isShow = this.isShowEventDialog
     },
   }

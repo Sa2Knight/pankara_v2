@@ -131,16 +131,9 @@ export default {
       router.push({query: urlQuery })
     },
     // カラオケダイアログを表示する
-    showEventDialog ({ commit, dispatch }, eventId) {
+    showEventDialog ({ commit, dispatch }, event) {
+      if (event) { commit('setShowingEvent', event) }
       commit('setIsShowEventDialog', true)
-
-      // 新規の場合はnullが入ってるので
-      if (eventId) {
-        return http.getEvent(eventId).then((res) => {
-          commit('setShowingEvent', res.data)
-          router.push({query: { eventDialog: res.data.id }})
-        })
-      }
     },
     // 歌唱履歴ダイアログを終了する
     hideEventDialog ({ commit }) {

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-box :label="event_title"><the-event-detail /></v-box>
+    <v-box :label="event.title"><the-event-detail /></v-box>
     <v-box label="参加メンバー"><the-event-members /></v-box>
 
     <!-- 更新ボタン -->
     <!-- TODO: 更新権限ある場合のみ表示 -->
     <div class="buttons">
-      <v-btn v-show="true" @click="() => showEventDialog(null)"
+      <v-btn v-show="true" @click="() => showEventDialog(event)"
              color="gray" class="elevation-12" fixed bottom right fab dark>
         <v-icon>edit</v-icon>
       </v-btn>
@@ -26,9 +26,9 @@
 
   export default {
     computed: {
-      ...mapState(namespace, {
-        event_title: state => state.event.title
-      })
+      ...mapState(namespace, [
+        'event'
+      ])
     },
     methods: {
       ...mapActions('common', [
