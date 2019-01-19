@@ -42,7 +42,6 @@
   import VSongCard from '@component/common/VSongCard'
   import TheSangCountRemarks from '@component/the/TheSangCountRemarks'
   import TheMySongsSearchForm from '@component/page/user/the/TheMySongsSearchForm'
-  const namespace = 'user'
 
   export default {
     mixins: [PageCommonMixin],
@@ -53,17 +52,17 @@
       VSongCard,
     },
     computed: {
-      ...mapState(namespace, [
+      ...mapState('user', [
         'mySongs',
         'isShowMySongsSearchDialog'
       ]),
-      ...mapState(namespace, {
+      ...mapState('user', {
         pageOrigin: state => state.mySongsPager.page,
         totalPages: state => state.mySongsPager.totalPages,
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('user', [
         'fetchMySongs',
         'changePage',
         'showMySongsSearchDialog'
