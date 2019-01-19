@@ -15,7 +15,7 @@
 
         <!-- 概要 -->
         <v-tab-item id="overview">
-          <page-event-overview />
+          <PageEventOverview />
         </v-tab-item>
 
         <!-- 歌唱履歴一覧 -->
@@ -23,7 +23,7 @@
         <v-tab-item id="histories">
           <v-layout row wrap class="pb-5">
             <v-flex xs12 sm12 md6 lg4 v-for="history in histories">
-              <v-history-card :history="history" showSongName showArtistName />
+              <VHistoryCard :history="history" showSongName showArtistName />
               <v-divider />
             </v-flex>
           </v-layout>
@@ -36,12 +36,17 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import PageCommonMixin from '@mixin/PageCommonMixin'
-  const namespace = 'event'
+  import PageEventOverview from '@component/page/event/PageEventOverview'
+  import VHistoryCard from '@component/common/VHistoryCard'
 
   export default {
     mixins: [PageCommonMixin],
+    components: {
+      PageEventOverview,
+      VHistoryCard
+    },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('event', {
         event: state => state.event,
         histories: state => state.histories
       }),
@@ -50,7 +55,7 @@
       },
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('event', [
         'fetchEvent'
       ])
     },
@@ -62,9 +67,5 @@
         this.$store.dispatch('common/setPageTitle', this.event.title)
       }
     },
-    components: {
-      PageEventOverview:  require('./PageEventOverview').default,
-      VHistoryCard:  require('../../common/VHistoryCard').default,
-    }
   }
 </script>

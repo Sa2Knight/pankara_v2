@@ -2,7 +2,7 @@
   <div app>
     <v-container fluid grid-list-md>
       <!-- カラオケ一覧 -->
-      <the-event-cards />
+      <TheEventCards />
 
       <div class="buttons">
         <!-- 検索フォームボタン -->
@@ -21,7 +21,7 @@
 
     <!-- 検索フォームをダイアログで描画 -->
     <v-dialog v-model="isShowSearchDialog" max-width="500px" persistent>
-      <the-events-search-form/>
+      <TheEventsSearchForm />
     </v-dialog>
   </div>
 </template>
@@ -40,19 +40,24 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import PageCommonMixin from '@mixin/PageCommonMixin'
-  import CONST        from '../../../lib/constants'
-  const namespace = 'events'
+  import CONST from '@lib/constants'
+  import TheEventCards from '@component/page/events/the/TheEventCards'
+  import TheEventsSearchForm from '@component/page/events/the/TheEventsSearchForm'
 
   export default {
     mixins: [PageCommonMixin],
+    components: {
+      TheEventCards,
+      TheEventsSearchForm
+    },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('events', {
         isShowSearchDialog: state => state.isShowSearchDialog,
         searchQuery: state => state.searchQuery,
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('events', [
         'fetchEvents',
         'showSearchDialog'
       ]),
@@ -64,9 +69,5 @@
       this.$store.dispatch('common/setPageTitle', 'カラオケ一覧')
       this.fetchEvents()
     },
-    components: {
-      TheEventCards: require('./parts/TheEventCards').default,
-      TheEventsSearchForm: require('./parts/TheEventsSearchForm').default
-    }
   }
 </script>

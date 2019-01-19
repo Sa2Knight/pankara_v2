@@ -8,7 +8,7 @@
       <v-list-tile>
         <v-list-tile-content>メンバー</v-list-tile-content>
         <v-list-tile-content class="align-end">
-          <v-user-icons :users="event.members" />
+          <VUserIcons :users="event.members" />
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile>
@@ -24,15 +24,16 @@
 </template>
 
 <script>
+  import VUserIcons from '@component/common/VUserIcons'
   export default {
+    components: {
+      VUserIcons
+    },
     props: {
       event: {
         type: Object,
         required: true
       }
     },
-    components: {
-      VUserIcons:  require('../../../common/VUserIcons').default,
-    }
   }
 </script>

@@ -8,16 +8,16 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  const namespace = 'event'
+  import VMemberCard from '@component/common/VMemberCard'
 
   export default {
+    components: {
+      VMemberCard
+    },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('event', {
         members: state => state.event.members
       })
-    },
-    components: {
-      VMemberCard: require('./VMemberCard').default
     },
   }
 </script>

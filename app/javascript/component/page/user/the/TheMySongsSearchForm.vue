@@ -31,7 +31,6 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  const namespace = 'user'
 
   export default {
     data: function() {
@@ -41,7 +40,7 @@
       }
     },
     computed: {
-      ...mapState(namespace, [
+      ...mapState('user', [
         'mySongsSearchQuery'
       ]),
       ...mapState('common', [
@@ -49,7 +48,7 @@
       ])
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('user', [
         'submitMySongsSearchDialog',
         'cancelMySongsSearchDialog',
         'fetchMySongs'

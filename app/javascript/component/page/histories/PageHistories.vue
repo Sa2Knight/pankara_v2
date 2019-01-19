@@ -27,7 +27,6 @@
   import CONST from '@lib/constants'
   import VPaginationWrapper from '@component/common/VPaginationWrapper'
   import VHistoryCard from '@component/common/VHistoryCard'
-  const namespace = 'histories'
 
   export default {
     mixins: [PageCommonMixin],
@@ -36,14 +35,14 @@
       VHistoryCard
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('histories', {
         histories: state => state.histories,
         pageOrigin: state => state.pager.page,
         totalPages: state => state.pager.totalPages,
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('histories', [
         'fetchHistories',
         'changePage'
       ]),

@@ -5,7 +5,7 @@
       <h2 class="link" @click="moveToArtistPage">{{ song.artist.name}}</h2>
     </div>
     <div class="player">
-      <youtube-player :song="song" />
+      <YoutubePlayer :song="song" />
     </div>
   </div>
 </template>
@@ -23,17 +23,16 @@
 <script>
 import { mapState } from 'vuex'
 import { ROUTES } from '../../../lib/routes'
-const namespace = 'song'
+import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
 
 export default {
+  components: {
+    YoutubePlayer
+  },
   computed: {
-    ...mapState(namespace, {
+    ...mapState('song', {
       song: state => state.song
     })
-  },
-  components: {
-    VBox: require('../../common/VBox').default,
-    YoutubePlayer: require('../../parts/Common/YoutubePlayer').default,
   },
   methods: {
     moveToArtistPage() {

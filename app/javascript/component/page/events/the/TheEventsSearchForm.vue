@@ -30,7 +30,6 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  const namespace = 'events'
 
   export default {
     data: function() {
@@ -40,7 +39,7 @@
       }
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('events', {
         searchQuery: state => state.searchQuery
       }),
       ...mapState('common', {
@@ -48,7 +47,7 @@
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('events', [
         'submitSearchDialog',
         'cancelSearchDialog',
         'fetchEvents',

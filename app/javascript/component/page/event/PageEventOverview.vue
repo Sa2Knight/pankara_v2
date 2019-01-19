@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-box :label="event.title"><the-event-detail /></v-box>
-    <v-box label="参加メンバー"><the-event-members /></v-box>
+    <v-box :label="event.title"><TheEventDetail /></v-box>
+    <v-box label="参加メンバー"><TheEventMembers /></v-box>
 
     <!-- 更新ボタン -->
     <!-- TODO: 更新権限ある場合のみ表示 -->
@@ -22,11 +22,18 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  const namespace = 'event'
+  import TheEventDetail from '@component/page/event/the/TheEventDetail'
+  import TheEventMembers from '@component/page/event/the/TheEventMembers'
+  import VBox from '@component/common/VBox'
 
   export default {
+    components: {
+      TheEventDetail,
+      TheEventMembers,
+      VBox
+    },
     computed: {
-      ...mapState(namespace, [
+      ...mapState('event', [
         'event'
       ])
     },
@@ -35,10 +42,5 @@
         'showEventDialog'
       ])
     },
-    components: {
-      TheEventDetail:  require('./parts/TheEventDetail').default,
-      TheEventMembers: require('./parts/TheEventMembers').default,
-      VBox: require('../../common/VBox').default,
-    }
   }
 </script>

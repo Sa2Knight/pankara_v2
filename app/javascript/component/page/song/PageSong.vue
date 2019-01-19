@@ -11,8 +11,8 @@
           歌唱履歴<v-icon>fas fa-list-ul</v-icon>
         </v-tab>
 
-        <v-tab-item id="overview"><page-song-overview /></v-tab-item>
-        <v-tab-item id="history"><page-song-histories /></v-tab-item>
+        <v-tab-item id="overview"><PageSongOverview /></v-tab-item>
+        <v-tab-item id="history"><PageSongHistories /></v-tab-item>
 
       </v-tabs>
     </div>
@@ -22,17 +22,22 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import PageCommonMixin from '@mixin/PageCommonMixin'
-  const namespace = 'song'
+  import PageSongOverview from '@component/page/song/PageSongOverview'
+  import PageSongHistories from '@component/page/song/PageSongHistories'
 
   export default {
     mixins: [PageCommonMixin],
+    components: {
+      PageSongOverview,
+      PageSongHistories
+    },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('song', {
         song: store => store.song
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('song', [
         'fetchSong'
       ]),
       // APIから楽曲詳細をフェッチ
@@ -44,10 +49,6 @@
     },
     mounted: function() {
       this.fetch()
-    },
-    components: {
-      PageSongOverview: require('./PageSongOverview').default,
-      PageSongHistories: require('./PageSongHistories').default,
     },
   }
 </script>
