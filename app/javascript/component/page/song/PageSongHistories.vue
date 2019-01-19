@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 lg3 v-for="history in histories">
         <div @click="() => selectHistory(history.id)">
-          <v-history-card :history="history" showEventTitle showDate/>
+          <VHistoryCard :history="history" showEventTitle showDate/>
         </div>
       </v-flex>
     </v-layout>
@@ -15,17 +15,17 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  const namespace = 'song'
+  import VHistoryCard from '@component/common/VHistoryCard'
 
   export default {
+    components: {
+      VHistoryCard
+    },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('song', {
         histories: state => state.histories,
         isSelectedHistory: state => !!state.selectedHistoryId,
       })
-    },
-    components: {
-      VHistoryCard: require('../../common/VHistoryCard').default
     },
     methods: {
       selectHistory: function(id) {
