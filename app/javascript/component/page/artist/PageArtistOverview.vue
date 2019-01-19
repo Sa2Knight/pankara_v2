@@ -28,15 +28,14 @@
 
 <script>
   import { mapState } from 'vuex'
-  import TheArtistSongs from '@component/page/artist/TheArtistSongs'
-  const namespace = 'artist'
+  import TheArtistSongs from '@component/page/artist/the/TheArtistSongs'
 
   export default {
     components: {
       TheArtistSongs
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('artist', {
         artist: store => store.artist,
       }),
       description: function() {

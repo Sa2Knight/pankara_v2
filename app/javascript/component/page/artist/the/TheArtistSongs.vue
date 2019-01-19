@@ -24,7 +24,6 @@
   import { mapState } from 'vuex'
   import TheSangCountRemarks from '@component/the/TheSangCountRemarks'
   import VSongCard from '@component/common/VSongCard'
-  const namespace = 'artist'
 
   export default {
     components: {
@@ -32,7 +31,7 @@
       VSongCard
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('artist', {
         artist: store => store.artist,
       }),
     },

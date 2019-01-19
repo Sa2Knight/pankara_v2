@@ -19,7 +19,6 @@
   import { mapState, mapActions } from 'vuex'
   import VPaginationWrapper from '@component/common/VPaginationWrapper'
   import VHistoryCard from '@component/common/VHistoryCard'
-  const namespace = 'artist'
 
   export default {
     components: {
@@ -27,7 +26,7 @@
       VHistoryCard
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('artist', {
         artist:    state => state.artist,
         histories: state => state.histories,
         pageOrigin: state => state.historiesPager.page,
@@ -35,7 +34,7 @@
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('artist', [
         'fetchHistoriesByPage'
       ]),
     },

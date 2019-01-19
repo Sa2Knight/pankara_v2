@@ -23,7 +23,6 @@
   import PageCommonMixin from '@mixin/PageCommonMixin'
   import PageArtistOverview from '@component/page/artist/PageArtistOverview'
   import PageArtistHistories from '@component/page/artist/PageArtistHistories'
-  const namespace = 'artist'
 
   export default {
     mixins: [PageCommonMixin],
@@ -32,12 +31,12 @@
       PageArtistHistories
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('artist', {
         artist: state => state.artist
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('artist', [
         'fetchArtist',
         'fetchHistoriesByPage'
       ])
