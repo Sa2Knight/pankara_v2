@@ -79,7 +79,7 @@
 
     <!-- カラオケ作成/編集ダイアログ -->
     <div class="event-dialog-outer" v-if="isShowEventDialog">
-      <EventDialog />
+      <TheEventDialog />
     </div>
 
     <!-- スナック TODO: もう少し汎用化したいね -->
@@ -121,7 +121,7 @@
   import TheLoginForm from '@component/the/TheLoginForm'
   import TheLoadingView from '@component/the/TheLoadingView'
   import TheHistoryDialog from '@component/the/TheHistoryDialog'
-  import EventDialog from '@component/parts/Common/EventDialog'
+  import TheEventDialog from '@component/the/TheEventDialog'
   import VUserIcon from '@component/common/VUserIcon'
   const namespace = 'common'
 
@@ -129,7 +129,7 @@
     components: {
       TheLoginForm,
       TheHistoryDialog,
-      EventDialog,
+      TheEventDialog,
       TheLoadingView,
       VUserIcon,
     },
