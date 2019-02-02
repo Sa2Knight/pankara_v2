@@ -65,7 +65,7 @@
 
     <!-- 歌唱履歴詳細ダイアログ　-->
     <div class="history-dialog-outer" v-if="isShowHistoryDialog">
-      <history-dialog />
+      <TheHistoryDialog />
       <v-btn
         v-show="true"
         @click="hideHistoryDialog"
@@ -117,9 +117,9 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import { ROUTES } from '../lib/routes'
+  import { ROUTES } from '@lib/routes'
   import LoginForm from '@component/parts/Common/LoginForm'
-  import HistoryDialog from '@component/parts/Common/HistoryDialog'
+  import TheHistoryDialog from '@component/the/TheHistoryDialog'
   import EventDialog from '@component/parts/Common/EventDialog'
   import TheLoadingView from '@component/parts/Common/TheLoadingView'
   import VUserIcon from '@component/common/VUserIcon'
@@ -128,7 +128,7 @@
   export default {
     components: {
       LoginForm,
-      HistoryDialog,
+      TheHistoryDialog,
       EventDialog,
       TheLoadingView,
       VUserIcon,
