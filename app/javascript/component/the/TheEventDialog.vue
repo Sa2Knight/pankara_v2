@@ -1,6 +1,5 @@
-<!-- TODO: TheEventDialogにするべきで、partsではないだろ -->
 <template>
-  <div class="event-dialog">
+  <div class="the-event-dialog">
     <v-dialog v-model="isShow" scrollable max-width="450px">
       <v-card class="event-detail">
         <v-card-title class="headline grey lighten-2">
@@ -51,8 +50,6 @@
 </template>
 
 <style lang="scss" scoped>
-.event-detail {
-}
 </style>
 
 <script>
