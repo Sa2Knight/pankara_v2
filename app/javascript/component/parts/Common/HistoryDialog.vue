@@ -53,7 +53,7 @@
                 <tr v-if="history.satisfaction">
                   <th class="nowrap">満足度</th>
                   <td class="nowrap">
-                    <VSatisfactionRate narrow :satisfaction="history.satisfaction" />
+                    <VSatisfactionRate readonly narrow :satisfaction="history.satisfaction" />
                   </td>
                 </tr>
                 <template v-if="history.score_type && history.score">
