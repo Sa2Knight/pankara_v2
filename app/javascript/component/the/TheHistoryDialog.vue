@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="middle">
-          <YoutubePlayer :song="history.song" />
+          <VYoutubePlayer :song="history.song" />
         </div>
         <div class="bottom">
           <div class="history-info">
@@ -157,11 +157,16 @@
   // TODO: YoutubeDialogとmixinなりできる？
   import { mapState, mapActions } from 'vuex'
   import { ROUTES } from '@lib/routes'
-  import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
+  import VYoutubePlayer from '@component/common/VYoutubePlayer'
   import VScoreTypeLabel from '@component/common/VScoreTypeLabel'
   import VSatisfactionRate from '@component/common/VSatisfactionRate'
   const namespace = 'common'
   export default {
+    components: {
+      VYoutubePlayer,
+      VScoreTypeLabel,
+      VSatisfactionRate
+    },
     data: function() {
       return {
         isShow: false
@@ -214,10 +219,5 @@
     mounted: function() {
       this.isShow = this.isShowHistoryDialog
     },
-    components: {
-      YoutubePlayer,
-      VScoreTypeLabel,
-      VSatisfactionRate
-    }
   }
 </script>

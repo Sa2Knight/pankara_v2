@@ -1,5 +1,5 @@
 <template>
-  <div class="youtube-player">
+  <div class="v-youtube-player">
     <div class="thumbnail" v-show="showingThumbnail" @click="onClick">
       <VSongThumbnail :song="song" />
       <v-icon class="link play-icon">fas fa-play-circle</v-icon>
@@ -15,7 +15,7 @@
 </template>
 
 <style lang="scss" scoped>
-.youtube-player {
+.v-youtube-player {
   .thumbnail {
     position: relative;
     width: 100%;
