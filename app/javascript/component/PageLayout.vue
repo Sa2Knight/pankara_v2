@@ -57,7 +57,7 @@
 
     <!-- ログインフォーム -->
     <v-dialog v-model="isShowLoginForm" max-width="500px">
-      <login-form
+      <TheLoginForm
         @submit="login"
         @close="isShowLoginForm = false"
       />
@@ -118,7 +118,7 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import { ROUTES } from '@lib/routes'
-  import LoginForm from '@component/parts/Common/LoginForm'
+  import TheLoginForm from '@component/the/TheLoginForm'
   import TheHistoryDialog from '@component/the/TheHistoryDialog'
   import EventDialog from '@component/parts/Common/EventDialog'
   import TheLoadingView from '@component/parts/Common/TheLoadingView'
@@ -127,7 +127,7 @@
 
   export default {
     components: {
-      LoginForm,
+      TheLoginForm,
       TheHistoryDialog,
       EventDialog,
       TheLoadingView,
