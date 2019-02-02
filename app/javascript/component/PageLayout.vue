@@ -93,7 +93,7 @@
     </v-snackbar>
 
     <!-- ローディングビュー-->
-    <the-loading-view v-if="isLoading" />
+    <TheLoadingView v-if="isLoading" />
 
   </div>
 </template>
@@ -119,9 +119,9 @@
   import { mapState, mapActions } from 'vuex'
   import { ROUTES } from '@lib/routes'
   import TheLoginForm from '@component/the/TheLoginForm'
+  import TheLoadingView from '@component/the/TheLoadingView'
   import TheHistoryDialog from '@component/the/TheHistoryDialog'
   import EventDialog from '@component/parts/Common/EventDialog'
-  import TheLoadingView from '@component/parts/Common/TheLoadingView'
   import VUserIcon from '@component/common/VUserIcon'
   const namespace = 'common'
 
