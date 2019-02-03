@@ -57,7 +57,7 @@
 
     <!-- ログインフォーム -->
     <v-dialog v-model="isShowLoginForm" max-width="500px">
-      <login-form
+      <TheLoginForm
         @submit="login"
         @close="isShowLoginForm = false"
       />
@@ -65,7 +65,7 @@
 
     <!-- 歌唱履歴詳細ダイアログ　-->
     <div class="history-dialog-outer" v-if="isShowHistoryDialog">
-      <history-dialog />
+      <TheHistoryDialog />
       <v-btn
         v-show="true"
         @click="hideHistoryDialog"
@@ -79,7 +79,7 @@
 
     <!-- カラオケ作成/編集ダイアログ -->
     <div class="event-dialog-outer" v-if="isShowEventDialog">
-      <EventDialog />
+      <TheEventDialog />
     </div>
 
     <!-- スナック TODO: もう少し汎用化したいね -->
@@ -93,7 +93,7 @@
     </v-snackbar>
 
     <!-- ローディングビュー-->
-    <the-loading-view v-if="isLoading" />
+    <TheLoadingView v-if="isLoading" />
 
   </div>
 </template>
@@ -117,19 +117,19 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import { ROUTES } from '../lib/routes'
-  import LoginForm from '@component/parts/Common/LoginForm'
-  import HistoryDialog from '@component/parts/Common/HistoryDialog'
-  import EventDialog from '@component/parts/Common/EventDialog'
-  import TheLoadingView from '@component/parts/Common/TheLoadingView'
+  import { ROUTES } from '@lib/routes'
+  import TheLoginForm from '@component/the/TheLoginForm'
+  import TheLoadingView from '@component/the/TheLoadingView'
+  import TheHistoryDialog from '@component/the/TheHistoryDialog'
+  import TheEventDialog from '@component/the/TheEventDialog'
   import VUserIcon from '@component/common/VUserIcon'
   const namespace = 'common'
 
   export default {
     components: {
-      LoginForm,
-      HistoryDialog,
-      EventDialog,
+      TheLoginForm,
+      TheHistoryDialog,
+      TheEventDialog,
       TheLoadingView,
       VUserIcon,
     },

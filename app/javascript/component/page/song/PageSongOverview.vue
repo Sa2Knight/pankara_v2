@@ -5,7 +5,7 @@
       <h2 class="link" @click="moveToArtistPage">{{ song.artist.name}}</h2>
     </div>
     <div class="player">
-      <YoutubePlayer :song="song" />
+      <VYoutubePlayer :song="song" />
     </div>
   </div>
 </template>
@@ -23,11 +23,11 @@
 <script>
 import { mapState } from 'vuex'
 import { ROUTES } from '../../../lib/routes'
-import YoutubePlayer from '@component/parts/Common/YoutubePlayer'
+import VYoutubePlayer from '@component/common/VYoutubePlayer'
 
 export default {
   components: {
-    YoutubePlayer
+    VYoutubePlayer
   },
   computed: {
     ...mapState('song', {
