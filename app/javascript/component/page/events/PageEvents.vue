@@ -1,22 +1,7 @@
 <template>
   <div app>
     <v-container fluid grid-list-md>
-      <!-- カラオケ一覧 -->
-      <TheEventCards />
-
-      <div class="buttons">
-        <!-- 検索フォームボタン -->
-        <v-btn v-show="true" @click="showSearchDialog"
-               color="gray" class="elevation-12" fixed bottom right fab dark small>
-          <v-icon>search</v-icon>
-        </v-btn>
-
-        <!-- 新規作成ボタン-->
-        <v-btn v-show="isLogin" @click="() => showEventDialog(null)"
-               color="pink" class="create-btn elevation-12" fixed bottom right fab dark small>
-          <v-icon>add</v-icon>
-        </v-btn>
-      </div>
+      <TheEditableHistoryDialog />
     </v-container>
 
     <!-- 検索フォームをダイアログで描画 -->
@@ -43,12 +28,14 @@
   import CONST from '@lib/constants'
   import TheEventCards from '@component/page/events/the/TheEventCards'
   import TheEventsSearchForm from '@component/page/events/the/TheEventsSearchForm'
+  import TheEditableHistoryDialog from '@component/the/TheEditableHistoryDialog'
 
   export default {
     mixins: [PageCommonMixin],
     components: {
       TheEventCards,
-      TheEventsSearchForm
+      TheEventsSearchForm,
+      TheEditableHistoryDialog
     },
     computed: {
       ...mapState('events', {

@@ -6,7 +6,6 @@
       :items="filteredStates"
       :readonly="false"
       :label="label"
-      prepend-icon="mdi-city"
       hide-no-data
       clearable
     >

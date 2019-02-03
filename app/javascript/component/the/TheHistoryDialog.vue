@@ -207,6 +207,7 @@
         'hideHistoryDialog',
       ])
     },
+    // 多分Dialog全般mixinできる
     watch: {
       isShow: {
         handler: function(val) {
