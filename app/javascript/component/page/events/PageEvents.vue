@@ -12,13 +12,13 @@
     <div class="buttons">
       <!-- 検索フォームボタン -->
       <v-btn v-show="true" @click="showSearchDialog"
-             color="gray" class="elevation-12" fixed bottom right fab dark small>
+             color="gray" class="elevation-12" fixed bottom right fab dark >
         <v-icon>search</v-icon>
       </v-btn>
 
       <!-- 新規作成ボタン-->
       <v-btn v-show="isLogin" @click="() => showEventDialog(null)"
-             color="pink" class="create-btn elevation-12" fixed bottom right fab dark small>
+             color="pink" class="create-btn elevation-12" fixed bottom right fab dark >
         <v-icon>add</v-icon>
       </v-btn>
     </div>
@@ -31,7 +31,7 @@
   button {
     bottom: 0.5em;
     &.create-btn {
-      right: 64px;
+      right: 80px;
     }
   }
 }
