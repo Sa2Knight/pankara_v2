@@ -22,6 +22,13 @@ body {
   cursor: pointer;
 }
 
+// https://github.com/vuetifyjs/vuetify/issues/3875#issuecomment-383440994
+.noscroll {
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 a {
   text-decoration: none;
   color: #000;

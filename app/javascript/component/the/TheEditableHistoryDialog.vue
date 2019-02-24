@@ -24,11 +24,13 @@
 </style>
 
 <script>
+  import DialogComponentMixin from '@mixin/DialogComponentMixin'
   import VAutocompleteTextField from '@component/common/VAutocompleteTextField'
   import VUsersSelector from '@component/common/VUsersSelector'
   import VSongKeySlider from '@component/common/VSongKeySlider'
   import VSatisfactionRate from '@component/common/VSatisfactionRate'
   export default {
+    mixins: [DialogComponentMixin],
     components: {
       VAutocompleteTextField,
       VUsersSelector,
@@ -37,7 +39,6 @@
     },
     data: function() {
       return {
-        isShow: true,
         users: [
           { id: 1, display_name: 'ないと', image_url: '/user_icon/sa2knight.png' },
           { id: 2, display_name: 'へたれ', image_url: '/user_icon/hetare.png' },
@@ -67,6 +68,12 @@
           'イヤミ、おそ松、カラ松、チョロ松、一松、十四松、トド松'
         ]
       }
+    },
+    beforeCreate: function() {
+      document.getElementsByTagName("body")[0].className="noscroll"
+    },
+    beforeDestroy: function() {
+      document.body.removeAttribute("class","noscroll")
     },
     props: {
     }

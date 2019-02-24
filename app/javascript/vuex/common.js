@@ -1,5 +1,6 @@
 /**
   各画面共通のストア
+  TODO: ダイアログ系はモジュール分割したほうがよさげ
 */
 import http from '@lib/http'
 import { router } from '@lib/routes'
@@ -18,6 +19,10 @@ export default {
     isShowHistoryDialog: false,
     // 歌唱履歴詳細ダイアログに表示してる歌唱履歴
     showingHistory: null,
+    // 歌唱履歴編集ダイアログを表示してる？
+    isShowEditableHistoryDialog: false,
+    // 歌唱履歴編集ダイアログに表示してる歌唱履歴
+    showingEditableHistory: null,
     // カラオケ作成編集ダイアログを表示してる？
     isShowEventDialog: false,
     // カラオケ作成編集ダイアログで表示しているカラオケ
@@ -45,8 +50,14 @@ export default {
     setIsShowHistoryDialog (state, value) {
       state.isShowHistoryDialog = value
     },
+    setIsShowEditableHistoryDialog (state, value) {
+      state.isShowEditableHistoryDialog = value
+    },
     setShowingHistory (state, history) {
       state.showingHistory = history
+    },
+    setShowingEditableHistory (state, history) {
+      state.showingEditableHistory = history
     },
     setIsShowEventDialog (state, value) {
       state.isShowEventDialog = value
@@ -129,6 +140,23 @@ export default {
       const urlQuery = Object.assign({}, router.currentRoute.query)
       delete urlQuery.historyDialog
       router.push({query: urlQuery })
+    },
+    // 歌唱履歴編集ダイアログを表示する
+    showEditableHistoryDialog ({ commit, dispatch }, historyId = null) {
+      commit('setIsShowEditableHistoryDialog', true)
+      console.log(historyId)
+      if (!historyId) return
+
+      dispatch('showLoadingView')
+      http.getHistory(historyId).then((res) => {
+        commit('setShowingEditableHistory', res.data)
+        dispatch('hideLoadingView')
+      })
+    },
+    // 歌唱履歴編集ダイアログを終了する
+    hideEditableHistoryDialog ({ commit }) {
+      commit('setIsShowEditableHistoryDialog', false)
+      commit('setShowingEditableHistory', null)
     },
     // カラオケダイアログを表示する
     showEventDialog ({ commit, dispatch }, event) {

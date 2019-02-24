@@ -77,6 +77,19 @@
       </v-btn>
     </div>
 
+    <!-- 歌唱履歴編集ダイアログ -->
+    <div class="editable-history-dialog-outer" v-if="isShowEditableHistoryDialog">
+      <TheEditableHistoryDialog />
+      <v-btn
+        v-show="true"
+        @click="hideEditableHistoryDialog"
+        color="pink accent-1"
+        class="close-button elevation-12"
+        fixed bottom right fab
+      >
+      </v-btn>
+    </div>
+
     <!-- カラオケ作成/編集ダイアログ -->
     <div class="event-dialog-outer" v-if="isShowEventDialog">
       <TheEventDialog />
@@ -121,14 +134,15 @@
   import TheLoginForm from '@component/the/TheLoginForm'
   import TheLoadingView from '@component/the/TheLoadingView'
   import TheHistoryDialog from '@component/the/TheHistoryDialog'
+  import TheEditableHistoryDialog from '@component/the/TheEditableHistoryDialog'
   import TheEventDialog from '@component/the/TheEventDialog'
   import VUserIcon from '@component/common/VUserIcon'
-  const namespace = 'common'
 
   export default {
     components: {
       TheLoginForm,
       TheHistoryDialog,
+      TheEditableHistoryDialog,
       TheEventDialog,
       TheLoadingView,
       VUserIcon,
@@ -143,18 +157,20 @@
       }
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('common', {
         currentUser: state => state.currentUser,
         pageTitle: state => state.pageTitle,
         isShowHistoryDialog: state => state.isShowHistoryDialog,
+        isShowEditableHistoryDialog: state => state.isShowEditableHistoryDialog,
         isShowEventDialog: state => state.isShowEventDialog,
         isLoading: state => state.isLoading
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('common', [
         'loginByToken',
         'hideHistoryDialog',
+        'hideEditableHistoryDialog',
         'hideEventDialog'
       ]),
       login (name, password) {
