@@ -5,9 +5,9 @@
     </v-container>
 
     <!-- 検索フォームをダイアログで描画 -->
-    <v-dialog v-model="isShowSearchDialog" max-width="500px" persistent>
-      <TheEventsSearchForm />
-    </v-dialog>
+    <div v-if="isShowSearchDialog">
+      <TheEventsSearchDialog />
+    </div>
 
     <div class="buttons">
       <!-- 検索フォームボタン -->
@@ -42,13 +42,13 @@
   import PageCommonMixin from '@mixin/PageCommonMixin'
   import CONST from '@lib/constants'
   import TheEventCards from '@component/page/events/the/TheEventCards'
-  import TheEventsSearchForm from '@component/page/events/the/TheEventsSearchForm'
+  import TheEventsSearchDialog from '@component/page/events/the/TheEventsSearchDialog'
 
   export default {
     mixins: [PageCommonMixin],
     components: {
       TheEventCards,
-      TheEventsSearchForm
+      TheEventsSearchDialog
     },
     computed: {
       ...mapState('events', {
