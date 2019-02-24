@@ -27,6 +27,13 @@
               <v-divider />
             </v-flex>
           </v-layout>
+          <!-- 追加ボタン -->
+          <div class="buttons">
+            <v-btn v-show="true" @click="() => {}"
+                   color="gray" class="elevation-12" fixed bottom right fab dark>
+              <v-icon>plus</v-icon>
+            </v-btn>
+          </div>
         </v-tab-item>
       </v-tabs>
     </div>
