@@ -8,12 +8,15 @@ export default {
     }
   },
   watch: {
-    isShow: function(v) {
-      if (v) {
-        document.getElementsByTagName("body")[0].className="noscroll"
-      } else {
-        document.body.removeAttribute("class","noscroll")
-      }
+    isShow: {
+      handler: function(v) {
+        if (v) {
+          document.getElementsByTagName("body")[0].className="noscroll"
+        } else {
+          document.body.removeAttribute("class","noscroll")
+        }
+      },
+      immediate: true
     }
   }
 }

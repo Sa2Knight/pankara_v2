@@ -39,7 +39,7 @@
 
             <!-- 未ログイン中ユーザのみのメニュー -->
             <template v-else>
-              <v-list-tile @click="isShowLoginForm = true">
+              <v-list-tile @click="isShowLoginDialog = true">
                 <a><v-list-tile-title>ログイン</v-list-tile-title></a>
               </v-list-tile>
             </template>
@@ -56,12 +56,12 @@
     </v-content>
 
     <!-- ログインフォーム -->
-    <v-dialog v-model="isShowLoginForm" max-width="500px">
-      <TheLoginForm
+    <div class="login-dialog-outer" v-if="isShowLoginDialog">
+      <TheLoginDialog
         @submit="login"
-        @close="isShowLoginForm = false"
+        @close="isShowLoginDialog = false"
       />
-    </v-dialog>
+    </div>
 
     <!-- 歌唱履歴詳細ダイアログ　-->
     <div class="history-dialog-outer" v-if="isShowHistoryDialog">
@@ -131,7 +131,7 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import { ROUTES } from '@lib/routes'
-  import TheLoginForm from '@component/the/TheLoginForm'
+  import TheLoginDialog from '@component/the/TheLoginDialog'
   import TheLoadingView from '@component/the/TheLoadingView'
   import TheHistoryDialog from '@component/the/TheHistoryDialog'
   import TheEditableHistoryDialog from '@component/the/TheEditableHistoryDialog'
@@ -140,7 +140,7 @@
 
   export default {
     components: {
-      TheLoginForm,
+      TheLoginDialog,
       TheHistoryDialog,
       TheEditableHistoryDialog,
       TheEventDialog,
@@ -149,7 +149,7 @@
     },
     data: function() {
       return {
-        isShowLoginForm: false,
+        isShowLoginDialog: false,
         isShowSuccessSnack: false,
         isShowFailedSnack: false,
         successSnackLabel: '',
@@ -178,7 +178,7 @@
           .then(() => {
             this.isShowSuccessSnack = true
             this.isShowFailedSnack = false
-            this.isShowLoginForm = false
+            this.isShowLoginDialog = false
             this.successSnackLabel = 'ログインしました'
           })
           .catch((err) => {
