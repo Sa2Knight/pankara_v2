@@ -1,10 +1,10 @@
 <template>
-  <div class="v-satisfaction-rate narrow">
+  <div class="v-satisfaction-rate" :class="{narrow}">
     <v-rating v-if="satisfaction"
       :value="satisfaction"
       :length="10"
       hover
-      readonly
+      :readonly="readonly"
       color="red lighten-3"
       small
       background-color="gray lighten-1"
@@ -26,6 +26,11 @@
 <script>
   export default {
     props: {
+      readonly: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
       satisfaction: {
         type: Number,
         required: false

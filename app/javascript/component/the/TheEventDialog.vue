@@ -61,7 +61,7 @@
       return {
         isShow: false,
         title: '',
-        date: null,
+        date: moment().format('YYYY-MM-DD'),
         showingDatePicker: false,
         titleRules: [
           v => !!v || 'タイトルを入力してください',

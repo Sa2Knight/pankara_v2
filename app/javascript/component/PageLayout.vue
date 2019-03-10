@@ -39,7 +39,7 @@
 
             <!-- 未ログイン中ユーザのみのメニュー -->
             <template v-else>
-              <v-list-tile @click="isShowLoginForm = true">
+              <v-list-tile @click="isShowLoginDialog = true">
                 <a><v-list-tile-title>ログイン</v-list-tile-title></a>
               </v-list-tile>
             </template>
@@ -56,12 +56,12 @@
     </v-content>
 
     <!-- ログインフォーム -->
-    <v-dialog v-model="isShowLoginForm" max-width="500px">
-      <TheLoginForm
+    <div class="login-dialog-outer" v-if="isShowLoginDialog">
+      <TheLoginDialog
         @submit="login"
-        @close="isShowLoginForm = false"
+        @close="isShowLoginDialog = false"
       />
-    </v-dialog>
+    </div>
 
     <!-- 歌唱履歴詳細ダイアログ　-->
     <div class="history-dialog-outer" v-if="isShowHistoryDialog">
@@ -74,6 +74,19 @@
         fixed bottom right fab
       >
         <v-icon>close</v-icon>
+      </v-btn>
+    </div>
+
+    <!-- 歌唱履歴編集ダイアログ -->
+    <div class="editable-history-dialog-outer" v-if="isShowEditableHistoryDialog">
+      <TheEditableHistoryDialog />
+      <v-btn
+        v-show="true"
+        @click="hideEditableHistoryDialog"
+        color="pink accent-1"
+        class="close-button elevation-12"
+        fixed bottom right fab
+      >
       </v-btn>
     </div>
 
@@ -118,24 +131,25 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import { ROUTES } from '@lib/routes'
-  import TheLoginForm from '@component/the/TheLoginForm'
+  import TheLoginDialog from '@component/the/TheLoginDialog'
   import TheLoadingView from '@component/the/TheLoadingView'
   import TheHistoryDialog from '@component/the/TheHistoryDialog'
+  import TheEditableHistoryDialog from '@component/the/TheEditableHistoryDialog'
   import TheEventDialog from '@component/the/TheEventDialog'
   import VUserIcon from '@component/common/VUserIcon'
-  const namespace = 'common'
 
   export default {
     components: {
-      TheLoginForm,
+      TheLoginDialog,
       TheHistoryDialog,
+      TheEditableHistoryDialog,
       TheEventDialog,
       TheLoadingView,
       VUserIcon,
     },
     data: function() {
       return {
-        isShowLoginForm: false,
+        isShowLoginDialog: false,
         isShowSuccessSnack: false,
         isShowFailedSnack: false,
         successSnackLabel: '',
@@ -143,18 +157,20 @@
       }
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('common', {
         currentUser: state => state.currentUser,
         pageTitle: state => state.pageTitle,
         isShowHistoryDialog: state => state.isShowHistoryDialog,
+        isShowEditableHistoryDialog: state => state.isShowEditableHistoryDialog,
         isShowEventDialog: state => state.isShowEventDialog,
         isLoading: state => state.isLoading
       })
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('common', [
         'loginByToken',
         'hideHistoryDialog',
+        'hideEditableHistoryDialog',
         'hideEventDialog'
       ]),
       login (name, password) {
@@ -162,7 +178,7 @@
           .then(() => {
             this.isShowSuccessSnack = true
             this.isShowFailedSnack = false
-            this.isShowLoginForm = false
+            this.isShowLoginDialog = false
             this.successSnackLabel = 'ログインしました'
           })
           .catch((err) => {

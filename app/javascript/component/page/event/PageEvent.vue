@@ -27,6 +27,13 @@
               <v-divider />
             </v-flex>
           </v-layout>
+          <!-- 追加ボタン -->
+          <div class="buttons">
+            <v-btn v-show="true" @click="() => showEditableHistoryDialog()"
+                   color="pink" class="elevation-12" fixed bottom right fab dark>
+              <v-icon>add</v-icon>
+            </v-btn>
+          </div>
         </v-tab-item>
       </v-tabs>
     </div>
@@ -57,6 +64,9 @@
     methods: {
       ...mapActions('event', [
         'fetchEvent'
+      ]),
+      ...mapActions('common', [
+        'showEditableHistoryDialog'
       ])
     },
     mounted: function() {
