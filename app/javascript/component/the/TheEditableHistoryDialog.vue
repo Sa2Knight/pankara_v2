@@ -8,11 +8,8 @@
         <v-card-text>
           <v-form class="history-form">
             <VUsersSelector label="歌った人" :multiple="false" :users="users" />
-
             <VAutocompleteTextField label="曲名" :states="songs" />
-
             <VAutocompleteTextField label="歌手名" :states="artists" />
-
              <v-subheader class="pl-0">キー設定</v-subheader>
             <VSongKeySlider />
           </v-form>
@@ -24,7 +21,7 @@
 
 <style lang="scss" scoped>
 .history-form {
-  margin: 1.5em;
+  margin: 0.5em;
 }
 </style>
 
