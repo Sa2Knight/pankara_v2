@@ -50,13 +50,5 @@
         ]
       }
     },
-    beforeCreate: function() {
-      document.getElementsByTagName("body")[0].className="noscroll"
-    },
-    beforeDestroy: function() {
-      document.body.removeAttribute("class","noscroll")
-    },
-    props: {
-    }
   }
 </script>
