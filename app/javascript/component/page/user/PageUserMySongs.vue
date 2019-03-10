@@ -20,7 +20,7 @@
       <!-- 検索ボタン -->
       <!-- TODO: 他の検索ボタンとまとめてコンポーネント化? -->
       <v-btn v-show="true" @click="showMySongsSearchDialog"
-             color="gray" class="elevation-12" fixed bottom right fab dark small>
+             color="gray" class="elevation-12" fixed bottom right fab dark>
         <v-icon>search</v-icon>
       </v-btn>
 
