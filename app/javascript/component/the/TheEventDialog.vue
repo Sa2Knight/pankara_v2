@@ -1,6 +1,6 @@
 <template>
   <div class="the-event-dialog">
-    <v-dialog v-model="isShow" scrollable max-width="450px">
+    <v-dialog v-model="isShow" fullscreen max-width="500px">
       <v-card class="event-detail">
         <v-card-title class="headline grey lighten-2">
           {{ dialogTitle }}
