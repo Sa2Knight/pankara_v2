@@ -6,13 +6,28 @@
           {{ cardTitle }}
         </v-card-title>
         <v-card-text>
-          <v-form class="history-form">
-            <VUsersSelector label="歌った人" :multiple="false" :users="users" />
-            <VAutocompleteTextField label="曲名" :states="songs" />
-            <VAutocompleteTextField label="歌手名" :states="artists" />
-             <v-subheader class="pl-0">キー設定</v-subheader>
-            <VSongKeySlider />
-          </v-form>
+          <v-tabs icons-and-text fixed-tabs centered dark color="grey lighten-5">
+            <v-tab href="#basic">
+              基本<v-icon>fas fa-music</v-icon>
+            </v-tab>
+            <v-tab href="#detail">
+              詳細<v-icon>fas fa-cog</v-icon>
+            </v-tab>
+
+            <v-tab-item id="basic">
+              <v-form class="history-form">
+                <VUsersSelector label="歌った人" :multiple="false" :users="users" />
+                <VAutocompleteTextField label="曲名" :states="songs" />
+                <VAutocompleteTextField label="歌手名" :states="artists" />
+                 <v-subheader class="pl-0">キー設定</v-subheader>
+                <VSongKeySlider />
+              </v-form>
+            </v-tab-item>
+
+            <v-tab-item id="detail">
+              詳細設定
+            </v-tab-item>
+          </v-tabs>
         </v-card-text>
       </v-card>
     </v-dialog>
