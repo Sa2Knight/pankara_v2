@@ -1,17 +1,22 @@
 <template>
   <div class="the-editable-history-dialog">
-    <v-dialog v-model="isShow" fullscreen hide-overlay scrollable max-width="450px">
+    <v-dialog v-model="isShow" fullscreen max-width="500px">
       <v-card class="editable-history-dialog">
-        <v-form class="history-form">
-          <VUsersSelector label="歌った人" :multiple="false" :users="users" />
+        <v-card-title class="headline grey lighten-2">
+          {{ cardTitle }}
+        </v-card-title>
+        <v-card-text>
+          <v-form class="history-form">
+            <VUsersSelector label="歌った人" :multiple="false" :users="users" />
 
-          <VAutocompleteTextField label="曲名" :states="songs" />
+            <VAutocompleteTextField label="曲名" :states="songs" />
 
-          <VAutocompleteTextField label="歌手名" :states="artists" />
+            <VAutocompleteTextField label="歌手名" :states="artists" />
 
-           <v-subheader class="pl-0">キー設定</v-subheader>
-          <VSongKeySlider />
-        </v-form>
+             <v-subheader class="pl-0">キー設定</v-subheader>
+            <VSongKeySlider />
+          </v-form>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </div>
@@ -50,5 +55,10 @@
         ]
       }
     },
+    computed: {
+      cardTitle() {
+        return '歌唱履歴作成'
+      }
+    }
   }
 </script>
