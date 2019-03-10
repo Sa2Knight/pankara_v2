@@ -29,14 +29,40 @@
             </v-tab-item>
           </v-tabs>
         </v-card-text>
+        <v-layout wrap class="buttons">
+          <v-flex xs6 class="button-outer">
+            <v-btn round class="pk-full-width" color="primary">
+              登録
+            </v-btn>
+          </v-flex>
+          <v-flex xs6 class="button-outer">
+            <v-btn round class="pk-full-width" color="primary">
+              キャンセル
+            </v-btn>
+          </v-flex>
+        </v-layout>
       </v-card>
     </v-dialog>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.history-form {
-  margin: 0.5em;
+.editable-history-dialog {
+  position: relative;
+
+  .history-form {
+    margin: 0.5em;
+  }
+  .buttons {
+    width: 100%;
+    position: absolute;
+    bottom: 1em;
+    right: 0.5em;
+
+    .button-outer {
+      padding: 0 0.5em;
+    }
+  }
 }
 </style>
 
