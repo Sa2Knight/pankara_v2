@@ -27,9 +27,9 @@
     </v-container>
 
     <!-- 検索フォーム -->
-    <v-dialog v-model="isShowMySongsSearchDialog" max-width="500px" persistent>
-      <TheMySongsSearchForm />
-    </v-dialog>
+    <div class="my-songs-search-dialog-outer" v-if="isShowMySongsSearchDialog">
+      <TheMySongsSearchDialog />
+    </div>
 
   </div>
 </template>
@@ -41,13 +41,13 @@
   import VPaginationWrapper from '@component/common/VPaginationWrapper'
   import VSongCard from '@component/common/VSongCard'
   import TheSangCountRemarks from '@component/the/TheSangCountRemarks'
-  import TheMySongsSearchForm from '@component/page/user/the/TheMySongsSearchForm'
+  import TheMySongsSearchDialog from '@component/page/user/the/TheMySongsSearchDialog'
 
   export default {
     mixins: [PageCommonMixin],
     components: {
       TheSangCountRemarks,
-      TheMySongsSearchForm,
+      TheMySongsSearchDialog,
       VPaginationWrapper,
       VSongCard,
     },
