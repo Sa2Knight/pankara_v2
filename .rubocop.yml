@@ -45,10 +45,6 @@ Style/IndentationConsistency:
 Style/GuardClause:
   Enabled: false
 
-# ABCSize制限を緩和
-Metrics/AbcSize:
-  Max: 20
-
 # 子クラスでの実装に期待したメソッド呼び出しを許可
 Rails/LexicallyScopedActionFilter:
   Enabled: false
@@ -82,6 +78,7 @@ Metrics/LineLength:
       - 'app/lib/json/*.rb'
       - 'spec/**/*.rb'
 Metrics/AbcSize:
+  Max: 20
   Exclude:
       - 'app/lib/json/*.rb'
       - 'spec/**/*.rb'
