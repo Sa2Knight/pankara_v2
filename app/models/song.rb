@@ -3,6 +3,9 @@ class Song < ApplicationRecord
 
   belongs_to :artist
 
+  validates :name, length: { presence: false, minimum: 1, maximum: 80,
+                             message: '曲名は1~80文字にしてください' }
+
   #
   # 歌手を歌手名で指定された場合、
   # 既存があればそれを、なければ新規作成する
@@ -58,10 +61,10 @@ class Song < ApplicationRecord
   #
   # 曲名/歌手名でレコード取得or作成
   #
-  def self.find_or_create_by(song_name:, artist_name:)
+  def self.find_or_create_by!(song_name:, artist_name:)
     super(
       name: song_name,
-      artist: Artist.find_or_create_by(
+      artist: Artist.find_or_create_by!(
         name: artist_name
       )
     )

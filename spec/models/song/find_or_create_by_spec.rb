@@ -1,7 +1,7 @@
 RSpec.describe Song, type: :model do
   describe 'find_or_create_by' do
     subject do
-      Song.find_or_create_by(song_name: song_name, artist_name: artist_name)
+      Song.find_or_create_by!(song_name: song_name, artist_name: artist_name)
     end
 
     let!(:song) do
@@ -58,6 +58,42 @@ RSpec.describe Song, type: :model do
 
       it '歌手の総数が増える' do
         expect { subject }.to change { Artist.count }.from(1).to(2)
+      end
+    end
+
+    context '曲名が空の場合' do
+      let(:song_name) { '' }
+      let(:artist_name) { 'BUMP OF CHICKEN' }
+
+      it '例外が発生する' do
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    context '曲名が長すぎる場合' do
+      let(:song_name) { 'a' * 81 }
+      let(:artist_name) { 'BUMP OF CHICKEN' }
+
+      it '例外が発生する' do
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    context '歌手名が空の場合' do
+      let(:song_name) { '天体観測' }
+      let(:artist_name) { '' }
+
+      it '例外が発生する' do
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    context '歌手名が長すぎる場合' do
+      let(:song_name) { '天体観測' }
+      let(:artist_name) { 'a' * 81 }
+
+      it '例外が発生する' do
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
   end

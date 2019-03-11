@@ -3,6 +3,9 @@ class Artist < ApplicationRecord
 
   has_many :songs, dependent: :destroy
 
+  validates :name, length: { presence: false, minimum: 1, maximum: 80,
+                             message: '歌手名は1~80文字にしてください' }
+
   scope :no_descriptions, -> { where(description: nil).or(where(url: nil)) }
 
   #
