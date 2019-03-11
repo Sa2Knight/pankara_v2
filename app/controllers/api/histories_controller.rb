@@ -1,13 +1,13 @@
 class Api::HistoriesController < Api::BaseController
   #
-  # 歌唱履歴の一覧を取得
+  # [endpoint] 一覧
   #
   def index
     render json: histories.map { |history| JSON::History.make(history) }
   end
 
   #
-  # 歌唱履歴の詳細を取得
+  # [endpoint] 取得
   #
   def show
     render json: JSON::History.show(history)
