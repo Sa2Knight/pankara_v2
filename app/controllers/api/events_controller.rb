@@ -14,7 +14,7 @@ class Api::EventsController < Api::BaseController
   # [endpoint] 詳細
   #
   def show
-    render json: JSON::Event.show(event)
+    render json: JSON::Event.show(event, current_user: current_user)
   end
 
   #
@@ -35,7 +35,7 @@ class Api::EventsController < Api::BaseController
   #
   def update
     event.update!(event_params.to_h.compact)
-    render json: JSON::Event.show(event)
+    render json: JSON::Event.show(event, current_user: current_user)
   rescue ActiveRecord::RecordInvalid => e
     raise400 e.record.full_error_message
   end
