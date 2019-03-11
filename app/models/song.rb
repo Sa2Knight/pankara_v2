@@ -56,6 +56,18 @@ class Song < ApplicationRecord
   end
 
   #
+  # 曲名/歌手名でレコード取得or作成
+  #
+  def self.find_or_create_by(song_name:, artist_name:)
+    super(
+      name: song_name,
+      artist: Artist.find_or_create_by(
+        name: artist_name
+      )
+    )
+  end
+
+  #
   # 歌唱履歴一覧
   #
   def histories
