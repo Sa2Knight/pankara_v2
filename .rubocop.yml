@@ -81,6 +81,7 @@ Metrics/BlockLength:
       - 'spec/**/*.rb'
       - 'lib/tasks/**/*.rake'
 Metrics/LineLength:
+  Max: 95
   Exclude:
       - 'app/lib/json/*.rb'
       - 'spec/**/*.rb'
