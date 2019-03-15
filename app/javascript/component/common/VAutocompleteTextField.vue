@@ -2,6 +2,7 @@
  <div>
    <v-combobox
       v-model="value"
+      v-on:update:searchInput="(v) => value = v"
       :search-input.sync="intermediateValue"
       :items="filteredStates"
       :readonly="false"

@@ -6,6 +6,7 @@
           {{ cardTitle }}
         </v-card-title>
         <v-card-text>
+
           <v-tabs icons-and-text fixed-tabs centered dark color="grey lighten-5">
             <v-tab href="#basic">
               基本<v-icon>fas fa-music</v-icon>
@@ -17,8 +18,8 @@
             <v-tab-item id="basic">
               <v-form class="history-form">
                 <VUsersSelector v-model="userId" label="歌った人" :multiple="false" :users="users" />
-                <VAutocompleteTextField v-model="songName" label="曲名" :states="songs" />
-                <VAutocompleteTextField v-model="artistName" label="歌手名" :states="artists" />
+                <VAutocompleteTextField v-model="songName" label="曲名" :states="[]" />
+                <VAutocompleteTextField v-model="artistName" label="歌手名" :states="[]" />
                  <v-subheader class="pl-0">キー設定</v-subheader>
                 <VSongKeySlider v-model="key" />
               </v-form>
@@ -27,11 +28,13 @@
             <v-tab-item id="detail">
               詳細設定
             </v-tab-item>
+
           </v-tabs>
         </v-card-text>
+
         <v-layout wrap class="buttons">
           <v-flex xs6 class="button-outer">
-            <v-btn round class="pk-full-width" color="primary">
+            <v-btn round @click.prevent="submit" class="pk-full-width" color="primary">
               登録
             </v-btn>
           </v-flex>
@@ -41,6 +44,7 @@
             </v-btn>
           </v-flex>
         </v-layout>
+
       </v-card>
     </v-dialog>
   </div>
@@ -96,6 +100,10 @@
     computed: {
       cardTitle() {
         return '歌唱履歴作成'
+      }
+    },
+    methods: {
+      submit() {
       }
     }
   }
