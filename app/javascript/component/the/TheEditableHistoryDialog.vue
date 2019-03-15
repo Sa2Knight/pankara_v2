@@ -91,11 +91,6 @@
         songName: '',
         artistName: '',
         key: 0,
-        users: [
-          { id: 1, display_name: 'ないと', image_url: '/user_icon/sa2knight.png' },
-          { id: 2, display_name: 'へたれ', image_url: '/user_icon/hetare.png' },
-          { id: 3, display_name: 'ちゃら', image_url: '/user_icon/unagipai.png' },
-        ],
       }
     },
     computed: {
@@ -104,6 +99,13 @@
       ]),
       cardTitle() {
         return '歌唱履歴作成'
+      },
+      users() {
+        if (this.event) {
+          return this.event.members.map((member) => member.user)
+        } else {
+          return []
+        }
       }
     },
     methods: {
