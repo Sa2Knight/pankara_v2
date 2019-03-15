@@ -144,7 +144,6 @@ export default {
     // 歌唱履歴編集ダイアログを表示する
     showEditableHistoryDialog ({ commit, dispatch }, historyId = null) {
       commit('setIsShowEditableHistoryDialog', true)
-      console.log(historyId)
       if (!historyId) return
 
       dispatch('showLoadingView')
@@ -170,6 +169,15 @@ export default {
       const urlQuery = Object.assign({}, router.currentRoute.query)
       delete urlQuery.eventDialog
       router.push({query: urlQuery })
+    },
+    // 歌唱履歴を新規作成する
+    createHistory ({ commit, dispatch }, params) {
+      dispatch('showLoadingView')
+      return http.postHistories(params).then((res) => {
+        commit('setShowingEditableHistory', res.data)
+        dispatch('hideLoadingView')
+        dispatch('hideEditableHistoryDialog')
+      })
     },
     // ローディングビューを表示する
     showLoadingView ({ commit }) {

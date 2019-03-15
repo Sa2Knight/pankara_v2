@@ -71,6 +71,7 @@
 </style>
 
 <script>
+  import { mapActions, mapState } from 'vuex'
   import DialogComponentMixin from '@mixin/DialogComponentMixin'
   import VAutocompleteTextField from '@component/common/VAutocompleteTextField'
   import VUsersSelector from '@component/common/VUsersSelector'
@@ -98,12 +99,27 @@
       }
     },
     computed: {
+      ...mapState('event', [
+        'event'
+      ]),
       cardTitle() {
         return '歌唱履歴作成'
       }
     },
     methods: {
+      ...mapActions('common', [
+        'createHistory'
+      ]),
+      // 歌唱履歴を新規作成
       submit() {
+        const params = {
+          event_id: this.event.id,
+          user_id: this.userId,
+          song_name: this.songName,
+          artist_name: this.artistName,
+          key: this.key
+        }
+        this.createHistory(params)
       }
     }
   }

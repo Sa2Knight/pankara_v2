@@ -118,4 +118,12 @@ http.getHistories = function(params = {}) {
 http.getHistory = function(id, params = {}) {
   return request('GET', `/histories/${id}`, params)
 }
+
+/**
+ * 歌唱履歴を作成する
+ */
+http.postHistories = function(params = {}) {
+  return request('POST', `/histories`, params)
+}
+
 export default http
