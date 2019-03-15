@@ -16,6 +16,16 @@ class Api::SongsController < Api::BaseController
   end
 
   #
+  # 曲名の一覧を取得
+  # NOTE: ページングを無効にして全件取得する
+  #
+  def names
+    params[:page] = 1
+    params[:per] = 9999
+    render json: songs.pluck(:name)
+  end
+
+  #
   # 楽曲の詳細を取得
   #
   def show

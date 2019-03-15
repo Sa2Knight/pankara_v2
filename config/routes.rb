@@ -18,6 +18,9 @@ Rails.application.routes.draw do
         get 'users'
         get 'histories'
       end
+      collection do
+        get 'names'
+      end
     end
     resources :artists, only: %i[show] do
       member do
