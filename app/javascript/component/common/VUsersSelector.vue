@@ -44,11 +44,13 @@
 </template>
 
 <script>
+  import InputComponentMixin from '@mixin/InputComponentMixin'
   export default {
+    mixins: [InputComponentMixin],
+
     data () {
       return {
-        value: [],
-        name: 'Midnight Crew',
+        value: null,
       }
     },
 

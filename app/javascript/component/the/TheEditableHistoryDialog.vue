@@ -16,11 +16,11 @@
 
             <v-tab-item id="basic">
               <v-form class="history-form">
-                <VUsersSelector label="歌った人" :multiple="false" :users="users" />
-                <VAutocompleteTextField label="曲名" :states="songs" />
-                <VAutocompleteTextField label="歌手名" :states="artists" />
+                <VUsersSelector v-model="userId" label="歌った人" :multiple="false" :users="users" />
+                <VAutocompleteTextField v-model="songName" label="曲名" :states="songs" />
+                <VAutocompleteTextField v-model="artistName" label="歌手名" :states="artists" />
                  <v-subheader class="pl-0">キー設定</v-subheader>
-                <VSongKeySlider />
+                <VSongKeySlider v-model="key" />
               </v-form>
             </v-tab-item>
 
@@ -82,15 +82,15 @@
     },
     data: function() {
       return {
+        userId: null,
+        songName: '',
+        artistName: '',
+        key: 0,
         users: [
           { id: 1, display_name: 'ないと', image_url: '/user_icon/sa2knight.png' },
           { id: 2, display_name: 'へたれ', image_url: '/user_icon/hetare.png' },
           { id: 3, display_name: 'ちゃら', image_url: '/user_icon/unagipai.png' },
         ],
-        songs: [
-        ],
-        artists: [
-        ]
       }
     },
     computed: {

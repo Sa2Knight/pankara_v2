@@ -32,7 +32,9 @@
 </template>
 
 <script>
+  import InputComponentMixin from '@mixin/InputComponentMixin'
   export default {
+    mixins: [InputComponentMixin],
     data: function() {
       return {
         value: 0
