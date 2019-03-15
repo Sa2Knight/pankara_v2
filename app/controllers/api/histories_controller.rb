@@ -17,7 +17,6 @@ class Api::HistoriesController < Api::BaseController
   # [endpoint] 作成
   #
   def create
-    binding.pry
     history = History.create(
       event_date: event.date,
       key: history_params[:key],
