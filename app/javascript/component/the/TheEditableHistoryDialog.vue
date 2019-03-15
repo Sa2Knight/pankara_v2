@@ -34,12 +34,12 @@
 
         <v-layout wrap class="buttons">
           <v-flex xs6 class="button-outer">
-            <v-btn round @click.prevent="submit" class="pk-full-width" color="primary">
+            <v-btn round @click="submit" class="pk-full-width" color="primary">
               登録
             </v-btn>
           </v-flex>
           <v-flex xs6 class="button-outer">
-            <v-btn round class="pk-full-width" color="primary">
+            <v-btn round @click="close" class="pk-full-width" color="primary">
               キャンセル
             </v-btn>
           </v-flex>
@@ -108,7 +108,8 @@
     },
     methods: {
       ...mapActions('common', [
-        'createHistory'
+        'createHistory',
+        'hideEditableHistoryDialog'
       ]),
       // 歌唱履歴を新規作成
       submit() {
@@ -120,6 +121,10 @@
           key: this.key
         }
         this.createHistory(params)
+      },
+      // ダイアログを閉じる
+      close() {
+        this.hideEditableHistoryDialog()
       }
     }
   }
