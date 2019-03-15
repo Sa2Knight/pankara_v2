@@ -1,81 +1,86 @@
 <!-- TODO: TheHistoryDialogにするべきで、partsではないだろ -->
 <template>
   <div class="history-dialog">
-    <v-dialog v-model="isShow" scrollable max-width="450px">
-      <v-card class="history-detail" v-if="history">
-        <div class="top clearfix">
-          <div class="song-info">
-            <h1 class="collapse">
-              <router-link class="underline" :to="songPage">
-                {{ history.song.name }}
-              </router-link>
-            </h1>
-            <h2 class="collapse">
-              <router-link  class="underline" :to="artistPage">
-                {{ history.song.artist.name }}
-              </router-link>
-            </h2>
-          </div>
-          <div class="avatar">
-            <img :src="history.user.image_url" >
-          </div>
-        </div>
-        <div class="middle">
-          <VYoutubePlayer :song="history.song" />
-        </div>
-        <div class="bottom">
-          <div class="history-info">
-            <div>
-              <table>
-                <tr>
-                  <th class="nowrap">日付</th>
-                  <td class="nowrap">{{ history.event.date }}</td>
-                </tr>
-                <tr>
-                  <th class="nowrap">カラオケ</th>
-                  <td class="nowrap">
-                    <router-link class="underline" :to="eventPage">
-                      {{ history.event.title }}
-                    </router-link>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="nowrap">ユーザー</th>
-                  <td class="nowrap">
-                    {{ history.user.display_name }}
-                  </td>
-                </tr>
-                <tr>
-                  <th class="nowrap">キー</th>
-                  <td class="nowrap">{{ history.key }}</td>
-                </tr>
-                <tr v-if="history.satisfaction">
-                  <th class="nowrap">満足度</th>
-                  <td class="nowrap">
-                    <VSatisfactionRate readonly narrow :satisfaction="history.satisfaction" />
-                  </td>
-                </tr>
-                <template v-if="history.score_type && history.score">
-                <tr>
-                  <th class="nowrap">採点</th>
-                  <td class="nowrap">
-                    <VScoreTypeLabel :type="history.score_type" />
-                  </td>
-                </tr>
-                <tr>
-                  <th class="nowrap">得点</th>
-                  <td class="nowrap">{{ history.score }} 点</td>
-                </tr>
-                </template>
-                <tr>
-                  <th class="nowrap">コメント</th>
-                  <td>{{ history.comment }}</td>
-                </tr>
-              </table>
+    <v-dialog v-model="isShow" fullscreen max-width="450px">
+      <v-card class="history-detail">
+        <v-card-title class="headline grey lighten-2">
+          歌唱履歴詳細
+        </v-card-title>
+        <v-card-text v-if="history">
+          <div class="top clearfix">
+            <div class="song-info">
+              <h1 class="collapse">
+                <router-link class="underline" :to="songPage">
+                  {{ history.song.name }}
+                </router-link>
+              </h1>
+              <h2 class="collapse">
+                <router-link  class="underline" :to="artistPage">
+                  {{ history.song.artist.name }}
+                </router-link>
+              </h2>
+            </div>
+            <div class="avatar">
+              <img :src="history.user.image_url" >
             </div>
           </div>
-        </div>
+          <div class="middle">
+            <VYoutubePlayer :song="history.song" />
+          </div>
+          <div class="bottom">
+            <div class="history-info">
+              <div>
+                <table>
+                  <tr>
+                    <th class="nowrap">日付</th>
+                    <td class="nowrap">{{ history.event.date }}</td>
+                  </tr>
+                  <tr>
+                    <th class="nowrap">カラオケ</th>
+                    <td class="nowrap">
+                      <router-link class="underline" :to="eventPage">
+                        {{ history.event.title }}
+                      </router-link>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="nowrap">ユーザー</th>
+                    <td class="nowrap">
+                      {{ history.user.display_name }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="nowrap">キー</th>
+                    <td class="nowrap">{{ history.key }}</td>
+                  </tr>
+                  <tr v-if="history.satisfaction">
+                    <th class="nowrap">満足度</th>
+                    <td class="nowrap">
+                      <VSatisfactionRate readonly narrow :satisfaction="history.satisfaction" />
+                    </td>
+                  </tr>
+                  <template v-if="history.score_type && history.score">
+                  <tr>
+                    <th class="nowrap">採点</th>
+                    <td class="nowrap">
+                      <VScoreTypeLabel :type="history.score_type" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="nowrap">得点</th>
+                    <td class="nowrap">{{ history.score }} 点</td>
+                  </tr>
+                  </template>
+                  <tr>
+                    <th class="nowrap">コメント</th>
+                    <td>{{ history.comment }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </div>
@@ -85,8 +90,6 @@
 .history-detail {
   width: 100%;
   max-width: 450px;
-  padding: 0.5em 0.5em;
-  border: 1em solid;
   .top {
     .song-info {
       float: left;
@@ -160,8 +163,9 @@
   import VYoutubePlayer from '@component/common/VYoutubePlayer'
   import VScoreTypeLabel from '@component/common/VScoreTypeLabel'
   import VSatisfactionRate from '@component/common/VSatisfactionRate'
-  const namespace = 'common'
+  import DialogComponentMixin from '@mixin/DialogComponentMixin'
   export default {
+    mixins: [DialogComponentMixin],
     components: {
       VYoutubePlayer,
       VScoreTypeLabel,
@@ -173,7 +177,7 @@
       }
     },
     computed: {
-      ...mapState(namespace, {
+      ...mapState('common', {
         isShowHistoryDialog: state => state.isShowHistoryDialog,
         history: state => state.showingHistory,
       }),
@@ -203,7 +207,7 @@
       }
     },
     methods: {
-      ...mapActions(namespace, [
+      ...mapActions('common', [
         'hideHistoryDialog',
       ])
     },
