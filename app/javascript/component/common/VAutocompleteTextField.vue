@@ -35,9 +35,9 @@
       }
     },
     computed: {
-      // 選択肢は1文字以上入力した場合のみ表示するため
+      // 選択肢は2文字から表示
       filteredStates: function() {
-        if (!!this.intermediateValue) {
+        if (this.intermediateValue && this.intermediateValue.length >= 2) {
           return this.states
         } else {
           return []

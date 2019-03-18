@@ -99,6 +99,14 @@ http.getSong = function(id, params = {}) {
 }
 
 /**
+ * 楽曲の曲名一覧を取得する
+ */
+http.getSongNames = function(params = {}) {
+  return request('GET', `/songs/names`, params)
+}
+
+
+/**
  * 歌手詳細を取得する
  */
 http.getArtist = function(id, params = {}) {

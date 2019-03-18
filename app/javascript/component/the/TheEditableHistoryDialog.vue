@@ -18,7 +18,7 @@
             <v-tab-item id="basic">
               <v-form class="history-form">
                 <VUsersSelector v-model="userId" label="歌った人" :multiple="false" :users="users" />
-                <VAutocompleteTextField v-model="songName" label="曲名" :states="[]" />
+                <VAutocompleteTextField v-model="songName" label="曲名" :states="songNames" />
                 <VAutocompleteTextField v-model="artistName" label="歌手名" :states="[]" />
                  <v-subheader class="pl-0">キー設定</v-subheader>
                 <VSongKeySlider v-model="key" />
@@ -97,6 +97,9 @@
       ...mapState('event', [
         'event'
       ]),
+      ...mapState('song', [
+        'songNames'
+      ]),
       cardTitle() {
         return '歌唱履歴作成'
       },
@@ -113,6 +116,9 @@
         'createHistory',
         'hideEditableHistoryDialog'
       ]),
+      ...mapActions('song', [
+        'fetchSongNames'
+      ]),
       // 歌唱履歴を新規作成
       submit() {
         const params = {
@@ -128,6 +134,11 @@
       close() {
         this.hideEditableHistoryDialog()
       }
-    }
+    },
+    watch: {
+      songName: function(v) {
+        this.fetchSongNames(v)
+      }
+    },
   }
 </script>
