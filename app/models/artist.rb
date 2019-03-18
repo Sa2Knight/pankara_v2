@@ -18,6 +18,18 @@ class Artist < ApplicationRecord
   end
 
   #
+  # 曲名で検索
+  # NOTE: この曲名は完全一致のみを対象とするので注意
+  #
+  def self.song_name_by(keyword)
+    return self.all if keyword.blank?
+
+    self.where(
+      id: Song.where(name: keyword).pluck(:artist_id)
+    )
+  end
+
+  #
   # 歌唱履歴
   # NOTE: has_manyだけで表現できる?
   #

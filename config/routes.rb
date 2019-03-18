@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       member do
         get 'histories'
       end
+      collection do
+        get 'names'
+      end
     end
   end
 end
