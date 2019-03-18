@@ -9,8 +9,6 @@ export default {
     song: null,
     // [API Response] 楽曲の歌唱履歴
     histories: null,
-    // [API Response] 曲名一覧
-    songNames: [],
   },
   mutations: {
     setSong (state, song) {
@@ -28,9 +26,6 @@ export default {
     unsetHistories (state) {
       state.histories = null
     },
-    setSongNames (state, names) {
-      state.songNames = names
-    }
   },
   actions: {
     //
@@ -59,14 +54,5 @@ export default {
           return dispatch('common/hideLoadingView', null, { root: true })
         })
     },
-    //
-    // APIから曲名一覧をフェッチ
-    // 連続で呼び出すのと、最悪失敗しても問題ないのでローディング無し
-    //
-    fetchSongNames ({ commit, dispatch }, name) {
-      http.getSongNames({name}).then((response) => {
-        commit('setSongNames', response.data)
-      })
-    }
   }
 }

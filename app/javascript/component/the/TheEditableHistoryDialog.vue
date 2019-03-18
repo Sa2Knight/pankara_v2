@@ -97,7 +97,7 @@
       ...mapState('event', [
         'event'
       ]),
-      ...mapState('song', [
+      ...mapState('songs', [
         'songNames'
       ]),
       cardTitle() {
@@ -116,7 +116,7 @@
         'createHistory',
         'hideEditableHistoryDialog'
       ]),
-      ...mapActions('song', [
+      ...mapActions('songs', [
         'fetchSongNames'
       ]),
       // 歌唱履歴を新規作成
