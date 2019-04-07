@@ -5,13 +5,15 @@
 export default {
   data: function() {
     return {
-      isShow: true
+      isShow: true,
+      scrollY: 0
     }
   },
   watch: {
     isShow: {
       handler: function(v) {
         if (v) {
+          this.scrollY = window.pageYOffset
           document.getElementsByTagName("body")[0].className="noscroll"
         }
       },
@@ -21,5 +23,6 @@ export default {
   beforeDestroy: function() {
     this.isShow = false
     document.body.removeAttribute("class","noscroll")
+    window.scrollTo(0, this.scrollY)
   }
 }
