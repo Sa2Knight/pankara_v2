@@ -2,6 +2,8 @@ class History < ApplicationRecord
   belongs_to :user_event
   belongs_to :song
 
+  validates :key, numericality: { only_integer: true, greater_than: -8, less_than: 8 }
+
   has_one :user,   through: :user_event
   has_one :event,  through: :user_event
   has_one :artist, through: :song
