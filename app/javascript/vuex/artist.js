@@ -7,10 +7,13 @@ import CONST from '../lib/constants'
 export default {
   namespaced: true,
   state: {
-    // 表示中の歌手
+    // [API Response] 表示中の歌手
     artist: null,
-    // 表示中の歌手の歌唱履歴
+    // [API Response] 表示中の歌手の歌唱履歴
     histories: null,
+    // [API Response] 歌手名一覧
+    artistNames: [],
+
     // 歌唱履歴用ページャ
     historiesPager: {
       total: 0,
@@ -31,6 +34,9 @@ export default {
     },
     resetHistories (state) {
       state.histories = null
+    },
+    setArtistNames (state, names) {
+      state.artistNames = names
     },
     setHistoriesPager (state, pager) {
       state.historiesPager = {
@@ -86,5 +92,18 @@ export default {
         util.scrollToTop() // TODO ページングごとにこれ書いてそう
       })
     },
+    //
+    // APIから楽曲一覧をフェッチ
+    // 連続で呼び出すのと、最悪失敗しても問題ないのでローディング無し
+    //
+    fetchArtistNames ({ commit, dispatch }, {name = null, songName = null}) {
+      const params = {
+        name,
+        song_name: songName
+      }
+      return http.getArtistNames(params).then((response) => {
+        commit('setArtistNames', response.data)
+      })
+    }
   }
 }

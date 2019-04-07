@@ -1,14 +1,15 @@
 <template>
  <div>
    <v-combobox
-      v-model="value"
-      v-on:update:searchInput="(v) => value = v"
+      v-model="localValue"
+      v-on:update:searchInput="(v) => localValue = v"
       :search-input.sync="intermediateValue"
       :items="filteredStates"
       :readonly="false"
       :label="label"
       hide-no-data
       clearable
+      @change="$emit('change')"
     >
       <v-slide-x-reverse-transition
         slot="append-outer"
@@ -30,7 +31,7 @@
     mixins: [InputComponentMixin],
     data: function() {
       return {
-        value: '',
+        localValue: '',
         intermediateValue: '',
       }
     },
@@ -45,6 +46,11 @@
       }
     },
     props: {
+      value: {
+        type: String,
+        required: false,
+        default: ''
+      },
       label: {
         type: String,
         required: true
@@ -54,6 +60,15 @@
         required: false,
         default: []
       },
+    },
+    // 親と子でvalueを双方向バインディング
+    watch: {
+      localValue() {
+        this.$emit('input', this.localValue)
+      },
+      value() {
+        this.localValue = this.value
+      }
     }
   }
 </script>

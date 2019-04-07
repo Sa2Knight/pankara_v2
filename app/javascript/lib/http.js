@@ -105,12 +105,18 @@ http.getSongNames = function(params = {}) {
   return request('GET', `/songs/names`, params)
 }
 
-
 /**
  * 歌手詳細を取得する
  */
 http.getArtist = function(id, params = {}) {
   return request('GET', `/artists/${id}`, params)
+}
+
+/**
+ * 歌手名一覧を取得する
+ */
+http.getArtistNames = function(params = {}) {
+  return request('GET', `/artists/names`, params)
 }
 
 /**

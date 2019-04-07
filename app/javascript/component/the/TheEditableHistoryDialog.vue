@@ -3,7 +3,7 @@
     <v-dialog v-model="isShow" fullscreen max-width="500px">
       <v-card class="editable-history-dialog">
         <v-card-title class="headline grey lighten-2">
-          {{ cardTitle }}
+          歌唱履歴作成
         </v-card-title>
         <v-card-text>
 
@@ -18,8 +18,17 @@
             <v-tab-item id="basic">
               <v-form class="history-form">
                 <VUsersSelector v-model="userId" label="歌った人" :multiple="false" :users="users" />
-                <VAutocompleteTextField v-model="songName" label="曲名" :states="songNames" />
-                <VAutocompleteTextField v-model="artistName" label="歌手名" :states="[]" />
+                <VAutocompleteTextField
+                  v-model="songName"
+                  label="曲名"
+                  :states="songNames"
+                  @change="onChangeSongName"
+                />
+                <VAutocompleteTextField
+                  v-model="artistName"
+                  label="歌手名"
+                  :states="artistNames"
+                 />
                  <v-subheader class="pl-0">キー設定</v-subheader>
                 <VSongKeySlider v-model="key" />
               </v-form>
@@ -100,9 +109,9 @@
       ...mapState('songs', [
         'songNames'
       ]),
-      cardTitle() {
-        return '歌唱履歴作成'
-      },
+      ...mapState('artist', [
+        'artistNames'
+      ]),
       users() {
         if (this.event) {
           return this.event.members.map((member) => member.user)
@@ -119,6 +128,21 @@
       ...mapActions('songs', [
         'fetchSongNames'
       ]),
+      ...mapActions('artist', [
+        'fetchArtistNames'
+      ]),
+      // 曲名が変更されたら、曲名を元に歌手名を取得する
+      // 歌手名が１件のみだった場合は、それを歌手名フィールドに入力する
+      // TODO: 曲名に依存せずに歌手名検索できるように
+      onChangeSongName() {
+        this.$nextTick(() => {
+          this.fetchArtistNames({songName: this.songName}).then(() => {
+            if (this.artistNames.length === 1) {
+              this.artistName = this.artistNames[0]
+            }
+          })
+        })
+      },
       // 歌唱履歴を新規作成
       submit() {
         const params = {
@@ -136,9 +160,10 @@
       }
     },
     watch: {
+      // REVIEW: 1文字入力ごとにリクエスト飛ぶの辛いかも
       songName: function(v) {
         this.fetchSongNames(v)
-      }
+      },
     },
   }
 </script>
