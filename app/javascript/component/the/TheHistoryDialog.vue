@@ -72,10 +72,6 @@
                     <td class="nowrap">{{ history.score }} 点</td>
                   </tr>
                   </template>
-                  <tr>
-                    <th class="nowrap">コメント</th>
-                    <td>{{ history.comment }}</td>
-                  </tr>
                 </table>
               </div>
             </div>
