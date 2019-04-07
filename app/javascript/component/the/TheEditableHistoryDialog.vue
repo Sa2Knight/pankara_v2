@@ -103,6 +103,9 @@
       }
     },
     computed: {
+      ...mapState('common', [
+        'currentUser'
+      ]),
       ...mapState('event', [
         'event'
       ]),
@@ -163,7 +166,15 @@
       // REVIEW: 1文字入力ごとにリクエスト飛ぶの辛いかも
       songName: function(v) {
         this.fetchSongNames(v)
-      },
+      }
     },
+    // マウント時に、自身を歌った人の初期値にする
+    mounted: function() {
+      if (this.currentUser && this.users.find((user) => user.id === this.currentUser.id)) {
+        this.userId = this.currentUser.id
+      } else {
+        this.userId = null
+      }
+    }
   }
 </script>

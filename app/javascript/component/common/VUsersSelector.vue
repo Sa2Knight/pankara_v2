@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-autocomplete
-      v-model="value"
+      v-model="localValue"
       :items="users"
       color="blue-grey lighten-2"
       :label="label"
@@ -50,11 +50,15 @@
 
     data () {
       return {
-        value: null,
+        localValue: null,
       }
     },
 
     props: {
+      value: {
+        type: Number,
+        required: false
+      },
       label: {
         type: String,
         required: true
@@ -72,8 +76,18 @@
 
     methods: {
       remove (item) {
-        const index = this.value.indexOf(item.id)
-        if (index >= 0) this.value.splice(index, 1)
+        const index = this.localValue.indexOf(item.id)
+        if (index >= 0) this.localValue.splice(index, 1)
+      }
+    },
+
+    watch: {
+      // 双方向バインディング
+      value() {
+        this.localValue = this.value
+      },
+      localValue() {
+        this.$emit('input', this.localValue)
       }
     },
 
