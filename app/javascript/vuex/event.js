@@ -22,9 +22,6 @@ export default {
     setHistories (state, histories) {
       state.histories = histories
     },
-    unsetHistories (state) {
-      state.histories = null
-    }
   },
 
   actions: {
@@ -33,7 +30,6 @@ export default {
     //
     fetchEvent ({ state, dispatch, commit }, id) {
       dispatch('common/showLoadingView', null, { root: true })
-      commit('unsetEvent')
 
       return Promise.resolve()
         .then(() => {

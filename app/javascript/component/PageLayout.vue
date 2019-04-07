@@ -96,6 +96,7 @@
     </div>
 
     <!-- スナック TODO: もう少し汎用化したいね -->
+    <!-- TODO: vuexから操作できるようにして便利に -->
     <v-snackbar v-model="isShowSuccessSnack" top color="success">
       {{ successSnackLabel }}
       <v-btn dark flat @click.native="isShowSuccessSnack = false">閉じる</v-btn>

@@ -134,6 +134,9 @@
       ...mapActions('artist', [
         'fetchArtistNames'
       ]),
+      ...mapActions('event', [
+        'fetchEvent'
+      ]),
       // 曲名が変更されたら、曲名を元に歌手名を取得する
       // 歌手名が１件のみだった場合は、それを歌手名フィールドに入力する
       // TODO: 曲名に依存せずに歌手名検索できるように
@@ -147,6 +150,7 @@
         })
       },
       // 歌唱履歴を新規作成
+      // 完了後にカラオケ情報をリロードする
       submit() {
         const params = {
           event_id: this.event.id,
@@ -155,7 +159,7 @@
           artist_name: this.artistName,
           key: this.key
         }
-        this.createHistory(params)
+        this.createHistory(params).then(() => { this.fetchEvent(this.event.id) })
       },
       // ダイアログを閉じる
       close() {
