@@ -1,6 +1,6 @@
 <template>
   <div class="the-editable-history-dialog">
-    <v-dialog v-model="isShow" fullscreen max-width="500px">
+    <v-dialog v-model="isShow" :fullscreen="isMobile" max-width="500px">
       <v-card class="editable-history-dialog">
         <v-card-title class="headline grey lighten-2">
           歌唱履歴作成

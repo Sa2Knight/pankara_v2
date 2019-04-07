@@ -1,7 +1,7 @@
 <!-- TODO: TheHistoryDialogにするべきで、partsではないだろ -->
 <template>
   <div class="history-dialog">
-    <v-dialog v-model="isShow" fullscreen max-width="450px">
+    <v-dialog v-model="isShow" :fullscreen="isMobile" max-width="450px">
       <v-card class="history-detail">
         <v-card-title class="headline grey lighten-2">
           歌唱履歴詳細

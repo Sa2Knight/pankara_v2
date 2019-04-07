@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isShow" fullscreen>
+  <v-dialog v-model="isShow" :fullscreen="isMobile" max-width="450px">
     <v-card>
       <v-card-title class="headline grey lighten-2">
         カラオケ検索

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isShow" fullscreen max-width="500px">
+  <v-dialog v-model="isShow" :fullscreen="isMobile" max-width="500px">
     <v-card>
       <v-card-title class="headline grey lighten-2">
         ログイン

@@ -1,6 +1,6 @@
 <template>
   <div class="the-event-dialog">
-    <v-dialog v-model="isShow" fullscreen max-width="500px">
+    <v-dialog v-model="isShow" :fullscreen="isMobile" max-width="450px">
       <v-card class="event-detail">
         <v-card-title class="headline grey lighten-2">
           {{ dialogTitle }}
@@ -56,7 +56,9 @@
   // TODO: YoutubeDialogとmixinなりできる？
   import { mapState, mapActions } from 'vuex'
   import moment from 'moment'
+  import DialogComponentMixin from '@mixin/DialogComponentMixin'
   export default {
+    mixins: [DialogComponentMixin],
     data: function() {
       return {
         isShow: false,
