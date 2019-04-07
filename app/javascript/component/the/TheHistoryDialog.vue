@@ -93,6 +93,12 @@
       h1,h2 {
         text-align: center;
       }
+      h1 {
+        font-size: 1.4em;
+      }
+      h2 {
+        font-size: 1.1em;
+      }
     }
     .avatar {
       float: right;
