@@ -74,9 +74,9 @@ class Event < ApplicationRecord
 
   #
   # 指定したユーザで編集可能か？
-  # 現状はカラオケオーナーのみ編集可能
+  # 現状はカラオケ参加者全員可能
   #
   def editable_by?(user:)
-    self.user == user
+    self.user_events.exists?(user: user)
   end
 end

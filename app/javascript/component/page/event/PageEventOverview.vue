@@ -5,7 +5,7 @@
 
     <!-- 更新ボタン -->
     <div class="buttons" v-if="event.can_edit">
-      <v-btn v-show="true" @click="() => showEventDialog(event)"
+      <v-btn @click="() => showEventDialog(event)"
              color="gray" class="elevation-12" fixed bottom right fab dark>
         <v-icon>edit</v-icon>
       </v-btn>
