@@ -3,7 +3,7 @@
     <v-layout row>
       <v-flex class="pr-3">
         <v-slider
-          v-model="value"
+          v-model="localValue"
           :max="7"
           :min="-7"
         >
@@ -19,7 +19,7 @@
       </v-flex>
       <v-flex shrink style="width: 15px">
         <v-text-field
-          v-model="value"
+          v-model="localValue"
           class="mt-0"
           readonly
           hide-details
@@ -35,11 +35,6 @@
   import InputComponentMixin from '@mixin/InputComponentMixin'
   export default {
     mixins: [InputComponentMixin],
-    data: function() {
-      return {
-        value: 0
-      }
-    },
     props: {
       readonly: {
         type: Boolean,
@@ -49,18 +44,18 @@
     },
     methods: {
       increment() {
-        this.value += 1
+        this.localValue += 1
       },
       decrement() {
-        this.value -= 1
+        this.localValue -= 1
       }
     },
     watch: {
-      value: function(v) {
+      localValue: function(v) {
         if (v > 7) {
-          this.value = 7
+          this.localValue = 7
         } else if (v < -7) {
-          this.value = -7
+          this.localValue = -7
         }
       }
     }

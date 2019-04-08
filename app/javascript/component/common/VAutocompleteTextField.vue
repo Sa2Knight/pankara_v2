@@ -31,7 +31,6 @@
     mixins: [InputComponentMixin],
     data: function() {
       return {
-        localValue: '',
         intermediateValue: '',
       }
     },
@@ -46,11 +45,6 @@
       }
     },
     props: {
-      value: {
-        type: String,
-        required: false,
-        default: ''
-      },
       label: {
         type: String,
         required: true
@@ -61,14 +55,5 @@
         default: []
       },
     },
-    // 親と子でvalueを双方向バインディング
-    watch: {
-      localValue() {
-        this.$emit('input', this.localValue)
-      },
-      value() {
-        this.localValue = this.value
-      }
-    }
   }
 </script>

@@ -48,17 +48,7 @@
   export default {
     mixins: [InputComponentMixin],
 
-    data () {
-      return {
-        localValue: null,
-      }
-    },
-
     props: {
-      value: {
-        type: Number,
-        required: false
-      },
       label: {
         type: String,
         required: true
@@ -78,16 +68,6 @@
       remove (item) {
         const index = this.localValue.indexOf(item.id)
         if (index >= 0) this.localValue.splice(index, 1)
-      }
-    },
-
-    watch: {
-      // 双方向バインディング
-      value() {
-        this.localValue = this.value
-      },
-      localValue() {
-        this.$emit('input', this.localValue)
       }
     },
 
