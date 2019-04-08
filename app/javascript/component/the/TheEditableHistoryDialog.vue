@@ -35,7 +35,14 @@
             </v-tab-item>
 
             <v-tab-item id="detail">
-              詳細設定
+              <v-layout>
+                <v-flex xs8>
+                  <VScoreTypeSelector v-model="scoreTypeId" />
+                </v-flex>
+                <v-flex xs4>
+                  <v-text-field v-model="score" suffix="点" clearable />
+                </v-flex>
+              </v-layout>
             </v-tab-item>
 
           </v-tabs>
@@ -86,13 +93,15 @@
   import VUsersSelector from '@component/common/VUsersSelector'
   import VSongKeySlider from '@component/common/VSongKeySlider'
   import VSatisfactionRate from '@component/common/VSatisfactionRate'
+  import VScoreTypeSelector from '@component/common/VScoreTypeSelector'
   export default {
     mixins: [DialogComponentMixin],
     components: {
       VAutocompleteTextField,
       VUsersSelector,
       VSongKeySlider,
-      VSatisfactionRate
+      VSatisfactionRate,
+      VScoreTypeSelector
     },
     data: function() {
       return {
@@ -100,6 +109,8 @@
         songName: '',
         artistName: '',
         key: 0,
+        scoreTypeId: null,
+        score: 0,
       }
     },
     computed: {
