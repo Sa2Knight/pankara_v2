@@ -52,7 +52,7 @@ namespace :common do
       4 => 3, # DAM ランキング
       5 => 4, # DAM 精密
       6 => 5, # DAMその他 to その他
-      7 => 6  # その他
+      7 => 5  # その他
     }
     user_event_hash = {}
     dump[:histories].each do |history|
