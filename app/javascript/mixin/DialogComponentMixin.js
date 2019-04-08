@@ -5,7 +5,7 @@ export default {
   data: function() {
     return {
       isShow: true,
-      isMobile: false,
+      isMobile: true,
       scrollY: 0
     }
   },
