@@ -1,10 +1,24 @@
 //
 // 入力系コンポーネントの共通属性
+// valueとlocalValueを持ち、双方向バインディングを実現する
 //
 export default {
+  data: function() {
+    return {
+      localValue: null
+    }
+  },
+  props: {
+    value: {
+      required: false
+    }
+  },
   watch: {
-    value (val) {
-      this.$emit('input', val)
+    localValue() {
+      this.$emit('input', this.localValue)
+    },
+    value() {
+      this.localValue = this.value
     }
   }
 }
