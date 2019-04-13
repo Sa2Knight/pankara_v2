@@ -35,14 +35,12 @@
             </v-tab-item>
 
             <v-tab-item id="detail">
-              <v-layout>
-                <v-flex xs8>
-                  <VScoreTypeSelector v-model="scoreTypeId" />
-                </v-flex>
-                <v-flex xs4>
-                  <v-text-field v-model="score" suffix="点" clearable />
-                </v-flex>
-              </v-layout>
+              <div>
+                <VScoreEditor v-model="scoreSet" />
+              </div>
+              <div>
+                {{ scoreSet }}
+              </div>
             </v-tab-item>
 
           </v-tabs>
@@ -93,7 +91,7 @@
   import VUsersSelector from '@component/common/VUsersSelector'
   import VSongKeySlider from '@component/common/VSongKeySlider'
   import VSatisfactionRate from '@component/common/VSatisfactionRate'
-  import VScoreTypeSelector from '@component/common/VScoreTypeSelector'
+  import VScoreEditor from '@component/common/VScoreEditor'
   export default {
     mixins: [DialogComponentMixin],
     components: {
@@ -101,7 +99,7 @@
       VUsersSelector,
       VSongKeySlider,
       VSatisfactionRate,
-      VScoreTypeSelector
+      VScoreEditor
     },
     data: function() {
       return {
@@ -109,8 +107,10 @@
         songName: '',
         artistName: '',
         key: 0,
-        scoreTypeId: null,
-        score: 0,
+        scoreSet: {
+          scoreType: 0,
+          score: null
+        }
       }
     },
     computed: {
