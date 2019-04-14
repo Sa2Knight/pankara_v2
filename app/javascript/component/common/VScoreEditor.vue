@@ -1,10 +1,19 @@
+<!-- Note: maskの都合上、99.99点までしか入力できない
+           100点を入力したい状況が生まれ次第なんとかする
+-->
 <template>
   <v-layout>
     <v-flex xs8>
       <VScoreTypeSelector v-model="scoreType" />
     </v-flex>
     <v-flex xs4>
-      <v-text-field v-model="score" suffix="点" clearable :disabled="isUnselectedScoreType" />
+      <v-text-field v-model="score"
+        suffix="点"
+        mask="##.##"
+        return-masked-value
+        clearable
+        :disabled="isUnselectedScoreType"
+       />
     </v-flex>
   </v-layout>
 </template>
@@ -51,11 +60,10 @@
         return !this.scoreType
       },
       isInvalidScore: function() {
+        if (this.score === null) return false
+
         const numberdScore = Number(this.score)
-        if (this.score === null) {
-          return false
-        }
-        return isNaN(numberdScore) || numberdScore < 0 || numberdScore > 100.0
+        return this.score === '' || isNaN(numberdScore) || numberdScore < 0 || numberdScore > 100.0
       },
     },
     watch: {

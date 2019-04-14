@@ -35,12 +35,7 @@
             </v-tab-item>
 
             <v-tab-item id="detail">
-              <div>
-                <VScoreEditor v-model="scoreSet" />
-              </div>
-              <div>
-                {{ scoreSet }}
-              </div>
+              <VScoreEditor v-model="scoreSet" />
             </v-tab-item>
 
           </v-tabs>
