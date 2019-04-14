@@ -17,8 +17,11 @@ export default {
     localValue() {
       this.$emit('input', this.localValue)
     },
-    value() {
-      this.localValue = this.value
+    value: {
+      handler () {
+        this.localValue = this.value
+      },
+      immediate: true
     }
   }
 }

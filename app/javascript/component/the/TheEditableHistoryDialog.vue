@@ -36,6 +36,9 @@
 
             <v-tab-item id="detail">
               <VScoreEditor v-model="scoreSet" />
+
+              <v-label>満足度</v-label>
+              <VSatisfactionRate v-model="satisfaction" />
             </v-tab-item>
 
           </v-tabs>
@@ -105,7 +108,8 @@
         scoreSet: {
           scoreType: 0,
           score: null
-        }
+        },
+        satisfaction: 5,
       }
     },
     computed: {

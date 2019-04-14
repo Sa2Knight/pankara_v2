@@ -21,7 +21,7 @@
           <span v-if="showKey">
             キー: {{ history.key }}
           </span>
-          <VSatisfactionRate readonly narrow :satisfaction="history.satisfaction" />
+          <VSatisfactionRate readonly narrow v-model="history.satisfaction" />
           <VScoreLabel v-if="history.score" :score="history.score" />
           <VUserIcons :user="history.user" />
         </div>

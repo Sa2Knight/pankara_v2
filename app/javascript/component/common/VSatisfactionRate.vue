@@ -1,7 +1,7 @@
 <template>
   <div class="v-satisfaction-rate" :class="{narrow}">
-    <v-rating v-if="satisfaction"
-      :value="satisfaction"
+    <v-rating v-if="value"
+      v-model="localValue"
       :length="10"
       hover
       :readonly="readonly"
@@ -16,6 +16,10 @@
 </template>
 
 <style lang="scss" scoped>
+.v-rating {
+  display: flex;
+  justify-content: space-between;
+}
 .narrow {
   /deep/ .v-icon {
     padding: 0;
@@ -24,16 +28,14 @@
 </style>
 
 <script>
+  import InputComponentMixin from '@mixin/InputComponentMixin'
   export default {
+    mixins: [InputComponentMixin],
     props: {
       readonly: {
         type: Boolean,
         required: false,
         default: false
-      },
-      satisfaction: {
-        type: Number,
-        required: false
       },
       emptyString: {
         type: String,
