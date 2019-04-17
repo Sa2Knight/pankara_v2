@@ -97,7 +97,7 @@
 
     <!-- スナック TODO: もう少し汎用化したいね -->
     <!-- TODO: vuexから操作できるようにして便利に -->
-    <v-snackbar :value="!!snackBarStyle" @input="hideSnackBar" top color="success">
+    <v-snackbar :value="!!snackBarStyle" @input="hideSnackBar" top :color="snackBarStyle">
       {{ snackBarText }}
       <v-btn dark flat @click.native="hideSnackBar">閉じる</v-btn>
     </v-snackbar>

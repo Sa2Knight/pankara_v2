@@ -191,9 +191,10 @@ export default {
               .then((res) => {
                 commit('setShowingEditableHistory', res.data)
                 dispatch('hideEditableHistoryDialog')
+                dispatch('showSuccessSnackBar', '歌唱履歴を作成しました')
               })
               .catch((err) => {
-                console.log(err.response)
+                dispatch('showErrorSnackBar', err.response.data.message)
               })
               .then(() => {
                 dispatch('hideLoadingView')
