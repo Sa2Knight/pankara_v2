@@ -97,13 +97,9 @@
 
     <!-- スナック TODO: もう少し汎用化したいね -->
     <!-- TODO: vuexから操作できるようにして便利に -->
-    <v-snackbar v-model="isShowSuccessSnack" top color="success">
-      {{ successSnackLabel }}
-      <v-btn dark flat @click.native="isShowSuccessSnack = false">閉じる</v-btn>
-    </v-snackbar>
-
-    <v-snackbar v-model="isShowFailedSnack" top color="error">
-      {{ failedSnackLabel }}
+    <v-snackbar :value="!!snackBarStyle" @input="hideSnackBar" top color="success">
+      {{ snackBarText }}
+      <v-btn dark flat @click.native="hideSnackBar">閉じる</v-btn>
     </v-snackbar>
 
     <!-- ローディングビュー-->
@@ -151,47 +147,33 @@
     data: function() {
       return {
         isShowLoginDialog: false,
-        isShowSuccessSnack: false,
-        isShowFailedSnack: false,
-        successSnackLabel: '',
-        failedSnackLabel: ''
       }
     },
     computed: {
-      ...mapState('common', {
-        currentUser: state => state.currentUser,
-        pageTitle: state => state.pageTitle,
-        isShowHistoryDialog: state => state.isShowHistoryDialog,
-        isShowEditableHistoryDialog: state => state.isShowEditableHistoryDialog,
-        isShowEventDialog: state => state.isShowEventDialog,
-        isLoading: state => state.isLoading
-      })
+      ...mapState('common', [
+        'currentUser',
+        'pageTitle',
+        'isShowHistoryDialog',
+        'isShowEditableHistoryDialog',
+        'isShowEventDialog',
+        'isLoading',
+        'snackBarStyle',
+        'snackBarText'
+      ])
     },
     methods: {
       ...mapActions('common', [
         'loginByToken',
         'hideHistoryDialog',
         'hideEditableHistoryDialog',
-        'hideEventDialog'
+        'hideEventDialog',
+        'hideSnackBar'
       ]),
       login (name, password) {
         this.$store.dispatch('common/login', { name, password })
-          .then(() => {
-            this.isShowSuccessSnack = true
-            this.isShowFailedSnack = false
-            this.isShowLoginDialog = false
-            this.successSnackLabel = 'ログインしました'
-          })
-          .catch((err) => {
-            this.isShowFailedSnack = true
-            this.isShowSuccessSnack = false
-            this.failedSnackLabel = 'ログインに失敗しました'
-          })
       },
       logout () {
         this.$store.dispatch('common/logout')
-        this.isShowSuccessSnack = true
-        this.successSnackLabel = 'ログアウトしました'
       }
     },
     mounted() {

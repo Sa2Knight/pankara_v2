@@ -29,6 +29,10 @@ export default {
     showingEvent: null,
     // ローディング中か？
     isLoading: false,
+    // スナックバーの表示状態
+    snackBarStyle: null,
+    // スナックバーのテキスト
+    snackBarText: ''
   },
 
   mutations: {
@@ -79,6 +83,15 @@ export default {
     },
     unsetIsLoading (state) {
       state.isLoading = false
+    },
+    setSnackBar (state, {style, text}) {
+      if (style === 'success' || style === 'error') {
+        state.snackBarStyle = style
+        state.snackBarText = text
+      } else {
+        state.snackBarStyle = null
+        state.snackBarText = ''
+      }
     }
   },
   actions: {
@@ -86,18 +99,18 @@ export default {
     login ({ commit, dispatch }, {name, password}) {
       dispatch('showLoadingView')
 
-      // TODO: Promise勉強しなおそ
       return http.login(name, password)
         .then((response) => {
           localStorage.setItem('jwt', response.data.jwt)
           commit('setJwtToken', response.data.jwt)
           commit('setIsLogin', true)
-          dispatch('hideLoadingView')
           location.reload()
         })
         .catch((err) => {
+          dispatch('showErrorSnackBar', 'ログインに失敗しました')
+        })
+        .then(() => {
           dispatch('hideLoadingView')
-          return Promise.reject()
         })
     },
     // LocalStorage内のトークンを用いてログイン
@@ -113,9 +126,10 @@ export default {
       })
     },
     // ログアウト
-    logout ({ commit }) {
+    logout ({ commit, dispatch }) {
       localStorage.removeItem('jwt')
       commit('setCurrentUser', null)
+      dispatch('showSuccessSnackBar', 'ログアウトしました')
       router.push('/')
     },
     // ページタイトルを差し替える
@@ -173,11 +187,17 @@ export default {
     // 歌唱履歴を新規作成する
     createHistory ({ commit, dispatch }, params) {
       dispatch('showLoadingView')
-      return http.postHistories(params).then((res) => {
-        commit('setShowingEditableHistory', res.data)
-        dispatch('hideLoadingView')
-        dispatch('hideEditableHistoryDialog')
-      })
+      return http.postHistories(params)
+              .then((res) => {
+                commit('setShowingEditableHistory', res.data)
+                dispatch('hideEditableHistoryDialog')
+              })
+              .catch((err) => {
+                console.log(err.response)
+              })
+              .then(() => {
+                dispatch('hideLoadingView')
+              })
     },
     // ローディングビューを表示する
     showLoadingView ({ commit }) {
@@ -186,6 +206,18 @@ export default {
     // ローディングビューを非表示にする
     hideLoadingView ({ commit }) {
       commit('unsetIsLoading')
+    },
+    // 正常系スナックバーを表示する
+    showSuccessSnackBar ({ commit }, text) {
+      commit('setSnackBar', {style: 'success', text})
+    },
+    // 異常系スナックバーを表示する
+    showErrorSnackBar ({ commit }, text) {
+      commit('setSnackBar', {style: 'error', text})
+    },
+    // スナックバーを非表示にする
+    hideSnackBar ({ commit }) {
+      commit('setSnackBar', {style: null, text: ''})
     }
   }
 }
