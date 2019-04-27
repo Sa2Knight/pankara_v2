@@ -39,6 +39,13 @@
 
               <v-label>満足度</v-label>
               <VSatisfactionRate v-model="satisfaction" />
+
+              <v-divider />
+
+              <v-textarea
+                v-model="comment"
+                placeholder="感想やメモなどご自由にご記入ください"
+              />
             </v-tab-item>
 
           </v-tabs>
@@ -99,7 +106,7 @@
       VSatisfactionRate,
       VScoreEditor
     },
-    data: function() {
+    data () {
       return {
         userId: null,
         songName: '',
@@ -110,6 +117,7 @@
           score: null
         },
         satisfaction: 5,
+        comment: ''
       }
     },
     computed: {
@@ -168,7 +176,8 @@
           song_name: this.songName,
           artist_name: this.artistName,
           key: this.key,
-          satisfaction: this.satisfaction
+          satisfaction: this.satisfaction,
+          comment: this.comment
         }
         this.createHistory(params).then(() => { this.fetchEvent(this.event.id) })
       },
