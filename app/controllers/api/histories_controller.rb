@@ -15,28 +15,34 @@ class Api::HistoriesController < Api::BaseController
 
   #
   # [endpoint] 作成
+  # NOTE: 単純な歌唱履歴作成のためrubocopを無視
+  # rubocop: disable Metrics/AbcSize,Metrics/MethodLength
   #
   def create
     history = History.create(
       event_date: event.date,
-      key: history_params[:key],
+      key: params[:key],
       song: Song.find_or_create_by!(
-        song_name: history_params[:song_name],
-        artist_name: history_params[:artist_name]
+        song_name: params[:song_name],
+        artist_name: params[:artist_name]
       ),
       user_event: UserEvent.find_by(
-        user_id: history_params[:user_id],
+        user_id: params[:user_id],
         event: event
-      )
+      ),
+      satisfaction: params[:satisfaction],
+      comment: params[:comment]
     )
     render json: JSON::History.show(history)
   rescue ActiveRecord::RecordInvalid => e
     raise400 e.record.full_error_message
   end
+  # rubocop: enable Metrics/AbcSize,Metrics/MethodLength
 
   private
 
   #
+  # NOTE: 単純なメソッドチェインのためrubocopを無視
   # rubocop: disable Metrics/AbcSize
   #
   def histories
@@ -57,10 +63,6 @@ class Api::HistoriesController < Api::BaseController
   end
 
   def event
-    current_user.events.find_by(id: history_params[:event_id]) || raise404('event_not_found')
-  end
-
-  def history_params
-    params.permit(:event_id, :user_id, :song_name, :artist_name, :key)
+    current_user.events.find_by(id: params[:event_id]) || raise404('event_not_found')
   end
 end

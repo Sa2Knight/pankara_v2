@@ -167,7 +167,8 @@
           user_id: this.userId,
           song_name: this.songName,
           artist_name: this.artistName,
-          key: this.key
+          key: this.key,
+          satisfaction: this.satisfaction
         }
         this.createHistory(params).then(() => { this.fetchEvent(this.event.id) })
       },
