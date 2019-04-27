@@ -3,10 +3,12 @@
   "private": true,
   "scripts": {
     "server": "bundle exec rails s -b 0.0.0.0 -p 80",
-    "client": "webpack --watch --mode development"
+    "client": "webpack --watch --mode development",
+    "storybook": "start-storybook -p 6004 --ci"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
+    "@storybook/vue": "^5.0.10",
     "axios": "^0.18.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.5",

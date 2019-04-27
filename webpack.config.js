@@ -2,17 +2,19 @@ const path = require('path');
 const glob = require('glob');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
+const baseDir = '/usr/local/pankara'
+
 module.exports = {
   // webpackが読み込むスタート地点
   entry: [
-    __dirname + '/app/javascript/main.js',
+    baseDir + '/app/javascript/main.js',
   ].concat(
     // scssディレクトリ内の全てのファイルを対象にする
-    glob.sync(__dirname + '/app/stylesheet/**/*.scss')
+    glob.sync(baseDir + '/app/stylesheet/**/*.scss')
   ),
   // ビルド後の出力先
   output: {
-    path: __dirname + '/app/assets/javascripts',
+    path: baseDir + '/app/assets/javascripts',
     filename: 'application.js',
   },
   module: {
@@ -55,10 +57,10 @@ module.exports = {
     // vueを事前にコンパイル
     alias: {
       vue: 'vue/dist/vue.esm.js',
-      '@component': path.join(__dirname, '/app/javascript/component'),
-      '@vuex': path.join(__dirname, '/app/javascript/vuex'),
-      '@mixin': path.join(__dirname, '/app/javascript/mixin'),
-      '@lib': path.join(__dirname, '/app/javascript/lib'),
+      '@component': path.join(baseDir, '/app/javascript/component'),
+      '@vuex': path.join(baseDir, '/app/javascript/vuex'),
+      '@mixin': path.join(baseDir, '/app/javascript/mixin'),
+      '@lib': path.join(baseDir, '/app/javascript/lib'),
     },
     extensions: ['.vue', '.js'],
   },
