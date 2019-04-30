@@ -26,13 +26,13 @@ RSpec.describe 'history#create', type: :request do
 
   describe '正常系' do
     it '歌唱履歴が作成される' do
-      expect(Song.exists?(id: body['id'])).to eq true
+      expect(History.exists?(id: body['id'])).to eq true
     end
   end
 
   describe '異常系' do
     context 'カラオケに参加していない場合' do
-      let(:user_id) { current_user.id }
+      let(:user_id) { FactoryBot.create(:user).id }
       it_behaves_like '404'
     end
 

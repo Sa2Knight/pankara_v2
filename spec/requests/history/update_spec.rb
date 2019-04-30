@@ -5,7 +5,7 @@ RSpec.describe 'history#update', type: :request do
   let(:params) do
     {
       event_id: history.event.id,
-      user_id: history.user.id,
+      user_id: user_id,
       song_name: history.song.name,
       artist_name: history.artist.name,
       comment: comment,
@@ -20,6 +20,7 @@ RSpec.describe 'history#update', type: :request do
   let(:event) { FactoryBot.create(:event) }
   let(:user_event) { FactoryBot.create(:user_event, user: current_user, event: event) }
   let(:history_id) { history.id }
+  let(:user_id) { history.user.id }
   let(:comment) { '更新後' }
 
   subject do
@@ -46,7 +47,7 @@ RSpec.describe 'history#update', type: :request do
 
     context 'カラオケに参加していない場合' do
       let(:user_id) { FactoryBot.create(:user).id }
-      it_behaves_like '400'
+      it_behaves_like '404'
     end
 
     context 'バリデーションエラーを起こした場合' do

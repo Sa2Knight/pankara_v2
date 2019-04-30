@@ -44,9 +44,7 @@ class Api::HistoriesController < Api::BaseController
         song_name: params[:song_name],
         artist_name: params[:artist_name]
       ),
-      user_event: UserEvent.find_by(
-        user_id: params[:user_id], event: event
-      ),
+      user_event: user_event,
       satisfaction: params[:satisfaction],
       comment: params[:comment],
       created_at: created_at
@@ -81,5 +79,11 @@ class Api::HistoriesController < Api::BaseController
 
   def event
     current_user.events.find_by(id: params[:event_id]) || raise404('event_not_found')
+  end
+
+  def user_event
+    UserEvent.find_by(
+      user_id: params[:user_id], event: event
+    ) || raise404('user_event_not_found')
   end
 end
