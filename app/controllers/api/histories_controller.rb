@@ -15,11 +15,18 @@ class Api::HistoriesController < Api::BaseController
 
   #
   # [endpoint] 作成
-  # NOTE: 単純な歌唱履歴作成のためrubocopを無視
-  # rubocop: disable Metrics/AbcSize,Metrics/MethodLength
   #
   def create
-    history = History.create(
+    history = update_new_history
+    render json: JSON::History.show(history)
+  rescue ActiveRecord::RecordInvalid => e
+    raise400 e.record.full_error_message
+  end
+
+  private
+
+  def update_new_history
+    new_history.update!(
       event_date: event.date,
       key: params[:key],
       song: Song.find_or_create_by!(
@@ -33,13 +40,8 @@ class Api::HistoriesController < Api::BaseController
       satisfaction: params[:satisfaction],
       comment: params[:comment]
     )
-    render json: JSON::History.show(history)
-  rescue ActiveRecord::RecordInvalid => e
-    raise400 e.record.full_error_message
+    @new_history
   end
-  # rubocop: enable Metrics/AbcSize,Metrics/MethodLength
-
-  private
 
   #
   # NOTE: 単純なメソッドチェインのためrubocopを無視
@@ -60,6 +62,10 @@ class Api::HistoriesController < Api::BaseController
 
   def history
     History.find_by(id: params[:id]) || raise404('history_not_found')
+  end
+
+  def new_history
+    @new_history ||= params[:id].present? ? history : History.new
   end
 
   def event
