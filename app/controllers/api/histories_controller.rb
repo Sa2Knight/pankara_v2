@@ -23,9 +23,20 @@ class Api::HistoriesController < Api::BaseController
     raise400 e.record.full_error_message
   end
 
+  #
+  # [endopint] 更新
+  # NOTE: 実態はcreated_atのみ保持してレコード再作成
+  #
+  def update
+    history = update_new_history(created_at: new_history.created_at)
+    render json: JSON::History.show(history)
+  rescue ActiveRecord::RecordInvalid => e
+    raise400 e.record.full_error_message
+  end
+
   private
 
-  def update_new_history
+  def update_new_history(created_at: DateTime.now)
     new_history.update!(
       event_date: event.date,
       key: params[:key],
@@ -34,11 +45,11 @@ class Api::HistoriesController < Api::BaseController
         artist_name: params[:artist_name]
       ),
       user_event: UserEvent.find_by(
-        user_id: params[:user_id],
-        event: event
+        user_id: params[:user_id], event: event
       ),
       satisfaction: params[:satisfaction],
-      comment: params[:comment]
+      comment: params[:comment],
+      created_at: created_at
     )
     @new_history
   end

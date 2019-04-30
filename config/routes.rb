@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       end
     end
     resources :events, only: %i[index show create update]
-    resources :histories, only: %i[index show create]
+    resources :histories, only: %i[index show create update]
     resources :songs, only: %i[index show] do
       member do
         get 'users'
