@@ -77,6 +77,15 @@
             </div>
           </div>
         </v-card-text>
+        <v-btn
+          v-show="true"
+          @click="hideHistoryDialog"
+          color="pink accent-1"
+          class="close-button elevation-12"
+          fixed bottom right fab
+        >
+          <v-icon>close</v-icon>
+        </v-btn>
       </v-card>
     </v-dialog>
   </div>
@@ -154,6 +163,10 @@
         }
       }
     }
+  }
+  .close-button {
+    z-index: 999;
+    opacity: 0.4;
   }
 }
 </style>

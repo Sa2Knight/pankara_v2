@@ -66,28 +66,11 @@
     <!-- 歌唱履歴詳細ダイアログ　-->
     <div class="history-dialog-outer" v-if="isShowHistoryDialog">
       <TheHistoryDialog />
-      <v-btn
-        v-show="true"
-        @click="hideHistoryDialog"
-        color="pink accent-1"
-        class="close-button elevation-12"
-        fixed bottom right fab
-      >
-        <v-icon>close</v-icon>
-      </v-btn>
     </div>
 
     <!-- 歌唱履歴編集ダイアログ -->
     <div class="editable-history-dialog-outer" v-if="isShowEditableHistoryDialog">
       <TheEditableHistoryDialog />
-      <v-btn
-        v-show="true"
-        @click="hideEditableHistoryDialog"
-        color="pink accent-1"
-        class="close-button elevation-12"
-        fixed bottom right fab
-      >
-      </v-btn>
     </div>
 
     <!-- カラオケ作成/編集ダイアログ -->
@@ -115,12 +98,6 @@
     position: absolute;
     max-width: 60%;
     border-radius: 50%;
-  }
-}
-.history-dialog-outer {
-  .close-button {
-    z-index: 999;
-    opacity: 0.4;
   }
 }
 </style>
@@ -164,7 +141,6 @@
     methods: {
       ...mapActions('common', [
         'loginByToken',
-        'hideHistoryDialog',
         'hideEditableHistoryDialog',
         'hideEventDialog',
         'hideSnackBar'
