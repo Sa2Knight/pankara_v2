@@ -77,15 +77,21 @@
             </div>
           </div>
         </v-card-text>
-        <v-btn
-          v-show="true"
-          @click="hideHistoryDialog"
-          color="pink accent-1"
-          class="close-button elevation-12"
-          fixed bottom right fab
-        >
-          <v-icon>close</v-icon>
-        </v-btn>
+        <div class="buttons">
+          <v-btn @click="() => showEventDialog(event)"
+                 color="gray" class="edit-button elevation-12" fixed bottom right fab dark>
+            <v-icon>edit</v-icon>
+          </v-btn>
+          <v-btn
+            v-show="true"
+            @click="hideHistoryDialog"
+            color="pink accent-1"
+            class="elevation-12"
+            fixed bottom right fab
+          >
+            <v-icon>close</v-icon>
+          </v-btn>
+        </div>
       </v-card>
     </v-dialog>
   </div>
@@ -164,9 +170,12 @@
       }
     }
   }
-  .close-button {
+  .buttons {
     z-index: 999;
     opacity: 0.4;
+    .edit-button {
+      right: 80px;
+    }
   }
 }
 </style>

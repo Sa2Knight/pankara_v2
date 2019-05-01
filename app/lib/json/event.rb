@@ -37,7 +37,7 @@ module JSON
         max_score: event.max_score,
         average_score: event.average_score,
         average_satisfaction: event.average_satisfaction,
-        can_edit: current_user ? event.editable_by?(user: current_user) : false,
+        can_edit: event.editable_by?(user: current_user),
         members: event.user_events.includes(:user).map do |user_event|
           {
             user: JSON::User.raw(user_event.user),

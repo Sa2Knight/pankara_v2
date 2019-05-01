@@ -77,6 +77,7 @@ class Event < ApplicationRecord
   # 現状はカラオケ参加者全員可能
   #
   def editable_by?(user:)
+    return false if user.blank?
     self.user_events.exists?(user: user)
   end
 end

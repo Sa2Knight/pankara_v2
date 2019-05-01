@@ -38,7 +38,7 @@ module JSON
     #
     # History.show用
     #
-    def self.show(history)
+    def self.show(history, current_user: nil)
       return nil if history.blank?
       {
         id: history.id,
@@ -47,7 +47,7 @@ module JSON
         comment: history.comment,
         score: history.score,
         user: JSON::User.raw(history.user),
-        event: JSON::Event.raw(history.event),
+        event: JSON::Event.show(history.event, current_user: current_user),
         song: JSON::Song.raw_with_artist(history.song),
         score_type: history.score_type
       }

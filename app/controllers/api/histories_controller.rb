@@ -10,7 +10,7 @@ class Api::HistoriesController < Api::BaseController
   # [endpoint] 取得
   #
   def show
-    render json: JSON::History.show(history)
+    render json: JSON::History.show(history, current_user: current_user)
   end
 
   #
@@ -18,7 +18,7 @@ class Api::HistoriesController < Api::BaseController
   #
   def create
     history = update_new_history
-    render json: JSON::History.show(history)
+    render json: JSON::History.show(history, current_user: current_user)
   rescue ActiveRecord::RecordInvalid => e
     raise400 e.record.full_error_message
   end
@@ -29,7 +29,7 @@ class Api::HistoriesController < Api::BaseController
   #
   def update
     history = update_new_history(created_at: new_history.created_at)
-    render json: JSON::History.show(history)
+    render json: JSON::History.show(history, current_user: current_user)
   rescue ActiveRecord::RecordInvalid => e
     raise400 e.record.full_error_message
   end
